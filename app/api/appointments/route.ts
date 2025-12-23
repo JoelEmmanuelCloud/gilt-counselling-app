@@ -1,11 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserFromRequest } from '@/lib/auth';
 import { createAppointment, getAllAppointments, getAppointmentsByUserId } from '@/lib/models/appointment';
+import connectDB from '@/lib/mongodb';
 
 // GET /api/appointments - Get all appointments (admin) or user's appointments
 export async function GET(request: NextRequest) {
   try {
-    const user = getUserFromRequest(request);
+    // Connect to database
+    await connectDB();
+
+    const user = await getUserFromRequest(request);
 
     if (!user) {
       return NextResponse.json(
@@ -16,12 +20,12 @@ export async function GET(request: NextRequest) {
 
     // Admin can see all appointments
     if (user.role === 'admin') {
-      const appointments = getAllAppointments();
+      const appointments = await getAllAppointments();
       return NextResponse.json(appointments);
     }
 
     // Regular users see only their appointments
-    const appointments = getAppointmentsByUserId(user.id);
+    const appointments = await getAppointmentsByUserId(user.id);
     return NextResponse.json(appointments);
   } catch (error) {
     console.error('Get appointments error:', error);
@@ -35,6 +39,9 @@ export async function GET(request: NextRequest) {
 // POST /api/appointments - Create new appointment
 export async function POST(request: NextRequest) {
   try {
+    // Connect to database
+    await connectDB();
+
     const body = await request.json();
     const { name, email, phone, service, date, time, notes } = body;
 
@@ -47,7 +54,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Try to get user if authenticated (optional for appointments)
-    const user = getUserFromRequest(request);
+    const user = await getUserFromRequest(request);
 
     // Create appointment
     const appointmentData = {
@@ -61,7 +68,7 @@ export async function POST(request: NextRequest) {
       notes: notes || ''
     };
 
-    const newAppointment = createAppointment(appointmentData);
+    const newAppointment = await createAppointment(appointmentData);
 
     return NextResponse.json(
       {

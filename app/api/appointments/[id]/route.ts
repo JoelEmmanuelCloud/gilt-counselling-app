@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getUserFromRequest } from '@/lib/auth';
 import { getAppointmentById, updateAppointment, deleteAppointment } from '@/lib/models/appointment';
+import connectDB from '@/lib/mongodb';
 
 // PATCH /api/appointments/[id] - Update appointment status
 export async function PATCH(
@@ -8,7 +9,10 @@ export async function PATCH(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = getUserFromRequest(request);
+    // Connect to database
+    await connectDB();
+
+    const user = await getUserFromRequest(request);
 
     if (!user) {
       return NextResponse.json(
@@ -21,7 +25,7 @@ export async function PATCH(
     const body = await request.json();
     const { status } = body;
 
-    const appointment = getAppointmentById(id);
+    const appointment = await getAppointmentById(id);
     if (!appointment) {
       return NextResponse.json(
         { message: 'Appointment not found' },
@@ -37,7 +41,7 @@ export async function PATCH(
       );
     }
 
-    const updatedAppointment = updateAppointment(id, { status });
+    const updatedAppointment = await updateAppointment(id, { status });
 
     return NextResponse.json({
       message: 'Appointment updated successfully',
@@ -58,7 +62,10 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   try {
-    const user = getUserFromRequest(request);
+    // Connect to database
+    await connectDB();
+
+    const user = await getUserFromRequest(request);
 
     if (!user) {
       return NextResponse.json(
@@ -69,7 +76,7 @@ export async function DELETE(
 
     const { id } = params;
 
-    const appointment = getAppointmentById(id);
+    const appointment = await getAppointmentById(id);
     if (!appointment) {
       return NextResponse.json(
         { message: 'Appointment not found' },
@@ -85,7 +92,7 @@ export async function DELETE(
       );
     }
 
-    const deleted = deleteAppointment(id);
+    const deleted = await deleteAppointment(id);
     if (!deleted) {
       return NextResponse.json(
         { message: 'Appointment not found' },

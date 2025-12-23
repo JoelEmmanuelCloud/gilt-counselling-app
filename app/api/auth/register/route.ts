@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createUser, findUserByEmail } from '@/lib/models/user';
 import { generateToken } from '@/lib/auth';
+import connectDB from '@/lib/mongodb';
 
 export async function POST(request: NextRequest) {
   try {
+    // Connect to database
+    await connectDB();
+
     const body = await request.json();
     const { name, email, password, phone } = body;
 
@@ -16,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Check if user already exists
-    const existingUser = findUserByEmail(email);
+    const existingUser = await findUserByEmail(email);
     if (existingUser) {
       return NextResponse.json(
         { message: 'User already exists' },
@@ -25,26 +29,30 @@ export async function POST(request: NextRequest) {
     }
 
     // Create new user
-    const newUser = createUser(name, email, password, phone);
+    const newUser = await createUser(name, email, password, phone);
 
-    // Generate token
-    const token = generateToken(newUser.id);
+    // Generate token with MongoDB _id
+    const token = generateToken(newUser._id!.toString());
 
     // Return user data (without password)
-    const { password: _, ...userWithoutPassword } = newUser;
+    const userObj = newUser.toObject();
+    const { password: _, ...userWithoutPassword } = userObj;
 
     return NextResponse.json(
       {
         message: 'User registered successfully',
         token,
-        user: userWithoutPassword
+        user: {
+          ...userWithoutPassword,
+          id: userObj._id.toString(),
+        }
       },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Registration error:', error);
     return NextResponse.json(
-      { message: 'Server error' },
+      { message: error.message || 'Server error' },
       { status: 500 }
     );
   }
