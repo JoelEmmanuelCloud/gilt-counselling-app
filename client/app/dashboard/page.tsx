@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import api from '../utils/api';
-import { Appointment } from '../types';
+'use client';
 
-const Dashboard: React.FC = () => {
+import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/lib/AuthContext';
+import api from '@/lib/api';
+import { Appointment } from '@/lib/types';
+import ProtectedRoute from '@/components/ProtectedRoute';
+
+function DashboardContent() {
   const { user } = useAuth();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
@@ -84,7 +87,7 @@ const Dashboard: React.FC = () => {
           <div className="flex justify-between items-center mb-6">
             <h2 className="text-2xl font-bold text-gray-800">My Appointments</h2>
             <Link
-              to="/book-appointment"
+              href="/book-appointment"
               className="bg-gilt-gold text-white px-4 py-2 rounded-lg hover:bg-gilt-orange transition"
             >
               Book New Appointment
@@ -99,7 +102,7 @@ const Dashboard: React.FC = () => {
             <div className="text-center py-12">
               <p className="text-gray-600 mb-4">You don't have any appointments yet.</p>
               <Link
-                to="/book-appointment"
+                href="/book-appointment"
                 className="inline-block bg-gilt-gold text-white px-6 py-2 rounded-lg hover:bg-gilt-orange transition"
               >
                 Book Your First Appointment
@@ -164,6 +167,12 @@ const Dashboard: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
-export default Dashboard;
+export default function Dashboard() {
+  return (
+    <ProtectedRoute>
+      <DashboardContent />
+    </ProtectedRoute>
+  );
+}

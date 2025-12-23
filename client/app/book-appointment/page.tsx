@@ -1,11 +1,13 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
-import api from '../utils/api';
+'use client';
 
-const BookAppointment: React.FC = () => {
+import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/AuthContext';
+import api from '@/lib/api';
+
+export default function BookAppointment() {
   const { user } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -55,7 +57,7 @@ const BookAppointment: React.FC = () => {
       setSuccess('Appointment booked successfully! We will contact you shortly.');
       setTimeout(() => {
         if (user) {
-          navigate('/dashboard');
+          router.push('/dashboard');
         } else {
           setFormData({
             name: '',
@@ -223,6 +225,4 @@ const BookAppointment: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default BookAppointment;
+}

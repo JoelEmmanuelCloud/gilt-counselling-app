@@ -1,21 +1,24 @@
+'use client';
+
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/AuthContext';
 
 const Navbar: React.FC = () => {
   const { user, logout } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    router.push('/');
   };
 
   return (
     <nav className="bg-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          <Link to="/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-gradient-to-br from-gilt-gold to-gilt-orange rounded-full flex items-center justify-center">
               <span className="text-white font-bold text-xl">G</span>
             </div>
@@ -26,23 +29,23 @@ const Navbar: React.FC = () => {
           </Link>
 
           <div className="hidden md:flex items-center space-x-8">
-            <Link to="/" className="text-gray-700 hover:text-gilt-gold transition">Home</Link>
-            <Link to="/services" className="text-gray-700 hover:text-gilt-gold transition">Services</Link>
-            <Link to="/about" className="text-gray-700 hover:text-gilt-gold transition">About</Link>
-            <Link to="/contact" className="text-gray-700 hover:text-gilt-gold transition">Contact</Link>
+            <Link href="/" className="text-gray-700 hover:text-gilt-gold transition">Home</Link>
+            <Link href="/services" className="text-gray-700 hover:text-gilt-gold transition">Services</Link>
+            <Link href="/about" className="text-gray-700 hover:text-gilt-gold transition">About</Link>
+            <Link href="/contact" className="text-gray-700 hover:text-gilt-gold transition">Contact</Link>
 
             {user ? (
               <>
                 {user.role === 'admin' ? (
                   <Link
-                    to="/admin"
+                    href="/admin"
                     className="text-gray-700 hover:text-gilt-gold transition font-semibold"
                   >
                     Admin Dashboard
                   </Link>
                 ) : (
                   <Link
-                    to="/dashboard"
+                    href="/dashboard"
                     className="text-gray-700 hover:text-gilt-gold transition"
                   >
                     My Dashboard
@@ -58,13 +61,13 @@ const Navbar: React.FC = () => {
             ) : (
               <>
                 <Link
-                  to="/login"
+                  href="/login"
                   className="text-gilt-gold hover:text-gilt-orange transition font-semibold"
                 >
                   Login
                 </Link>
                 <Link
-                  to="/book-appointment"
+                  href="/book-appointment"
                   className="bg-gilt-gold text-white px-6 py-2 rounded-lg hover:bg-gilt-orange transition"
                 >
                   Book Appointment

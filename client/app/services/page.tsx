@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+'use client';
 
-const Services: React.FC = () => {
+import React from 'react';
+import Link from 'next/link';
+
+export default function Services() {
   const services = [
     {
       title: 'Mental Health & Emotional Wellness',
@@ -70,7 +72,7 @@ const Services: React.FC = () => {
               <h3 className="text-xl font-bold text-gray-800 mb-3">{service.title}</h3>
               <p className="text-gray-600 mb-4">{service.description}</p>
               <Link
-                to="/book-appointment"
+                href="/book-appointment"
                 className="text-gilt-gold hover:text-gilt-orange font-semibold"
               >
                 Book Now →
@@ -85,7 +87,7 @@ const Services: React.FC = () => {
             Book your appointment today and begin your journey to optimal development.
           </p>
           <Link
-            to="/book-appointment"
+            href="/book-appointment"
             className="inline-block bg-white text-gilt-gold px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
           >
             Book Appointment
@@ -94,6 +96,4 @@ const Services: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Services;
+}

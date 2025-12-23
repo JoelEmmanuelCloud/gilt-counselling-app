@@ -1,14 +1,17 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+'use client';
 
-const Login: React.FC = () => {
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/AuthContext';
+
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { login } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -17,7 +20,7 @@ const Login: React.FC = () => {
 
     try {
       await login(email, password);
-      navigate('/dashboard');
+      router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -80,7 +83,7 @@ const Login: React.FC = () => {
 
           <p className="mt-6 text-center text-gray-600">
             Don't have an account?{' '}
-            <Link to="/register" className="text-gilt-gold hover:text-gilt-orange font-semibold">
+            <Link href="/register" className="text-gilt-gold hover:text-gilt-orange font-semibold">
               Register here
             </Link>
           </p>
@@ -94,6 +97,4 @@ const Login: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Login;
+}
