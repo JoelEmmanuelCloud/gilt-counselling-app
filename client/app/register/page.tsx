@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext';
+'use client';
 
-const Register: React.FC = () => {
+import React, { useState } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { useAuth } from '@/lib/AuthContext';
+
+export default function Register() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -11,7 +14,7 @@ const Register: React.FC = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
-  const navigate = useNavigate();
+  const router = useRouter();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +34,7 @@ const Register: React.FC = () => {
 
     try {
       await register(name, email, password, phone);
-      navigate('/dashboard');
+      router.push('/dashboard');
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -136,7 +139,7 @@ const Register: React.FC = () => {
 
           <p className="mt-6 text-center text-gray-600">
             Already have an account?{' '}
-            <Link to="/login" className="text-gilt-gold hover:text-gilt-orange font-semibold">
+            <Link href="/login" className="text-gilt-gold hover:text-gilt-orange font-semibold">
               Sign in here
             </Link>
           </p>
@@ -144,6 +147,4 @@ const Register: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default Register;
+}

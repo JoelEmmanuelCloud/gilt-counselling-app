@@ -1,7 +1,9 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+'use client';
 
-const Home: React.FC = () => {
+import React from 'react';
+import Link from 'next/link';
+
+export default function Home() {
   const services = [
     'Mental Health & Emotional Wellness',
     'Educational Consulting',
@@ -38,13 +40,13 @@ const Home: React.FC = () => {
               </p>
               <div className="flex space-x-4">
                 <Link
-                  to="/book-appointment"
+                  href="/book-appointment"
                   className="bg-gilt-gold text-white px-8 py-3 rounded-lg font-semibold hover:bg-gilt-orange transition"
                 >
                   Book Appointment
                 </Link>
                 <Link
-                  to="/services"
+                  href="/services"
                   className="bg-white text-gilt-blue px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
                 >
                   Our Services
@@ -106,7 +108,7 @@ const Home: React.FC = () => {
             Book your appointment today and take the first step towards optimal development.
           </p>
           <Link
-            to="/book-appointment"
+            href="/book-appointment"
             className="inline-block bg-white text-gilt-gold px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition"
           >
             Book an Appointment Now
@@ -115,6 +117,4 @@ const Home: React.FC = () => {
       </section>
     </div>
   );
-};
-
-export default Home;
+}

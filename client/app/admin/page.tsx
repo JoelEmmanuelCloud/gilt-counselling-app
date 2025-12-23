@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../context/AuthContext';
-import { useNavigate } from 'react-router-dom';
-import api from '../utils/api';
-import { Appointment } from '../types';
+'use client';
 
-const AdminDashboard: React.FC = () => {
-  const { user } = useAuth();
-  const navigate = useNavigate();
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '@/lib/AuthContext';
+import api from '@/lib/api';
+import { Appointment } from '@/lib/types';
+import ProtectedRoute from '@/components/ProtectedRoute';
+
+function AdminDashboardContent() {
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
 
   useEffect(() => {
-    if (user?.role !== 'admin') {
-      navigate('/dashboard');
-      return;
-    }
     fetchAppointments();
-  }, [user, navigate]);
+  }, []);
 
   const fetchAppointments = async () => {
     try {
@@ -217,6 +213,12 @@ const AdminDashboard: React.FC = () => {
       </div>
     </div>
   );
-};
+}
 
-export default AdminDashboard;
+export default function AdminDashboard() {
+  return (
+    <ProtectedRoute adminOnly>
+      <AdminDashboardContent />
+    </ProtectedRoute>
+  );
+}
