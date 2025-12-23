@@ -1,57 +1,98 @@
+import mongoose, { Schema, Model } from 'mongoose';
 import bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
 
-export interface User {
-  id: string;
+export interface IUser {
+  _id?: string;
   name: string;
   email: string;
   phone: string;
   password: string;
   role: 'user' | 'admin';
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
-// In-memory storage (replace with database in production)
-let users: User[] = [
+const UserSchema = new Schema<IUser>(
   {
-    id: '1',
-    name: 'Admin User',
-    email: 'admin@gilt.com',
-    phone: '+234 803 309 4050',
-    password: bcrypt.hashSync('admin123', 10),
-    role: 'admin'
+    name: {
+      type: String,
+      required: [true, 'Name is required'],
+      trim: true,
+    },
+    email: {
+      type: String,
+      required: [true, 'Email is required'],
+      unique: true,
+      lowercase: true,
+      trim: true,
+      validate: {
+        validator: function (v: string) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        },
+        message: 'Please provide a valid email',
+      },
+    },
+    phone: {
+      type: String,
+      required: [true, 'Phone is required'],
+      trim: true,
+    },
+    password: {
+      type: String,
+      required: [true, 'Password is required'],
+      minlength: [6, 'Password must be at least 6 characters'],
+    },
+    role: {
+      type: String,
+      enum: ['user', 'admin'],
+      default: 'user',
+    },
   },
   {
-    id: '2',
-    name: 'John Doe',
-    email: 'user@example.com',
-    phone: '+234 706 573 4165',
-    password: bcrypt.hashSync('user123', 10),
-    role: 'user'
+    timestamps: true,
   }
-];
+);
 
-export const findUserByEmail = (email: string): User | undefined => {
-  return users.find(user => user.email === email);
+// Hash password before saving
+UserSchema.pre('save', async function () {
+  if (!this.isModified('password')) {
+    return;
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+});
+
+// Method to compare password
+UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
+  return bcrypt.compare(candidatePassword, this.password);
 };
 
-export const findUserById = (id: string): User | undefined => {
-  return users.find(user => user.id === id);
+// Prevent model recompilation in development
+const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+
+export default User;
+
+// Helper functions for compatibility
+export const findUserByEmail = async (email: string) => {
+  return await User.findOne({ email });
 };
 
-export const createUser = (name: string, email: string, password: string, phone: string): User => {
-  const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser: User = {
-    id: uuidv4(),
+export const findUserById = async (id: string) => {
+  return await User.findById(id);
+};
+
+export const createUser = async (name: string, email: string, password: string, phone: string) => {
+  const user = new User({
     name,
     email,
+    password,
     phone,
-    password: hashedPassword,
-    role: 'user'
-  };
-  users.push(newUser);
-  return newUser;
+    role: 'user',
+  });
+  return await user.save();
 };
 
-export const validatePassword = (plainPassword: string, hashedPassword: string): boolean => {
-  return bcrypt.compareSync(plainPassword, hashedPassword);
+export const validatePassword = async (plainPassword: string, hashedPassword: string): Promise<boolean> => {
+  return bcrypt.compare(plainPassword, hashedPassword);
 };

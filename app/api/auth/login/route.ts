@@ -1,9 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { findUserByEmail, validatePassword } from '@/lib/models/user';
 import { generateToken } from '@/lib/auth';
+import connectDB from '@/lib/mongodb';
 
 export async function POST(request: NextRequest) {
   try {
+    // Connect to database
+    await connectDB();
+
     const body = await request.json();
     const { email, password } = body;
 
@@ -16,7 +20,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Find user
-    const user = findUserByEmail(email);
+    const user = await findUserByEmail(email);
     if (!user) {
       return NextResponse.json(
         { message: 'Invalid credentials' },
@@ -25,7 +29,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate password
-    const isValidPassword = validatePassword(password, user.password);
+    const isValidPassword = await validatePassword(password, user.password);
     if (!isValidPassword) {
       return NextResponse.json(
         { message: 'Invalid credentials' },
@@ -33,16 +37,20 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate token
-    const token = generateToken(user.id);
+    // Generate token with MongoDB _id
+    const token = generateToken(user._id!.toString());
 
     // Return user data (without password)
-    const { password: _, ...userWithoutPassword } = user;
+    const userObj = user.toObject();
+    const { password: _, ...userWithoutPassword } = userObj;
 
     return NextResponse.json({
       message: 'Login successful',
       token,
-      user: userWithoutPassword
+      user: {
+        ...userWithoutPassword,
+        id: userObj._id.toString(),
+      }
     });
   } catch (error) {
     console.error('Login error:', error);

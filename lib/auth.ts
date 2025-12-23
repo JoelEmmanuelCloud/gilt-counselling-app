@@ -1,10 +1,9 @@
 import jwt from 'jsonwebtoken';
 import { NextRequest } from 'next/server';
-import { findUserById, User } from './models/user';
+import { findUserById } from './models/user';
+import connectDB from './mongodb';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
-
-export interface AuthUser extends Omit<User, 'password'> {}
 
 export const verifyToken = (token: string): { userId: string } | null => {
   try {
@@ -15,7 +14,7 @@ export const verifyToken = (token: string): { userId: string } | null => {
   }
 };
 
-export const getUserFromRequest = (request: NextRequest): AuthUser | null => {
+export const getUserFromRequest = async (request: NextRequest) => {
   const authHeader = request.headers.get('authorization');
 
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -29,15 +28,24 @@ export const getUserFromRequest = (request: NextRequest): AuthUser | null => {
     return null;
   }
 
-  const user = findUserById(decoded.userId);
+  // Connect to database
+  await connectDB();
+
+  const user = await findUserById(decoded.userId);
 
   if (!user) {
     return null;
   }
 
-  // Remove password from user object
-  const { password, ...userWithoutPassword } = user;
-  return userWithoutPassword;
+  // Convert to plain object and remove password
+  const userObj = user.toObject();
+  const { password, ...userWithoutPassword } = userObj;
+
+  // Add id field for compatibility
+  return {
+    ...userWithoutPassword,
+    id: userObj._id.toString(),
+  };
 };
 
 export const generateToken = (userId: string): string => {
