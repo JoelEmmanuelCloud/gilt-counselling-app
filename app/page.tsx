@@ -3,48 +3,50 @@
 import React from 'react';
 import Link from 'next/link';
 import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
-import SectionHeading from '@/components/ui/SectionHeading';
-import ServiceCard from '@/components/ui/ServiceCard';
-import TestimonialCard from '@/components/ui/TestimonialCard';
 import Button from '@/components/ui/Button';
 
 export default function Home() {
-  const services = [
+  const helpOptions = [
+    'Family Problems',
+    'Breakups',
+    'Business Failure',
+    'Stress Issues',
+    'Online Sessions',
+  ];
+
+  const pricingPlans = [
     {
-      title: 'Individual Counselling',
-      description: 'One-on-one support tailored to your unique journey and needs.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-        </svg>
-      ),
+      name: 'Individual',
+      price: '$250',
+      description: 'For individual therapy sessions',
+      features: [
+        'Personalized treatment plan',
+        'Equitable rate up to two hours',
+        'All sessions include materials',
+      ],
     },
     {
-      title: 'Family Counselling',
-      description: 'Strengthen family bonds and navigate challenges together with compassion.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-        </svg>
-      ),
+      name: 'Couples',
+      price: '$300',
+      period: 'Per session',
+      description: 'For couples counseling',
+      features: [
+        'Relationship focused sessions',
+        'Equitable rate up to two hours',
+        'Offers Session and Counseling',
+      ],
+      highlighted: true,
     },
     {
-      title: 'Teen & Youth Support',
-      description: 'Empowering young people to navigate life\'s complexities with confidence.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-        </svg>
-      ),
-    },
-    {
-      title: 'Mental Health Support',
-      description: 'Professional care for your emotional and psychological wellbeing.',
-      icon: (
-        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-        </svg>
-      ),
+      name: 'Business',
+      price: '$400',
+      period: 'Per session',
+      description: 'For business coaching',
+      features: [
+        'Professional consultation',
+        'Equitable rate up to two hours',
+        'Helps business owners discover key',
+      ],
     },
   ];
 
@@ -60,177 +62,380 @@ export default function Home() {
       service: 'Family Counselling',
     },
     {
-      quote: 'I was struggling with school stress and anxiety. The counselor listened without judgment and helped me find my way.',
+      quote: 'I was struggling with anxiety and depression. Dr. Lopez helped me find hope and develop coping strategies that actually work.',
       firstName: 'David',
-      service: 'Teen Support',
+      service: 'Mental Health Support',
     },
-  ];
-
-  const coreValues = [
-    { name: 'Joy', description: 'We believe in fostering happiness and positive growth.' },
-    { name: 'Optimism', description: 'Every challenge is an opportunity for positive change.' },
-    { name: 'Confidentiality', description: 'Your privacy is sacred and always protected.' },
-    { name: 'Integrity', description: 'We uphold the highest ethical standards in our practice.' },
-    { name: 'Inclusion', description: 'Everyone deserves compassionate care, without exception.' },
   ];
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="heading-xl mb-6">
-                You're Not Alone on This Journey
+      {/* Hero Section - Full Width */}
+      <section className="relative h-[600px] md:h-[700px] overflow-hidden">
+        {/* Background Image Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
+        <div className="absolute inset-0">
+          <ImagePlaceholder
+            description="Person from behind in counseling session, professional therapist environment"
+            dimensions="1920x700px"
+            usageNotes="Background image showing back of person in counseling session, warm professional atmosphere"
+          />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-20 h-full flex items-center">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div className="max-w-2xl">
+              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-4 py-2 rounded mb-6 text-sm uppercase tracking-wider">
+                Best Psychologist in NYC
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+                Better Advice for<br />
+                <span className="italic font-serif">Healthy & Happier</span><br />
+                Relationships.
               </h1>
-              <p className="body-lg mb-8">
-                Professional, compassionate counselling for teens, youths, and families.
-                We're here to support you every step of the way.
+              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-xl">
+                Mental Health is a major concern nowadays, which can end up affecting relations & giving diseases.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link href="/book-appointment">
-                  <Button variant="primary" className="w-full sm:w-auto">
-                    Take the First Step
+                  <Button className="w-full sm:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-8 py-3 uppercase text-sm tracking-wide">
+                    Book Session
                   </Button>
                 </Link>
-                <Link href="/services">
-                  <Button variant="ghost" className="w-full sm:w-auto">
-                    Explore Our Services
+                <Link href="/about">
+                  <Button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-8 py-3 uppercase text-sm tracking-wide">
+                    About Me
                   </Button>
                 </Link>
               </div>
-              <p className="text-sm text-gray-600 mt-6">
-                Walk-in, phone, WhatsApp, and video consultations available.
-              </p>
+              {/* Slider Dots */}
+              <div className="flex gap-2 mt-12">
+                <div className="w-2 h-2 bg-white rounded-full"></div>
+                <div className="w-2 h-2 bg-white/40 rounded-full"></div>
+              </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Benefits Section - Dark Background */}
+      <section className="bg-gray-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
+              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-soft-terracotta px-3 py-1 rounded text-xs uppercase tracking-wider mb-4">
+                Discover a Process
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-6">
+                Benefits of psychological<br />therapy by an expert.
+              </h2>
+              <p className="text-gray-300 mb-8 leading-relaxed">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.
+              </p>
+              <div className="space-y-4">
+                <div className="flex justify-between items-center border-b border-gray-700 pb-3">
+                  <span className="text-gray-300">Family</span>
+                  <span className="text-soft-terracotta font-semibold">90%</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-gray-700 pb-3">
+                  <span className="text-gray-300">Marriage & Love</span>
+                  <span className="text-soft-terracotta font-semibold">80%</span>
+                </div>
+                <div className="flex justify-between items-center border-b border-gray-700 pb-3">
+                  <span className="text-gray-300">Life Style</span>
+                  <span className="text-soft-terracotta font-semibold">85%</span>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
               <ImagePlaceholder
-                description="Calm Counsellor Speaking with Teen/Parent"
-                dimensions="400px"
-                usageNotes="Use a soft-focused image showing a counsellor in gentle conversation with a teen or parent. Natural lighting, neutral background, emotionally safe atmosphere."
+                description="Professional therapist consultation session with clients"
+                dimensions="600px"
+                usageNotes="Bright professional setting with therapist and clients in session"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Service Highlights */}
-      <section className="section-container bg-off-white">
-        <SectionHeading
-          title="We're Here to Support You"
-          subtitle="Whether you're navigating teen challenges, family dynamics, or personal growth, we offer professional, compassionate care tailored to your needs."
-          centered
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
-            <ServiceCard
-              key={index}
-              title={service.title}
-              description={service.description}
-              icon={service.icon}
-            />
-          ))}
-        </div>
-        <div className="text-center mt-12">
-          <Link href="/services">
-            <Button variant="secondary">View All Services</Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* Core Values */}
+      {/* Pricing Section */}
       <section className="section-container bg-warm-cream">
-        <SectionHeading
-          title="Our Core Values"
-          subtitle="These principles guide everything we do."
-          centered
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          {coreValues.map((value, index) => (
+        <div className="max-w-6xl mx-auto text-center mb-12">
+          <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-4 py-2 rounded-full text-sm uppercase tracking-wider mb-4">
+            Consultation Prices
+          </div>
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+            Simple prices, flexible options,<br />
+            & nothing hidden.
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {pricingPlans.map((plan, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl p-6 text-center shadow-calm hover:shadow-calm-lg transition-shadow duration-300"
+              className={`rounded-lg p-8 ${
+                plan.highlighted
+                  ? 'bg-soft-terracotta text-white shadow-xl'
+                  : 'bg-white shadow-lg'
+              } transition-all duration-300 hover:shadow-2xl`}
             >
-              <h3 className="font-heading font-semibold text-lg text-soft-gold mb-2">
-                {value.name}
+              <h3 className={`text-xl font-heading font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
+                {plan.name}
               </h3>
-              <p className="text-sm text-gray-600 leading-relaxed">
-                {value.description}
-              </p>
+              <div className="mb-6">
+                <span className={`text-4xl md:text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-soft-terracotta'}`}>
+                  {plan.price}
+                </span>
+              </div>
+              <ul className="space-y-3 mb-8">
+                {plan.features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-3">
+                    <svg
+                      className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-white' : 'text-soft-terracotta'}`}
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                    <span className={`text-sm ${plan.highlighted ? 'text-white' : 'text-gray-600'}`}>
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <Link href="/book-appointment">
+                <Button
+                  className={`w-full uppercase text-sm tracking-wide ${
+                    plan.highlighted
+                      ? 'bg-white text-soft-terracotta hover:bg-gray-100'
+                      : 'bg-soft-terracotta text-white hover:bg-soft-terracotta/90'
+                  }`}
+                >
+                  Get Started
+                </Button>
+              </Link>
             </div>
           ))}
         </div>
+        <p className="text-center text-gray-600 mt-8 text-sm">
+          *Hourly pricing for sessions on an equitable basis
+        </p>
       </section>
 
-      {/* Trust & Professional Section */}
-      <section className="section-container bg-off-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <SectionHeading
-            title="Professional Care You Can Trust"
-            centered
-          />
-          <div className="space-y-6 text-gray-700 leading-relaxed">
-            <p className="body-lg">
-              Our licensed counsellors bring years of experience in adolescent psychology,
-              family therapy, and mental health support. We understand the unique challenges
-              facing teens and youths today.
+      {/* How Can I Help You & Call for Consultation Section */}
+      <section className="section-container bg-white">
+        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* How can I help you */}
+          <div className="bg-warm-cream rounded-lg p-8">
+            <h2 className="text-2xl font-heading font-bold text-gray-900 mb-6">
+              How can I help you?
+            </h2>
+            <p className="text-gray-600 mb-6">
+              If you're experiencing any kind of mental illness or problem in relations.
             </p>
-            <p className="body-md">
-              With offices in Nigeria and Canada, we serve clients locally and internationally
-              through secure, confidential online sessions. Your wellbeing and privacy are our highest priorities.
-            </p>
+            <ul className="space-y-3 mb-6">
+              {helpOptions.map((option, index) => (
+                <li key={index} className="flex items-center gap-3">
+                  <svg className="w-5 h-5 text-soft-terracotta flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                  </svg>
+                  <span className="text-gray-700">{option}</span>
+                </li>
+              ))}
+            </ul>
+            <Link href="/services">
+              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 uppercase text-sm tracking-wide">
+                Explore Programs
+              </Button>
+            </Link>
           </div>
-          <div className="mt-8">
+
+          {/* Call for Consultation */}
+          <div className="bg-soft-terracotta text-white rounded-lg p-8">
+            <h2 className="text-2xl font-heading font-bold mb-4">
+              Call for Consultation
+            </h2>
+            <p className="text-lg mb-6 text-white/90">
+              30 minutes free for first session. <Link href="/terms" className="underline">T&C Apply</Link>
+            </p>
+            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                </div>
+                <div>
+                  <div className="text-xs text-white/80 uppercase tracking-wide">Dial Now</div>
+                  <a href="tel:921-124-9220" className="text-2xl font-bold hover:text-white/90 transition-colors">
+                    921-124-9220
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* About Dr. Susan Lopez */}
+      <section className="section-container bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+          <div className="order-2 lg:order-1">
+            <ImagePlaceholder
+              description="Dr. Susan Lopez - Professional headshot in office"
+              dimensions="500px"
+              usageNotes="Professional female psychologist portrait, friendly smile, office background with bookshelves"
+            />
+          </div>
+          <div className="order-1 lg:order-2">
+            <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-4 py-2 rounded-full text-xs uppercase tracking-wider mb-4">
+              Let Me Introduce
+            </div>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+              I'm Dr. Susan Lopez –<br />
+              Expert <span className="italic font-serif">Psychologist</span> from<br />
+              New York.
+            </h2>
+            <p className="text-lg text-gray-600 leading-relaxed mb-6">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.
+            </p>
+            <p className="text-base text-gray-600 leading-relaxed mb-8">
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo nemo ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione.
+            </p>
+            <div className="flex items-start gap-4 mb-8">
+              <div className="text-6xl text-soft-terracotta font-serif">"</div>
+              <div>
+                <p className="text-lg text-gray-700 italic mb-2">
+                  I can help you overcome the fears and obstacles in your life.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-12 bg-soft-terracotta"></div>
+                  <div>
+                    <p className="font-semibold text-gray-900">Susan Lopez</p>
+                    <p className="text-sm text-gray-600">Founder</p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <Link href="/about">
-              <Button variant="ghost">Learn More About Us</Button>
+              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 uppercase text-sm tracking-wide">
+                About Me
+              </Button>
             </Link>
           </div>
         </div>
       </section>
 
-      {/* Testimonials Preview */}
-      <section className="section-container bg-warm-sand">
-        <SectionHeading
-          title="Stories of Hope & Growth"
-          subtitle="Hear from those we've had the privilege to support."
-          centered
-        />
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard
-              key={index}
-              quote={testimonial.quote}
-              firstName={testimonial.firstName}
-              service={testimonial.service}
-            />
-          ))}
+      {/* Testimonials - Dark Background */}
+      <section className="bg-gray-900 text-white py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="text-6xl text-soft-terracotta mb-6">"</div>
+          <blockquote className="text-2xl md:text-3xl font-heading italic mb-6">
+            Susan is a life changer, having magical skills for helping people with psychotherapy.
+          </blockquote>
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <div className="h-0.5 w-12 bg-soft-terracotta"></div>
+            <div>
+              <p className="font-semibold">Jonathan Trout</p>
+              <p className="text-sm text-gray-400">August 2019</p>
+            </div>
+          </div>
         </div>
-        <div className="text-center mt-12">
-          <Link href="/testimonies">
-            <Button variant="secondary">Read More Stories</Button>
-          </Link>
+      </section>
+
+      {/* Features Section */}
+      <section className="section-container bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
+            <div className="text-center">
+              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
+              </svg>
+              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
+            </div>
+            <div className="text-center">
+              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
+              </svg>
+              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
+            </div>
+            <div className="text-center">
+              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
+              </svg>
+              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
+            </div>
+            <div className="text-center">
+              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
+              </svg>
+              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Process Section */}
+      <section className="section-container bg-warm-cream">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <ImagePlaceholder
+                description="Professional counseling session or therapist working"
+                dimensions="600px"
+                usageNotes="Warm professional setting showing therapist at work or in session"
+              />
+            </div>
+            <div>
+              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-4 py-2 rounded-full text-xs uppercase tracking-wider mb-4">
+                The Process
+              </div>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+                An amazing tagline for your process...
+              </h2>
+              <p className="text-gray-600 leading-relaxed mb-8">
+                Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris sed ut perspiciatis unde omnis iste natus error sit.
+              </p>
+              <div className="bg-white rounded-lg p-6 shadow-sm">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 bg-soft-terracotta rounded-full flex items-center justify-center flex-shrink-0">
+                    <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 className="font-heading font-bold text-gray-900 mb-2">Personalized therapies</h3>
+                    <p className="text-gray-600 text-sm">
+                      When you are in distressed or stressful period in life you need a supportive therapist. What can you accomplish with support and understanding.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="section-container bg-gradient-to-br from-soft-gold to-muted-coral text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="heading-lg text-white mb-6">
-            Ready to Take the Next Step?
+      <section className="bg-gradient-to-br from-soft-terracotta to-muted-coral text-white py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-6">
+            Ready to Begin Your Journey?
           </h2>
           <p className="text-xl mb-8 text-white/90">
-            Booking an appointment is simple and confidential. Let's talk about how we can support you.
+            Take the first step towards a healthier, happier life. Book your consultation today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book-appointment">
-              <Button className="bg-white text-soft-gold hover:bg-off-white w-full sm:w-auto">
-                Book an Appointment
+              <Button className="bg-white text-soft-terracotta hover:bg-gray-100 w-full sm:w-auto px-8 py-3 uppercase text-sm tracking-wide">
+                Book Session
               </Button>
             </Link>
             <Link href="/contact">
-              <Button className="bg-transparent border-2 border-white text-white hover:bg-white/10 w-full sm:w-auto">
-                Get in Touch
+              <Button className="bg-transparent border-2 border-white text-white hover:bg-white/10 w-full sm:w-auto px-8 py-3 uppercase text-sm tracking-wide">
+                Contact Us
               </Button>
             </Link>
           </div>
