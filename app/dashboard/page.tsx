@@ -6,6 +6,8 @@ import { useAuth } from '@/lib/AuthContext';
 import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import Card from '@/components/ui/Card';
+import Button from '@/components/ui/Button';
 
 function DashboardContent() {
   const { user } = useAuth();
@@ -28,7 +30,7 @@ function DashboardContent() {
   };
 
   const handleCancelAppointment = async (id: string) => {
-    if (!window.confirm('Are you sure you want to cancel this appointment?')) {
+    if (!window.confirm('Are you sure you would like to cancel this appointment? We understand plans change.')) {
       return;
     }
 
@@ -37,134 +39,260 @@ function DashboardContent() {
       fetchAppointments();
     } catch (error) {
       console.error('Failed to cancel appointment', error);
-      alert('Failed to cancel appointment');
+      alert('We encountered an issue canceling your appointment. Please contact us directly if you need to make changes.');
     }
   };
 
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'confirmed':
-        return 'bg-green-100 text-green-800';
+        return 'bg-olive-green bg-opacity-10 text-olive-green border border-olive-green';
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-soft-gold bg-opacity-10 text-soft-gold border border-soft-gold';
       case 'cancelled':
-        return 'bg-red-100 text-red-800';
+        return 'bg-soft-beige text-gray-600 border border-soft-beige';
       case 'completed':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-muted-teal bg-opacity-10 text-muted-teal border border-muted-teal';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-light-grey text-gray-600 border border-light-grey';
+    }
+  };
+
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case 'confirmed':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+      case 'pending':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+      case 'cancelled':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        );
+      case 'completed':
+        return (
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+          </svg>
+        );
+      default:
+        return null;
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800">Welcome, {user?.name}!</h1>
-          <p className="text-gray-600 mt-2">Manage your appointments and profile</p>
+    <div className="min-h-screen bg-off-white">
+      {/* Header */}
+      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="heading-xl mb-3">Welcome back, {user?.name}!</h1>
+          <p className="text-gray-600 text-lg">Here's an overview of your appointments and sessions.</p>
         </div>
+      </section>
 
-        <div className="grid md:grid-cols-3 gap-6 mb-8">
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-gray-600 text-sm font-medium">Total Appointments</h3>
-            <p className="text-3xl font-bold text-gilt-gold mt-2">{appointments.length}</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-gray-600 text-sm font-medium">Pending</h3>
-            <p className="text-3xl font-bold text-yellow-600 mt-2">
-              {appointments.filter(a => a.status === 'pending').length}
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h3 className="text-gray-600 text-sm font-medium">Confirmed</h3>
-            <p className="text-3xl font-bold text-green-600 mt-2">
-              {appointments.filter(a => a.status === 'confirmed').length}
-            </p>
+      {/* Stats Cards */}
+      <section className="section-container">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <Card className="text-center">
+              <div className="flex items-center justify-center w-12 h-12 bg-soft-gold bg-opacity-10 rounded-full mx-auto mb-4">
+                <svg className="w-6 h-6 text-soft-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Total Appointments</h3>
+              <p className="text-4xl font-heading font-bold text-gray-900">{appointments.length}</p>
+            </Card>
+
+            <Card className="text-center">
+              <div className="flex items-center justify-center w-12 h-12 bg-soft-gold bg-opacity-10 rounded-full mx-auto mb-4">
+                <svg className="w-6 h-6 text-soft-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Pending Confirmation</h3>
+              <p className="text-4xl font-heading font-bold text-gray-900">
+                {appointments.filter(a => a.status === 'pending').length}
+              </p>
+            </Card>
+
+            <Card className="text-center">
+              <div className="flex items-center justify-center w-12 h-12 bg-olive-green bg-opacity-10 rounded-full mx-auto mb-4">
+                <svg className="w-6 h-6 text-olive-green" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-sm font-medium text-gray-600 mb-2">Confirmed Sessions</h3>
+              <p className="text-4xl font-heading font-bold text-gray-900">
+                {appointments.filter(a => a.status === 'confirmed').length}
+              </p>
+            </Card>
           </div>
         </div>
+      </section>
 
-        <div className="bg-white rounded-lg shadow-md p-6">
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold text-gray-800">My Appointments</h2>
-            <Link
-              href="/book-appointment"
-              className="bg-gilt-gold text-white px-4 py-2 rounded-lg hover:bg-gilt-orange transition"
-            >
-              Book New Appointment
-            </Link>
-          </div>
-
-          {loading ? (
-            <div className="text-center py-8">
-              <p className="text-gray-600">Loading appointments...</p>
-            </div>
-          ) : appointments.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-gray-600 mb-4">You don't have any appointments yet.</p>
-              <Link
-                href="/book-appointment"
-                className="inline-block bg-gilt-gold text-white px-6 py-2 rounded-lg hover:bg-gilt-orange transition"
-              >
-                Book Your First Appointment
+      {/* Appointments List */}
+      <section className="section-container bg-off-white">
+        <div className="max-w-7xl mx-auto">
+          <Card>
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
+              <div>
+                <h2 className="heading-md">Your Appointments</h2>
+                <p className="text-gray-600 text-sm mt-1">View and manage your upcoming and past sessions</p>
+              </div>
+              <Link href="/book-appointment">
+                <Button variant="primary">Schedule New Session</Button>
               </Link>
             </div>
-          ) : (
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Service
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date & Time
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="bg-white divide-y divide-gray-200">
+
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-soft-gold mb-4"></div>
+                <p className="text-gray-600">Loading your appointments...</p>
+              </div>
+            ) : appointments.length === 0 ? (
+              <div className="text-center py-12 bg-warm-cream rounded-lg">
+                <svg className="w-16 h-16 text-soft-gold mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                <h3 className="font-heading font-semibold text-lg text-gray-900 mb-2">No Appointments Yet</h3>
+                <p className="text-gray-600 mb-6 max-w-md mx-auto">
+                  You haven't scheduled any sessions yet. When you're ready, we're here to support you.
+                </p>
+                <Link href="/book-appointment">
+                  <Button variant="primary">Schedule Your First Session</Button>
+                </Link>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {/* Desktop Table View */}
+                <div className="hidden md:block overflow-x-auto">
+                  <table className="w-full">
+                    <thead>
+                      <tr className="border-b border-light-grey">
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Service
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Date & Time
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Status
+                        </th>
+                        <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-light-grey">
+                      {appointments.map((appointment) => (
+                        <tr key={appointment.id} className="hover:bg-warm-cream transition-colors duration-150">
+                          <td className="px-6 py-4">
+                            <div className="text-sm font-medium text-gray-900">
+                              {appointment.service}
+                            </div>
+                            {appointment.notes && (
+                              <div className="text-sm text-gray-500 mt-1 max-w-xs truncate" title={appointment.notes}>
+                                {appointment.notes}
+                              </div>
+                            )}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="text-sm text-gray-900">{appointment.date}</div>
+                            <div className="text-sm text-gray-500">{appointment.time}</div>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className={`px-3 py-1 inline-flex items-center gap-2 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
+                              {getStatusIcon(appointment.status)}
+                              {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm">
+                            {appointment.status !== 'cancelled' && appointment.status !== 'completed' && (
+                              <button
+                                onClick={() => handleCancelAppointment(appointment.id)}
+                                className="text-muted-coral hover:text-soft-terracotta font-medium transition-colors duration-150"
+                              >
+                                Cancel
+                              </button>
+                            )}
+                          </td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+
+                {/* Mobile Card View */}
+                <div className="md:hidden space-y-4">
                   {appointments.map((appointment) => (
-                    <tr key={appointment.id}>
-                      <td className="px-6 py-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          {appointment.service}
+                    <div key={appointment.id} className="bg-warm-cream rounded-lg p-4 border border-light-grey">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="font-medium text-gray-900 flex-1">{appointment.service}</h3>
+                        <span className={`px-2 py-1 inline-flex items-center gap-1 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
+                          {getStatusIcon(appointment.status)}
+                          {appointment.status.charAt(0).toUpperCase() + appointment.status.slice(1)}
+                        </span>
+                      </div>
+
+                      <div className="space-y-2 text-sm text-gray-600 mb-3">
+                        <div className="flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                          </svg>
+                          <span>{appointment.date}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                          </svg>
+                          <span>{appointment.time}</span>
                         </div>
                         {appointment.notes && (
-                          <div className="text-sm text-gray-500">{appointment.notes}</div>
+                          <div className="text-xs text-gray-500 mt-2 italic">
+                            Note: {appointment.notes}
+                          </div>
                         )}
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-900">{appointment.date}</div>
-                        <div className="text-sm text-gray-500">{appointment.time}</div>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${getStatusColor(appointment.status)}`}>
-                          {appointment.status}
-                        </span>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-sm">
-                        {appointment.status !== 'cancelled' && appointment.status !== 'completed' && (
-                          <button
-                            onClick={() => handleCancelAppointment(appointment.id)}
-                            className="text-red-600 hover:text-red-900"
-                          >
-                            Cancel
-                          </button>
-                        )}
-                      </td>
-                    </tr>
+                      </div>
+
+                      {appointment.status !== 'cancelled' && appointment.status !== 'completed' && (
+                        <button
+                          onClick={() => handleCancelAppointment(appointment.id)}
+                          className="text-muted-coral hover:text-soft-terracotta font-medium text-sm transition-colors duration-150"
+                        >
+                          Cancel Appointment
+                        </button>
+                      )}
+                    </div>
                   ))}
-                </tbody>
-              </table>
-            </div>
-          )}
+                </div>
+              </div>
+            )}
+          </Card>
         </div>
-      </div>
+      </section>
+
+      {/* Help Section */}
+      <section className="section-container bg-warm-cream">
+        <div className="max-w-4xl mx-auto text-center">
+          <h3 className="heading-sm mb-4">Need to Make Changes?</h3>
+          <p className="body-md text-gray-700 mb-6">
+            If you need to reschedule or have questions about your upcoming sessions, we're here to help.
+          </p>
+          <Link href="/contact">
+            <Button variant="secondary">Contact Us</Button>
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
