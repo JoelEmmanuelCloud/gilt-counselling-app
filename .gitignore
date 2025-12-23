@@ -1,14 +1,16 @@
 # Dependencies
 node_modules/
-client/node_modules/
-server/node_modules/
 
 # Production build
-client/build/
-client/.next/
-client/out/
-client/src_old/
+.next/
+out/
+build/
 dist/
+src_old/
+
+# Old directories (to be removed)
+client/
+server/
 
 # Environment variables
 .env

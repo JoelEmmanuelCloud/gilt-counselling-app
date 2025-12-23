@@ -1,8 +1,17 @@
-const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
+import bcrypt from 'bcryptjs';
+import { v4 as uuidv4 } from 'uuid';
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  role: 'user' | 'admin';
+}
 
 // In-memory storage (replace with database in production)
-let users = [
+let users: User[] = [
   {
     id: '1',
     name: 'Admin User',
@@ -21,17 +30,17 @@ let users = [
   }
 ];
 
-const findUserByEmail = (email) => {
+export const findUserByEmail = (email: string): User | undefined => {
   return users.find(user => user.email === email);
 };
 
-const findUserById = (id) => {
+export const findUserById = (id: string): User | undefined => {
   return users.find(user => user.id === id);
 };
 
-const createUser = (name, email, password, phone) => {
+export const createUser = (name: string, email: string, password: string, phone: string): User => {
   const hashedPassword = bcrypt.hashSync(password, 10);
-  const newUser = {
+  const newUser: User = {
     id: uuidv4(),
     name,
     email,
@@ -43,13 +52,6 @@ const createUser = (name, email, password, phone) => {
   return newUser;
 };
 
-const validatePassword = (plainPassword, hashedPassword) => {
+export const validatePassword = (plainPassword: string, hashedPassword: string): boolean => {
   return bcrypt.compareSync(plainPassword, hashedPassword);
-};
-
-module.exports = {
-  findUserByEmail,
-  findUserById,
-  createUser,
-  validatePassword
 };
