@@ -45,7 +45,7 @@ export default function TestimoniesPage() {
       date: 'October 2024',
     },
     {
-      quote: 'Our teen was going through a difficult time, and the counselor helped her navigate it with compassion and wisdom. We're so grateful.',
+      quote: 'Our teen was going through a difficult time, and the counselor helped her navigate it with compassion and wisdom. We\'re so grateful.',
       firstName: 'Patricia',
       service: 'Teen & Youth Support',
       date: 'December 2024',
