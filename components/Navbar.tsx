@@ -36,13 +36,13 @@ const Navbar: React.FC = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-                <span>183/10 Alpaca Way Irvine, New York</span>
+                <span>Port Harcourt, Nigeria | Toronto, Canada</span>
               </span>
               <span className="flex items-center space-x-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <a href="mailto:hello@psychare.com" className="hover:text-soft-terracotta transition-colors">hello@psychare.com</a>
+                <a href="mailto:info@giltcounselling.com" className="hover:text-soft-terracotta transition-colors">info@giltcounselling.com</a>
               </span>
             </div>
             <div className="flex items-center space-x-4">
@@ -83,8 +83,8 @@ const Navbar: React.FC = () => {
                 </svg>
               </div>
               <div>
-                <h1 className="text-2xl font-heading font-bold text-gray-900">Psychare</h1>
-                <p className="text-xs text-gray-500 uppercase tracking-wide font-body">Mind Health</p>
+                <h1 className="text-2xl font-heading font-bold text-gray-900">Gilt Counselling</h1>
+                <p className="text-xs text-gray-500 uppercase tracking-wide font-body">Consult</p>
               </div>
             </Link>
 
@@ -130,7 +130,7 @@ const Navbar: React.FC = () => {
                 </svg>
                 <div className="text-sm">
                   <div className="text-xs text-gray-500">LET'S CHAT</div>
-                  <a href="tel:921-124-9220" className="font-semibold hover:text-soft-terracotta transition-colors">921-124-9220</a>
+                  <a href="tel:+2348033094050" className="font-semibold hover:text-soft-terracotta transition-colors">+234 803 309 4050</a>
                 </div>
               </div>
 

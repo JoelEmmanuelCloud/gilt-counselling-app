@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import Button from '@/components/ui/Button';
 
 export default function About() {
@@ -110,17 +110,17 @@ export default function About() {
             <h2 className="heading-md mb-6">Our Mission</h2>
             <div className="space-y-4 text-gray-700">
               <p className="body-lg">
-                We are dedicated to providing professional, compassionate counselling that empowers
-                teens, youths, and families to navigate life's challenges with confidence and hope.
+                Empowering teens and youths for optimal development through professional,
+                compassionate counselling and comprehensive support services.
               </p>
               <p className="body-md">
-                Our team of licensed counsellors brings years of specialized experience in adolescent
-                psychology, family therapy, and mental health support. We understand the unique pressures
-                facing young people today, and we're here to provide the guidance and support needed to thrive.
+                At Gilt Counselling Consult, we are dedicated to providing high-quality mental health services,
+                educational consulting, and youth development programs. With offices in Nigeria and Canada, we serve
+                individuals, families, schools, and organizations with a commitment to excellence and care.
               </p>
               <p className="body-md">
-                Whether you're dealing with anxiety, family dynamics, academic stress, or simply seeking
-                personal growth, we create a safe, non-judgmental space where healing and transformation can happen.
+                Whether you need mental health support, academic guidance, career counselling, or organizational training,
+                we create a safe, confidential space where transformation and growth can happen.
               </p>
             </div>
           </Card>
@@ -137,12 +137,15 @@ export default function About() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {team.map((member, index) => (
             <Card key={index} className="text-center md:text-left">
-              <div className="mb-6">
-                <ImagePlaceholder
-                  description={`Professional Headshot: ${member.name}`}
-                  dimensions="300px"
-                  usageNotes="Neutral background, soft lighting, calm expression, professional attire. Square or portrait orientation."
-                  className="mx-auto md:mx-0"
+              <div className="mb-6 relative h-[300px] w-[300px] mx-auto md:mx-0 rounded-lg overflow-hidden">
+                <Image
+                  src={index === 0
+                    ? "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop"
+                    : "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=300&h=300&fit=crop"
+                  }
+                  alt={`${member.name} - Professional Headshot`}
+                  fill
+                  className="object-cover"
                 />
               </div>
               <h3 className="heading-sm mb-2">{member.name}</h3>

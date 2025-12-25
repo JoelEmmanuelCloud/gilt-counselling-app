@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import Button from '@/components/ui/Button';
 
 export default function Contact() {
@@ -139,26 +139,38 @@ export default function Contact() {
           centered
         />
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <ImagePlaceholder
-            description="Waiting Area - Nigeria Office"
-            dimensions="400px"
-            usageNotes="Comfortable seating, well-lit space, plants, soft colors. Professional but warm and welcoming."
-          />
-          <ImagePlaceholder
-            description="Counselling Room - Nigeria Office"
-            dimensions="400px"
-            usageNotes="Private, comfortable setting with neutral colors. Cozy and safe atmosphere, not clinical."
-          />
-          <ImagePlaceholder
-            description="Waiting Area - Canada Office"
-            dimensions="400px"
-            usageNotes="Comfortable seating, well-lit space, plants, soft colors. Professional but warm and welcoming."
-          />
-          <ImagePlaceholder
-            description="Counselling Room - Canada Office"
-            dimensions="400px"
-            usageNotes="Private, comfortable setting with neutral colors. Cozy and safe atmosphere, not clinical."
-          />
+          <div className="relative h-[400px] rounded-lg overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=400&fit=crop"
+              alt="Waiting Area - Nigeria Office"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative h-[400px] rounded-lg overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=400&fit=crop"
+              alt="Counselling Room - Nigeria Office"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative h-[400px] rounded-lg overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=400&fit=crop"
+              alt="Waiting Area - Canada Office"
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="relative h-[400px] rounded-lg overflow-hidden">
+            <Image
+              src="https://images.unsplash.com/photo-1497215842964-222b430dc094?w=400&h=400&fit=crop"
+              alt="Counselling Room - Canada Office"
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
