@@ -83,7 +83,7 @@ const Navbar: React.FC = () => {
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-16 h-16 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative w-32 h-20 group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src="/Gilt Counselling Consult Profile.svg"
                   alt="Gilt Counselling Consult Logo"

@@ -158,7 +158,15 @@ export default function BookAppointment() {
 
   // Show auth modal if not authenticated
   if (showAuthModal && status === 'unauthenticated') {
-    return <AuthModal redirectTo="/book-appointment" />;
+    return (
+      <AuthModal
+        redirectTo="/book-appointment"
+        onClose={() => {
+          setShowAuthModal(false);
+          router.push('/');
+        }}
+      />
+    );
   }
 
   // Show loading state while checking auth
