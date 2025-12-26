@@ -72,7 +72,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full Width */}
-      <section className="relative h-[600px] md:h-[700px] overflow-hidden">
+      <section className="relative h-screen overflow-hidden -mt-[120px] pt-[120px]">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
         <HeroSlideshow />
