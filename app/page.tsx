@@ -349,38 +349,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="section-container bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Process Section */}
       <section className="section-container bg-warm-cream">
         <div className="max-w-6xl mx-auto">
