@@ -27,7 +27,7 @@
 @layer components {
   /* Emotionally Safe Button Styles */
   .btn-primary {
-    @apply bg-soft-gold text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-muted-coral focus:outline-none focus:ring-2 focus:ring-soft-gold focus:ring-offset-2;
+    @apply bg-soft-terracotta text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-soft-terracotta/90 focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:ring-offset-2;
   }
 
   .btn-secondary {
@@ -35,7 +35,7 @@
   }
 
   .btn-ghost {
-    @apply bg-transparent border-2 border-soft-gold text-soft-gold px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-soft-gold hover:text-white focus:outline-none focus:ring-2 focus:ring-soft-gold focus:ring-offset-2;
+    @apply bg-transparent border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2;
   }
 
   /* Calm Card Styles */
@@ -49,7 +49,7 @@
 
   /* Form Input Styles - Emotionally Safe */
   .input {
-    @apply w-full px-4 py-3 border border-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-gold focus:border-transparent transition-all duration-200 bg-white;
+    @apply w-full px-4 py-3 border border-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all duration-200 bg-white;
   }
 
   .label {
@@ -97,7 +97,7 @@
   }
 
   .status-confirmed {
-    @apply bg-olive-green text-white;
+    @apply bg-soft-terracotta text-white;
   }
 
   .status-cancelled {

@@ -2,9 +2,9 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ServiceCard from '@/components/ui/ServiceCard';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import Button from '@/components/ui/Button';
 
 export default function Services() {
@@ -135,6 +135,20 @@ export default function Services() {
         </svg>
       ),
     },
+    {
+      title: 'Partnerships & More',
+      description: 'We collaborate with schools, organizations, and community partners to expand mental health services and create meaningful impact in communities.',
+      details: {
+        whoItsFor: 'Organizations, schools, and institutions seeking partnerships',
+        whatToExpect: 'Collaborative programs tailored to community needs',
+        duration: 'Customized partnership arrangements',
+      },
+      icon: (
+        <svg className="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+        </svg>
+      ),
+    },
   ];
 
   return (
@@ -152,12 +166,14 @@ export default function Services() {
 
       {/* Optional Banner */}
       <section className="section-container">
-        <ImagePlaceholder
-          description="Calm Counselling Environment"
-          dimensions="300px"
-          usageNotes="Optional: Use a subtle, calming image of a counselling space or abstract calming visual. Can be omitted if preferred."
-          className="max-w-5xl mx-auto"
-        />
+        <div className="relative h-[300px] max-w-5xl mx-auto rounded-lg overflow-hidden">
+          <Image
+            src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1200&h=300&fit=crop"
+            alt="Calm Counselling Environment"
+            fill
+            className="object-cover"
+          />
+        </div>
       </section>
 
       {/* Services Grid */}

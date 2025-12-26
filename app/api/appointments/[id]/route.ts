@@ -1,27 +1,29 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserFromRequest } from '@/lib/auth';
+import { requireAuth } from '@/lib/auth';
 import { getAppointmentById, updateAppointment, deleteAppointment } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
 
 // PATCH /api/appointments/[id] - Update appointment status
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const authResult = await requireAuth();
+
+  if (authResult.error) {
+    return NextResponse.json(
+      { message: authResult.error },
+      { status: authResult.status }
+    );
+  }
+
   try {
     // Connect to database
     await connectDB();
 
-    const user = await getUserFromRequest(request);
+    const user = authResult.user;
 
-    if (!user) {
-      return NextResponse.json(
-        { message: 'Not authenticated' },
-        { status: 401 }
-      );
-    }
-
-    const { id } = params;
+    const { id } = await params;
     const body = await request.json();
     const { status } = body;
 
@@ -59,22 +61,24 @@ export async function PATCH(
 // DELETE /api/appointments/[id] - Delete appointment (admin only)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
+  const authResult = await requireAuth();
+
+  if (authResult.error) {
+    return NextResponse.json(
+      { message: authResult.error },
+      { status: authResult.status }
+    );
+  }
+
   try {
     // Connect to database
     await connectDB();
 
-    const user = await getUserFromRequest(request);
+    const user = authResult.user;
 
-    if (!user) {
-      return NextResponse.json(
-        { message: 'Not authenticated' },
-        { status: 401 }
-      );
-    }
-
-    const { id } = params;
+    const { id } = await params;
 
     const appointment = await getAppointmentById(id);
     if (!appointment) {

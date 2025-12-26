@@ -15,9 +15,9 @@ export default function Button({
   const baseStyles = 'px-6 py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-soft-gold text-white hover:bg-muted-coral focus:ring-soft-gold',
+    primary: 'bg-soft-terracotta text-white hover:bg-soft-terracotta/90 focus:ring-soft-terracotta',
     secondary: 'bg-gentle-blue-grey text-white hover:bg-muted-teal focus:ring-gentle-blue-grey',
-    ghost: 'bg-transparent border-2 border-soft-gold text-soft-gold hover:bg-soft-gold hover:text-white focus:ring-soft-gold',
+    ghost: 'bg-transparent border-2 border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-gray-300',
   };
 
   return (

@@ -1,55 +1,85 @@
-import jwt from 'jsonwebtoken';
-import { NextRequest } from 'next/server';
-import { findUserById } from './models/user';
-import connectDB from './mongodb';
+import { getServerSession } from 'next-auth';
+import { authConfig } from './auth.config';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+/**
+ * Get the current session (server-side only)
+ * @returns The current session or null
+ */
+export async function getSession() {
+  return await getServerSession(authConfig);
+}
 
-export const verifyToken = (token: string): { userId: string } | null => {
-  try {
-    const decoded = jwt.verify(token, JWT_SECRET) as { userId: string };
-    return decoded;
-  } catch (error) {
-    return null;
+/**
+ * Get the current user from session (server-side only)
+ * @returns The current user or null
+ */
+export async function getCurrentUser() {
+  const session = await getSession();
+  return session?.user || null;
+}
+
+/**
+ * Require authentication for API routes
+ * Returns user if authenticated, error otherwise
+ *
+ * @example
+ * const authResult = await requireAuth();
+ * if (authResult.error) {
+ *   return NextResponse.json({ message: authResult.error }, { status: authResult.status });
+ * }
+ * const user = authResult.user;
+ */
+export async function requireAuth() {
+  const session = await getSession();
+
+  if (!session || !session.user) {
+    return {
+      error: 'Not authenticated',
+      status: 401,
+      user: null,
+    };
   }
-};
 
-export const getUserFromRequest = async (request: NextRequest) => {
-  const authHeader = request.headers.get('authorization');
-
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return null;
-  }
-
-  const token = authHeader.replace('Bearer ', '');
-  const decoded = verifyToken(token);
-
-  if (!decoded) {
-    return null;
-  }
-
-  // Connect to database
-  await connectDB();
-
-  const user = await findUserById(decoded.userId);
-
-  if (!user) {
-    return null;
-  }
-
-  // Convert to plain object and remove password
-  const userObj = user.toObject();
-  const { password, ...userWithoutPassword } = userObj;
-
-  // Add id field for compatibility
   return {
-    ...userWithoutPassword,
-    id: userObj._id.toString(),
+    user: session.user,
+    error: null,
+    status: 200,
   };
-};
+}
 
-export const generateToken = (userId: string): string => {
-  return jwt.sign({ userId }, JWT_SECRET, { expiresIn: '7d' });
-};
+/**
+ * Require admin role for API routes
+ * Returns user if authenticated and admin, error otherwise
+ *
+ * @example
+ * const authResult = await requireAdmin();
+ * if (authResult.error) {
+ *   return NextResponse.json({ message: authResult.error }, { status: authResult.status });
+ * }
+ * const adminUser = authResult.user;
+ */
+export async function requireAdmin() {
+  const session = await getSession();
 
-export { JWT_SECRET };
+  if (!session || !session.user) {
+    return {
+      error: 'Not authenticated',
+      status: 401,
+      user: null,
+    };
+  }
+
+  if (session.user.role !== 'admin') {
+    return {
+      error: 'Admin access required',
+      status: 403,
+      user: null,
+    };
+  }
+
+  return {
+    user: session.user,
+    error: null,
+    status: 200,
+  };
+}

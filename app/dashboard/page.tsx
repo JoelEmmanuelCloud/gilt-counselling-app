@@ -2,21 +2,27 @@
 
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useAuth } from '@/lib/AuthContext';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
-import ProtectedRoute from '@/components/ProtectedRoute';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 
 function DashboardContent() {
-  const { user } = useAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
+  const router = useRouter();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAppointments();
-  }, []);
+    if (status === 'unauthenticated') {
+      router.push('/book-appointment');
+    } else if (status === 'authenticated') {
+      fetchAppointments();
+    }
+  }, [status, router]);
 
   const fetchAppointments = async () => {
     try {
@@ -298,9 +304,5 @@ function DashboardContent() {
 }
 
 export default function Dashboard() {
-  return (
-    <ProtectedRoute>
-      <DashboardContent />
-    </ProtectedRoute>
-  );
+  return <DashboardContent />;
 }

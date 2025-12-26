@@ -5,14 +5,51 @@ export interface IUser {
   _id?: string;
   name: string;
   email: string;
-  phone: string;
-  password: string;
+  phone?: string; // Now optional (for OAuth users)
+  password?: string; // Now optional (for passwordless auth)
   role: 'user' | 'admin';
+  emailVerified?: Date | null; // For NextAuth
+  verificationToken?: string; // For email verification
+  verificationTokenExpiry?: Date; // Token expiry time
+  image?: string; // For OAuth profile photos
+  comparePassword?: (candidatePassword: string) => Promise<boolean>;
+  // Profile information
+  profilePhoto?: string;
+  dateOfBirth?: Date;
+  gender?: 'male' | 'female' | 'other' | 'prefer-not-to-say';
+  // Address information
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+    postalCode?: string;
+  };
+  // Emergency contact
+  emergencyContact?: {
+    name?: string;
+    relationship?: string;
+    phone?: string;
+    email?: string;
+  };
+  // Client source tracking
+  source?: 'online' | 'phone' | 'whatsapp' | 'walk-in';
+  // Medical/counselling history
+  medicalHistory?: string;
+  // Session notes (admin only, not exposed to user)
+  sessionNotes?: Array<{
+    date: Date;
+    note: string;
+    createdBy: string;
+  }>;
+  // Additional preferences
+  preferredContactMethod?: 'email' | 'phone' | 'whatsapp';
+  emailNotifications?: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-const UserSchema = new Schema<IUser>(
+const UserSchema = new Schema(
   {
     name: {
       type: String,
@@ -34,12 +71,12 @@ const UserSchema = new Schema<IUser>(
     },
     phone: {
       type: String,
-      required: [true, 'Phone is required'],
+      required: false, // Now optional for OAuth users
       trim: true,
     },
     password: {
       type: String,
-      required: [true, 'Password is required'],
+      required: false, // Now optional for passwordless auth
       minlength: [6, 'Password must be at least 6 characters'],
     },
     role: {
@@ -47,15 +84,84 @@ const UserSchema = new Schema<IUser>(
       enum: ['user', 'admin'],
       default: 'user',
     },
+    // NextAuth fields
+    emailVerified: {
+      type: Date,
+      default: null,
+    },
+    verificationToken: {
+      type: String,
+    },
+    verificationTokenExpiry: {
+      type: Date,
+    },
+    image: {
+      type: String, // For OAuth profile photos (e.g., Google avatar)
+    },
+    // Profile information
+    profilePhoto: {
+      type: String,
+    },
+    dateOfBirth: {
+      type: Date,
+    },
+    gender: {
+      type: String,
+      enum: ['male', 'female', 'other', 'prefer-not-to-say'],
+    },
+    // Address information
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      country: String,
+      postalCode: String,
+    },
+    // Emergency contact
+    emergencyContact: {
+      name: String,
+      relationship: String,
+      phone: String,
+      email: String,
+    },
+    // Client source tracking
+    source: {
+      type: String,
+      enum: ['online', 'phone', 'whatsapp', 'walk-in'],
+      default: 'online',
+    },
+    // Medical/counselling history
+    medicalHistory: {
+      type: String,
+    },
+    // Session notes (admin only)
+    sessionNotes: [{
+      date: {
+        type: Date,
+        default: Date.now,
+      },
+      note: String,
+      createdBy: String,
+    }],
+    // Additional preferences
+    preferredContactMethod: {
+      type: String,
+      enum: ['email', 'phone', 'whatsapp'],
+      default: 'email',
+    },
+    emailNotifications: {
+      type: Boolean,
+      default: true,
+    },
   },
   {
     timestamps: true,
   }
 );
 
-// Hash password before saving
+// Hash password before saving (only if password exists and is modified)
 UserSchema.pre('save', async function () {
-  if (!this.isModified('password')) {
+  if (!this.isModified('password') || !this.password) {
     return;
   }
 
@@ -63,8 +169,11 @@ UserSchema.pre('save', async function () {
   this.password = await bcrypt.hash(this.password, salt);
 });
 
-// Method to compare password
+// Method to compare password (only if password exists)
 UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
+  if (!this.password) {
+    return false; // No password set (OAuth or magic link user)
+  }
   return bcrypt.compare(candidatePassword, this.password);
 };
 
