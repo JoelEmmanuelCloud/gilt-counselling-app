@@ -1,4 +1,4 @@
-import type { NextAuthConfig } from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Email from 'next-auth/providers/email';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
@@ -131,7 +131,7 @@ Email: hello@giltcounselling.com
   return { html, text };
 }
 
-export const authConfig: NextAuthConfig = {
+export const authConfig: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
 
   providers: [
