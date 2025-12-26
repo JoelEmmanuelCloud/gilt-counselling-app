@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/lib/AuthContext';
 
 export default function Register() {
@@ -15,6 +15,7 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,7 +35,10 @@ export default function Register() {
 
     try {
       await register(name, email, password, phone);
-      router.push('/dashboard');
+
+      // Check for redirect parameter
+      const redirectUrl = searchParams.get('redirect');
+      router.push(redirectUrl || '/dashboard');
     } catch (err: any) {
       setError(err.message);
     } finally {
@@ -139,7 +143,10 @@ export default function Register() {
 
           <p className="mt-6 text-center text-gray-600">
             Already have an account?{' '}
-            <Link href="/login" className="text-gilt-gold hover:text-gilt-orange font-semibold">
+            <Link
+              href={`/login${searchParams.get('redirect') ? `?redirect=${searchParams.get('redirect')}` : ''}`}
+              className="text-gilt-gold hover:text-gilt-orange font-semibold"
+            >
               Sign in here
             </Link>
           </p>

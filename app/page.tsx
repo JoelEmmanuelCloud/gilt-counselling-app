@@ -107,7 +107,7 @@ export default function Home() {
                 </Link>
                 <Link href="/about">
                   <Button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-8 py-3 uppercase text-sm tracking-wide">
-                    About Me
+                    About US
                   </Button>
                 </Link>
               </div>

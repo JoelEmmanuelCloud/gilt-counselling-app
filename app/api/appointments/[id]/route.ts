@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserFromRequest } from '@/lib/auth';
+import { requireAuth } from '@/lib/auth';
 import { getAppointmentById, updateAppointment, deleteAppointment } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
 
@@ -8,18 +8,20 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const authResult = await requireAuth();
+
+  if (authResult.error) {
+    return NextResponse.json(
+      { message: authResult.error },
+      { status: authResult.status }
+    );
+  }
+
   try {
     // Connect to database
     await connectDB();
 
-    const user = await getUserFromRequest(request);
-
-    if (!user) {
-      return NextResponse.json(
-        { message: 'Not authenticated' },
-        { status: 401 }
-      );
-    }
+    const user = authResult.user;
 
     const { id } = await params;
     const body = await request.json();
@@ -61,18 +63,20 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const authResult = await requireAuth();
+
+  if (authResult.error) {
+    return NextResponse.json(
+      { message: authResult.error },
+      { status: authResult.status }
+    );
+  }
+
   try {
     // Connect to database
     await connectDB();
 
-    const user = await getUserFromRequest(request);
-
-    if (!user) {
-      return NextResponse.json(
-        { message: 'Not authenticated' },
-        { status: 401 }
-      );
-    }
+    const user = authResult.user;
 
     const { id } = await params;
 

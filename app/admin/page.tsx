@@ -1,27 +1,115 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useAuth } from '@/lib/AuthContext';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
-import ProtectedRoute from '@/components/ProtectedRoute';
 import Card from '@/components/ui/Card';
+import axios from 'axios';
+
+type Tab = 'appointments' | 'clients' | 'create-booking';
+
+interface Client {
+  _id: string;
+  name: string;
+  email: string;
+  phone: string;
+  source?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  address?: {
+    city?: string;
+    country?: string;
+  };
+  createdAt: string;
+}
 
 function AdminDashboardContent() {
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const user = session?.user;
+
+  const [activeTab, setActiveTab] = useState<Tab>('appointments');
   const [appointments, setAppointments] = useState<Appointment[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    fetchAppointments();
-  }, []);
+    if (status === 'unauthenticated') {
+      router.push('/book-appointment');
+    } else if (status === 'authenticated' && user?.role !== 'admin') {
+      router.push('/dashboard');
+    }
+  }, [status, user, router]);
+
+  // Booking form state
+  const [bookingForm, setBookingForm] = useState({
+    userId: '',
+    service: '',
+    date: '',
+    time: '',
+    notes: '',
+    status: 'confirmed',
+    sendConfirmation: true,
+  });
+
+  // Client form state
+  const [showClientForm, setShowClientForm] = useState(false);
+  const [clientForm, setClientForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    source: 'walk-in',
+    gender: '',
+    dateOfBirth: '',
+    address: {
+      street: '',
+      city: '',
+      state: '',
+      country: 'Nigeria',
+      postalCode: '',
+    },
+    emergencyContact: {
+      name: '',
+      relationship: '',
+      phone: '',
+    },
+    preferredContactMethod: 'phone',
+  });
+
+  useEffect(() => {
+    if (activeTab === 'appointments') {
+      fetchAppointments();
+    } else if (activeTab === 'clients' || activeTab === 'create-booking') {
+      fetchClients();
+    }
+  }, [activeTab]);
 
   const fetchAppointments = async () => {
     try {
+      setLoading(true);
       const response = await api.get('/appointments');
       setAppointments(response.data);
     } catch (error) {
       console.error('Failed to fetch appointments', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const fetchClients = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      const response = await axios.get('/api/admin/clients', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setClients(response.data);
+    } catch (error) {
+      console.error('Failed to fetch clients', error);
     } finally {
       setLoading(false);
     }
@@ -51,6 +139,66 @@ function AdminDashboardContent() {
     }
   };
 
+  const handleCreateClient = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('/api/admin/clients', clientForm, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert('Client created successfully!');
+      setShowClientForm(false);
+      setClientForm({
+        name: '',
+        email: '',
+        phone: '',
+        source: 'walk-in',
+        gender: '',
+        dateOfBirth: '',
+        address: {
+          street: '',
+          city: '',
+          state: '',
+          country: 'Nigeria',
+          postalCode: '',
+        },
+        emergencyContact: {
+          name: '',
+          relationship: '',
+          phone: '',
+        },
+        preferredContactMethod: 'phone',
+      });
+      fetchClients();
+    } catch (error: any) {
+      alert(error.response?.data?.message || 'Failed to create client');
+    }
+  };
+
+  const handleCreateBooking = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('/api/admin/create-booking', bookingForm, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert('Appointment created successfully!');
+      setBookingForm({
+        userId: '',
+        service: '',
+        date: '',
+        time: '',
+        notes: '',
+        status: 'confirmed',
+        sendConfirmation: true,
+      });
+      setActiveTab('appointments');
+      fetchAppointments();
+    } catch (error: any) {
+      alert(error.response?.data?.message || 'Failed to create appointment');
+    }
+  };
+
   const getStatusColor = (status: string) => {
     switch (status) {
       case 'confirmed':
@@ -70,13 +218,33 @@ function AdminDashboardContent() {
     filter === 'all' ? true : apt.status === filter
   );
 
+  const filteredClients = clients.filter(client =>
+    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    client.phone.includes(searchTerm)
+  );
+
   const stats = {
     total: appointments.length,
     pending: appointments.filter(a => a.status === 'pending').length,
     confirmed: appointments.filter(a => a.status === 'confirmed').length,
     completed: appointments.filter(a => a.status === 'completed').length,
     cancelled: appointments.filter(a => a.status === 'cancelled').length,
+    totalClients: clients.length,
   };
+
+  const services = [
+    'Individual Counseling',
+    'Family Therapy',
+    'Couples Counseling',
+    'Group Therapy',
+    'Child & Adolescent Therapy',
+    'Trauma & PTSD Counseling',
+    'Addiction Counseling',
+    'Career Counseling',
+    'Mental Health Assessment',
+    'Online Counseling Sessions',
+  ];
 
   return (
     <div className="min-h-screen bg-off-white">
@@ -84,14 +252,18 @@ function AdminDashboardContent() {
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Admin Dashboard</h1>
-          <p className="text-gray-600 text-lg">Manage client appointments and bookings</p>
+          <p className="text-gray-600 text-lg">Manage clients, appointments, and bookings</p>
         </div>
       </section>
 
       {/* Statistics Cards */}
       <section className="section-container">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
+            <Card className="text-center">
+              <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Clients</h3>
+              <p className="text-3xl font-heading font-bold text-gray-900">{stats.totalClients}</p>
+            </Card>
             <Card className="text-center">
               <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-2">Total</h3>
               <p className="text-3xl font-heading font-bold text-gray-900">{stats.total}</p>
@@ -116,9 +288,43 @@ function AdminDashboardContent() {
         </div>
       </section>
 
-      {/* Appointments Table */}
-      <section className="section-container bg-off-white">
-        <div className="max-w-7xl mx-auto">
+      {/* Tabs */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200">
+          <button
+            onClick={() => setActiveTab('appointments')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'appointments'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Appointments
+          </button>
+          <button
+            onClick={() => setActiveTab('clients')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'clients'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Clients
+          </button>
+          <button
+            onClick={() => setActiveTab('create-booking')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'create-booking'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Create Booking
+          </button>
+        </div>
+
+        {/* Appointments Tab */}
+        {activeTab === 'appointments' && (
           <Card>
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
               <div>
@@ -128,46 +334,10 @@ function AdminDashboardContent() {
                 </p>
               </div>
               <div className="flex flex-wrap gap-2">
-                <button
-                  onClick={() => setFilter('all')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                    filter === 'all'
-                      ? 'bg-soft-gold text-white'
-                      : 'bg-light-grey text-gray-700 hover:bg-soft-beige'
-                  }`}
-                >
-                  All
-                </button>
-                <button
-                  onClick={() => setFilter('pending')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                    filter === 'pending'
-                      ? 'bg-soft-gold text-white'
-                      : 'bg-light-grey text-gray-700 hover:bg-soft-beige'
-                  }`}
-                >
-                  Pending
-                </button>
-                <button
-                  onClick={() => setFilter('confirmed')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                    filter === 'confirmed'
-                      ? 'bg-olive-green text-white'
-                      : 'bg-light-grey text-gray-700 hover:bg-soft-beige'
-                  }`}
-                >
-                  Confirmed
-                </button>
-                <button
-                  onClick={() => setFilter('completed')}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 ${
-                    filter === 'completed'
-                      ? 'bg-muted-teal text-white'
-                      : 'bg-light-grey text-gray-700 hover:bg-soft-beige'
-                  }`}
-                >
-                  Completed
-                </button>
+                <button onClick={() => setFilter('all')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'all' ? 'bg-soft-gold text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>All</button>
+                <button onClick={() => setFilter('pending')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'pending' ? 'bg-soft-gold text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>Pending</button>
+                <button onClick={() => setFilter('confirmed')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'confirmed' ? 'bg-olive-green text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>Confirmed</button>
+                <button onClick={() => setFilter('completed')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'completed' ? 'bg-muted-teal text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>Completed</button>
               </div>
             </div>
 
@@ -178,9 +348,6 @@ function AdminDashboardContent() {
               </div>
             ) : filteredAppointments.length === 0 ? (
               <div className="text-center py-12 bg-warm-cream rounded-lg">
-                <svg className="w-16 h-16 text-soft-gold mx-auto mb-4 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
                 <p className="text-gray-600">No {filter !== 'all' ? filter : ''} appointments found.</p>
               </div>
             ) : (
@@ -188,64 +355,39 @@ function AdminDashboardContent() {
                 <table className="w-full">
                   <thead>
                     <tr className="border-b border-light-grey">
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Client Information
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Service
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Date & Time
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Status
-                      </th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                        Actions
-                      </th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Client</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Service</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date & Time</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-light-grey">
                     {filteredAppointments.map((appointment) => (
-                      <tr key={appointment.id} className="hover:bg-warm-cream transition-colors duration-150">
+                      <tr key={appointment.id} className="hover:bg-warm-cream transition-colors">
                         <td className="px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {appointment.userName}
-                          </div>
+                          <div className="text-sm font-medium text-gray-900">{appointment.userName}</div>
                           <div className="text-sm text-gray-500">{appointment.userEmail}</div>
                           <div className="text-sm text-gray-500">{appointment.userPhone}</div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="text-sm text-gray-900 font-medium">{appointment.service}</div>
-                          {appointment.notes && (
-                            <div className="text-sm text-gray-500 mt-1 max-w-xs">
-                              <span className="font-medium">Note:</span> {appointment.notes}
-                            </div>
-                          )}
+                          {appointment.notes && <div className="text-sm text-gray-500 mt-1">{appointment.notes}</div>}
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
+                        <td className="px-6 py-4">
                           <div className="text-sm text-gray-900">{appointment.date}</div>
                           <div className="text-sm text-gray-500">{appointment.time}</div>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <select
-                            value={appointment.status}
-                            onChange={(e) => handleStatusChange(appointment.id, e.target.value)}
-                            className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer transition-colors duration-200 ${getStatusColor(appointment.status)}`}
-                          >
+                        <td className="px-6 py-4">
+                          <select value={appointment.status} onChange={(e) => handleStatusChange(appointment.id, e.target.value)} className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer ${getStatusColor(appointment.status)}`}>
                             <option value="pending">Pending</option>
                             <option value="confirmed">Confirmed</option>
                             <option value="completed">Completed</option>
                             <option value="cancelled">Cancelled</option>
                           </select>
                         </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm">
-                          <button
-                            onClick={() => handleDeleteAppointment(appointment.id)}
-                            className="text-muted-coral hover:text-soft-terracotta font-medium transition-colors duration-150"
-                          >
-                            Delete
-                          </button>
+                        <td className="px-6 py-4">
+                          <button onClick={() => handleDeleteAppointment(appointment.id)} className="text-red-600 hover:text-red-800 font-medium text-sm">Delete</button>
                         </td>
                       </tr>
                     ))}
@@ -254,16 +396,160 @@ function AdminDashboardContent() {
               </div>
             )}
           </Card>
-        </div>
+        )}
+
+        {/* Clients Tab */}
+        {activeTab === 'clients' && (
+          <Card>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="heading-md">Client Management</h2>
+              <button onClick={() => setShowClientForm(!showClientForm)} className="px-4 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition">
+                {showClientForm ? 'Cancel' : '+ New Client'}
+              </button>
+            </div>
+
+            {showClientForm && (
+              <form onSubmit={handleCreateClient} className="mb-8 p-6 bg-warm-cream rounded-lg">
+                <h3 className="font-semibold text-lg mb-4">Create New Client</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" placeholder="Full Name *" required value={clientForm.name} onChange={(e) => setClientForm({...clientForm, name: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="email" placeholder="Email *" required value={clientForm.email} onChange={(e) => setClientForm({...clientForm, email: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="tel" placeholder="Phone *" required value={clientForm.phone} onChange={(e) => setClientForm({...clientForm, phone: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <select value={clientForm.source} onChange={(e) => setClientForm({...clientForm, source: e.target.value as any})} className="px-4 py-2 border rounded-lg">
+                    <option value="walk-in">Walk-in</option>
+                    <option value="phone">Phone</option>
+                    <option value="whatsapp">WhatsApp</option>
+                    <option value="online">Online</option>
+                  </select>
+                  <select value={clientForm.gender} onChange={(e) => setClientForm({...clientForm, gender: e.target.value})} className="px-4 py-2 border rounded-lg">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                    <option value="prefer-not-to-say">Prefer not to say</option>
+                  </select>
+                  <input type="date" placeholder="Date of Birth" value={clientForm.dateOfBirth} onChange={(e) => setClientForm({...clientForm, dateOfBirth: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="City" value={clientForm.address.city} onChange={(e) => setClientForm({...clientForm, address: {...clientForm.address, city: e.target.value}})} className="px-4 py-2 border rounded-lg" />
+                  <select value={clientForm.address.country} onChange={(e) => setClientForm({...clientForm, address: {...clientForm.address, country: e.target.value}})} className="px-4 py-2 border rounded-lg">
+                    <option value="Nigeria">Nigeria</option>
+                    <option value="Canada">Canada</option>
+                  </select>
+                </div>
+                <button type="submit" className="mt-4 px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition">Create Client</button>
+              </form>
+            )}
+
+            <input
+              type="text"
+              placeholder="Search clients by name, email, or phone..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full px-4 py-2 border rounded-lg mb-4"
+            />
+
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-soft-gold mb-4"></div>
+                <p className="text-gray-600">Loading clients...</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contact</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Location</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Source</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Joined</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {filteredClients.map((client) => (
+                      <tr key={client._id} className="hover:bg-warm-cream transition-colors">
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{client.name}</td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">{client.email}</div>
+                          <div className="text-sm text-gray-500">{client.phone}</div>
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-900">{client.address?.city || '-'}, {client.address?.country || '-'}</td>
+                        <td className="px-6 py-4 text-sm">
+                          <span className="px-2 py-1 bg-gilt-gold bg-opacity-10 text-gilt-gold rounded-full text-xs">{client.source || 'online'}</span>
+                        </td>
+                        <td className="px-6 py-4 text-sm text-gray-500">{new Date(client.createdAt).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </Card>
+        )}
+
+        {/* Create Booking Tab */}
+        {activeTab === 'create-booking' && (
+          <Card>
+            <h2 className="heading-md mb-6">Create Appointment for Client</h2>
+            <form onSubmit={handleCreateBooking} className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Select Client *</label>
+                  <select required value={bookingForm.userId} onChange={(e) => setBookingForm({...bookingForm, userId: e.target.value})} className="w-full px-4 py-2 border rounded-lg">
+                    <option value="">-- Select a client --</option>
+                    {clients.map((client) => (
+                      <option key={client._id} value={client._id}>{client.name} ({client.email})</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Service *</label>
+                  <select required value={bookingForm.service} onChange={(e) => setBookingForm({...bookingForm, service: e.target.value})} className="w-full px-4 py-2 border rounded-lg">
+                    <option value="">-- Select a service --</option>
+                    {services.map((service) => (
+                      <option key={service} value={service}>{service}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Date *</label>
+                  <input type="date" required value={bookingForm.date} onChange={(e) => setBookingForm({...bookingForm, date: e.target.value})} className="w-full px-4 py-2 border rounded-lg" />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Time *</label>
+                  <input type="time" required value={bookingForm.time} onChange={(e) => setBookingForm({...bookingForm, time: e.target.value})} className="w-full px-4 py-2 border rounded-lg" />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
+                  <select value={bookingForm.status} onChange={(e) => setBookingForm({...bookingForm, status: e.target.value})} className="w-full px-4 py-2 border rounded-lg">
+                    <option value="confirmed">Confirmed</option>
+                    <option value="pending">Pending</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center">
+                  <input type="checkbox" id="sendConfirmation" checked={bookingForm.sendConfirmation} onChange={(e) => setBookingForm({...bookingForm, sendConfirmation: e.target.checked})} className="mr-2" />
+                  <label htmlFor="sendConfirmation" className="text-sm text-gray-700">Send email confirmation</label>
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Notes</label>
+                <textarea value={bookingForm.notes} onChange={(e) => setBookingForm({...bookingForm, notes: e.target.value})} rows={3} className="w-full px-4 py-2 border rounded-lg" placeholder="Add any notes about this booking..."></textarea>
+              </div>
+
+              <button type="submit" className="w-full px-6 py-3 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition">Create Appointment</button>
+            </form>
+          </Card>
+        )}
       </section>
     </div>
   );
 }
 
 export default function AdminDashboard() {
-  return (
-    <ProtectedRoute adminOnly>
-      <AdminDashboardContent />
-    </ProtectedRoute>
-  );
+  return <AdminDashboardContent />;
 }

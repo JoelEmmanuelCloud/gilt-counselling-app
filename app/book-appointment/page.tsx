@@ -1,21 +1,25 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { useAuth } from '@/lib/AuthContext';
+import { useSession } from 'next-auth/react';
 import api from '@/lib/api';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import AuthModal from '@/components/AuthModal';
 
 export default function BookAppointment() {
-  const { user } = useAuth();
+  const { data: session, status } = useSession();
+  const user = session?.user;
   const router = useRouter();
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showUserInfoForm, setShowUserInfoForm] = useState(false);
 
   const [formData, setFormData] = useState({
     name: user?.name || '',
     email: user?.email || '',
-    phone: user?.phone || '',
+    phone: '',
     service: '',
     date: '',
     time: '',
@@ -24,6 +28,27 @@ export default function BookAppointment() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // Check authentication status on mount
+  useEffect(() => {
+    if (status === 'loading') return;
+
+    if (status === 'unauthenticated') {
+      setShowAuthModal(true);
+    } else if (status === 'authenticated' && user) {
+      // Update form data with user info
+      setFormData(prev => ({
+        ...prev,
+        name: user.name || '',
+        email: user.email || '',
+      }));
+
+      // Check if we need additional user info (phone number)
+      if (!user.phone) {
+        setShowUserInfoForm(true);
+      }
+    }
+  }, [status, user]);
 
   const services = [
     {
@@ -122,19 +147,7 @@ export default function BookAppointment() {
       await api.post('/appointments', formData);
       setSuccess('Your appointment request has been received. We\'ll be in touch within 24 hours to confirm your session.');
       setTimeout(() => {
-        if (user) {
-          router.push('/dashboard');
-        } else {
-          setFormData({
-            name: '',
-            email: '',
-            phone: '',
-            service: '',
-            date: '',
-            time: '',
-            notes: ''
-          });
-        }
+        router.push('/dashboard');
       }, 3000);
     } catch (err: any) {
       setError(err.response?.data?.message || 'We encountered an issue processing your request. Please try again or contact us directly.');
@@ -143,10 +156,84 @@ export default function BookAppointment() {
     }
   };
 
+  // Show auth modal if not authenticated
+  if (showAuthModal && status === 'unauthenticated') {
+    return <AuthModal redirectTo="/book-appointment" />;
+  }
+
+  // Show loading state while checking auth
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen bg-off-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-soft-terracotta mb-4"></div>
+          <p className="text-gray-600">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Show user info collection modal if needed
+  const UserInfoModal = () => (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className="bg-white rounded-lg max-w-md w-full p-8">
+        <div className="text-center mb-6">
+          <div className="w-12 h-12 bg-soft-terracotta rounded-full flex items-center justify-center mx-auto mb-4">
+            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Complete your profile</h2>
+          <p className="text-gray-600 text-sm">
+            We need a few more details to complete your booking
+          </p>
+        </div>
+
+        <form onSubmit={async (e) => {
+          e.preventDefault();
+          try {
+            // Update user profile with phone number
+            await api.patch('/profile', {
+              phone: formData.phone,
+            });
+            setShowUserInfoForm(false);
+          } catch (err) {
+            console.error('Failed to update profile:', err);
+            alert('Failed to update profile. Please try again.');
+          }
+        }} className="space-y-4">
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+              Phone Number
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              required
+              value={formData.phone}
+              onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent"
+              placeholder="+234 xxx xxx xxxx"
+            />
+          </div>
+
+          <Button
+            type="submit"
+            className="w-full bg-soft-terracotta text-white hover:bg-soft-terracotta/90"
+          >
+            Continue to Booking
+          </Button>
+        </form>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="min-h-screen bg-off-white">
-      {/* Hero Section */}
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+    <>
+      {showUserInfoForm && <UserInfoModal />}
+      <div className="min-h-screen bg-off-white">
+        {/* Hero Section */}
+        <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-6">Take the First Step</h1>
           <p className="body-lg mb-4">
@@ -386,6 +473,7 @@ export default function BookAppointment() {
           </div>
         </div>
       </section>
-    </div>
+      </div>
+    </>
   );
 }

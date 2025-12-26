@@ -1,22 +1,24 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { getUserFromRequest } from '@/lib/auth';
+import { requireAuth } from '@/lib/auth';
 import { createAppointment, getAllAppointments, getAppointmentsByUserId } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
 
 // GET /api/appointments - Get all appointments (admin) or user's appointments
 export async function GET(request: NextRequest) {
+  const authResult = await requireAuth();
+
+  if (authResult.error) {
+    return NextResponse.json(
+      { message: authResult.error },
+      { status: authResult.status }
+    );
+  }
+
   try {
     // Connect to database
     await connectDB();
 
-    const user = await getUserFromRequest(request);
-
-    if (!user) {
-      return NextResponse.json(
-        { message: 'Not authenticated' },
-        { status: 401 }
-      );
-    }
+    const user = authResult.user;
 
     // Admin can see all appointments
     if (user.role === 'admin') {
@@ -54,7 +56,8 @@ export async function POST(request: NextRequest) {
     }
 
     // Try to get user if authenticated (optional for appointments)
-    const user = await getUserFromRequest(request);
+    const authResult = await requireAuth();
+    const user = authResult.error ? null : authResult.user;
 
     // Create appointment
     const appointmentData = {
