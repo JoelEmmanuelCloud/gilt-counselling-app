@@ -28,6 +28,7 @@ function generateNextAuthMagicLinkEmail(url: string, email: string) {
                 <!-- Header -->
                 <tr>
                   <td style="background: linear-gradient(135deg, #D9A85D 0%, #F5A623 100%); padding: 40px 32px; text-align: center;">
+                    <img src="${APP_URL}/Gilt Counselling Consult.jpg" alt="Gilt Counselling Consult" style="max-width: 200px; height: auto; margin: 0 auto 16px; display: block;" />
                     <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
                       Gilt Counselling Consult
                     </h1>

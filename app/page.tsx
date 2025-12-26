@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
+import HeroSlideshow from '@/components/HeroSlideshow';
 
 export default function Home() {
   const helpOptions = [
@@ -74,15 +75,7 @@ export default function Home() {
       <section className="relative h-[600px] md:h-[700px] overflow-hidden">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1920&h=700&fit=crop"
-            alt="Professional counseling session - person in consultation"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+        <HeroSlideshow />
 
         {/* Hero Content */}
         <div className="relative z-20 h-full flex items-center">
