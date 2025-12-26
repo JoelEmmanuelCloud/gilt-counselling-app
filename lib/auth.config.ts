@@ -1,6 +1,6 @@
 import type { NextAuthConfig } from 'next-auth';
 import Google from 'next-auth/providers/google';
-import Resend from 'next-auth/providers/resend';
+import Email from 'next-auth/providers/email';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import clientPromise from './mongodb-client';
 import { sendEmail } from './email';
@@ -135,9 +135,8 @@ export const authConfig: NextAuthConfig = {
   adapter: MongoDBAdapter(clientPromise),
 
   providers: [
-    // Email Magic Link Provider (Resend)
-    Resend({
-      apiKey: process.env.RESEND_API_KEY!,
+    // Email Magic Link Provider (using Resend for sending)
+    Email({
       from: FROM_EMAIL,
       // Custom email sending with Gilt branding
       sendVerificationRequest: async ({ identifier: email, url }) => {

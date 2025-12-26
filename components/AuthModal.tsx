@@ -176,7 +176,7 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full bg-soft-terracotta text-white hover:bg-soft-terracotta/90"
+              className="w-full"
             >
               {loading ? 'Sending magic link...' : 'Continue with Email'}
             </Button>

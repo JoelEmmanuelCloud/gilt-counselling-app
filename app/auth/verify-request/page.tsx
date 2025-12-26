@@ -34,7 +34,7 @@ export default function VerifyRequest() {
           </div>
 
           <Link href="/">
-            <Button className="w-full bg-soft-terracotta text-white hover:bg-soft-terracotta/90">
+            <Button className="w-full">
               Return to Home
             </Button>
           </Link>

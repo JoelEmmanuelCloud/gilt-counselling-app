@@ -219,7 +219,7 @@ export default function BookAppointment() {
 
           <Button
             type="submit"
-            className="w-full bg-soft-terracotta text-white hover:bg-soft-terracotta/90"
+            className="w-full"
           >
             Continue to Booking
           </Button>

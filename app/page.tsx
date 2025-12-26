@@ -179,15 +179,15 @@ export default function Home() {
               key={index}
               className={`rounded-lg p-8 ${
                 plan.highlighted
-                  ? 'bg-soft-terracotta text-white shadow-xl'
+                  ? 'bg-soft-terracotta text-gray-900 shadow-xl'
                   : 'bg-white shadow-lg'
               } transition-all duration-300 hover:shadow-2xl`}
             >
-              <h3 className={`text-xl font-heading font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className={`text-xl font-heading font-bold mb-2 ${plan.highlighted ? 'text-gray-900' : 'text-gray-900'}`}>
                 {plan.name}
               </h3>
               <div className="mb-6">
-                <span className={`text-4xl md:text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-soft-terracotta'}`}>
+                <span className={`text-4xl md:text-5xl font-bold ${plan.highlighted ? 'text-gray-900' : 'text-soft-terracotta'}`}>
                   {plan.price}
                 </span>
               </div>
@@ -195,14 +195,14 @@ export default function Home() {
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <svg
-                      className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-white' : 'text-soft-terracotta'}`}
+                      className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-gray-900' : 'text-soft-terracotta'}`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span className={`text-sm ${plan.highlighted ? 'text-white' : 'text-gray-600'}`}>
+                    <span className={`text-sm ${plan.highlighted ? 'text-gray-700' : 'text-gray-600'}`}>
                       {feature}
                     </span>
                   </li>
@@ -213,7 +213,7 @@ export default function Home() {
                   className={`w-full uppercase text-sm tracking-wide ${
                     plan.highlighted
                       ? 'bg-white text-soft-terracotta hover:bg-gray-100'
-                      : 'bg-soft-terracotta text-white hover:bg-soft-terracotta/90'
+                      : ''
                   }`}
                 >
                   Get Started
@@ -249,30 +249,30 @@ export default function Home() {
               ))}
             </ul>
             <Link href="/services">
-              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 uppercase text-sm tracking-wide">
+              <Button className="uppercase text-sm tracking-wide">
                 Explore Programs
               </Button>
             </Link>
           </div>
 
           {/* Call for Consultation */}
-          <div className="bg-soft-terracotta text-white rounded-lg p-8">
+          <div className="bg-soft-terracotta text-gray-900 rounded-lg p-8">
             <h2 className="text-2xl font-heading font-bold mb-4">
               Call for Consultation
             </h2>
-            <p className="text-lg mb-6 text-white/90">
-              30 minutes free for first session. <Link href="/terms" className="underline">T&C Apply</Link>
+            <p className="text-lg mb-6 text-gray-800">
+              30 minutes free for first session. <Link href="/terms" className="underline font-semibold">T&C Apply</Link>
             </p>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
+            <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg p-6 mb-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gray-900/20 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="text-xs text-white/80 uppercase tracking-wide">Dial Now</div>
-                  <a href="tel:+2348033094050" className="text-2xl font-bold hover:text-white/90 transition-colors">
+                  <div className="text-xs text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
+                  <a href="tel:+2348033094050" className="text-2xl font-bold hover:opacity-80 transition-opacity">
                     +234 803 309 4050
                   </a>
                 </div>
@@ -324,7 +324,7 @@ export default function Home() {
               </div>
             </div>
             <Link href="/about">
-              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 uppercase text-sm tracking-wide">
+              <Button className="uppercase text-sm tracking-wide">
                 Learn More About Us
               </Button>
             </Link>
