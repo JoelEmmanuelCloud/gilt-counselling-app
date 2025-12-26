@@ -212,7 +212,7 @@ export default function Home() {
                 <Button
                   className={`w-full uppercase text-sm tracking-wide ${
                     plan.highlighted
-                      ? 'bg-white text-soft-terracotta'
+                      ? 'bg-white text-soft-terracotta hover:bg-white hover:text-soft-terracotta'
                       : ''
                   }`}
                 >
@@ -402,7 +402,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book-appointment">
-              <Button className="bg-white text-soft-terracotta w-full sm:w-auto px-8 py-3 uppercase text-sm tracking-wide">
+              <Button className="bg-white text-soft-terracotta hover:bg-white hover:text-soft-terracotta w-full sm:w-auto px-8 py-3 uppercase text-sm tracking-wide">
                 Book Session
               </Button>
             </Link>
