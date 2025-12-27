@@ -72,40 +72,40 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full Width */}
-      <section className="relative h-screen overflow-hidden -mt-[120px] pt-[120px]">
+      <section className="relative min-h-screen overflow-hidden">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
         <HeroSlideshow />
 
         {/* Hero Content */}
-        <div className="relative z-20 h-full flex items-center">
+        <div className="relative z-20 min-h-screen flex items-center justify-center py-32 sm:py-36 md:py-40 lg:py-44">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-2xl">
-              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-4 py-2 rounded mb-6 text-sm uppercase tracking-wider">
-                Gilt Counselling Consult
+              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded mb-4 sm:mb-5 md:mb-6 text-xs sm:text-sm uppercase tracking-wider">
+                Best counselling service in Port Harcourt
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-heading font-bold text-white mb-4 sm:mb-5 md:mb-6 leading-tight">
                 Empowering Teens & Youths<br />
                 for <span className="italic font-serif">Optimal</span><br />
                 Development.
               </h1>
-              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg md:text-lg lg:text-xl text-white/90 mb-6 sm:mb-7 md:mb-8 leading-relaxed max-w-xl">
                 Professional counselling and support services designed to help young people navigate life's challenges with confidence and hope.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link href="/book-appointment">
-                  <Button className="w-full sm:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-8 py-3 uppercase text-sm tracking-wide">
+                  <Button className="w-full sm:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs sm:text-sm tracking-wide">
                     Book Session
                   </Button>
                 </Link>
                 <Link href="/about">
-                  <Button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-8 py-3 uppercase text-sm tracking-wide">
+                  <Button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs sm:text-sm tracking-wide">
                     About US
                   </Button>
                 </Link>
               </div>
               {/* Slider Dots */}
-              <div className="flex gap-2 mt-12">
+              <div className="flex gap-2 mt-8 sm:mt-10 md:mt-12">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
                 <div className="w-2 h-2 bg-white/40 rounded-full"></div>
               </div>
