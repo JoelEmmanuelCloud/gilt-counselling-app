@@ -1,6 +1,6 @@
-import type { NextAuthConfig } from 'next-auth';
+import type { NextAuthOptions } from 'next-auth';
 import Google from 'next-auth/providers/google';
-import Resend from 'next-auth/providers/resend';
+import Email from 'next-auth/providers/email';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import clientPromise from './mongodb-client';
 import { sendEmail } from './email';
@@ -28,6 +28,7 @@ function generateNextAuthMagicLinkEmail(url: string, email: string) {
                 <!-- Header -->
                 <tr>
                   <td style="background: linear-gradient(135deg, #D9A85D 0%, #F5A623 100%); padding: 40px 32px; text-align: center;">
+                    <img src="${APP_URL}/Gilt Counselling Consult.jpg" alt="Gilt Counselling Consult" style="max-width: 200px; height: auto; margin: 0 auto 16px; display: block;" />
                     <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
                       Gilt Counselling Consult
                     </h1>
@@ -131,13 +132,12 @@ Email: hello@giltcounselling.com
   return { html, text };
 }
 
-export const authConfig: NextAuthConfig = {
+export const authConfig: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
 
   providers: [
-    // Email Magic Link Provider (Resend)
-    Resend({
-      apiKey: process.env.RESEND_API_KEY!,
+    // Email Magic Link Provider (using Resend for sending)
+    Email({
       from: FROM_EMAIL,
       // Custom email sending with Gilt branding
       sendVerificationRequest: async ({ identifier: email, url }) => {

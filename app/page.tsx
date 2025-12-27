@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
+import HeroSlideshow from '@/components/HeroSlideshow';
 
 export default function Home() {
   const helpOptions = [
@@ -71,48 +72,40 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section - Full Width */}
-      <section className="relative h-[600px] md:h-[700px] overflow-hidden">
+      <section className="relative min-h-screen overflow-hidden">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10"></div>
-        <div className="absolute inset-0">
-          <Image
-            src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1920&h=700&fit=crop"
-            alt="Professional counseling session - person in consultation"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
+        <HeroSlideshow />
 
         {/* Hero Content */}
-        <div className="relative z-20 h-full flex items-center">
+        <div className="relative z-20 min-h-screen flex items-center justify-center py-32 sm:py-36 md:py-40 lg:py-44">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-2xl">
-              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-4 py-2 rounded mb-6 text-sm uppercase tracking-wider">
-                Gilt Counselling Consult
+              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded mb-4 sm:mb-5 md:mb-6 text-xs sm:text-sm uppercase tracking-wider">
+                Best counselling service in Port Harcourt
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-white mb-6 leading-tight">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-heading font-bold text-white mb-4 sm:mb-5 md:mb-6 leading-tight">
                 Empowering Teens & Youths<br />
                 for <span className="italic font-serif">Optimal</span><br />
                 Development.
               </h1>
-              <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg md:text-lg lg:text-xl text-white/90 mb-6 sm:mb-7 md:mb-8 leading-relaxed max-w-xl">
                 Professional counselling and support services designed to help young people navigate life's challenges with confidence and hope.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                 <Link href="/book-appointment">
-                  <Button className="w-full sm:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-8 py-3 uppercase text-sm tracking-wide">
+                  <Button className="w-full sm:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs sm:text-sm tracking-wide">
                     Book Session
                   </Button>
                 </Link>
                 <Link href="/about">
-                  <Button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-8 py-3 uppercase text-sm tracking-wide">
+                  <Button className="w-full sm:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs sm:text-sm tracking-wide">
                     About US
                   </Button>
                 </Link>
               </div>
               {/* Slider Dots */}
-              <div className="flex gap-2 mt-12">
+              <div className="flex gap-2 mt-8 sm:mt-10 md:mt-12">
                 <div className="w-2 h-2 bg-white rounded-full"></div>
                 <div className="w-2 h-2 bg-white/40 rounded-full"></div>
               </div>
@@ -179,15 +172,15 @@ export default function Home() {
               key={index}
               className={`rounded-lg p-8 ${
                 plan.highlighted
-                  ? 'bg-soft-terracotta text-white shadow-xl'
+                  ? 'bg-soft-terracotta text-gray-900 shadow-xl'
                   : 'bg-white shadow-lg'
               } transition-all duration-300 hover:shadow-2xl`}
             >
-              <h3 className={`text-xl font-heading font-bold mb-2 ${plan.highlighted ? 'text-white' : 'text-gray-900'}`}>
+              <h3 className={`text-xl font-heading font-bold mb-2 ${plan.highlighted ? 'text-gray-900' : 'text-gray-900'}`}>
                 {plan.name}
               </h3>
               <div className="mb-6">
-                <span className={`text-4xl md:text-5xl font-bold ${plan.highlighted ? 'text-white' : 'text-soft-terracotta'}`}>
+                <span className={`text-4xl md:text-5xl font-bold ${plan.highlighted ? 'text-gray-900' : 'text-soft-terracotta'}`}>
                   {plan.price}
                 </span>
               </div>
@@ -195,14 +188,14 @@ export default function Home() {
                 {plan.features.map((feature, idx) => (
                   <li key={idx} className="flex items-start gap-3">
                     <svg
-                      className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-white' : 'text-soft-terracotta'}`}
+                      className={`w-5 h-5 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-gray-900' : 'text-soft-terracotta'}`}
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
                     >
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                     </svg>
-                    <span className={`text-sm ${plan.highlighted ? 'text-white' : 'text-gray-600'}`}>
+                    <span className={`text-sm ${plan.highlighted ? 'text-gray-700' : 'text-gray-600'}`}>
                       {feature}
                     </span>
                   </li>
@@ -212,8 +205,8 @@ export default function Home() {
                 <Button
                   className={`w-full uppercase text-sm tracking-wide ${
                     plan.highlighted
-                      ? 'bg-white text-soft-terracotta hover:bg-gray-100'
-                      : 'bg-soft-terracotta text-white hover:bg-soft-terracotta/90'
+                      ? 'bg-white text-soft-terracotta hover:bg-white hover:text-soft-terracotta'
+                      : ''
                   }`}
                 >
                   Get Started
@@ -249,30 +242,30 @@ export default function Home() {
               ))}
             </ul>
             <Link href="/services">
-              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 uppercase text-sm tracking-wide">
+              <Button className="uppercase text-sm tracking-wide">
                 Explore Programs
               </Button>
             </Link>
           </div>
 
           {/* Call for Consultation */}
-          <div className="bg-soft-terracotta text-white rounded-lg p-8">
+          <div className="bg-soft-terracotta text-gray-900 rounded-lg p-8">
             <h2 className="text-2xl font-heading font-bold mb-4">
               Call for Consultation
             </h2>
-            <p className="text-lg mb-6 text-white/90">
-              30 minutes free for first session. <Link href="/terms" className="underline">T&C Apply</Link>
+            <p className="text-lg mb-6 text-gray-800">
+              30 minutes free for first session. <Link href="/terms" className="underline font-semibold">T&C Apply</Link>
             </p>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 mb-6">
+            <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg p-6 mb-6">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                <div className="w-12 h-12 bg-gray-900/20 rounded-full flex items-center justify-center">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                   </svg>
                 </div>
                 <div>
-                  <div className="text-xs text-white/80 uppercase tracking-wide">Dial Now</div>
-                  <a href="tel:+2348033094050" className="text-2xl font-bold hover:text-white/90 transition-colors">
+                  <div className="text-xs text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
+                  <a href="tel:+2348033094050" className="text-2xl font-bold hover:opacity-80 transition-opacity">
                     +234 803 309 4050
                   </a>
                 </div>
@@ -324,7 +317,7 @@ export default function Home() {
               </div>
             </div>
             <Link href="/about">
-              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 uppercase text-sm tracking-wide">
+              <Button className="uppercase text-sm tracking-wide">
                 Learn More About Us
               </Button>
             </Link>
@@ -344,38 +337,6 @@ export default function Home() {
             <div>
               <p className="font-semibold">Client Testimonial</p>
               <p className="text-sm text-gray-400">Youth Counselling Program</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="section-container bg-white">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 items-center justify-items-center opacity-60">
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
-            </div>
-            <div className="text-center">
-              <svg className="w-16 h-16 mx-auto text-gray-400" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M10 2a8 8 0 100 16 8 8 0 000-16zM8 11a1 1 0 100-2 1 1 0 000 2zm4 0a1 1 0 100-2 1 1 0 000 2z"/>
-              </svg>
-              <p className="mt-2 text-sm text-gray-600">singlelemon</p>
             </div>
           </div>
         </div>
@@ -434,7 +395,7 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/book-appointment">
-              <Button className="bg-white text-soft-terracotta hover:bg-gray-100 w-full sm:w-auto px-8 py-3 uppercase text-sm tracking-wide">
+              <Button className="bg-white text-soft-terracotta hover:bg-white hover:text-soft-terracotta w-full sm:w-auto px-8 py-3 uppercase text-sm tracking-wide">
                 Book Session
               </Button>
             </Link>

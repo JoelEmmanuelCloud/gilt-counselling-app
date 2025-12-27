@@ -20,6 +20,10 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Gilt Counselling Consult',
   description: 'Professional counselling and consulting services - Empowering teens & youths for optimal development',
+  icons: {
+    icon: '/icon-192.png',
+    apple: '/icon-192.png',
+  },
 };
 
 export default function RootLayout({

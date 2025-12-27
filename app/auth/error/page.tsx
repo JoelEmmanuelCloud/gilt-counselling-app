@@ -36,7 +36,7 @@ export default function AuthError() {
 
           <div className="space-y-3">
             <Link href="/book-appointment">
-              <Button className="w-full bg-soft-terracotta text-white hover:bg-soft-terracotta/90">
+              <Button className="w-full">
                 Try Again
               </Button>
             </Link>
