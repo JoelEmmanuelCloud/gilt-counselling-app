@@ -3,7 +3,7 @@ import { generateOTPEmail as _generateOTPEmail } from './email-templates/otp';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = process.env.EMAIL_FROM || 'hello@giltcounselling.com';
+const FROM_EMAIL = process.env.EMAIL_FROM || 'Gilt Counselling Consult <hello@giltcounselling.com>';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 const LOGO_URL = 'http://cdn.mcauto-images-production.sendgrid.net/f638e50cb4cb3520/2aca1832-4d5e-4457-a2d0-d15541acd0f2/7262x3077.jpg';
 
