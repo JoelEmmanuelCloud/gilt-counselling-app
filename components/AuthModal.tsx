@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
 import Button from '@/components/ui/Button';
@@ -14,6 +15,7 @@ interface AuthModalProps {
 type Step = 'email' | 'otp';
 
 export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
+  const router = useRouter();
   const [step, setStep] = useState<Step>('email');
   const [email, setEmail] = useState('');
   const [otp, setOtp] = useState('');
@@ -57,8 +59,17 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
 
     try {
       await verifyOTP(email, otp);
-      // User is now logged in, redirect to dashboard or specified page
-      window.location.href = redirectTo || '/dashboard';
+      // User is now logged in
+      // Close modal first
+      if (onClose) onClose();
+
+      // Small delay to ensure state updates, then navigate if redirectTo specified
+      if (redirectTo) {
+        setTimeout(() => {
+          router.push(redirectTo);
+        }, 100);
+      }
+      // If no redirectTo, stay on current page (modal just closes)
     } catch (err: any) {
       setError(err.message || 'Invalid verification code');
       if (remainingAttempts > 1) {

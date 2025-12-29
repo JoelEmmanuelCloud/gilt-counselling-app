@@ -47,12 +47,8 @@ export default function BookAppointment() {
         ...prev,
         name: user.name || '',
         email: user.email || '',
+        phone: user.phone || '',
       }));
-
-      // Check if we need additional user info (phone number)
-      if (!user.phone) {
-        setShowUserInfoForm(true);
-      }
     }
   }, [status, isAuthenticated, user]);
 
