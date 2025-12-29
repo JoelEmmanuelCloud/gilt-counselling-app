@@ -23,9 +23,16 @@ export async function PATCH(
 
     const user = authResult.user;
 
+    if (!user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const body = await request.json();
-    const { status } = body;
+    const { status, date, time, service, notes } = body;
 
     const appointment = await getAppointmentById(id);
     if (!appointment) {
@@ -36,14 +43,53 @@ export async function PATCH(
     }
 
     // Check if user has permission to update
-    if (user.role !== 'admin' && appointment.userId !== user.id) {
+    if (user.role !== 'admin' && appointment.userId?.toString() !== user.id) {
       return NextResponse.json(
         { message: 'Not authorized to update this appointment' },
         { status: 403 }
       );
     }
 
-    const updatedAppointment = await updateAppointment(id, { status });
+    // Users can only edit pending appointments (not confirmed/completed)
+    if (user.role !== 'admin' && appointment.status !== 'pending') {
+      return NextResponse.json(
+        { message: 'You can only edit pending appointments. Please contact us to reschedule confirmed appointments.' },
+        { status: 403 }
+      );
+    }
+
+    // Track rescheduling
+    const updateData: any = {};
+
+    if (date || time) {
+      // If date or time is being changed, track it
+      if ((date && date !== appointment.date) || (time && time !== appointment.time)) {
+        updateData.rescheduledFrom = {
+          date: appointment.date,
+          time: appointment.time,
+          rescheduledAt: new Date(),
+        };
+      }
+    }
+
+    // Build update object
+    if (status) updateData.status = status;
+    if (date) updateData.date = date;
+    if (time) updateData.time = time;
+    if (service) updateData.service = service;
+    if (notes !== undefined) updateData.notes = notes;
+
+    // Track who made the change
+    updateData.lastModifiedBy = user.role === 'admin' ? 'admin' : 'user';
+
+    // If user cancels, track it
+    if (status === 'cancelled' && user.role !== 'admin') {
+      updateData.cancelledBy = 'user';
+    } else if (status === 'cancelled') {
+      updateData.cancelledBy = 'admin';
+    }
+
+    const updatedAppointment = await updateAppointment(id, updateData);
 
     return NextResponse.json({
       message: 'Appointment updated successfully',
@@ -77,6 +123,13 @@ export async function DELETE(
     await connectDB();
 
     const user = authResult.user;
+
+    if (!user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
 
     const { id } = await params;
 

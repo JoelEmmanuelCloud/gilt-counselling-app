@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
     const newUser = await createUser(name, email, password, phone);
 
     // Generate token with MongoDB _id
-    const token = generateToken(newUser._id!.toString());
+    const token = generateToken(newUser._id!.toString(), newUser.email);
 
     // Return user data (without password)
     const userObj = newUser.toObject();

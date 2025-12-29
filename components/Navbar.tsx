@@ -118,7 +118,7 @@ const Navbar: React.FC = () => {
                   )}
                   {user.role !== 'admin' && (
                     <Link
-                      href="/dashboard"
+                      href="/account"
                       className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200"
                     >
                       My Account
@@ -205,7 +205,7 @@ const Navbar: React.FC = () => {
                     </Link>
                   ) : (
                     <Link
-                      href="/dashboard"
+                      href="/account"
                       onClick={() => setMobileMenuOpen(false)}
                       className="block text-gray-700 hover:text-soft-terracotta transition-colors duration-200 py-2"
                     >

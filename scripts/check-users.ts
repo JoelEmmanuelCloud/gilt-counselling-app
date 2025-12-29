@@ -13,7 +13,7 @@ async function checkUsers() {
 
     if (users.length > 0) {
       console.log(`\n📋 Found ${users.length} users:\n`);
-      users.forEach((user, index) => {
+      users.forEach((user: any, index: number) => {
         console.log(`${index + 1}. ${user.name} <${user.email}> [${user.role}]`);
       });
     } else {

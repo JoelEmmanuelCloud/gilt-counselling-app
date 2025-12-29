@@ -19,8 +19,15 @@ export async function GET(request: NextRequest) {
 
     const user = authResult.user;
 
+    if (!user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
+
     const appointments = await getAppointmentsByUserId(user.id);
-    return NextResponse.json(appointments);
+    return NextResponse.json({ appointments });
   } catch (error) {
     console.error('Get my appointments error:', error);
     return NextResponse.json(

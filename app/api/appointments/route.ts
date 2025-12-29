@@ -20,6 +20,13 @@ export async function GET(request: NextRequest) {
 
     const user = authResult.user;
 
+    if (!user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
+
     // Admin can see all appointments
     if (user.role === 'admin') {
       const appointments = await getAllAppointments();

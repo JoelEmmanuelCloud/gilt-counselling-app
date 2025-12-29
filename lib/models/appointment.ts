@@ -11,6 +11,13 @@ export interface IAppointment {
   time: string;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
   notes?: string;
+  cancelledBy?: 'user' | 'admin';
+  rescheduledFrom?: {
+    date: string;
+    time: string;
+    rescheduledAt: Date;
+  };
+  lastModifiedBy?: 'user' | 'admin';
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -57,6 +64,19 @@ const AppointmentSchema = new Schema(
     notes: {
       type: String,
       default: '',
+    },
+    cancelledBy: {
+      type: String,
+      enum: ['user', 'admin'],
+    },
+    rescheduledFrom: {
+      date: String,
+      time: String,
+      rescheduledAt: Date,
+    },
+    lastModifiedBy: {
+      type: String,
+      enum: ['user', 'admin'],
     },
   },
   {

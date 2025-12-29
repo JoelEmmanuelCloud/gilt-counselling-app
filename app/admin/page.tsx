@@ -8,6 +8,7 @@ import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
 import Card from '@/components/ui/Card';
 import axios from 'axios';
+import UserProfileModal from '@/components/admin/UserProfileModal';
 
 type Tab = 'appointments' | 'clients' | 'create-booking';
 
@@ -41,6 +42,7 @@ function AdminDashboardContent() {
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -473,7 +475,11 @@ function AdminDashboardContent() {
                   </thead>
                   <tbody className="divide-y">
                     {filteredClients.map((client) => (
-                      <tr key={client._id} className="hover:bg-warm-cream transition-colors">
+                      <tr
+                        key={client._id}
+                        onClick={() => setSelectedUserId(client._id)}
+                        className="hover:bg-warm-cream transition-colors cursor-pointer"
+                      >
                         <td className="px-6 py-4 text-sm font-medium text-gray-900">{client.name}</td>
                         <td className="px-6 py-4">
                           <div className="text-sm text-gray-900">{client.email}</div>
@@ -553,6 +559,15 @@ function AdminDashboardContent() {
           </Card>
         )}
       </section>
+
+      {/* User Profile Modal */}
+      {selectedUserId && (
+        <UserProfileModal
+          userId={selectedUserId}
+          isOpen={!!selectedUserId}
+          onClose={() => setSelectedUserId(null)}
+        />
+      )}
     </div>
   );
 }

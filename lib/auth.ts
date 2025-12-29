@@ -1,5 +1,6 @@
 import { getServerSession } from 'next-auth';
 import { authConfig } from './auth.config';
+import jwt from 'jsonwebtoken';
 
 /**
  * Get the current session (server-side only)
@@ -82,4 +83,19 @@ export async function requireAdmin() {
     error: null,
     status: 200,
   };
+}
+
+/**
+ * Generate JWT token for user authentication
+ * @param userId - User ID
+ * @param email - User email
+ * @returns JWT token string
+ */
+export function generateToken(userId: string, email: string): string {
+  const secret = process.env.JWT_SECRET || 'your-secret-key';
+  return jwt.sign(
+    { id: userId, email },
+    secret,
+    { expiresIn: '7d' }
+  );
 }
