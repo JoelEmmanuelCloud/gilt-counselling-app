@@ -57,8 +57,8 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
 
     try {
       await verifyOTP(email, otp);
-      // User is now logged in, reload to update session
-      window.location.href = redirectTo || '/book-appointment';
+      // User is now logged in, redirect to dashboard or specified page
+      window.location.href = redirectTo || '/dashboard';
     } catch (err: any) {
       setError(err.message || 'Invalid verification code');
       if (remainingAttempts > 1) {
