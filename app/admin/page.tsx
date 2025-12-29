@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
@@ -27,8 +28,12 @@ interface Client {
 
 function AdminDashboardContent() {
   const { data: session, status } = useSession();
+  const { user: customUser, token } = useAuth();
   const router = useRouter();
-  const user = session?.user;
+
+  // Use either NextAuth user (Google) or custom auth user (OTP)
+  const user = session?.user || customUser;
+  const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const [activeTab, setActiveTab] = useState<Tab>('appointments');
   const [appointments, setAppointments] = useState<Appointment[]>([]);
@@ -38,12 +43,14 @@ function AdminDashboardContent() {
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (status === 'loading') return;
+
+    if (!isAuthenticated) {
       router.push('/book-appointment');
-    } else if (status === 'authenticated' && user?.role !== 'admin') {
+    } else if (user?.role !== 'admin') {
       router.push('/dashboard');
     }
-  }, [status, user, router]);
+  }, [status, isAuthenticated, user, router]);
 
   // Booking form state
   const [bookingForm, setBookingForm] = useState({

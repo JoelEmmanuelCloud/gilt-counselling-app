@@ -2,24 +2,31 @@
 
 import React, { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/ui/Card';
 import axios from 'axios';
 
 function ProfileContent() {
   const { data: session, status } = useSession();
-  const user = session?.user;
+  const { user: customUser, token } = useAuth();
   const router = useRouter();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
+  // Use either NextAuth user (Google) or custom auth user (OTP)
+  const user = session?.user || customUser;
+  const isAuthenticated = status === 'authenticated' || (token && customUser);
+
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (status === 'loading') return;
+
+    if (!isAuthenticated) {
       router.push('/book-appointment');
     }
-  }, [status, router]);
+  }, [status, isAuthenticated, router]);
 
   const [profile, setProfile] = useState({
     name: '',
