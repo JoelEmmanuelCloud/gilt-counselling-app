@@ -28,9 +28,8 @@ export default function ProtectedRoute({
     if (isChecking) return;
 
     if (!token || !user) {
-      // Redirect to login with the current path as a return URL
-      const currentPath = window.location.pathname;
-      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+      // Redirect to home - user can sign in from there
+      router.push('/');
       return;
     }
 

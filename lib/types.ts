@@ -26,4 +26,7 @@ export interface AuthContextType {
   register: (name: string, email: string, password: string, phone: string) => Promise<void>;
   logout: () => void;
   token: string | null;
+  sendOTP: (email: string) => Promise<void>;
+  verifyOTP: (email: string, code: string) => Promise<void>;
+  resendOTP: (email: string) => Promise<void>;
 }

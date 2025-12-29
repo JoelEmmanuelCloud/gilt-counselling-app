@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useSession } from 'next-auth/react';
+import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
@@ -11,18 +12,24 @@ import Button from '@/components/ui/Button';
 
 function DashboardContent() {
   const { data: session, status } = useSession();
-  const user = session?.user;
+  const { user: customUser, token } = useAuth();
   const router = useRouter();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // Use either NextAuth user (Google) or custom auth user (OTP)
+  const user = session?.user || customUser;
+  const isAuthenticated = status === 'authenticated' || (token && customUser);
+
   useEffect(() => {
-    if (status === 'unauthenticated') {
+    if (status === 'loading') return;
+
+    if (!isAuthenticated) {
       router.push('/book-appointment');
-    } else if (status === 'authenticated') {
+    } else {
       fetchAppointments();
     }
-  }, [status, router]);
+  }, [status, isAuthenticated, router]);
 
   const fetchAppointments = async () => {
     try {

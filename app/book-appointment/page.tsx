@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
+import { useAuth } from '@/lib/AuthContext';
 import api from '@/lib/api';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
@@ -11,10 +12,14 @@ import AuthModal from '@/components/AuthModal';
 
 export default function BookAppointment() {
   const { data: session, status } = useSession();
-  const user = session?.user;
+  const { user: customUser, token } = useAuth(); // Custom auth context for OTP users
   const router = useRouter();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserInfoForm, setShowUserInfoForm] = useState(false);
+
+  // Use either NextAuth user (Google) or custom auth user (OTP)
+  const user = session?.user || customUser;
+  const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const [formData, setFormData] = useState({
     name: user?.name || '',
@@ -33,9 +38,10 @@ export default function BookAppointment() {
   useEffect(() => {
     if (status === 'loading') return;
 
-    if (status === 'unauthenticated') {
+    // Check both auth systems
+    if (!isAuthenticated) {
       setShowAuthModal(true);
-    } else if (status === 'authenticated' && user) {
+    } else if (user) {
       // Update form data with user info
       setFormData(prev => ({
         ...prev,
@@ -48,7 +54,7 @@ export default function BookAppointment() {
         setShowUserInfoForm(true);
       }
     }
-  }, [status, user]);
+  }, [status, isAuthenticated, user]);
 
   const services = [
     {
@@ -157,12 +163,20 @@ export default function BookAppointment() {
   };
 
   // Show auth modal if not authenticated
-  if (showAuthModal && status === 'unauthenticated') {
-    return <AuthModal redirectTo="/book-appointment" />;
+  if (showAuthModal && !isAuthenticated) {
+    return (
+      <AuthModal
+        redirectTo="/book-appointment"
+        onClose={() => {
+          setShowAuthModal(false);
+          router.push('/');
+        }}
+      />
+    );
   }
 
   // Show loading state while checking auth
-  if (status === 'loading') {
+  if (status === 'loading' && !token) {
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center">
         <div className="text-center">
@@ -219,7 +233,7 @@ export default function BookAppointment() {
 
           <Button
             type="submit"
-            className="w-full bg-soft-terracotta text-white hover:bg-soft-terracotta/90"
+            className="w-full"
           >
             Continue to Booking
           </Button>

@@ -104,10 +104,10 @@ export default function VerifyMagicLinkPage() {
             <h1 className="text-2xl font-bold text-gray-900 mb-2">Verification Failed</h1>
             <p className="text-gray-600 mb-6">{message}</p>
             <button
-              onClick={() => router.push('/login')}
+              onClick={() => router.push('/')}
               className="px-6 py-3 bg-gilt-gold text-white rounded-lg font-medium hover:bg-opacity-90 transition-all"
             >
-              Back to Login
+              Back to Home
             </button>
           </>
         )}

@@ -1,9 +1,11 @@
 import { Resend } from 'resend';
+import { generateOTPEmail as _generateOTPEmail } from './email-templates/otp';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = process.env.EMAIL_FROM || 'hello@giltcounselling.com';
+const FROM_EMAIL = process.env.EMAIL_FROM || 'Gilt Counselling Consult <hello@giltcounselling.com>';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+const LOGO_URL = 'http://cdn.mcauto-images-production.sendgrid.net/f638e50cb4cb3520/2aca1832-4d5e-4457-a2d0-d15541acd0f2/7262x3077.jpg';
 
 export interface EmailOptions {
   to: string;
@@ -47,82 +49,74 @@ export function generateMagicLinkEmail(email: string, token: string, userName?: 
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Sign in to Gilt Counselling Consult</title>
       </head>
-      <body style="margin: 0; padding: 0; font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif; background-color: #F5F1E8;">
-        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #F5F1E8; padding: 40px 0;">
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
           <tr>
             <td align="center">
-              <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
-                <!-- Header -->
+              <!-- Main Container -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+
+                <!-- Header with Logo -->
                 <tr>
-                  <td style="background: linear-gradient(135deg, #D9A85D 0%, #F5A623 100%); padding: 40px 32px; text-align: center;">
-                    <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
-                      Gilt Counselling Consult
-                    </h1>
-                    <p style="margin: 8px 0 0; color: #ffffff; font-size: 14px; opacity: 0.9;">
-                      Empowering teens & youths for optimal development
-                    </p>
+                  <td style="background-color: #ffffff; padding: 40px 32px 32px; text-align: center; border-bottom: 1px solid #e5e5e5;">
+                    <img src="${LOGO_URL}" alt="Gilt Counselling Consult" style="max-width: 200px; height: auto; display: block; margin: 0 auto;" />
                   </td>
                 </tr>
 
                 <!-- Content -->
                 <tr>
                   <td style="padding: 40px 32px;">
-                    <h2 style="margin: 0 0 16px; color: #1a1a1a; font-size: 24px; font-weight: 600;">
-                      Welcome back, ${displayName}!
+                    <h2 style="margin: 0 0 16px; color: #1a1a1a; font-size: 24px; font-weight: 600; text-align: center;">
+                      Sign In to Your Account
                     </h2>
-                    <p style="margin: 0 0 24px; color: #4a4a4a; font-size: 16px; line-height: 1.6;">
-                      Click the button below to sign in to your Gilt Counselling account. This link will expire in 15 minutes for your security.
+                    <p style="margin: 0 0 32px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
+                      Hello ${displayName}, click the button below to sign in to your account. This link will expire in 15 minutes.
                     </p>
 
                     <!-- Button -->
                     <table width="100%" cellpadding="0" cellspacing="0">
                       <tr>
-                        <td align="center" style="padding: 12px 0;">
+                        <td align="center" style="padding: 0 0 32px 0;">
                           <a href="${magicLink}"
-                             style="display: inline-block; background: linear-gradient(135deg, #D9A85D 0%, #F5A623 100%); color: #ffffff; text-decoration: none; padding: 16px 48px; border-radius: 8px; font-size: 16px; font-weight: 600; box-shadow: 0 2px 4px rgba(217, 168, 93, 0.3);">
-                            Sign In to Your Account
+                             style="display: inline-block; background-color: #1a1a1a; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 6px; font-size: 16px; font-weight: 600;">
+                            Sign In Now
                           </a>
                         </td>
                       </tr>
                     </table>
 
-                    <p style="margin: 24px 0 0; color: #6a6a6a; font-size: 14px; line-height: 1.6;">
-                      Or copy and paste this URL into your browser:
+                    <p style="margin: 0 0 8px; color: #999999; font-size: 14px; text-align: center;">
+                      Or copy and paste this link:
                     </p>
-                    <p style="margin: 8px 0; color: #D9A85D; font-size: 13px; word-break: break-all; background-color: #f9f9f9; padding: 12px; border-radius: 6px; border-left: 3px solid #D9A85D;">
+                    <p style="margin: 0 0 32px; color: #666666; font-size: 13px; word-break: break-all; background-color: #f8f9fa; padding: 12px; border-radius: 4px; text-align: center;">
                       ${magicLink}
                     </p>
 
-                    <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e5e5e5;">
-                      <p style="margin: 0 0 8px; color: #6a6a6a; font-size: 13px;">
-                        <strong>Didn't request this?</strong>
-                      </p>
-                      <p style="margin: 0; color: #8a8a8a; font-size: 13px; line-height: 1.5;">
-                        If you didn't try to sign in, you can safely ignore this email. The link will expire automatically.
-                      </p>
-                    </div>
+                    <p style="margin: 0; color: #999999; font-size: 14px; line-height: 1.5; text-align: center;">
+                      If you didn't request this link, you can safely ignore this email.
+                    </p>
                   </td>
                 </tr>
 
                 <!-- Footer -->
                 <tr>
-                  <td style="background-color: #F5F1E8; padding: 32px; text-align: center;">
-                    <p style="margin: 0 0 12px; color: #4a4a4a; font-size: 13px; font-weight: 600;">
+                  <td style="background-color: #f8f9fa; padding: 32px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0 0 12px; color: #666666; font-size: 14px; font-weight: 600;">
                       Contact Us
                     </p>
-                    <p style="margin: 0 0 4px; color: #6a6a6a; font-size: 12px;">
-                      📍 88 Woji Road, Port Harcourt, Nigeria
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      88 Woji Road, Port Harcourt, Nigeria
                     </p>
-                    <p style="margin: 0 0 4px; color: #6a6a6a; font-size: 12px;">
-                      📍 470 Front St W, Toronto, Canada
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      470 Front St W, Toronto, Canada
                     </p>
-                    <p style="margin: 0 0 4px; color: #6a6a6a; font-size: 12px;">
-                      📞 +234 803 309 4050
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      +234 803 309 4050
                     </p>
-                    <p style="margin: 0 0 16px; color: #6a6a6a; font-size: 12px;">
-                      ✉️ hello@giltcounselling.com
+                    <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
+                      hello@giltcounselling.com
                     </p>
-                    <p style="margin: 16px 0 0; color: #8a8a8a; font-size: 11px;">
+                    <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
                     </p>
                   </td>
@@ -171,71 +165,92 @@ export function generateAppointmentConfirmationEmail(
     <html>
       <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Appointment Confirmed</title>
       </head>
-      <body style="margin: 0; padding: 0; font-family: 'Inter', Arial, sans-serif; background-color: #F5F1E8;">
-        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #F5F1E8; padding: 40px 0;">
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
           <tr>
             <td align="center">
-              <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);">
+              <!-- Main Container -->
+              <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+
+                <!-- Header with Logo -->
                 <tr>
-                  <td style="background: linear-gradient(135deg, #5FB74E 0%, #1BA5BB 100%); padding: 40px 32px; text-align: center;">
-                    <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: bold;">
-                      Appointment Confirmed ✓
-                    </h1>
+                  <td style="background-color: #ffffff; padding: 40px 32px 32px; text-align: center; border-bottom: 1px solid #e5e5e5;">
+                    <img src="${LOGO_URL}" alt="Gilt Counselling Consult" style="max-width: 200px; height: auto; display: block; margin: 0 auto;" />
                   </td>
                 </tr>
 
+                <!-- Content -->
                 <tr>
                   <td style="padding: 40px 32px;">
-                    <p style="margin: 0 0 24px; color: #1a1a1a; font-size: 16px;">
-                      Dear ${clientName},
-                    </p>
-                    <p style="margin: 0 0 24px; color: #4a4a4a; font-size: 15px; line-height: 1.6;">
-                      Your counselling session has been successfully scheduled. We look forward to supporting you on your journey.
+                    <h2 style="margin: 0 0 16px; color: #1a1a1a; font-size: 24px; font-weight: 600; text-align: center;">
+                      Appointment Confirmed
+                    </h2>
+                    <p style="margin: 0 0 32px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
+                      Dear ${clientName}, your counselling session has been successfully scheduled.
                     </p>
 
-                    <div style="background-color: #F5F1E8; border-left: 4px solid #5FB74E; padding: 20px; margin: 24px 0; border-radius: 6px;">
+                    <!-- Appointment Details Box -->
+                    <div style="background-color: #f8f9fa; border: 1px solid #e5e5e5; border-radius: 8px; padding: 24px; margin-bottom: 32px;">
                       <table width="100%" cellpadding="0" cellspacing="0">
                         <tr>
-                          <td style="padding: 8px 0;">
-                            <strong style="color: #1a1a1a; font-size: 14px;">Service:</strong>
-                            <p style="margin: 4px 0 0; color: #4a4a4a; font-size: 15px;">${service}</p>
+                          <td style="padding: 12px 0; border-bottom: 1px solid #e5e5e5;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Service</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${service}</p>
                           </td>
                         </tr>
                         <tr>
-                          <td style="padding: 8px 0;">
-                            <strong style="color: #1a1a1a; font-size: 14px;">Date:</strong>
-                            <p style="margin: 4px 0 0; color: #4a4a4a; font-size: 15px;">${date}</p>
+                          <td style="padding: 12px 0; border-bottom: 1px solid #e5e5e5;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Date</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${date}</p>
                           </td>
                         </tr>
                         <tr>
-                          <td style="padding: 8px 0;">
-                            <strong style="color: #1a1a1a; font-size: 14px;">Time:</strong>
-                            <p style="margin: 4px 0 0; color: #4a4a4a; font-size: 15px;">${time}</p>
+                          <td style="padding: 12px 0; border-bottom: 1px solid #e5e5e5;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Time</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${time}</p>
                           </td>
                         </tr>
                         <tr>
-                          <td style="padding: 8px 0;">
-                            <strong style="color: #1a1a1a; font-size: 14px;">Location:</strong>
-                            <p style="margin: 4px 0 0; color: #4a4a4a; font-size: 15px;">${location}</p>
+                          <td style="padding: 12px 0;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Location</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${location}</p>
                           </td>
                         </tr>
                       </table>
                     </div>
 
-                    <p style="margin: 24px 0; color: #4a4a4a; font-size: 14px; line-height: 1.6;">
-                      <strong>Need to reschedule?</strong><br>
-                      Contact us at <a href="tel:+2348033094050" style="color: #D9A85D;">+234 803 309 4050</a> or
-                      <a href="mailto:hello@giltcounselling.com" style="color: #D9A85D;">hello@giltcounselling.com</a>
+                    <p style="margin: 0 0 8px; color: #1a1a1a; font-size: 15px; font-weight: 600; text-align: center;">
+                      Need to reschedule?
+                    </p>
+                    <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.5; text-align: center;">
+                      Contact us at <a href="tel:+2348033094050" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">+234 803 309 4050</a> or <a href="mailto:hello@giltcounselling.com" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">hello@giltcounselling.com</a>
                     </p>
                   </td>
                 </tr>
 
+                <!-- Footer -->
                 <tr>
-                  <td style="background-color: #F5F1E8; padding: 24px 32px; text-align: center;">
-                    <p style="margin: 0; color: #6a6a6a; font-size: 12px;">
-                      © ${new Date().getFullYear()} Gilt Counselling Consult
+                  <td style="background-color: #f8f9fa; padding: 32px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0 0 12px; color: #666666; font-size: 14px; font-weight: 600;">
+                      Contact Us
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      88 Woji Road, Port Harcourt, Nigeria
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      470 Front St W, Toronto, Canada
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      +234 803 309 4050
+                    </p>
+                    <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
+                      hello@giltcounselling.com
+                    </p>
+                    <p style="margin: 0; color: #cccccc; font-size: 12px;">
+                      © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
                     </p>
                   </td>
                 </tr>
@@ -249,3 +264,6 @@ export function generateAppointmentConfirmationEmail(
 
   return { html, text: `Your appointment for ${service} has been confirmed for ${date} at ${time}.` };
 }
+
+// OTP Email Template
+export const generateOTPEmail = _generateOTPEmail;
