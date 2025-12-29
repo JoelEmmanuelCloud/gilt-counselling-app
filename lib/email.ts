@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { generateOTPEmail as _generateOTPEmail } from './email-templates/otp';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -251,3 +252,6 @@ export function generateAppointmentConfirmationEmail(
 
   return { html, text: `Your appointment for ${service} has been confirmed for ${date} at ${time}.` };
 }
+
+// OTP Email Template
+export const generateOTPEmail = _generateOTPEmail;

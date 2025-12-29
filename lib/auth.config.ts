@@ -1,14 +1,16 @@
 import type { NextAuthOptions } from 'next-auth';
 import Google from 'next-auth/providers/google';
-import Email from 'next-auth/providers/email';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import clientPromise from './mongodb-client';
-import { sendEmail } from './email';
 
-const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
-const FROM_EMAIL = process.env.EMAIL_FROM || 'hello@giltcounselling.com';
+// NOTE: Email/OTP authentication is handled by custom API endpoints:
+// - POST /api/auth/send-otp - Send 6-digit verification code
+// - POST /api/auth/verify-otp - Verify code and authenticate user
+// - POST /api/auth/resend-otp - Resend verification code
+// This provides better UX than magic links (no email click required)
 
-// Custom NextAuth magic link email template (matches Gilt branding)
+// Legacy: Custom NextAuth magic link email template (no longer used)
+// Kept for reference - replaced by OTP authentication
 function generateNextAuthMagicLinkEmail(url: string, email: string) {
   const displayName = email.split('@')[0];
 
@@ -136,32 +138,19 @@ export const authConfig: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
 
   providers: [
-    // Email Magic Link Provider (using Resend for sending)
-    Email({
-      from: FROM_EMAIL,
-      // Custom email sending with Gilt branding
-      sendVerificationRequest: async ({ identifier: email, url }) => {
-        const { html, text } = generateNextAuthMagicLinkEmail(url, email);
-
-        await sendEmail({
-          to: email,
-          subject: 'Sign in to Gilt Counselling Consult',
-          html,
-          text,
-        });
-      },
-    }),
-
     // Google OAuth Provider
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
       allowDangerousEmailAccountLinking: true, // Allow linking if email matches
     }),
+
+    // Email/OTP authentication handled by custom endpoints (see note above)
+    // No NextAuth Email provider needed - we use our own OTP system
   ],
 
   pages: {
-    signIn: '/login',
+    signIn: '/book-appointment',
     verifyRequest: '/auth/verify-request',
     error: '/auth/error',
   },
