@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth';
 import { getAppointmentById, updateAppointment, deleteAppointment } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
+import { sendAppointmentStatusEmail, sendRescheduleEmail } from '@/lib/email';
 
 // PATCH /api/appointments/[id] - Update appointment status
 export async function PATCH(
@@ -50,10 +51,10 @@ export async function PATCH(
       );
     }
 
-    // Users can only edit pending appointments (not confirmed/completed)
-    if (user.role !== 'admin' && appointment.status !== 'pending') {
+    // Users can edit pending or confirmed appointments (not completed/cancelled)
+    if (user.role !== 'admin' && !['pending', 'confirmed'].includes(appointment.status)) {
       return NextResponse.json(
-        { message: 'You can only edit pending appointments. Please contact us to reschedule confirmed appointments.' },
+        { message: 'You can only reschedule pending or confirmed appointments.' },
         { status: 403 }
       );
     }
@@ -90,6 +91,34 @@ export async function PATCH(
     }
 
     const updatedAppointment = await updateAppointment(id, updateData);
+
+    // Send email notifications
+    try {
+      if (updateData.rescheduledFrom) {
+        // Send reschedule notification
+        await sendRescheduleEmail(
+          appointment.userEmail,
+          appointment.userName,
+          updateData.rescheduledFrom.date,
+          updateData.rescheduledFrom.time,
+          date || appointment.date,
+          time || appointment.time,
+          appointment.service
+        );
+      } else if (status && status !== appointment.status) {
+        // Send status change notification
+        await sendAppointmentStatusEmail(
+          appointment.userEmail,
+          appointment.userName,
+          status,
+          appointment.date,
+          appointment.time,
+          appointment.service
+        );
+      }
+    } catch (emailError) {
+      console.error('Failed to send email notification:', emailError);
+    }
 
     return NextResponse.json({
       message: 'Appointment updated successfully',

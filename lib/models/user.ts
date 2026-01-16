@@ -7,7 +7,16 @@ export interface IUser {
   email: string;
   phone?: string; // Now optional (for OAuth users)
   password?: string; // Now optional (for passwordless auth)
-  role: 'user' | 'admin';
+  role: 'user' | 'admin' | 'counselor';
+  // Counselor-specific fields
+  specializations?: string[];
+  bio?: string;
+  availability?: Array<{
+    dayOfWeek: number; // 0 = Sunday, 6 = Saturday
+    startTime: string; // HH:mm format
+    endTime: string; // HH:mm format
+  }>;
+  isAvailable?: boolean; // Quick toggle for availability
   emailVerified?: Date | null; // For NextAuth
   verificationToken?: string; // For email verification
   verificationTokenExpiry?: Date; // Token expiry time
@@ -81,8 +90,30 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'counselor'],
       default: 'user',
+    },
+    // Counselor-specific fields
+    specializations: [{
+      type: String,
+      trim: true,
+    }],
+    bio: {
+      type: String,
+      trim: true,
+    },
+    availability: [{
+      dayOfWeek: {
+        type: Number,
+        min: 0,
+        max: 6,
+      },
+      startTime: String,
+      endTime: String,
+    }],
+    isAvailable: {
+      type: Boolean,
+      default: true,
     },
     // NextAuth fields
     emailVerified: {

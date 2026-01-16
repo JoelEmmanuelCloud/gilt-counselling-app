@@ -4,6 +4,7 @@ import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { findOTPByCode, markOTPAsUsed, incrementAttempts } from '@/lib/models/otp';
 import { isValidOTPFormat } from '@/lib/utils/otpGenerator';
+import { sendWelcomeEmail } from '@/lib/email';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const MAX_ATTEMPTS = 3;
@@ -90,9 +91,17 @@ export async function POST(request: NextRequest) {
     await markOTPAsUsed(otp._id as string);
 
     // Update email verified status if not already verified
+    const isFirstTimeVerification = !user.emailVerified;
     if (!user.emailVerified) {
       user.emailVerified = new Date();
       await user.save();
+
+      // Send welcome email for first-time verification
+      try {
+        await sendWelcomeEmail(user.email, user.name);
+      } catch (emailError) {
+        console.error('Failed to send welcome email:', emailError);
+      }
     }
 
     // Generate JWT token

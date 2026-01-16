@@ -188,7 +188,7 @@ export const authConfig: NextAuthOptions = {
       // Add custom fields to session from JWT token
       if (token && session.user) {
         session.user.id = token.userId as string;
-        session.user.role = token.role as 'user' | 'admin';
+        session.user.role = token.role as 'user' | 'admin' | 'counselor';
         session.user.phone = token.phone as string | undefined;
       }
 

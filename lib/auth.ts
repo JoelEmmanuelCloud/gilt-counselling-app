@@ -86,6 +86,66 @@ export async function requireAdmin() {
 }
 
 /**
+ * Require counselor role for API routes
+ * Returns user if authenticated and counselor, error otherwise
+ */
+export async function requireCounselor() {
+  const session = await getSession();
+
+  if (!session || !session.user) {
+    return {
+      error: 'Not authenticated',
+      status: 401,
+      user: null,
+    };
+  }
+
+  if (session.user.role !== 'counselor') {
+    return {
+      error: 'Counselor access required',
+      status: 403,
+      user: null,
+    };
+  }
+
+  return {
+    user: session.user,
+    error: null,
+    status: 200,
+  };
+}
+
+/**
+ * Require admin or counselor role for API routes
+ * Returns user if authenticated and admin or counselor, error otherwise
+ */
+export async function requireAdminOrCounselor() {
+  const session = await getSession();
+
+  if (!session || !session.user) {
+    return {
+      error: 'Not authenticated',
+      status: 401,
+      user: null,
+    };
+  }
+
+  if (session.user.role !== 'admin' && session.user.role !== 'counselor') {
+    return {
+      error: 'Admin or counselor access required',
+      status: 403,
+      user: null,
+    };
+  }
+
+  return {
+    user: session.user,
+    error: null,
+    status: 200,
+  };
+}
+
+/**
  * Generate JWT token for user authentication
  * @param userId - User ID
  * @param email - User email

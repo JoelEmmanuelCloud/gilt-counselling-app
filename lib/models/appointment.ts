@@ -6,18 +6,21 @@ export interface IAppointment {
   userName: string;
   userEmail: string;
   userPhone: string;
+  counselorId?: mongoose.Types.ObjectId | string | null;
+  counselorName?: string;
   service: string;
   date: string;
   time: string;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
   notes?: string;
-  cancelledBy?: 'user' | 'admin';
+  counselorNotes?: string; // Private notes from counselor
+  cancelledBy?: 'user' | 'admin' | 'counselor';
   rescheduledFrom?: {
     date: string;
     time: string;
     rescheduledAt: Date;
   };
-  lastModifiedBy?: 'user' | 'admin';
+  lastModifiedBy?: 'user' | 'admin' | 'counselor';
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -44,6 +47,15 @@ const AppointmentSchema = new Schema(
       required: [true, 'Phone is required'],
       trim: true,
     },
+    counselorId: {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+      default: null,
+    },
+    counselorName: {
+      type: String,
+      trim: true,
+    },
     service: {
       type: String,
       required: [true, 'Service is required'],
@@ -65,9 +77,13 @@ const AppointmentSchema = new Schema(
       type: String,
       default: '',
     },
+    counselorNotes: {
+      type: String,
+      default: '',
+    },
     cancelledBy: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'counselor'],
     },
     rescheduledFrom: {
       date: String,
@@ -76,7 +92,7 @@ const AppointmentSchema = new Schema(
     },
     lastModifiedBy: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'counselor'],
     },
   },
   {
