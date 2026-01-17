@@ -29,7 +29,7 @@ export const authOptions: NextAuthOptions = {
     EmailProvider({
       server: {
         host: process.env.EMAIL_SERVER_HOST,
-        port: process.env.EMAIL_SERVER_PORT,
+        port: process.env.EMAIL_SERVER_PORT ? parseInt(process.env.EMAIL_SERVER_PORT) : undefined,
         auth: {
           user: process.env.EMAIL_SERVER_USER,
           pass: process.env.EMAIL_SERVER_PASSWORD,
@@ -166,18 +166,17 @@ export const authOptions: NextAuthOptions = {
 
         if (!existingUser) {
           // Create new user with Google data
-          await User.create({
+          const newUser = new User({
             name: user.name,
             email: user.email,
             profilePhoto: user.image,
             role: "user",
             emailVerified: new Date(),
             source: "online",
-            preferences: {
-              contactMethod: "email",
-              emailNotifications: true,
-            },
+            preferredContactMethod: "email",
+            emailNotifications: true,
           });
+          await newUser.save();
         } else if (!existingUser.emailVerified) {
           // Auto-verify email if signing in with Google
           existingUser.emailVerified = new Date();
@@ -191,8 +190,8 @@ export const authOptions: NextAuthOptions = {
       // Initial sign in
       if (user) {
         token.id = user.id;
-        token.role = user.role;
-        token.emailVerified = user.emailVerified;
+        token.role = user.role || "user";
+        token.emailVerified = (user as any).emailVerified || null;
       }
 
       // Update token when session is updated
@@ -206,7 +205,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (token && session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as string;
+        session.user.role = token.role as "user" | "admin";
         session.user.emailVerified = token.emailVerified as Date | null;
       }
 

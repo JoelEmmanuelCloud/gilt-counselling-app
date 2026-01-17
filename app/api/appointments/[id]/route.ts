@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { requireAuth } from '@/lib/auth';
 import { getAppointmentById, updateAppointment, deleteAppointment } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
+import { sendAppointmentStatusEmail, sendRescheduleEmail } from '@/lib/email';
 
 // PATCH /api/appointments/[id] - Update appointment status
 export async function PATCH(
@@ -23,9 +24,16 @@ export async function PATCH(
 
     const user = authResult.user;
 
+    if (!user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
+
     const { id } = await params;
     const body = await request.json();
-    const { status } = body;
+    const { status, date, time, service, notes } = body;
 
     const appointment = await getAppointmentById(id);
     if (!appointment) {
@@ -36,14 +44,81 @@ export async function PATCH(
     }
 
     // Check if user has permission to update
-    if (user.role !== 'admin' && appointment.userId !== user.id) {
+    if (user.role !== 'admin' && appointment.userId?.toString() !== user.id) {
       return NextResponse.json(
         { message: 'Not authorized to update this appointment' },
         { status: 403 }
       );
     }
 
-    const updatedAppointment = await updateAppointment(id, { status });
+    // Users can edit pending or confirmed appointments (not completed/cancelled)
+    if (user.role !== 'admin' && !['pending', 'confirmed'].includes(appointment.status)) {
+      return NextResponse.json(
+        { message: 'You can only reschedule pending or confirmed appointments.' },
+        { status: 403 }
+      );
+    }
+
+    // Track rescheduling
+    const updateData: any = {};
+
+    if (date || time) {
+      // If date or time is being changed, track it
+      if ((date && date !== appointment.date) || (time && time !== appointment.time)) {
+        updateData.rescheduledFrom = {
+          date: appointment.date,
+          time: appointment.time,
+          rescheduledAt: new Date(),
+        };
+      }
+    }
+
+    // Build update object
+    if (status) updateData.status = status;
+    if (date) updateData.date = date;
+    if (time) updateData.time = time;
+    if (service) updateData.service = service;
+    if (notes !== undefined) updateData.notes = notes;
+
+    // Track who made the change
+    updateData.lastModifiedBy = user.role === 'admin' ? 'admin' : 'user';
+
+    // If user cancels, track it
+    if (status === 'cancelled' && user.role !== 'admin') {
+      updateData.cancelledBy = 'user';
+    } else if (status === 'cancelled') {
+      updateData.cancelledBy = 'admin';
+    }
+
+    const updatedAppointment = await updateAppointment(id, updateData);
+
+    // Send email notifications
+    try {
+      if (updateData.rescheduledFrom) {
+        // Send reschedule notification
+        await sendRescheduleEmail(
+          appointment.userEmail,
+          appointment.userName,
+          updateData.rescheduledFrom.date,
+          updateData.rescheduledFrom.time,
+          date || appointment.date,
+          time || appointment.time,
+          appointment.service
+        );
+      } else if (status && status !== appointment.status) {
+        // Send status change notification
+        await sendAppointmentStatusEmail(
+          appointment.userEmail,
+          appointment.userName,
+          status,
+          appointment.date,
+          appointment.time,
+          appointment.service
+        );
+      }
+    } catch (emailError) {
+      console.error('Failed to send email notification:', emailError);
+    }
 
     return NextResponse.json({
       message: 'Appointment updated successfully',
@@ -77,6 +152,13 @@ export async function DELETE(
     await connectDB();
 
     const user = authResult.user;
+
+    if (!user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
 
     const { id } = await params;
 

@@ -133,7 +133,7 @@ export async function POST(
     client.sessionNotes.push({
       date: new Date(),
       note,
-      createdBy: authResult.user.email,
+      createdBy: authResult.user?.email || 'Admin',
     });
 
     await client.save();

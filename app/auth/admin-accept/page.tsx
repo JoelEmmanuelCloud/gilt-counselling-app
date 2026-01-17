@@ -1,11 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { signIn } from "next-auth/react";
 import Link from "next/link";
 
-export default function AdminAcceptPage() {
+function AdminAcceptContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const token = searchParams.get("token");
@@ -311,5 +311,24 @@ export default function AdminAcceptPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function AdminAcceptPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-12 px-4">
+        <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-2xl border border-gilt-gold/20 text-center">
+          <div className="mb-6">
+            <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-gilt-teal"></div>
+          </div>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">
+            Loading...
+          </h1>
+        </div>
+      </div>
+    }>
+      <AdminAcceptContent />
+    </Suspense>
   );
 }

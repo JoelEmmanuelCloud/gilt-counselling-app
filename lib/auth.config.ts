@@ -13,6 +13,7 @@ import clientPromise from './mongodb-client';
 // Kept for reference - replaced by OTP authentication
 function generateNextAuthMagicLinkEmail(url: string, email: string) {
   const displayName = email.split('@')[0];
+  const APP_URL = process.env.NEXT_PUBLIC_APP_URL || '';
 
   const html = `
     <!DOCTYPE html>
@@ -187,7 +188,7 @@ export const authConfig: NextAuthOptions = {
       // Add custom fields to session from JWT token
       if (token && session.user) {
         session.user.id = token.userId as string;
-        session.user.role = token.role as 'user' | 'admin';
+        session.user.role = token.role as 'user' | 'admin' | 'counselor';
         session.user.phone = token.phone as string | undefined;
       }
 

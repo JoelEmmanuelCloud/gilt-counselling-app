@@ -44,3 +44,7 @@ coverage/
 .cache/
 temp/
 tmp/
+
+# Uploaded files
+public/uploads/profiles/*
+!public/uploads/profiles/.gitkeep

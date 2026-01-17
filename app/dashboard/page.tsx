@@ -16,6 +16,12 @@ function DashboardContent() {
   const router = useRouter();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [rescheduleModal, setRescheduleModal] = useState<{ isOpen: boolean; appointment: Appointment | null }>({
+    isOpen: false,
+    appointment: null,
+  });
+  const [rescheduleForm, setRescheduleForm] = useState({ date: '', time: '' });
+  const [rescheduleLoading, setRescheduleLoading] = useState(false);
 
   // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
@@ -54,6 +60,42 @@ function DashboardContent() {
       console.error('Failed to cancel appointment', error);
       alert('We encountered an issue canceling your appointment. Please contact us directly if you need to make changes.');
     }
+  };
+
+  const openRescheduleModal = (appointment: Appointment) => {
+    setRescheduleModal({ isOpen: true, appointment });
+    setRescheduleForm({ date: appointment.date, time: appointment.time });
+  };
+
+  const handleReschedule = async () => {
+    if (!rescheduleModal.appointment) return;
+
+    if (!rescheduleForm.date || !rescheduleForm.time) {
+      alert('Please select both a new date and time.');
+      return;
+    }
+
+    setRescheduleLoading(true);
+    try {
+      await api.patch(`/appointments/${rescheduleModal.appointment.id}`, {
+        date: rescheduleForm.date,
+        time: rescheduleForm.time,
+      });
+      setRescheduleModal({ isOpen: false, appointment: null });
+      fetchAppointments();
+      alert('Your appointment has been rescheduled successfully. A confirmation email has been sent.');
+    } catch (error: any) {
+      console.error('Failed to reschedule appointment', error);
+      alert(error.response?.data?.message || 'We encountered an issue rescheduling your appointment. Please try again or contact us.');
+    } finally {
+      setRescheduleLoading(false);
+    }
+  };
+
+  const getMinDate = () => {
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    return tomorrow.toISOString().split('T')[0];
   };
 
   const getStatusColor = (status: string) => {
@@ -231,12 +273,20 @@ function DashboardContent() {
                           </td>
                           <td className="px-6 py-4 whitespace-nowrap text-sm">
                             {appointment.status !== 'cancelled' && appointment.status !== 'completed' && (
-                              <button
-                                onClick={() => handleCancelAppointment(appointment.id)}
-                                className="text-muted-coral hover:text-soft-terracotta font-medium transition-colors duration-150"
-                              >
-                                Cancel
-                              </button>
+                              <div className="flex items-center gap-3">
+                                <button
+                                  onClick={() => openRescheduleModal(appointment)}
+                                  className="text-gilt-gold hover:text-gilt-orange font-medium transition-colors duration-150"
+                                >
+                                  Reschedule
+                                </button>
+                                <button
+                                  onClick={() => handleCancelAppointment(appointment.id)}
+                                  className="text-muted-coral hover:text-soft-terracotta font-medium transition-colors duration-150"
+                                >
+                                  Cancel
+                                </button>
+                              </div>
                             )}
                           </td>
                         </tr>
@@ -278,12 +328,20 @@ function DashboardContent() {
                       </div>
 
                       {appointment.status !== 'cancelled' && appointment.status !== 'completed' && (
-                        <button
-                          onClick={() => handleCancelAppointment(appointment.id)}
-                          className="text-muted-coral hover:text-soft-terracotta font-medium text-sm transition-colors duration-150"
-                        >
-                          Cancel Appointment
-                        </button>
+                        <div className="flex items-center gap-4">
+                          <button
+                            onClick={() => openRescheduleModal(appointment)}
+                            className="text-gilt-gold hover:text-gilt-orange font-medium text-sm transition-colors duration-150"
+                          >
+                            Reschedule
+                          </button>
+                          <button
+                            onClick={() => handleCancelAppointment(appointment.id)}
+                            className="text-muted-coral hover:text-soft-terracotta font-medium text-sm transition-colors duration-150"
+                          >
+                            Cancel
+                          </button>
+                        </div>
                       )}
                     </div>
                   ))}
@@ -297,15 +355,67 @@ function DashboardContent() {
       {/* Help Section */}
       <section className="section-container bg-warm-cream">
         <div className="max-w-4xl mx-auto text-center">
-          <h3 className="heading-sm mb-4">Need to Make Changes?</h3>
+          <h3 className="heading-sm mb-4">Need Help?</h3>
           <p className="body-md text-gray-700 mb-6">
-            If you need to reschedule or have questions about your upcoming sessions, we're here to help.
+            If you have questions about your upcoming sessions, we're here to help.
           </p>
           <Link href="/contact">
             <Button variant="secondary">Contact Us</Button>
           </Link>
         </div>
       </section>
+
+      {/* Reschedule Modal */}
+      {rescheduleModal.isOpen && rescheduleModal.appointment && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
+            <h3 className="text-xl font-heading font-semibold mb-2">Reschedule Appointment</h3>
+            <p className="text-sm text-gray-600 mb-6">
+              {rescheduleModal.appointment.service}<br />
+              <span className="text-gray-500">Currently: {rescheduleModal.appointment.date} at {rescheduleModal.appointment.time}</span>
+            </p>
+
+            <div className="space-y-4 mb-6">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">New Date</label>
+                <input
+                  type="date"
+                  value={rescheduleForm.date}
+                  onChange={(e) => setRescheduleForm({ ...rescheduleForm, date: e.target.value })}
+                  min={getMinDate()}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-gilt-gold"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">New Time</label>
+                <input
+                  type="time"
+                  value={rescheduleForm.time}
+                  onChange={(e) => setRescheduleForm({ ...rescheduleForm, time: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-gilt-gold"
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-4 justify-end">
+              <button
+                onClick={() => setRescheduleModal({ isOpen: false, appointment: null })}
+                className="px-4 py-2 text-gray-600 hover:text-gray-900 font-medium transition-colors"
+                disabled={rescheduleLoading}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleReschedule}
+                disabled={rescheduleLoading}
+                className="px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition-colors font-medium disabled:opacity-50"
+              >
+                {rescheduleLoading ? 'Rescheduling...' : 'Confirm Reschedule'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

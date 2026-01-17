@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
       date,
       time,
       status: status || 'confirmed',
-      notes: notes || `Booked by admin: ${authResult.user.email}`,
+      notes: notes || `Booked by admin: ${authResult.user?.email || 'Admin'}`,
     });
 
     await appointment.save();

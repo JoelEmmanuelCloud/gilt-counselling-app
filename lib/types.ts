@@ -3,7 +3,7 @@ export interface User {
   name: string;
   email: string;
   phone: string;
-  role: 'user' | 'admin';
+  role: 'user' | 'admin' | 'counselor';
 }
 
 export interface Appointment {
@@ -12,11 +12,19 @@ export interface Appointment {
   userName: string;
   userEmail: string;
   userPhone: string;
+  counselorId?: string;
+  counselorName?: string;
   service: string;
   date: string;
   time: string;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
   notes?: string;
+  counselorNotes?: string;
+  rescheduledFrom?: {
+    date: string;
+    time: string;
+    rescheduledAt: Date;
+  };
   createdAt: string;
 }
 

@@ -6,9 +6,9 @@ import bcrypt from 'bcryptjs';
 
 // POST change password
 export async function POST(request: NextRequest) {
-  const authResult = await requireAuth(request);
+  const authResult = await requireAuth();
 
-  if ('error' in authResult) {
+  if (authResult.error) {
     return NextResponse.json(
       { message: authResult.error },
       { status: authResult.status }
@@ -17,6 +17,13 @@ export async function POST(request: NextRequest) {
 
   try {
     const { currentPassword, newPassword } = await request.json();
+
+    if (!authResult.user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
 
     if (!currentPassword || !newPassword) {
       return NextResponse.json(

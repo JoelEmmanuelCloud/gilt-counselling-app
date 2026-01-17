@@ -35,10 +35,8 @@ export async function POST(request: NextRequest) {
       role: "user",
       source: "online",
       emailVerified: new Date(), // Auto-verify since they'll use magic link
-      preferences: {
-        contactMethod: "email",
-        emailNotifications: true,
-      },
+      preferredContactMethod: "email",
+      emailNotifications: true,
     });
 
     // Send welcome email

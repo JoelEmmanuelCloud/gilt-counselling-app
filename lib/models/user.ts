@@ -7,16 +7,25 @@ export interface IUser {
   email: string;
   phone?: string; // Now optional (for OAuth users)
   password?: string; // Now optional (for passwordless auth)
-  role: 'user' | 'admin';
+  role: 'user' | 'admin' | 'counselor';
+  // Counselor-specific fields
+  specializations?: string[];
+  bio?: string;
+  availability?: Array<{
+    dayOfWeek: number; // 0 = Sunday, 6 = Saturday
+    startTime: string; // HH:mm format
+    endTime: string; // HH:mm format
+  }>;
+  isAvailable?: boolean; // Quick toggle for availability
   emailVerified?: Date | null; // For NextAuth
   verificationToken?: string; // For email verification
   verificationTokenExpiry?: Date; // Token expiry time
   image?: string; // For OAuth profile photos
-  comparePassword?: (candidatePassword: string) => Promise<boolean>;
   // Profile information
   profilePhoto?: string;
   dateOfBirth?: Date;
   gender?: 'male' | 'female' | 'other' | 'prefer-not-to-say';
+  occupation?: string;
   // Address information
   address?: {
     street?: string;
@@ -81,8 +90,30 @@ const UserSchema = new Schema(
     },
     role: {
       type: String,
-      enum: ['user', 'admin'],
+      enum: ['user', 'admin', 'counselor'],
       default: 'user',
+    },
+    // Counselor-specific fields
+    specializations: [{
+      type: String,
+      trim: true,
+    }],
+    bio: {
+      type: String,
+      trim: true,
+    },
+    availability: [{
+      dayOfWeek: {
+        type: Number,
+        min: 0,
+        max: 6,
+      },
+      startTime: String,
+      endTime: String,
+    }],
+    isAvailable: {
+      type: Boolean,
+      default: true,
     },
     // NextAuth fields
     emailVerified: {
@@ -108,6 +139,10 @@ const UserSchema = new Schema(
     gender: {
       type: String,
       enum: ['male', 'female', 'other', 'prefer-not-to-say'],
+    },
+    occupation: {
+      type: String,
+      trim: true,
     },
     // Address information
     address: {
@@ -178,7 +213,13 @@ UserSchema.methods.comparePassword = async function (candidatePassword: string):
 };
 
 // Prevent model recompilation in development
-const User: Model<IUser> = mongoose.models.User || mongoose.model<IUser>('User', UserSchema);
+let User: any;
+if (mongoose.models.User) {
+  User = mongoose.models.User;
+} else {
+  // @ts-ignore - Complex schema types cause TypeScript compilation issues
+  User = mongoose.model('User', UserSchema);
+}
 
 export default User;
 

@@ -15,6 +15,13 @@ export async function GET(request: NextRequest) {
   }
 
   try {
+    if (!authResult.user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
+
     await connectDB();
 
     const user = await User.findOne({ email: authResult.user.email }).select('-password -sessionNotes');
@@ -48,6 +55,13 @@ export async function PATCH(request: NextRequest) {
   }
 
   try {
+    if (!authResult.user) {
+      return NextResponse.json(
+        { message: 'User not found' },
+        { status: 401 }
+      );
+    }
+
     const body = await request.json();
 
     // Remove fields that shouldn't be updated this way

@@ -60,10 +60,8 @@ export async function POST(request: NextRequest) {
       role: "admin", // Assign admin role
       emailVerified: new Date(), // Auto-verify email for invited admins
       source: "online",
-      preferences: {
-        contactMethod: "email",
-        emailNotifications: true,
-      },
+      preferredContactMethod: "email",
+      emailNotifications: true,
     });
 
     // Mark invite as used

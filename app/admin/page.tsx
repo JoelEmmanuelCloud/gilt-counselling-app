@@ -8,8 +8,9 @@ import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
 import Card from '@/components/ui/Card';
 import axios from 'axios';
+import UserProfileModal from '@/components/admin/UserProfileModal';
 
-type Tab = 'appointments' | 'clients' | 'create-booking';
+type Tab = 'appointments' | 'clients' | 'counselors' | 'create-booking';
 
 interface Client {
   _id: string;
@@ -26,6 +27,17 @@ interface Client {
   createdAt: string;
 }
 
+interface Counselor {
+  _id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  specializations?: string[];
+  bio?: string;
+  isAvailable?: boolean;
+  createdAt: string;
+}
+
 function AdminDashboardContent() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth();
@@ -38,9 +50,19 @@ function AdminDashboardContent() {
   const [activeTab, setActiveTab] = useState<Tab>('appointments');
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
+  const [counselors, setCounselors] = useState<Counselor[]>([]);
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState<string>('all');
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
+  const [showCounselorForm, setShowCounselorForm] = useState(false);
+  const [counselorForm, setCounselorForm] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    specializations: '',
+    bio: '',
+  });
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -92,6 +114,8 @@ function AdminDashboardContent() {
       fetchAppointments();
     } else if (activeTab === 'clients' || activeTab === 'create-booking') {
       fetchClients();
+    } else if (activeTab === 'counselors') {
+      fetchCounselors();
     }
   }, [activeTab]);
 
@@ -119,6 +143,62 @@ function AdminDashboardContent() {
       console.error('Failed to fetch clients', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCounselors = async () => {
+    try {
+      setLoading(true);
+      const token = localStorage.getItem('token');
+      const response = await axios.get('/api/admin/counselors', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      setCounselors(response.data);
+    } catch (error) {
+      console.error('Failed to fetch counselors', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCreateCounselor = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      const token = localStorage.getItem('token');
+      await axios.post('/api/admin/counselors', {
+        ...counselorForm,
+        specializations: counselorForm.specializations.split(',').map(s => s.trim()).filter(Boolean),
+      }, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      alert('Counselor created successfully! A welcome email has been sent.');
+      setShowCounselorForm(false);
+      setCounselorForm({
+        name: '',
+        email: '',
+        phone: '',
+        specializations: '',
+        bio: '',
+      });
+      fetchCounselors();
+    } catch (error: any) {
+      alert(error.response?.data?.message || 'Failed to create counselor');
+    }
+  };
+
+  const handleDeleteCounselor = async (id: string) => {
+    if (!window.confirm('Are you sure you want to remove this counselor? Their account will be converted to a regular user.')) {
+      return;
+    }
+    try {
+      const token = localStorage.getItem('token');
+      await axios.delete(`/api/admin/counselors/${id}`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      fetchCounselors();
+    } catch (error) {
+      console.error('Failed to delete counselor', error);
+      alert('Unable to remove counselor. Please try again.');
     }
   };
 
@@ -238,6 +318,7 @@ function AdminDashboardContent() {
     completed: appointments.filter(a => a.status === 'completed').length,
     cancelled: appointments.filter(a => a.status === 'cancelled').length,
     totalClients: clients.length,
+    totalCounselors: counselors.length,
   };
 
   const services = [
@@ -317,6 +398,16 @@ function AdminDashboardContent() {
             }`}
           >
             Clients
+          </button>
+          <button
+            onClick={() => setActiveTab('counselors')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'counselors'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Counselors
           </button>
           <button
             onClick={() => setActiveTab('create-booking')}
@@ -473,7 +564,11 @@ function AdminDashboardContent() {
                   </thead>
                   <tbody className="divide-y">
                     {filteredClients.map((client) => (
-                      <tr key={client._id} className="hover:bg-warm-cream transition-colors">
+                      <tr
+                        key={client._id}
+                        onClick={() => setSelectedUserId(client._id)}
+                        className="hover:bg-warm-cream transition-colors cursor-pointer"
+                      >
                         <td className="px-6 py-4 text-sm font-medium text-gray-900">{client.name}</td>
                         <td className="px-6 py-4">
                           <div className="text-sm text-gray-900">{client.email}</div>
@@ -484,6 +579,86 @@ function AdminDashboardContent() {
                           <span className="px-2 py-1 bg-gilt-gold bg-opacity-10 text-gilt-gold rounded-full text-xs">{client.source || 'online'}</span>
                         </td>
                         <td className="px-6 py-4 text-sm text-gray-500">{new Date(client.createdAt).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+          </Card>
+        )}
+
+        {/* Counselors Tab */}
+        {activeTab === 'counselors' && (
+          <Card>
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="heading-md">Counselor Management</h2>
+              <button onClick={() => setShowCounselorForm(!showCounselorForm)} className="px-4 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition">
+                {showCounselorForm ? 'Cancel' : '+ Add Counselor'}
+              </button>
+            </div>
+
+            {showCounselorForm && (
+              <form onSubmit={handleCreateCounselor} className="mb-8 p-6 bg-warm-cream rounded-lg">
+                <h3 className="font-semibold text-lg mb-4">Add New Counselor</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <input type="text" placeholder="Full Name *" required value={counselorForm.name} onChange={(e) => setCounselorForm({...counselorForm, name: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="email" placeholder="Email *" required value={counselorForm.email} onChange={(e) => setCounselorForm({...counselorForm, email: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="tel" placeholder="Phone" value={counselorForm.phone} onChange={(e) => setCounselorForm({...counselorForm, phone: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="Specializations (comma-separated)" value={counselorForm.specializations} onChange={(e) => setCounselorForm({...counselorForm, specializations: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                </div>
+                <textarea placeholder="Bio / Description" value={counselorForm.bio} onChange={(e) => setCounselorForm({...counselorForm, bio: e.target.value})} rows={3} className="w-full px-4 py-2 border rounded-lg mt-4" />
+                <button type="submit" className="mt-4 px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition">Create Counselor</button>
+              </form>
+            )}
+
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-soft-gold mb-4"></div>
+                <p className="text-gray-600">Loading counselors...</p>
+              </div>
+            ) : counselors.length === 0 ? (
+              <div className="text-center py-12 bg-warm-cream rounded-lg">
+                <p className="text-gray-600">No counselors found. Add your first counselor above.</p>
+              </div>
+            ) : (
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Name</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Contact</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Specializations</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y">
+                    {counselors.map((counselor) => (
+                      <tr key={counselor._id} className="hover:bg-warm-cream transition-colors">
+                        <td className="px-6 py-4">
+                          <div className="text-sm font-medium text-gray-900">{counselor.name}</div>
+                          {counselor.bio && <div className="text-sm text-gray-500 truncate max-w-xs">{counselor.bio}</div>}
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="text-sm text-gray-900">{counselor.email}</div>
+                          <div className="text-sm text-gray-500">{counselor.phone || '-'}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <div className="flex flex-wrap gap-1">
+                            {counselor.specializations?.map((spec, i) => (
+                              <span key={i} className="px-2 py-1 bg-muted-teal bg-opacity-10 text-muted-teal rounded-full text-xs">{spec}</span>
+                            )) || <span className="text-gray-400">-</span>}
+                          </div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <span className={`px-2 py-1 rounded-full text-xs ${counselor.isAvailable !== false ? 'bg-olive-green bg-opacity-10 text-olive-green' : 'bg-gray-200 text-gray-600'}`}>
+                            {counselor.isAvailable !== false ? 'Available' : 'Unavailable'}
+                          </span>
+                        </td>
+                        <td className="px-6 py-4">
+                          <button onClick={() => handleDeleteCounselor(counselor._id)} className="text-red-600 hover:text-red-800 font-medium text-sm">Remove</button>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -553,6 +728,15 @@ function AdminDashboardContent() {
           </Card>
         )}
       </section>
+
+      {/* User Profile Modal */}
+      {selectedUserId && (
+        <UserProfileModal
+          userId={selectedUserId}
+          isOpen={!!selectedUserId}
+          onClose={() => setSelectedUserId(null)}
+        />
+      )}
     </div>
   );
 }
