@@ -10,17 +10,23 @@ import Button from '@/components/ui/Button';
 interface AuthModalProps {
   onClose?: () => void;
   redirectTo?: string;
+  initialMode?: 'signin' | 'signup';
 }
 
-type Step = 'email' | 'otp';
+type Step = 'form' | 'otp';
+type Mode = 'signin' | 'signup';
 
-export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
+export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' }: AuthModalProps) {
   const router = useRouter();
-  const [step, setStep] = useState<Step>('email');
+  const [mode, setMode] = useState<Mode>(initialMode);
+  const [step, setStep] = useState<Step>('form');
   const [email, setEmail] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [resendCountdown, setResendCountdown] = useState(0);
   const [remainingAttempts, setRemainingAttempts] = useState(3);
 
@@ -36,6 +42,46 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
     }
   }, [resendCountdown]);
 
+  const handleSignUpSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError('');
+    setSuccessMessage('');
+    setLoading(true);
+
+    try {
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: `${firstName} ${lastName}`.trim(),
+          email,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create account');
+      }
+
+      setSuccessMessage('Account created! Switching to sign in...');
+
+      // Switch to sign in mode after successful signup
+      setTimeout(() => {
+        setMode('signin');
+        setSuccessMessage('');
+        setFirstName('');
+        setLastName('');
+      }, 1500);
+    } catch (err: any) {
+      setError(err.message || 'An error occurred. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleEmailSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
@@ -44,7 +90,7 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
     try {
       await sendOTP(email);
       setStep('otp');
-      setResendCountdown(30); // 30 second cooldown
+      setResendCountdown(30);
     } catch (err: any) {
       setError(err.message || 'Failed to send verification code');
     } finally {
@@ -59,17 +105,13 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
 
     try {
       await verifyOTP(email, otp);
-      // User is now logged in
-      // Close modal first
       if (onClose) onClose();
 
-      // Small delay to ensure state updates, then navigate if redirectTo specified
       if (redirectTo) {
         setTimeout(() => {
           router.push(redirectTo);
         }, 100);
       }
-      // If no redirectTo, stay on current page (modal just closes)
     } catch (err: any) {
       setError(err.message || 'Invalid verification code');
       if (remainingAttempts > 1) {
@@ -116,40 +158,47 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
   };
 
   const handleBack = () => {
-    setStep('email');
+    setStep('form');
     setOtp('');
     setError('');
     setRemainingAttempts(3);
   };
 
   const handleOTPChange = (value: string) => {
-    // Only allow digits and max 6 characters
     const cleaned = value.replace(/\D/g, '').slice(0, 6);
     setOtp(cleaned);
   };
 
+  const switchMode = (newMode: Mode) => {
+    setMode(newMode);
+    setStep('form');
+    setError('');
+    setSuccessMessage('');
+    setOtp('');
+  };
+
   return (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4 lg:p-6"
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg max-w-md w-full p-8 relative"
+        className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl max-w-md lg:max-w-lg w-full p-4 sm:p-6 md:p-8 lg:p-10 relative max-h-[95vh] sm:max-h-[90vh] lg:max-h-[85vh] overflow-y-auto shadow-xl lg:shadow-2xl"
         onClick={(e) => e.stopPropagation()}
       >
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute top-3 right-3 sm:top-4 sm:right-4 lg:top-5 lg:right-5 text-gray-400 hover:text-gray-600 transition-colors"
           aria-label="Close"
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
 
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="relative w-32 h-20 mx-auto mb-4">
+        <div className="text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
+          <div className="relative w-24 h-16 sm:w-32 sm:h-20 lg:w-36 lg:h-24 mx-auto mb-3 sm:mb-4 lg:mb-5">
             <Image
               src="/Gilt Counselling Consult Profile.svg"
               alt="Gilt Counselling Consult"
@@ -157,55 +206,57 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
               className="object-contain"
             />
           </div>
-          <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">
-            {step === 'email' ? 'Sign in to continue' : 'Enter verification code'}
+          <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
+            {step === 'otp'
+              ? 'Enter verification code'
+              : mode === 'signin'
+                ? 'Sign in to continue'
+                : 'Create your account'
+            }
           </h2>
-          <p className="text-gray-600 text-sm">
-            {step === 'email'
-              ? 'Sign in to book your appointment with Gilt Counselling'
-              : `We've sent a code to ${email}`
+          <p className="text-gray-600 text-xs sm:text-sm lg:text-base px-2 lg:px-4">
+            {step === 'otp'
+              ? `We've sent a code to ${email}`
+              : mode === 'signin'
+                ? 'Sign in to book your appointment with Gilt Counselling'
+                : 'Join Gilt Counselling to book your appointment'
             }
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6 text-sm">
+          <div className="bg-red-50 border border-red-200 text-red-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
             {error}
             {remainingAttempts < 3 && remainingAttempts > 0 && step === 'otp' && (
-              <div className="text-xs mt-1">
+              <div className="text-xs lg:text-sm mt-1">
                 {remainingAttempts} attempt{remainingAttempts !== 1 ? 's' : ''} remaining
               </div>
             )}
           </div>
         )}
 
-        {/* Email Entry Step */}
-        {step === 'email' && (
-          <div className="space-y-4">
+        {/* Success Message */}
+        {successMessage && (
+          <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
+            {successMessage}
+          </div>
+        )}
+
+        {/* Sign In Form */}
+        {mode === 'signin' && step === 'form' && (
+          <div className="space-y-3 sm:space-y-4 lg:space-y-5">
             {/* Google Sign In */}
             <button
               onClick={handleGoogleAuth}
               disabled={loading}
-              className="w-full bg-white border-2 border-gray-300 text-gray-700 px-4 py-3 rounded-lg font-medium flex items-center justify-center gap-3 transition-opacity disabled:opacity-50"
+              className="w-full bg-white border-2 border-gray-300 text-gray-700 px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 rounded-lg lg:rounded-xl font-medium flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base lg:text-lg transition-all disabled:opacity-50 hover:bg-gray-50 hover:border-gray-400"
             >
-              <svg className="w-5 h-5" viewBox="0 0 24 24">
-                <path
-                  fill="#4285F4"
-                  d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
-                />
-                <path
-                  fill="#34A853"
-                  d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"
-                />
-                <path
-                  fill="#FBBC05"
-                  d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"
-                />
-                <path
-                  fill="#EA4335"
-                  d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"
-                />
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
               </svg>
               Continue with Google
             </button>
@@ -214,54 +265,167 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
               <div className="absolute inset-0 flex items-center">
                 <div className="w-full border-t border-gray-300"></div>
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or</span>
+              <div className="relative flex justify-center text-xs sm:text-sm lg:text-base">
+                <span className="px-2 lg:px-4 bg-white text-gray-500">Or</span>
               </div>
             </div>
 
             {/* Email Form */}
-            <form onSubmit={handleEmailSubmit} className="space-y-4">
+            <form onSubmit={handleEmailSubmit} className="space-y-3 sm:space-y-4 lg:space-y-5">
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="signin-email" className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 sm:mb-2">
                   Email address
                 </label>
                 <input
                   type="email"
-                  id="email"
+                  id="signin-email"
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                   placeholder="your.email@example.com"
                   disabled={loading}
                 />
               </div>
 
-              <Button
-                type="submit"
-                disabled={loading}
-                className="w-full"
-              >
+              <Button type="submit" disabled={loading} className="w-full text-sm sm:text-base lg:text-lg py-2.5 sm:py-3 lg:py-3.5">
                 {loading ? 'Sending code...' : 'Continue with Email'}
               </Button>
             </form>
 
-            <p className="text-xs text-gray-500 text-center mt-6">
+            <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 text-center mt-4 sm:mt-6 lg:mt-8">
               By continuing, you agree to our Terms of Service and Privacy Policy.
             </p>
+
+            {/* Sign Up Link */}
+            <div className="text-center mt-3 sm:mt-4 lg:mt-5 pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
+              <p className="text-xs sm:text-sm lg:text-base text-gray-600">
+                Don't have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => switchMode('signup')}
+                  className="font-semibold text-soft-terracotta hover:text-soft-terracotta/80 transition-colors"
+                >
+                  Sign Up
+                </button>
+              </p>
+            </div>
+          </div>
+        )}
+
+        {/* Sign Up Form */}
+        {mode === 'signup' && step === 'form' && (
+          <div className="space-y-3 sm:space-y-4 lg:space-y-5">
+            {/* Google Sign Up */}
+            <button
+              onClick={handleGoogleAuth}
+              disabled={loading}
+              className="w-full bg-white border-2 border-gray-300 text-gray-700 px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 rounded-lg lg:rounded-xl font-medium flex items-center justify-center gap-2 sm:gap-3 text-sm sm:text-base lg:text-lg transition-all disabled:opacity-50 hover:bg-gray-50 hover:border-gray-400"
+            >
+              <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24">
+                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+              </svg>
+              Continue with Google
+            </button>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300"></div>
+              </div>
+              <div className="relative flex justify-center text-xs sm:text-sm lg:text-base">
+                <span className="px-2 lg:px-4 bg-white text-gray-500">Or sign up with email</span>
+              </div>
+            </div>
+
+            {/* Sign Up Form */}
+            <form onSubmit={handleSignUpSubmit} className="space-y-3 sm:space-y-4 lg:space-y-5">
+              <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+                <div>
+                  <label htmlFor="firstName" className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2">
+                    First Name
+                  </label>
+                  <input
+                    type="text"
+                    id="firstName"
+                    required
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    placeholder="John"
+                    disabled={loading}
+                  />
+                </div>
+                <div>
+                  <label htmlFor="lastName" className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2">
+                    Last Name
+                  </label>
+                  <input
+                    type="text"
+                    id="lastName"
+                    required
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    placeholder="Doe"
+                    disabled={loading}
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label htmlFor="signup-email" className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2">
+                  Email Address
+                </label>
+                <input
+                  type="email"
+                  id="signup-email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  placeholder="you@example.com"
+                  disabled={loading}
+                />
+              </div>
+
+              <Button type="submit" disabled={loading || !!successMessage} className="w-full text-sm sm:text-base lg:text-lg py-2.5 sm:py-3 lg:py-3.5">
+                {loading ? 'Creating account...' : successMessage ? 'Success!' : 'Create Account'}
+              </Button>
+            </form>
+
+            <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 text-center mt-3 sm:mt-4 lg:mt-6">
+              By signing up, you agree to our Terms of Service and Privacy Policy.
+            </p>
+
+            {/* Sign In Link */}
+            <div className="text-center mt-3 sm:mt-4 lg:mt-5 pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
+              <p className="text-xs sm:text-sm lg:text-base text-gray-600">
+                Already have an account?{' '}
+                <button
+                  type="button"
+                  onClick={() => switchMode('signin')}
+                  className="font-semibold text-soft-terracotta hover:text-soft-terracotta/80 transition-colors"
+                >
+                  Sign In
+                </button>
+              </p>
+            </div>
           </div>
         )}
 
         {/* OTP Verification Step */}
         {step === 'otp' && (
-          <form onSubmit={handleOTPVerify} className="space-y-6">
-            <div className="text-center mb-6">
-              <p className="text-sm font-semibold text-gray-800">
+          <form onSubmit={handleOTPVerify} className="space-y-4 sm:space-y-6 lg:space-y-8">
+            <div className="text-center mb-4 sm:mb-6 lg:mb-8">
+              <p className="text-xs sm:text-sm lg:text-base font-semibold text-gray-800 break-all px-2 lg:px-4">
                 {email}
                 <button
                   type="button"
                   onClick={handleBack}
-                  className="ml-2 text-soft-terracotta hover:text-soft-terracotta/80 text-xs"
+                  className="ml-2 text-soft-terracotta hover:text-soft-terracotta/80 text-xs lg:text-sm"
                 >
                   Edit
                 </button>
@@ -269,7 +433,7 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
             </div>
 
             <div>
-              <label htmlFor="otp" className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="otp" className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 sm:mb-2 lg:mb-3">
                 Verification Code
               </label>
               <input
@@ -280,22 +444,18 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
                 required
                 value={otp}
                 onChange={(e) => handleOTPChange(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent text-center text-2xl tracking-widest font-mono"
+                className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-6 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent text-center text-xl sm:text-2xl lg:text-3xl tracking-widest font-mono transition-all"
                 placeholder="000000"
                 maxLength={6}
                 disabled={loading}
                 autoFocus
               />
-              <p className="text-xs text-gray-500 mt-2 text-center">
+              <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 mt-1 sm:mt-2 lg:mt-3 text-center">
                 Enter the 6-digit code from your email
               </p>
             </div>
 
-            <Button
-              type="submit"
-              disabled={loading || otp.length !== 6}
-              className="w-full"
-            >
+            <Button type="submit" disabled={loading || otp.length !== 6} className="w-full text-sm sm:text-base lg:text-lg py-2.5 sm:py-3 lg:py-3.5">
               {loading ? 'Verifying...' : 'Verify Code'}
             </Button>
 
@@ -304,7 +464,7 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
                 type="button"
                 onClick={handleResendOTP}
                 disabled={loading || resendCountdown > 0}
-                className="text-sm text-soft-terracotta hover:text-soft-terracotta/80 font-medium disabled:text-gray-400 disabled:cursor-not-allowed"
+                className="text-xs sm:text-sm lg:text-base text-soft-terracotta hover:text-soft-terracotta/80 font-medium disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
               >
                 {resendCountdown > 0
                   ? `Resend code in ${resendCountdown}s`
@@ -316,9 +476,9 @@ export default function AuthModal({ onClose, redirectTo }: AuthModalProps) {
               <button
                 type="button"
                 onClick={handleBack}
-                className="text-sm text-gray-600 hover:text-gray-800"
+                className="text-xs sm:text-sm lg:text-base text-gray-600 hover:text-gray-800 transition-colors"
               >
-                ← Back to email
+                ← Back to {mode === 'signin' ? 'sign in' : 'sign up'}
               </button>
             </div>
           </form>

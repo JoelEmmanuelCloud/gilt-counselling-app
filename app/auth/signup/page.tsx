@@ -9,7 +9,8 @@ export default function SignUpPage() {
   const router = useRouter();
 
   const [formData, setFormData] = useState({
-    name: "",
+    firstName: "",
+    lastName: "",
     email: "",
     phone: "",
   });
@@ -30,7 +31,7 @@ export default function SignUpPage() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: formData.name,
+          name: `${formData.firstName} ${formData.lastName}`.trim(),
           email: formData.email,
           phone: formData.phone,
         }),
@@ -67,28 +68,28 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-md w-full space-y-8 bg-white p-8 rounded-2xl shadow-2xl border border-gilt-gold/20">
+    <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
+      <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl border border-gilt-gold/20">
         {/* Header */}
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
             Get Started
           </h1>
-          <p className="text-gray-600">
+          <p className="text-sm sm:text-base lg:text-lg text-gray-600">
             Create your Gilt Counselling account
           </p>
         </div>
 
         {/* Error/Success Message */}
         {errorMessage && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
-            <p className="text-sm">{errorMessage}</p>
+          <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
+            <p className="text-xs sm:text-sm lg:text-base">{errorMessage}</p>
           </div>
         )}
 
         {successMessage && (
-          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
-            <p className="text-sm">{successMessage}</p>
+          <div className="bg-green-50 border border-green-200 text-green-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
+            <p className="text-xs sm:text-sm lg:text-base">{successMessage}</p>
           </div>
         )}
 
@@ -97,9 +98,9 @@ export default function SignUpPage() {
           <button
             onClick={handleGoogleSignUp}
             disabled={isLoading}
-            className="w-full flex items-center justify-center gap-3 px-4 py-3 border-2 border-gray-300 rounded-lg shadow-sm text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full flex items-center justify-center gap-2 sm:gap-3 px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 border-2 border-gray-300 rounded-lg lg:rounded-xl shadow-sm text-gray-700 bg-white hover:bg-gray-50 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all text-sm sm:text-base lg:text-lg"
           >
-            <svg className="w-5 h-5" viewBox="0 0 24 24">
+            <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
                 d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
@@ -126,40 +127,62 @@ export default function SignUpPage() {
           <div className="absolute inset-0 flex items-center">
             <div className="w-full border-t border-gray-300"></div>
           </div>
-          <div className="relative flex justify-center text-sm">
-            <span className="px-4 bg-white text-gray-500">
+          <div className="relative flex justify-center text-xs sm:text-sm lg:text-base">
+            <span className="px-3 sm:px-4 lg:px-5 bg-white text-gray-500">
               Or sign up with email
             </span>
           </div>
         </div>
 
         {/* Sign Up Form */}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-gray-700 mb-1"
-            >
-              Full Name
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) =>
-                setFormData({ ...formData, name: e.target.value })
-              }
-              className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition"
-              placeholder="John Doe"
-            />
+        <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-7">
+          <div className="grid grid-cols-1 xs:grid-cols-2 gap-3 sm:gap-4 lg:gap-5">
+            <div>
+              <label
+                htmlFor="firstName"
+                className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2"
+              >
+                First Name
+              </label>
+              <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                required
+                value={formData.firstName}
+                onChange={(e) =>
+                  setFormData({ ...formData, firstName: e.target.value })
+                }
+                className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
+                placeholder="John"
+              />
+            </div>
+            <div>
+              <label
+                htmlFor="lastName"
+                className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2"
+              >
+                Last Name
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                required
+                value={formData.lastName}
+                onChange={(e) =>
+                  setFormData({ ...formData, lastName: e.target.value })
+                }
+                className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
+                placeholder="Doe"
+              />
+            </div>
           </div>
 
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2"
             >
               Email Address
             </label>
@@ -173,7 +196,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition"
+              className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
               placeholder="you@example.com"
             />
           </div>
@@ -181,7 +204,7 @@ export default function SignUpPage() {
           <div>
             <label
               htmlFor="phone"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 lg:mb-2"
             >
               Phone Number
             </label>
@@ -194,10 +217,10 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
               }
-              className="appearance-none block w-full px-4 py-3 border border-gray-300 rounded-lg placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition"
+              className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
               placeholder="+234 800 000 0000"
             />
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 lg:mt-2 text-[10px] sm:text-xs lg:text-sm text-gray-500">
               After creating your account, you can sign in with a magic link (no password needed!)
             </p>
           </div>
@@ -208,20 +231,20 @@ export default function SignUpPage() {
               name="terms"
               type="checkbox"
               required
-              className="h-4 w-4 mt-1 text-gilt-gold focus:ring-gilt-gold border-gray-300 rounded"
+              className="h-4 w-4 lg:h-5 lg:w-5 mt-0.5 sm:mt-1 text-gilt-gold focus:ring-gilt-gold border-gray-300 rounded"
             />
-            <label htmlFor="terms" className="ml-2 block text-sm text-gray-700">
+            <label htmlFor="terms" className="ml-2 lg:ml-3 block text-xs sm:text-sm lg:text-base text-gray-700">
               I agree to the{" "}
               <Link
                 href="/terms"
-                className="text-gilt-gold hover:text-gilt-orange"
+                className="text-gilt-gold hover:text-gilt-orange transition-colors"
               >
                 Terms of Service
               </Link>{" "}
               and{" "}
               <Link
                 href="/privacy"
-                className="text-gilt-gold hover:text-gilt-orange"
+                className="text-gilt-gold hover:text-gilt-orange transition-colors"
               >
                 Privacy Policy
               </Link>
@@ -231,7 +254,7 @@ export default function SignUpPage() {
           <button
             type="submit"
             disabled={isLoading || !!successMessage}
-            className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+            className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-xl shadow-sm text-sm sm:text-base lg:text-lg text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
           >
             {isLoading
               ? "Creating account..."
@@ -243,11 +266,11 @@ export default function SignUpPage() {
 
         {/* Sign In Link */}
         <div className="text-center">
-          <p className="text-sm text-gray-600">
+          <p className="text-xs sm:text-sm lg:text-base text-gray-600">
             Already have an account?{" "}
             <Link
               href="/auth/signin"
-              className="font-medium text-gilt-gold hover:text-gilt-orange transition"
+              className="font-medium text-gilt-gold hover:text-gilt-orange transition-colors"
             >
               Sign in
             </Link>

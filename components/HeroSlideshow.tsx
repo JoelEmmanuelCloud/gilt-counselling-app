@@ -5,11 +5,11 @@ import Image from 'next/image';
 
 const heroImages = [
   {
-    src: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1920&h=700&fit=crop',
+    src: '/pixel1.jpg',
     alt: 'Professional counseling session - person in consultation',
   },
   {
-    src: 'https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=1920&h=700&fit=crop',
+    src: '/pixel2.jpg',
     alt: 'Professional counseling environment - supportive atmosphere',
   },
 ];
