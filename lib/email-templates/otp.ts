@@ -4,10 +4,10 @@ const LOGO_URL = 'http://cdn.mcauto-images-production.sendgrid.net/f638e50cb4cb3
  * Generate OTP email template
  * @param email - User's email address
  * @param code - 6-digit OTP code
- * @param userName - Optional user name for personalization
+ * @param firstName - Optional user first name for personalization
  */
-export function generateOTPEmail(email: string, code: string, userName?: string) {
-  const displayName = userName || email.split('@')[0];
+export function generateOTPEmail(email: string, code: string, firstName?: string) {
+  const displayName = firstName || email.split('@')[0];
 
   const html = `
     <!DOCTYPE html>

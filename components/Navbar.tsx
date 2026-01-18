@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import AuthModal from '@/components/AuthModal';
 
 const Navbar: React.FC = () => {
   const { data: session } = useSession();
@@ -12,6 +13,16 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
+  const handleBookSession = () => {
+    if (user) {
+      router.push('/dashboard');
+    } else {
+      setShowAuthModal(true);
+      setMobileMenuOpen(false);
+    }
+  };
 
   // Lock body scroll when drawer is open
   useEffect(() => {
@@ -166,12 +177,12 @@ const Navbar: React.FC = () => {
                   Sign Out
                 </button>
               ) : (
-                <Link
-                  href="/book-appointment"
+                <button
+                  onClick={handleBookSession}
                   className="bg-soft-terracotta text-gray-900 px-6 py-2.5 rounded hover:bg-soft-terracotta/90 transition-colors duration-300 font-semibold uppercase text-sm tracking-wide"
                 >
                   Book Session
-                </Link>
+                </button>
               )}
             </div>
 
@@ -331,19 +342,26 @@ const Navbar: React.FC = () => {
                   Sign Out
                 </button>
               ) : (
-                <Link
-                  href="/book-appointment"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block bg-soft-terracotta text-gray-900 px-4 sm:px-5 py-3 sm:py-3.5 rounded-lg hover:bg-soft-terracotta/90 active:bg-soft-terracotta/80 transition-colors duration-300 font-semibold text-center uppercase text-sm sm:text-base touch-manipulation"
+                <button
+                  onClick={handleBookSession}
+                  className="block w-full bg-soft-terracotta text-gray-900 px-4 sm:px-5 py-3 sm:py-3.5 rounded-lg hover:bg-soft-terracotta/90 active:bg-soft-terracotta/80 transition-colors duration-300 font-semibold text-center uppercase text-sm sm:text-base touch-manipulation"
                 >
                   Book Session
-                </Link>
+                </button>
               )}
             </div>
 
           </div>
         </div>
       </div>
+
+      {/* Auth Modal */}
+      {showAuthModal && (
+        <AuthModal
+          onClose={() => setShowAuthModal(false)}
+          redirectTo="/dashboard"
+        />
+      )}
     </nav>
   );
 };

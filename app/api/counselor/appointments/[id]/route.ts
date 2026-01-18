@@ -104,9 +104,11 @@ export async function PATCH(
     // Send email notification for status changes
     if (body.status && body.status !== appointment.status) {
       try {
+        // Use userFirstName if available, otherwise extract from userName
+        const firstName = appointment.userFirstName || appointment.userName.split(' ')[0];
         await sendAppointmentStatusEmail(
           appointment.userEmail,
-          appointment.userName,
+          firstName,
           body.status,
           appointment.date,
           appointment.time,

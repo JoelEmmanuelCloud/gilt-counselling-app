@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
 
     await connectDB();
 
-    const user = await User.findOne({ email: authResult.user.email }).select('-password -sessionNotes');
+    const user = await User.findOne({ email: authResult.user.email }).select('-sessionNotes');
 
     if (!user) {
       return NextResponse.json(
@@ -65,7 +65,7 @@ export async function PATCH(request: NextRequest) {
     const body = await request.json();
 
     // Remove fields that shouldn't be updated this way
-    const { password, role, _id, sessionNotes, ...updateData } = body;
+    const { role, _id, sessionNotes, ...updateData } = body;
 
     await connectDB();
 
@@ -73,7 +73,7 @@ export async function PATCH(request: NextRequest) {
       { email: authResult.user.email },
       { $set: updateData },
       { new: true, runValidators: true, upsert: false }
-    ).select('-password -sessionNotes');
+    ).select('-sessionNotes');
 
     if (!user) {
       return NextResponse.json(

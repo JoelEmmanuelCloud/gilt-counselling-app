@@ -21,7 +21,7 @@ export async function GET(
   try {
     await connectDB();
 
-    const client = await User.findById(id).select('-password');
+    const client = await User.findById(id);
 
     if (!client) {
       return NextResponse.json(
@@ -59,7 +59,7 @@ export async function PATCH(
     const body = await request.json();
 
     // Remove fields that shouldn't be updated this way
-    const { password, role, _id, ...updateData } = body;
+    const { role, _id, ...updateData } = body;
 
     await connectDB();
 
@@ -67,7 +67,7 @@ export async function PATCH(
       id,
       { $set: updateData },
       { new: true, runValidators: true }
-    ).select('-password');
+    );
 
     if (!client) {
       return NextResponse.json(

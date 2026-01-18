@@ -190,7 +190,7 @@ function CounselorDashboardContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Counselor Dashboard</h1>
           <p className="text-gray-600 text-lg">
-            Welcome back, {user?.name || 'Counselor'}. Manage your appointments and availability.
+            Welcome back, {user?.firstName || 'Counselor'}. Manage your appointments and availability.
           </p>
         </div>
       </section>

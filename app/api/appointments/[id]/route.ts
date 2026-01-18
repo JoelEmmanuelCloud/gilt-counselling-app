@@ -94,11 +94,14 @@ export async function PATCH(
 
     // Send email notifications
     try {
+      // Use userFirstName if available, otherwise extract from userName
+      const firstName = appointment.userFirstName || appointment.userName.split(' ')[0];
+
       if (updateData.rescheduledFrom) {
         // Send reschedule notification
         await sendRescheduleEmail(
           appointment.userEmail,
-          appointment.userName,
+          firstName,
           updateData.rescheduledFrom.date,
           updateData.rescheduledFrom.time,
           date || appointment.date,
@@ -109,7 +112,7 @@ export async function PATCH(
         // Send status change notification
         await sendAppointmentStatusEmail(
           appointment.userEmail,
-          appointment.userName,
+          firstName,
           status,
           appointment.date,
           appointment.time,

@@ -22,7 +22,7 @@ export async function GET(
     await connectDB();
 
     const counselor = await User.findOne({ _id: id, role: 'counselor' })
-      .select('-password');
+      ;
 
     if (!counselor) {
       return NextResponse.json(
@@ -93,7 +93,7 @@ export async function PATCH(
       id,
       updates,
       { new: true }
-    ).select('-password');
+    );
 
     return NextResponse.json(
       {

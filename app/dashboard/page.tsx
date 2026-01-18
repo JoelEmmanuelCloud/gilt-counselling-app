@@ -149,7 +149,7 @@ function DashboardContent() {
       {/* Header */}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="heading-xl mb-3">Welcome back, {user?.name}!</h1>
+          <h1 className="heading-xl mb-3">Welcome back, {user?.firstName}!</h1>
           <p className="text-gray-600 text-lg">Here's an overview of your appointments and sessions.</p>
         </div>
       </section>

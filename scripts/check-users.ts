@@ -9,12 +9,12 @@ async function checkUsers() {
     console.log('✅ MongoDB connected');
 
     // Find all users
-    const users = await User.find({}).select('name email role').limit(10).exec();
+    const users = await User.find({}).select('firstName lastName email role').limit(10).exec();
 
     if (users.length > 0) {
       console.log(`\n📋 Found ${users.length} users:\n`);
       users.forEach((user: any, index: number) => {
-        console.log(`${index + 1}. ${user.name} <${user.email}> [${user.role}]`);
+        console.log(`${index + 1}. ${user.firstName} ${user.lastName} <${user.email}> [${user.role}]`);
       });
     } else {
       console.log('\n❌ No users found in database');

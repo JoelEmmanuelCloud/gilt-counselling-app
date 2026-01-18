@@ -21,8 +21,8 @@ export async function GET(
   try {
     await connectDB();
 
-    // Get user profile (exclude password but include sessionNotes for admin)
-    const user = await User.findById(id).select('-password');
+    // Get user profile (include sessionNotes for admin)
+    const user = await User.findById(id);
 
     if (!user) {
       return NextResponse.json(

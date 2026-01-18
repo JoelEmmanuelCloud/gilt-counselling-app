@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
     await createOTP(email.toLowerCase(), code, 10);
 
     // Generate email content
-    const { html, text } = generateOTPEmail(email, code, user.name);
+    const { html, text } = generateOTPEmail(email, code, user.firstName);
 
     // Send email
     await sendEmail({

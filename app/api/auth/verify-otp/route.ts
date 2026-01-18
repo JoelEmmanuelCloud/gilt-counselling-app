@@ -98,7 +98,7 @@ export async function POST(request: NextRequest) {
 
       // Send welcome email for first-time verification
       try {
-        await sendWelcomeEmail(user.email, user.name);
+        await sendWelcomeEmail(user.email, user.firstName);
       } catch (emailError) {
         console.error('Failed to send welcome email:', emailError);
       }
@@ -121,7 +121,8 @@ export async function POST(request: NextRequest) {
         token: jwtToken,
         user: {
           id: user._id,
-          name: user.name,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           phone: user.phone,
           role: user.role,

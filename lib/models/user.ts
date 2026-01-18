@@ -1,12 +1,11 @@
 import mongoose, { Schema, Model } from 'mongoose';
-import bcrypt from 'bcryptjs';
 
 export interface IUser {
   _id?: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone?: string; // Now optional (for OAuth users)
-  password?: string; // Now optional (for passwordless auth)
+  phone?: string; // Optional (for OAuth users)
   role: 'user' | 'admin' | 'counselor';
   // Counselor-specific fields
   specializations?: string[];
@@ -60,9 +59,14 @@ export interface IUser {
 
 const UserSchema = new Schema(
   {
-    name: {
+    firstName: {
       type: String,
-      required: [true, 'Name is required'],
+      required: [true, 'First name is required'],
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: [true, 'Last name is required'],
       trim: true,
     },
     email: {
@@ -80,13 +84,8 @@ const UserSchema = new Schema(
     },
     phone: {
       type: String,
-      required: false, // Now optional for OAuth users
+      required: false, // Optional for OAuth users
       trim: true,
-    },
-    password: {
-      type: String,
-      required: false, // Now optional for passwordless auth
-      minlength: [6, 'Password must be at least 6 characters'],
     },
     role: {
       type: String,
@@ -194,24 +193,6 @@ const UserSchema = new Schema(
   }
 );
 
-// Hash password before saving (only if password exists and is modified)
-UserSchema.pre('save', async function () {
-  if (!this.isModified('password') || !this.password) {
-    return;
-  }
-
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-});
-
-// Method to compare password (only if password exists)
-UserSchema.methods.comparePassword = async function (candidatePassword: string): Promise<boolean> {
-  if (!this.password) {
-    return false; // No password set (OAuth or magic link user)
-  }
-  return bcrypt.compare(candidatePassword, this.password);
-};
-
 // Prevent model recompilation in development
 let User: any;
 if (mongoose.models.User) {
@@ -232,17 +213,13 @@ export const findUserById = async (id: string) => {
   return await User.findById(id);
 };
 
-export const createUser = async (name: string, email: string, password: string, phone: string) => {
+export const createUser = async (firstName: string, lastName: string, email: string, phone: string) => {
   const user = new User({
-    name,
+    firstName,
+    lastName,
     email,
-    password,
     phone,
     role: 'user',
   });
   return await user.save();
-};
-
-export const validatePassword = async (plainPassword: string, hashedPassword: string): Promise<boolean> => {
-  return bcrypt.compare(plainPassword, hashedPassword);
 };

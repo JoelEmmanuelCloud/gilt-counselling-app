@@ -66,10 +66,14 @@ export async function POST(request: NextRequest) {
     const authResult = await requireAuth();
     const user = authResult.error ? null : authResult.user;
 
+    // Extract first name from the full name
+    const firstName = name.split(' ')[0];
+
     // Create appointment
     const appointmentData = {
       userId: user?.id || null,
       userName: name,
+      userFirstName: firstName,
       userEmail: email,
       userPhone: phone,
       service,
