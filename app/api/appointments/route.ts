@@ -5,7 +5,7 @@ import connectDB from '@/lib/mongodb';
 
 // GET /api/appointments - Get all appointments (admin) or user's appointments
 export async function GET(request: NextRequest) {
-  const authResult = await requireAuth();
+  const authResult = await requireAuth(request);
 
   if (authResult.error) {
     return NextResponse.json(
@@ -63,7 +63,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Try to get user if authenticated (optional for appointments)
-    const authResult = await requireAuth();
+    const authResult = await requireAuth(request);
     const user = authResult.error ? null : authResult.user;
 
     // Extract first name from the full name

@@ -5,18 +5,23 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
+import { useAuth } from '@/lib/AuthContext';
 import AuthModal from '@/components/AuthModal';
 
 const Navbar: React.FC = () => {
-  const { data: session } = useSession();
-  const user = session?.user;
+  const { data: session, status } = useSession();
+  const { user: customUser, token, logout: customLogout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+  // Use either NextAuth user (Google) or custom auth user (OTP)
+  const user = session?.user || customUser;
+  const isAuthenticated = status === 'authenticated' || (token && customUser);
+
   const handleBookSession = () => {
-    if (user) {
+    if (isAuthenticated) {
       router.push('/dashboard');
     } else {
       setShowAuthModal(true);
@@ -42,7 +47,15 @@ const Navbar: React.FC = () => {
   }, [pathname]);
 
   const handleLogout = async () => {
-    await signOut({ callbackUrl: '/' });
+    // Handle both auth methods
+    if (session) {
+      // NextAuth (Google) logout
+      await signOut({ callbackUrl: '/' });
+    } else if (token) {
+      // Custom OTP logout
+      customLogout();
+      router.push('/');
+    }
     setMobileMenuOpen(false);
   };
 

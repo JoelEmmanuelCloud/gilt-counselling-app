@@ -1,6 +1,9 @@
 import { getServerSession } from 'next-auth';
+import { headers } from 'next/headers';
 import { authConfig } from './auth.config';
-import jwt from 'jsonwebtoken';
+import * as jwt from 'jsonwebtoken';
+import connectDB from './mongodb';
+import User from './models/user';
 
 /**
  * Get the current session (server-side only)
@@ -20,57 +23,123 @@ export async function getCurrentUser() {
 }
 
 /**
+ * Verify JWT token and get user from database
+ * @param token - JWT token string
+ * @returns User object or null
+ */
+async function verifyTokenAndGetUser(token: string) {
+  try {
+    const secret = process.env.JWT_SECRET || 'your-secret-key';
+    // Token payload uses 'userId' (from verify-otp) or 'id' (from generateToken)
+    const decoded = jwt.verify(token, secret) as { userId?: string; id?: string; email: string };
+    const userId = decoded.userId || decoded.id;
+
+    if (!userId) {
+      return null;
+    }
+
+    await connectDB();
+    const user = await User.findById(userId).select('-sessionNotes');
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      id: user._id.toString(),
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      phone: user.phone,
+      image: user.profilePhoto || user.image,
+    };
+  } catch (error) {
+    return null;
+  }
+}
+
+/**
  * Require authentication for API routes
  * Returns user if authenticated, error otherwise
+ * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
+ *
+ * @param request - Optional NextRequest object to get headers from directly
  *
  * @example
- * const authResult = await requireAuth();
+ * const authResult = await requireAuth(request);
  * if (authResult.error) {
  *   return NextResponse.json({ message: authResult.error }, { status: authResult.status });
  * }
  * const user = authResult.user;
  */
-export async function requireAuth() {
+export async function requireAuth(request?: { headers: { get: (name: string) => string | null } }) {
+  // First, try NextAuth session (Google auth)
   const session = await getSession();
 
-  if (!session || !session.user) {
+  if (session?.user) {
     return {
-      error: 'Not authenticated',
-      status: 401,
-      user: null,
+      user: session.user,
+      error: null,
+      status: 200,
     };
   }
 
+  // If no NextAuth session, check for Bearer token (OTP auth)
+  // Try to get authorization from request headers first, then fall back to headers()
+  let authorization: string | null = null;
+
+  if (request?.headers) {
+    authorization = request.headers.get('authorization');
+  }
+
+  if (!authorization) {
+    const headersList = await headers();
+    authorization = headersList.get('authorization');
+  }
+
+  if (authorization?.startsWith('Bearer ')) {
+    const token = authorization.substring(7);
+    const user = await verifyTokenAndGetUser(token);
+
+    if (user) {
+      return {
+        user,
+        error: null,
+        status: 200,
+      };
+    }
+  }
+
   return {
-    user: session.user,
-    error: null,
-    status: 200,
+    error: 'Not authenticated',
+    status: 401,
+    user: null,
   };
 }
 
 /**
  * Require admin role for API routes
  * Returns user if authenticated and admin, error otherwise
+ * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
+ *
+ * @param request - Optional NextRequest object to get headers from directly
  *
  * @example
- * const authResult = await requireAdmin();
+ * const authResult = await requireAdmin(request);
  * if (authResult.error) {
  *   return NextResponse.json({ message: authResult.error }, { status: authResult.status });
  * }
  * const adminUser = authResult.user;
  */
-export async function requireAdmin() {
-  const session = await getSession();
+export async function requireAdmin(request?: { headers: { get: (name: string) => string | null } }) {
+  const authResult = await requireAuth(request);
 
-  if (!session || !session.user) {
-    return {
-      error: 'Not authenticated',
-      status: 401,
-      user: null,
-    };
+  if (authResult.error) {
+    return authResult;
   }
 
-  if (session.user.role !== 'admin') {
+  if (authResult.user?.role !== 'admin') {
     return {
       error: 'Admin access required',
       status: 403,
@@ -78,29 +147,24 @@ export async function requireAdmin() {
     };
   }
 
-  return {
-    user: session.user,
-    error: null,
-    status: 200,
-  };
+  return authResult;
 }
 
 /**
  * Require counselor role for API routes
  * Returns user if authenticated and counselor, error otherwise
+ * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
+ *
+ * @param request - Optional NextRequest object to get headers from directly
  */
-export async function requireCounselor() {
-  const session = await getSession();
+export async function requireCounselor(request?: { headers: { get: (name: string) => string | null } }) {
+  const authResult = await requireAuth(request);
 
-  if (!session || !session.user) {
-    return {
-      error: 'Not authenticated',
-      status: 401,
-      user: null,
-    };
+  if (authResult.error) {
+    return authResult;
   }
 
-  if (session.user.role !== 'counselor') {
+  if (authResult.user?.role !== 'counselor') {
     return {
       error: 'Counselor access required',
       status: 403,
@@ -108,29 +172,24 @@ export async function requireCounselor() {
     };
   }
 
-  return {
-    user: session.user,
-    error: null,
-    status: 200,
-  };
+  return authResult;
 }
 
 /**
  * Require admin or counselor role for API routes
  * Returns user if authenticated and admin or counselor, error otherwise
+ * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
+ *
+ * @param request - Optional NextRequest object to get headers from directly
  */
-export async function requireAdminOrCounselor() {
-  const session = await getSession();
+export async function requireAdminOrCounselor(request?: { headers: { get: (name: string) => string | null } }) {
+  const authResult = await requireAuth(request);
 
-  if (!session || !session.user) {
-    return {
-      error: 'Not authenticated',
-      status: 401,
-      user: null,
-    };
+  if (authResult.error) {
+    return authResult;
   }
 
-  if (session.user.role !== 'admin' && session.user.role !== 'counselor') {
+  if (authResult.user?.role !== 'admin' && authResult.user?.role !== 'counselor') {
     return {
       error: 'Admin or counselor access required',
       status: 403,
@@ -138,11 +197,7 @@ export async function requireAdminOrCounselor() {
     };
   }
 
-  return {
-    user: session.user,
-    error: null,
-    status: 200,
-  };
+  return authResult;
 }
 
 /**

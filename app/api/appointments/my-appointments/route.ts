@@ -4,7 +4,7 @@ import { getAppointmentsByUserId } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
 
 export async function GET(request: NextRequest) {
-  const authResult = await requireAuth();
+  const authResult = await requireAuth(request);
 
   if (authResult.error) {
     return NextResponse.json(

@@ -5,7 +5,7 @@ import { requireAuth } from '@/lib/auth';
 
 // GET current user profile
 export async function GET(request: NextRequest) {
-  const authResult = await requireAuth();
+  const authResult = await requireAuth(request);
 
   if (authResult.error) {
     return NextResponse.json(
@@ -45,7 +45,7 @@ export async function GET(request: NextRequest) {
 
 // PATCH update user profile
 export async function PATCH(request: NextRequest) {
-  const authResult = await requireAuth();
+  const authResult = await requireAuth(request);
 
   if (authResult.error) {
     return NextResponse.json(
