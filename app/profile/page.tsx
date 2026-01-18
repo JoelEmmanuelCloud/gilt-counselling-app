@@ -29,7 +29,8 @@ function ProfileContent() {
   }, [status, isAuthenticated, router]);
 
   const [profile, setProfile] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     dateOfBirth: '',
@@ -51,12 +52,6 @@ function ProfileContent() {
     emailNotifications: true,
   });
 
-  const [passwordForm, setPasswordForm] = useState({
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: '',
-  });
-
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -70,7 +65,8 @@ function ProfileContent() {
 
       const data = response.data;
       setProfile({
-        name: data.name || '',
+        firstName: data.firstName || '',
+        lastName: data.lastName || '',
         email: data.email || '',
         phone: data.phone || '',
         dateOfBirth: data.dateOfBirth ? data.dateOfBirth.split('T')[0] : '',
@@ -120,37 +116,6 @@ function ProfileContent() {
     }
   };
 
-  const handleChangePassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setMessage('');
-    setError('');
-
-    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
-      setError('New passwords do not match');
-      return;
-    }
-
-    try {
-      const token = localStorage.getItem('token');
-      await axios.post('/api/profile/change-password', {
-        currentPassword: passwordForm.currentPassword,
-        newPassword: passwordForm.newPassword,
-      }, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setMessage('Password changed successfully!');
-      setPasswordForm({
-        currentPassword: '',
-        newPassword: '',
-        confirmPassword: '',
-      });
-      setTimeout(() => setMessage(''), 3000);
-    } catch (error: any) {
-      setError(error.response?.data?.message || 'Failed to change password');
-    }
-  };
-
   if (loading) {
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center">
@@ -197,11 +162,21 @@ function ProfileContent() {
             <form onSubmit={handleUpdateProfile} className="space-y-6">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
                   <input
                     type="text"
-                    value={profile.name}
-                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                    value={profile.firstName}
+                    onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
+                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+                  <input
+                    type="text"
+                    value={profile.lastName}
+                    onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
                     className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
                   />
                 </div>
@@ -395,53 +370,6 @@ function ProfileContent() {
             </form>
           </Card>
 
-          {/* Change Password Section */}
-          <Card className="mt-8">
-            <h2 className="heading-md mb-6">Change Password</h2>
-            <form onSubmit={handleChangePassword} className="space-y-6">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
-                <input
-                  type="password"
-                  value={passwordForm.currentPassword}
-                  onChange={(e) => setPasswordForm({ ...passwordForm, currentPassword: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
-                  required
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">New Password</label>
-                <input
-                  type="password"
-                  value={passwordForm.newPassword}
-                  onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
-                  required
-                  minLength={6}
-                />
-                <p className="text-xs text-gray-500 mt-1">At least 6 characters</p>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
-                <input
-                  type="password"
-                  value={passwordForm.confirmPassword}
-                  onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
-                  className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
-                  required
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="w-full px-6 py-3 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition"
-              >
-                Change Password
-              </button>
-            </form>
-          </Card>
         </div>
       </section>
     </div>

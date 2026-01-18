@@ -5,10 +5,10 @@ import { sendEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
-    const { name, email, phone } = await request.json();
+    const { firstName, lastName, email, phone } = await request.json();
 
     // Validation
-    if (!name || !email) {
+    if (!firstName || !lastName || !email) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
@@ -27,14 +27,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create user (passwordless - they'll use magic link to sign in)
+    // Create user (passwordless - they'll use OTP to sign in)
     const user = await User.create({
-      name,
+      firstName,
+      lastName,
       email,
       phone: phone || "",
       role: "user",
       source: "online",
-      emailVerified: new Date(), // Auto-verify since they'll use magic link
+      emailVerified: new Date(), // Auto-verify since they'll use OTP
       preferredContactMethod: "email",
       emailNotifications: true,
     });
@@ -57,14 +58,14 @@ export async function POST(request: NextRequest) {
               </div>
 
               <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e0e0e0;">
-                <p style="font-size: 16px; margin-bottom: 20px;">Hi ${name},</p>
+                <p style="font-size: 16px; margin-bottom: 20px;">Hi ${firstName},</p>
 
                 <p style="font-size: 16px; margin-bottom: 20px;">
                   Thank you for creating an account with Gilt Counselling Consult. We're excited to have you!
                 </p>
 
                 <p style="font-size: 16px; margin-bottom: 20px;">
-                  Your account has been created successfully. To sign in, simply use your email address and we'll send you a magic link - no password needed!
+                  Your account has been created successfully. To sign in, simply use your email address and we'll send you a verification code - no password needed!
                 </p>
 
                 <div style="text-align: center; margin: 30px 0;">
@@ -118,7 +119,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         message:
-          "Account created successfully! You can now sign in with a magic link.",
+          "Account created successfully! You can now sign in with a verification code.",
         userId: user._id,
       },
       { status: 201 }

@@ -55,7 +55,8 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          name: `${firstName} ${lastName}`.trim(),
+          firstName,
+          lastName,
           email,
         }),
       });

@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     await connectDB();
 
     const counselors = await User.find({ role: 'counselor' })
-      .select('-password -sessionNotes')
+      .select('-sessionNotes')
       .sort({ createdAt: -1 });
 
     return NextResponse.json(counselors, { status: 200 });
@@ -46,18 +46,18 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const {
-      name,
+      firstName,
+      lastName,
       email,
       phone,
-      password,
       specializations,
       bio,
       availability,
     } = body;
 
-    if (!name || !email) {
+    if (!firstName || !lastName || !email) {
       return NextResponse.json(
-        { message: 'Name and email are required' },
+        { message: 'First name, last name, and email are required' },
         { status: 400 }
       );
     }
@@ -73,38 +73,33 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create counselor with default or provided password
-    const defaultPassword = password || 'Counselor123!';
-
     const counselor = new User({
-      name,
+      firstName,
+      lastName,
       email: email.toLowerCase(),
       phone,
-      password: defaultPassword,
       role: 'counselor',
       specializations: specializations || [],
       bio: bio || '',
       availability: availability || [],
       isAvailable: true,
       emailNotifications: true,
+      emailVerified: new Date(),
     });
 
     await counselor.save();
 
     // Send welcome email to counselor
     try {
-      await sendCounselorWelcomeEmail(email, name, defaultPassword);
+      await sendCounselorWelcomeEmail(email, firstName);
     } catch (emailError) {
       console.error('Failed to send welcome email:', emailError);
     }
 
-    // Remove password from response
-    const { password: _, ...counselorResponse } = counselor.toObject();
-
     return NextResponse.json(
       {
         message: 'Counselor created successfully',
-        counselor: counselorResponse,
+        counselor,
       },
       { status: 201 }
     );

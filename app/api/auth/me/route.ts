@@ -38,7 +38,7 @@ export async function GET(request: NextRequest) {
 
     // Fetch user from database
     await connectDB();
-    const user = await User.findById(decoded.userId).select('-password');
+    const user = await User.findById(decoded.userId);
 
     if (!user) {
       return NextResponse.json(
@@ -51,7 +51,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({
       user: {
         id: user._id.toString(),
-        name: user.name,
+        firstName: user.firstName,
+        lastName: user.lastName,
         email: user.email,
         phone: user.phone,
         role: user.role,

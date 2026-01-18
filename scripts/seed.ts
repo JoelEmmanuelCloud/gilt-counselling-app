@@ -19,44 +19,47 @@ async function seed() {
     // Create Admin User
     console.log('Creating admin user...');
     const adminUser = new User({
-      name: 'Admin User',
+      firstName: 'Admin',
+      lastName: 'User',
       email: 'admin@gilt.com',
-      password: 'admin123',
       phone: '+234 803 309 4050',
       role: 'admin',
+      emailVerified: new Date(),
     });
     await adminUser.save();
-    console.log('Admin user created: admin@gilt.com / admin123');
+    console.log('Admin user created: admin@gilt.com (use OTP to sign in)');
 
     // Create Regular User
     console.log('Creating regular user...');
     const regularUser = new User({
-      name: 'John Doe',
+      firstName: 'John',
+      lastName: 'Doe',
       email: 'user@example.com',
-      password: 'user123',
       phone: '+234 706 573 4165',
       role: 'user',
+      emailVerified: new Date(),
     });
     await regularUser.save();
-    console.log('Regular user created: user@example.com / user123');
+    console.log('Regular user created: user@example.com (use OTP to sign in)');
 
     // Create another regular user
     const regularUser2 = new User({
-      name: 'Jane Smith',
+      firstName: 'Jane',
+      lastName: 'Smith',
       email: 'jane@example.com',
-      password: 'jane123',
       phone: '+234 806 211 5372',
       role: 'user',
+      emailVerified: new Date(),
     });
     await regularUser2.save();
-    console.log('Another user created: jane@example.com / jane123');
+    console.log('Another user created: jane@example.com (use OTP to sign in)');
 
     // Create sample appointments
     console.log('Creating sample appointments...');
 
     const appointment1 = new Appointment({
       userId: regularUser._id,
-      userName: regularUser.name,
+      userName: `${regularUser.firstName} ${regularUser.lastName}`,
       userEmail: regularUser.email,
       userPhone: regularUser.phone,
       service: 'Individual Counseling',
@@ -69,7 +72,7 @@ async function seed() {
 
     const appointment2 = new Appointment({
       userId: regularUser._id,
-      userName: regularUser.name,
+      userName: `${regularUser.firstName} ${regularUser.lastName}`,
       userEmail: regularUser.email,
       userPhone: regularUser.phone,
       service: 'Career Counseling',
@@ -82,7 +85,7 @@ async function seed() {
 
     const appointment3 = new Appointment({
       userId: regularUser2._id,
-      userName: regularUser2.name,
+      userName: `${regularUser2.firstName} ${regularUser2.lastName}`,
       userEmail: regularUser2.email,
       userPhone: regularUser2.phone,
       service: 'Family Counseling',
@@ -95,7 +98,7 @@ async function seed() {
 
     const appointment4 = new Appointment({
       userId: regularUser2._id,
-      userName: regularUser2.name,
+      userName: `${regularUser2.firstName} ${regularUser2.lastName}`,
       userEmail: regularUser2.email,
       userPhone: regularUser2.phone,
       service: 'Youth Counseling',
@@ -109,9 +112,10 @@ async function seed() {
     console.log('Sample appointments created!');
 
     console.log('\n=== Seed Complete ===');
-    console.log('Admin Login: admin@gilt.com / admin123');
-    console.log('User Login: user@example.com / user123');
-    console.log('User Login: jane@example.com / jane123');
+    console.log('All users use passwordless OTP authentication.');
+    console.log('Admin: admin@gilt.com');
+    console.log('User: user@example.com');
+    console.log('User: jane@example.com');
     console.log('=====================\n');
 
     await mongoose.connection.close();

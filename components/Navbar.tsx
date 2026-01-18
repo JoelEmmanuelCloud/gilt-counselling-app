@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
 
   const handleBookSession = () => {
     if (user) {
-      router.push('/book-appointment');
+      router.push('/dashboard');
     } else {
       setShowAuthModal(true);
       setMobileMenuOpen(false);
@@ -359,7 +359,7 @@ const Navbar: React.FC = () => {
       {showAuthModal && (
         <AuthModal
           onClose={() => setShowAuthModal(false)}
-          redirectTo="/book-appointment"
+          redirectTo="/dashboard"
         />
       )}
     </nav>

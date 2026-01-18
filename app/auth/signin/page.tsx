@@ -15,27 +15,30 @@ function SignInContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleMagicLinkSignIn = async (e: React.FormEvent) => {
+  const handleOTPSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
     setErrorMessage("");
 
     try {
-      const result = await signIn("email", {
-        email,
-        redirect: false,
-        callbackUrl,
+      const response = await fetch("/api/auth/send-otp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
       });
 
-      if (result?.error) {
-        setErrorMessage("Failed to send magic link. Please try again.");
-        setIsLoading(false);
-      } else {
-        // Redirect to verify-request page
-        router.push("/auth/verify-request?email=" + encodeURIComponent(email));
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || "Failed to send verification code");
       }
-    } catch (error) {
-      setErrorMessage("An error occurred. Please try again.");
+
+      // Redirect to OTP verification page
+      router.push(`/auth/verify-otp?email=${encodeURIComponent(email)}&type=signin`);
+    } catch (error: any) {
+      setErrorMessage(error.message || "An error occurred. Please try again.");
       setIsLoading(false);
     }
   };
@@ -116,8 +119,8 @@ function SignInContent() {
           </div>
         </div>
 
-        {/* Magic Link Email Form */}
-        <form onSubmit={handleMagicLinkSignIn} className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-7">
+        {/* OTP Email Form */}
+        <form onSubmit={handleOTPSignIn} className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-7">
           <div>
             <label
               htmlFor="email"
@@ -137,7 +140,7 @@ function SignInContent() {
               placeholder="you@example.com"
             />
             <p className="mt-1 sm:mt-2 lg:mt-3 text-[10px] sm:text-xs lg:text-sm text-gray-500">
-              We'll send you a magic link to sign in
+              We'll send you a 6-digit verification code
             </p>
           </div>
 
@@ -146,7 +149,7 @@ function SignInContent() {
             disabled={isLoading}
             className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-xl shadow-sm text-sm sm:text-base lg:text-lg text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
           >
-            {isLoading ? "Sending magic link..." : "Send Magic Link"}
+            {isLoading ? "Sending verification code..." : "Send Verification Code"}
           </button>
         </form>
 

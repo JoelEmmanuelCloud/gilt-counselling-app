@@ -111,7 +111,7 @@ function MyAccountContent() {
             <div className="relative">
               <img
                 src={userData?.profilePhoto || userData?.image || '/default-avatar.svg'}
-                alt={userData?.name}
+                alt={`${userData?.firstName} ${userData?.lastName}`}
                 className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
               />
             </div>
@@ -120,7 +120,7 @@ function MyAccountContent() {
               <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-2">
                 My Account
               </h1>
-              <p className="text-gray-700 text-lg font-medium">{userData?.name}</p>
+              <p className="text-gray-700 text-lg font-medium">{userData?.firstName} {userData?.lastName}</p>
               <p className="text-gray-600 text-sm">{userData?.email}</p>
               {userData?.occupation && (
                 <p className="text-gray-500 text-sm mt-1">{userData.occupation}</p>
@@ -203,7 +203,6 @@ function MyAccountContent() {
           )}
           {activeTab === 'security' && (
             <SecurityTab
-              hasPassword={!!userData?.password}
               emailNotifications={userData?.emailNotifications ?? true}
               onUpdate={fetchData}
             />

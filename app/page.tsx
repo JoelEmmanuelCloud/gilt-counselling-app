@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
+import BookSessionButton from '@/components/BookSessionButton';
 import HeroSlideshow from '@/components/HeroSlideshow';
 
 export default function Home() {
@@ -93,11 +94,9 @@ export default function Home() {
                 Professional counselling and support services designed to help young people navigate life's challenges with confidence and hope.
               </p>
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5">
-                <Link href="/book-appointment">
-                  <Button className="w-full xs:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300 hover:shadow-lg">
-                    Book Session
-                  </Button>
-                </Link>
+                <BookSessionButton className="w-full xs:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300 hover:shadow-lg">
+                  Book Session
+                </BookSessionButton>
                 <Link href="/about">
                   <Button className="w-full xs:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
                     About US

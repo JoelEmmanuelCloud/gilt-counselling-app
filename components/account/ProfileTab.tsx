@@ -5,7 +5,8 @@ import axios from 'axios';
 import ProfilePhotoUpload from '@/components/ProfilePhotoUpload';
 
 interface User {
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone?: string;
   occupation?: string;
@@ -36,7 +37,8 @@ interface ProfileTabProps {
 
 export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
   const [formData, setFormData] = useState({
-    name: user.name || '',
+    firstName: user.firstName || '',
+    lastName: user.lastName || '',
     phone: user.phone || '',
     occupation: user.occupation || '',
     dateOfBirth: user.dateOfBirth ? user.dateOfBirth.split('T')[0] : '',
@@ -96,11 +98,22 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
           <h2 className="text-xl font-heading font-semibold mb-4">Personal Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700 mb-2">First Name</label>
               <input
                 type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                value={formData.firstName}
+                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">Last Name</label>
+              <input
+                type="text"
+                value={formData.lastName}
+                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
                 required
               />

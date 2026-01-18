@@ -22,7 +22,7 @@ export default function BookAppointment() {
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const [formData, setFormData] = useState({
-    name: user?.name || '',
+    name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : '',
     email: user?.email || '',
     phone: '',
     service: '',
@@ -45,7 +45,7 @@ export default function BookAppointment() {
       // Update form data with user info
       setFormData(prev => ({
         ...prev,
-        name: user.name || '',
+        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '',
         email: user.email || '',
         phone: user.phone || '',
       }));

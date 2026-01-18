@@ -25,32 +25,41 @@ export default function SignUpPage() {
     setSuccessMessage("");
 
     try {
-      const response = await fetch("/api/auth/signup", {
+      // Store signup data in localStorage for profile update after verification
+      localStorage.setItem(
+        "signupData",
+        JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+        })
+      );
+
+      // Send OTP to email
+      const response = await fetch("/api/auth/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          name: `${formData.firstName} ${formData.lastName}`.trim(),
           email: formData.email,
-          phone: formData.phone,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "Failed to create account");
+        throw new Error(data.message || "Failed to send verification code");
       }
 
       setSuccessMessage(
-        "Account created successfully! Redirecting to sign in..."
+        "Verification code sent! Redirecting..."
       );
 
-      // Redirect to sign in after 2 seconds
+      // Redirect to OTP verification page
       setTimeout(() => {
-        router.push("/auth/signin");
-      }, 2000);
+        router.push(`/auth/verify-otp?email=${encodeURIComponent(formData.email)}&type=signup`);
+      }, 1000);
     } catch (error: any) {
       setErrorMessage(error.message || "An error occurred. Please try again.");
       setIsLoading(false);
@@ -221,7 +230,7 @@ export default function SignUpPage() {
               placeholder="+234 800 000 0000"
             />
             <p className="mt-1 lg:mt-2 text-[10px] sm:text-xs lg:text-sm text-gray-500">
-              After creating your account, you can sign in with a magic link (no password needed!)
+              We'll send a 6-digit verification code to your email (no password needed!)
             </p>
           </div>
 
@@ -257,9 +266,9 @@ export default function SignUpPage() {
             className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-xl shadow-sm text-sm sm:text-base lg:text-lg text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
           >
             {isLoading
-              ? "Creating account..."
+              ? "Sending verification code..."
               : successMessage
-              ? "Success! Redirecting..."
+              ? "Code sent! Redirecting..."
               : "Create Account"}
           </button>
         </form>

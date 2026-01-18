@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { requireAdmin } from '@/lib/auth';
-import bcrypt from 'bcryptjs';
 
 // GET all clients (admin only)
 export async function GET(request: NextRequest) {
@@ -19,7 +18,7 @@ export async function GET(request: NextRequest) {
     await connectDB();
 
     const clients = await User.find({ role: 'user' })
-      .select('-password -sessionNotes')
+      .select('-sessionNotes')
       .sort({ createdAt: -1 });
 
     return NextResponse.json(clients, { status: 200 });
@@ -46,10 +45,10 @@ export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
     const {
-      name,
+      firstName,
+      lastName,
       email,
       phone,
-      password,
       source,
       dateOfBirth,
       gender,
@@ -59,9 +58,9 @@ export async function POST(request: NextRequest) {
       preferredContactMethod,
     } = body;
 
-    if (!name || !email || !phone) {
+    if (!firstName || !lastName || !email || !phone) {
       return NextResponse.json(
-        { message: 'Name, email, and phone are required' },
+        { message: 'First name, last name, email, and phone are required' },
         { status: 400 }
       );
     }
@@ -77,14 +76,11 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create user with default or provided password
-    const defaultPassword = password || 'Welcome123!';
-
     const user = new User({
-      name,
+      firstName,
+      lastName,
       email: email.toLowerCase(),
       phone,
-      password: defaultPassword,
       role: 'user',
       source: source || 'walk-in',
       dateOfBirth: dateOfBirth ? new Date(dateOfBirth) : undefined,
@@ -94,17 +90,15 @@ export async function POST(request: NextRequest) {
       medicalHistory,
       preferredContactMethod: preferredContactMethod || 'phone',
       emailNotifications: true,
+      emailVerified: new Date(),
     });
 
     await user.save();
 
-    // Remove password from response
-    const { password: _, ...userResponse } = user.toObject();
-
     return NextResponse.json(
       {
         message: 'Client created successfully',
-        client: userResponse,
+        client: user,
       },
       { status: 201 }
     );

@@ -1,6 +1,7 @@
 export interface User {
   id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string;
   role: 'user' | 'admin' | 'counselor';
@@ -30,8 +31,6 @@ export interface Appointment {
 
 export interface AuthContextType {
   user: User | null;
-  login: (email: string, password: string) => Promise<void>;
-  register: (name: string, email: string, password: string, phone: string) => Promise<void>;
   logout: () => void;
   token: string | null;
   sendOTP: (email: string) => Promise<void>;
