@@ -25,8 +25,8 @@ export default function SignUpPage() {
     setSuccessMessage("");
 
     try {
-      // Step 1: Create the user account
-      const signupResponse = await fetch("/api/auth/signup", {
+      // Create account and send OTP in one request
+      const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,27 +39,10 @@ export default function SignUpPage() {
         }),
       });
 
-      const signupData = await signupResponse.json();
+      const data = await response.json();
 
-      if (!signupResponse.ok) {
-        throw new Error(signupData.error || "Failed to create account");
-      }
-
-      // Step 2: Send OTP to email for verification
-      const otpResponse = await fetch("/api/auth/send-otp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          email: formData.email,
-        }),
-      });
-
-      const otpData = await otpResponse.json();
-
-      if (!otpResponse.ok) {
-        throw new Error(otpData.message || "Failed to send verification code");
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to create account");
       }
 
       setSuccessMessage(
@@ -69,7 +52,7 @@ export default function SignUpPage() {
       // Redirect to OTP verification page
       setTimeout(() => {
         router.push(`/auth/verify-otp?email=${encodeURIComponent(formData.email)}&type=signup`);
-      }, 1000);
+      }, 1500);
     } catch (error: any) {
       setErrorMessage(error.message || "An error occurred. Please try again.");
       setIsLoading(false);

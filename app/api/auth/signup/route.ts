@@ -1,7 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import User from "@/lib/models/user";
-import { sendWelcomeEmail } from "@/lib/email";
+import { createOTP } from "@/lib/models/otp";
+import { generateOTP } from "@/lib/utils/otpGenerator";
+import { sendEmail, generateOTPEmail } from "@/lib/email";
 
 export async function POST(request: NextRequest) {
   try {
@@ -35,24 +37,29 @@ export async function POST(request: NextRequest) {
       phone: phone || "",
       role: "user",
       source: "online",
-      emailVerified: new Date(), // Auto-verify since they'll use OTP
+      emailVerified: null, // Will be verified after OTP confirmation
       preferredContactMethod: "email",
       emailNotifications: true,
     });
 
-    // Send welcome email (uses the consistent email template design)
-    try {
-      await sendWelcomeEmail(email, firstName);
-    } catch (emailError) {
-      console.error("Failed to send welcome email:", emailError);
-      // Don't fail the signup if email fails
-    }
+    // Generate and send OTP for verification
+    const code = generateOTP();
+    await createOTP(email.toLowerCase(), code, 10); // 10 minutes expiry
+
+    // Send OTP email
+    const { html, text } = generateOTPEmail(email, code, firstName);
+    await sendEmail({
+      to: email,
+      subject: "Verify your email - Gilt Counselling Consult",
+      html,
+      text,
+    });
 
     return NextResponse.json(
       {
-        message:
-          "Account created successfully! You can now sign in with a verification code.",
+        message: "Account created! Please check your email for the verification code.",
         userId: user._id,
+        email: email,
       },
       { status: 201 }
     );
