@@ -26,7 +26,7 @@ async function seed() {
       email: 'wecare@giltcounselling.com',
       phone: '+234 803 309 4050',
       role: 'admin',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'prefer-not-to-say',
       occupation: 'Administrator',
       address: {
@@ -49,7 +49,7 @@ async function seed() {
       email: 'joelcloud65@gmail.com',
       phone: '+234 706 573 4165',
       role: 'counselor',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'male',
       occupation: 'Professional Counselor',
       bio: 'Experienced counselor specializing in youth development, career guidance, and mental health support. Passionate about helping individuals discover their potential and achieve their goals.',
@@ -82,7 +82,7 @@ async function seed() {
       email: 'sarah.adeyemi@giltcounselling.com',
       phone: '+234 812 345 6789',
       role: 'counselor',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'female',
       occupation: 'Licensed Clinical Counselor',
       bio: 'Dedicated family and relationship counselor with over 10 years of experience. Specializes in couples therapy, parenting support, and family dynamics.',
@@ -115,7 +115,7 @@ async function seed() {
       email: 'michael.okonkwo@giltcounselling.com',
       phone: '+234 803 456 7890',
       role: 'counselor',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'male',
       occupation: 'Business & Career Coach',
       bio: 'Expert in organizational psychology and business coaching. Helps professionals and business owners navigate challenges and achieve peak performance.',
@@ -153,7 +153,7 @@ async function seed() {
       email: 'chinedu.okoro@email.com',
       phone: '+234 810 123 4567',
       role: 'user',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'male',
       dateOfBirth: new Date('1990-05-15'),
       occupation: 'Software Engineer',
@@ -179,7 +179,7 @@ async function seed() {
       email: 'amaka.nwosu@email.com',
       phone: '+234 805 678 9012',
       role: 'user',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'female',
       dateOfBirth: new Date('1988-11-22'),
       occupation: 'Marketing Manager',
@@ -205,7 +205,7 @@ async function seed() {
       email: 'david.adekunle@email.com',
       phone: '+234 703 456 7890',
       role: 'user',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'male',
       dateOfBirth: new Date('1995-03-08'),
       occupation: 'University Student',
@@ -231,7 +231,7 @@ async function seed() {
       email: 'blessing.eze@email.com',
       phone: '+234 816 789 0123',
       role: 'user',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'female',
       dateOfBirth: new Date('1992-07-30'),
       occupation: 'Entrepreneur',
@@ -257,7 +257,7 @@ async function seed() {
       email: 'seun.bakare@email.com',
       phone: '+234 902 345 6789',
       role: 'user',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'male',
       dateOfBirth: new Date('1985-12-10'),
       occupation: 'Business Owner',
@@ -283,7 +283,7 @@ async function seed() {
       email: 'fatima.ibrahim@email.com',
       phone: '+234 814 567 8901',
       role: 'user',
-      emailVerified: new Date(),
+      emailVerified: null, // Users must verify OTP on first login
       gender: 'female',
       dateOfBirth: new Date('1998-09-25'),
       occupation: 'Graduate Student',
@@ -522,7 +522,8 @@ async function seed() {
     console.log('\n========================================');
     console.log('           SEED COMPLETE');
     console.log('========================================');
-    console.log('\nAll users use passwordless OTP authentication.\n');
+    console.log('\nAll users must verify OTP on first login.');
+    console.log('Email verification required before accessing dashboards.\n');
 
     console.log('ADMIN:');
     console.log('  - wecare@giltcounselling.com (Gilt Admin)');
