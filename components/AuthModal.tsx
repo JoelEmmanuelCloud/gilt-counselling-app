@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
@@ -29,8 +30,15 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
   const [successMessage, setSuccessMessage] = useState('');
   const [resendCountdown, setResendCountdown] = useState(0);
   const [remainingAttempts, setRemainingAttempts] = useState(3);
+  const [mounted, setMounted] = useState(false);
 
   const { sendOTP, verifyOTP, resendOTP } = useAuth();
+
+  // Mount check for portal (SSR compatibility)
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   // Resend countdown timer
   useEffect(() => {
@@ -67,14 +75,13 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
         throw new Error(data.error || 'Failed to create account');
       }
 
-      setSuccessMessage('Account created! Switching to sign in...');
+      // Signup now sends OTP, go directly to OTP verification step
+      setSuccessMessage('Account created! Check your email for the verification code.');
+      setResendCountdown(30);
 
-      // Switch to sign in mode after successful signup
       setTimeout(() => {
-        setMode('signin');
         setSuccessMessage('');
-        setFirstName('');
-        setLastName('');
+        setStep('otp');
       }, 1500);
     } catch (err: any) {
       setError(err.message || 'An error occurred. Please try again.');
@@ -178,9 +185,12 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
     setOtp('');
   };
 
-  return (
+  // Don't render on server or before mount
+  if (!mounted) return null;
+
+  const modalContent = (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-2 sm:p-4 lg:p-6"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-2 sm:p-4 lg:p-6"
       onClick={onClose}
     >
       <div
@@ -487,4 +497,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
       </div>
     </div>
   );
+
+  // Use portal to render at document body level, escaping any stacking contexts
+  return createPortal(modalContent, document.body);
 }

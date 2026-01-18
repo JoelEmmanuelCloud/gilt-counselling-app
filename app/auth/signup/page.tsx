@@ -25,41 +25,34 @@ export default function SignUpPage() {
     setSuccessMessage("");
 
     try {
-      // Store signup data in localStorage for profile update after verification
-      localStorage.setItem(
-        "signupData",
-        JSON.stringify({
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          phone: formData.phone,
-        })
-      );
-
-      // Send OTP to email
-      const response = await fetch("/api/auth/send-otp", {
+      // Create account and send OTP in one request
+      const response = await fetch("/api/auth/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
           email: formData.email,
+          phone: formData.phone,
         }),
       });
 
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message || "Failed to send verification code");
+        throw new Error(data.error || "Failed to create account");
       }
 
       setSuccessMessage(
-        "Verification code sent! Redirecting..."
+        "Account created! Verification code sent. Redirecting..."
       );
 
       // Redirect to OTP verification page
       setTimeout(() => {
         router.push(`/auth/verify-otp?email=${encodeURIComponent(formData.email)}&type=signup`);
-      }, 1000);
+      }, 1500);
     } catch (error: any) {
       setErrorMessage(error.message || "An error occurred. Please try again.");
       setIsLoading(false);

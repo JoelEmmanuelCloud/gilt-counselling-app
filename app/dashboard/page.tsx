@@ -10,12 +10,29 @@ import { Appointment } from '@/lib/types';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 
+interface UserProfile {
+  phone?: string;
+  dateOfBirth?: string;
+  gender?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    country?: string;
+  };
+  emergencyContact?: {
+    name?: string;
+    phone?: string;
+  };
+}
+
 function DashboardContent() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth();
   const router = useRouter();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
+  const [profileComplete, setProfileComplete] = useState(true);
   const [rescheduleModal, setRescheduleModal] = useState<{ isOpen: boolean; appointment: Appointment | null }>({
     isOpen: false,
     appointment: null,
@@ -34,17 +51,38 @@ function DashboardContent() {
       router.push('/book-appointment');
     } else {
       fetchAppointments();
+      checkProfileCompletion();
     }
   }, [status, isAuthenticated, router]);
 
   const fetchAppointments = async () => {
     try {
       const response = await api.get('/appointments/my-appointments');
-      setAppointments(response.data);
+      // API returns { appointments: [...] }
+      setAppointments(response.data.appointments || response.data || []);
     } catch (error) {
       console.error('Failed to fetch appointments', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const checkProfileCompletion = async () => {
+    try {
+      const response = await api.get('/profile');
+      const profile: UserProfile = response.data;
+
+      // Check if key profile fields are filled
+      const hasPhone = !!profile.phone;
+      const hasDOB = !!profile.dateOfBirth;
+      const hasGender = !!profile.gender;
+      const hasAddress = !!(profile.address?.city || profile.address?.street);
+      const hasEmergencyContact = !!(profile.emergencyContact?.name && profile.emergencyContact?.phone);
+
+      // Profile is complete if at least phone, DOB, and gender are filled
+      setProfileComplete(hasPhone && hasDOB && hasGender);
+    } catch (error) {
+      console.error('Failed to check profile completion', error);
     }
   };
 
@@ -194,6 +232,36 @@ function DashboardContent() {
           </div>
         </div>
       </section>
+
+      {/* Profile Completion Prompt */}
+      {!profileComplete && (
+        <section className="section-container pt-0">
+          <div className="max-w-7xl mx-auto">
+            <Card className="bg-gradient-to-r from-soft-gold/10 to-warm-cream border-soft-gold/30">
+              <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
+                <div className="flex-shrink-0">
+                  <div className="w-12 h-12 bg-soft-gold/20 rounded-full flex items-center justify-center">
+                    <svg className="w-6 h-6 text-soft-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-heading font-semibold text-lg text-gray-900 mb-1">Complete Your Profile</h3>
+                  <p className="text-gray-600 text-sm">
+                    Add your phone number, date of birth, gender, address, and emergency contact to help us serve you better. This information will be reused for all your appointment bookings.
+                  </p>
+                </div>
+                <Link href="/account?tab=profile">
+                  <Button variant="primary" className="whitespace-nowrap">
+                    Set Up Profile
+                  </Button>
+                </Link>
+              </div>
+            </Card>
+          </div>
+        </section>
+      )}
 
       {/* Appointments List */}
       <section className="section-container bg-off-white">

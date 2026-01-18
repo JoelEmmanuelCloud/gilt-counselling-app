@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
+import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
 import AuthModal from '@/components/AuthModal';
 import Button from '@/components/ui/Button';
@@ -17,12 +18,16 @@ export default function BookSessionButton({
   className = '',
   variant = 'primary'
 }: BookSessionButtonProps) {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
+  const { user: customUser, token } = useAuth();
   const router = useRouter();
   const [showAuthModal, setShowAuthModal] = useState(false);
 
+  // Check both NextAuth (Google) and custom OTP auth
+  const isAuthenticated = status === 'authenticated' || (token && customUser);
+
   const handleClick = () => {
-    if (session?.user) {
+    if (isAuthenticated) {
       // Authenticated - go to dashboard
       router.push('/dashboard');
     } else {

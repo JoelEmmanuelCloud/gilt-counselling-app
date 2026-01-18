@@ -40,19 +40,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Find or create user
-    let user = await User.findOne({ email: email.toLowerCase() });
+    // Check if user exists - they must register first
+    const user = await User.findOne({ email: email.toLowerCase() });
 
     if (!user) {
-      // Auto-create new user with email
-      // They can update their profile (name, phone) later
-      user = await User.create({
-        email: email.toLowerCase(),
-        name: email.split('@')[0], // Temporary name from email
-        emailVerified: null, // Will be set after OTP verification
-        role: 'user',
-      });
-      console.log('New user auto-created for OTP:', email);
+      return NextResponse.json(
+        {
+          message: 'No account found with this email. Please register first.',
+          requiresRegistration: true
+        },
+        { status: 404 }
+      );
     }
 
     // Generate 6-digit OTP

@@ -252,16 +252,22 @@ export default function Contact() {
       </section>
 
       {/* CTA Section */}
-      <section className="section-container bg-gradient-to-br from-soft-gold to-muted-coral text-white">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="heading-lg text-white mb-6">
+      <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <div className="text-4xl sm:text-5xl lg:text-6xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 leading-relaxed">
             Prefer to Book Directly?
           </h2>
-          <p className="text-xl mb-8 text-white/90">
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-300">
             Skip the form and schedule your appointment right away.
           </p>
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
+            <p className="text-xs sm:text-sm text-gray-400">We're here to help</p>
+            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
+          </div>
           <Link href="/book-appointment">
-            <Button className="bg-white text-soft-gold hover:bg-off-white">
+            <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs tracking-wide rounded-lg transition-all duration-300 hover:shadow-lg">
               Book an Appointment
             </Button>
           </Link>

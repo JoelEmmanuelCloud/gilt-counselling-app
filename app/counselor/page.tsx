@@ -54,11 +54,8 @@ function CounselorDashboardContent() {
     if (!isAuthenticated) {
       router.push('/auth/signin');
     } else if (user?.role !== 'counselor') {
-      if (user?.role === 'admin') {
-        router.push('/admin');
-      } else {
-        router.push('/dashboard');
-      }
+      // Only counselors can access this page - redirect everyone else to account
+      router.push('/account');
     }
   }, [status, isAuthenticated, user, router]);
 
