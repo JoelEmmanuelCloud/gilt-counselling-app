@@ -25,18 +25,28 @@ export default function SignUpPage() {
     setSuccessMessage("");
 
     try {
-      // Store signup data in localStorage for profile update after verification
-      localStorage.setItem(
-        "signupData",
-        JSON.stringify({
+      // Step 1: Create the user account
+      const signupResponse = await fetch("/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
           firstName: formData.firstName,
           lastName: formData.lastName,
+          email: formData.email,
           phone: formData.phone,
-        })
-      );
+        }),
+      });
 
-      // Send OTP to email
-      const response = await fetch("/api/auth/send-otp", {
+      const signupData = await signupResponse.json();
+
+      if (!signupResponse.ok) {
+        throw new Error(signupData.error || "Failed to create account");
+      }
+
+      // Step 2: Send OTP to email for verification
+      const otpResponse = await fetch("/api/auth/send-otp", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -46,14 +56,14 @@ export default function SignUpPage() {
         }),
       });
 
-      const data = await response.json();
+      const otpData = await otpResponse.json();
 
-      if (!response.ok) {
-        throw new Error(data.message || "Failed to send verification code");
+      if (!otpResponse.ok) {
+        throw new Error(otpData.message || "Failed to send verification code");
       }
 
       setSuccessMessage(
-        "Verification code sent! Redirecting..."
+        "Account created! Verification code sent. Redirecting..."
       );
 
       // Redirect to OTP verification page

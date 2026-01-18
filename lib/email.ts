@@ -186,51 +186,21 @@ export async function sendWelcomeEmail(email: string, firstName: string) {
                       Welcome to Gilt Counselling Consult!
                     </h2>
                     <p style="margin: 0 0 32px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
-                      Hello ${displayName}, thank you for joining us. Your account has been successfully created and verified.
+                      Hello ${displayName}, thank you for creating an account with us. We're excited to have you join our community.
                     </p>
 
-                    <!-- Services Box -->
+                    <!-- Info Box -->
                     <table width="100%" cellpadding="0" cellspacing="0">
                       <tr>
                         <td align="center" style="padding: 0 0 32px 0;">
-                          <div style="background-color: #f8f9fa; border: 2px solid #e5e5e5; border-radius: 8px; padding: 24px 32px; text-align: left;">
-                            <p style="margin: 0 0 16px; color: #1a1a1a; font-size: 15px; font-weight: 600;">
-                              Our Services Include:
+                          <div style="background-color: #f8f9fa; border: 2px solid #e5e5e5; border-radius: 8px; padding: 24px 32px;">
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; line-height: 1.6; text-align: center;">
+                              You're now ready to book counselling sessions with our experienced professionals.
                             </p>
-                            <table width="100%" cellpadding="0" cellspacing="0">
-                              <tr>
-                                <td style="padding: 6px 0; color: #666666; font-size: 14px;">&#8226; Mental Health Counselling</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 6px 0; color: #666666; font-size: 14px;">&#8226; Educational Consulting</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 6px 0; color: #666666; font-size: 14px;">&#8226; School Counselling</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 6px 0; color: #666666; font-size: 14px;">&#8226; Academic & Career Guidance</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 6px 0; color: #666666; font-size: 14px;">&#8226; Youth Counselling</td>
-                              </tr>
-                              <tr>
-                                <td style="padding: 6px 0; color: #666666; font-size: 14px;">&#8226; Parenting & Special Needs Support</td>
-                              </tr>
-                            </table>
                           </div>
                         </td>
                       </tr>
                     </table>
-
-                    <!-- Get Started Notice -->
-                    <div style="background-color: #e8f5e9; border-left: 3px solid #4caf50; padding: 16px 20px; border-radius: 4px; margin-bottom: 32px;">
-                      <p style="margin: 0 0 8px; color: #2e7d32; font-size: 14px; font-weight: 600;">
-                        Ready to Get Started?
-                      </p>
-                      <p style="margin: 0; color: #2e7d32; font-size: 14px; line-height: 1.5;">
-                        Visit your dashboard to book your first counselling session with one of our experienced professionals.
-                      </p>
-                    </div>
 
                     <!-- Button -->
                     <table width="100%" cellpadding="0" cellspacing="0">
@@ -286,25 +256,16 @@ Hello ${displayName}!
 
 Welcome to Gilt Counselling Consult!
 
-Thank you for joining us. Your account has been successfully created and verified.
+Thank you for creating an account with us. We're excited to have you join our community.
 
-At Gilt Counselling Consult, we're dedicated to empowering teens and youths for optimal development. We offer a range of services including:
+You're now ready to book counselling sessions with our experienced professionals.
 
-- Mental Health Counselling
-- Educational Consulting
-- School Counselling
-- Academic & Career Guidance
-- Youth Counselling
-- Parenting & Special Needs Support
-
-Ready to get started? Visit your dashboard to book your first counselling session:
-${dashboardUrl}
+Visit your dashboard to get started: ${dashboardUrl}
 
 We're here to support you on your journey to personal growth and well-being.
 
 ---
 Gilt Counselling Consult
-Empowering teens & youths for optimal development
 
 Nigeria Office: 88 Woji Road, Port Harcourt
 Canada Office: 470 Front St W, Toronto
