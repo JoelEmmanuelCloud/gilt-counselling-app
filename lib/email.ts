@@ -38,7 +38,7 @@ export async function sendEmail(options: EmailOptions) {
 
 // Appointment Confirmation Email Template
 export function generateAppointmentConfirmationEmail(
-  clientName: string,
+  firstName: string,
   service: string,
   date: string,
   time: string,
@@ -73,7 +73,7 @@ export function generateAppointmentConfirmationEmail(
                       Appointment Confirmed
                     </h2>
                     <p style="margin: 0 0 32px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
-                      Dear ${clientName}, your counselling session has been successfully scheduled.
+                      Hello ${firstName}, your counselling session has been successfully scheduled.
                     </p>
 
                     <!-- Appointment Details Box -->
@@ -146,16 +146,16 @@ export function generateAppointmentConfirmationEmail(
     </html>
   `;
 
-  return { html, text: `Your appointment for ${service} has been confirmed for ${date} at ${time}.` };
+  return { html, text: `Hello ${firstName}, your appointment for ${service} has been confirmed for ${date} at ${time}.` };
 }
 
 // OTP Email Template
 export const generateOTPEmail = _generateOTPEmail;
 
 // Welcome Email for new users
-export async function sendWelcomeEmail(email: string, name: string) {
+export async function sendWelcomeEmail(email: string, firstName: string) {
   const dashboardUrl = `${APP_URL}/dashboard`;
-  const displayName = name || email.split('@')[0];
+  const displayName = firstName || email.split('@')[0];
 
   const html = `
     <!DOCTYPE html>
@@ -321,7 +321,7 @@ Email: hello@giltcounselling.com
 }
 
 // Counselor Welcome Email
-export async function sendCounselorWelcomeEmail(email: string, name: string) {
+export async function sendCounselorWelcomeEmail(email: string, firstName: string) {
   const loginUrl = `${APP_URL}/auth/signin`;
 
   const html = `
@@ -348,7 +348,7 @@ export async function sendCounselorWelcomeEmail(email: string, name: string) {
                       Welcome to Gilt Counselling Consult
                     </h2>
                     <p style="margin: 0 0 24px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
-                      Dear ${name}, your counselor account has been created. You can now access the counselor dashboard to manage your appointments.
+                      Hello ${firstName}, your counselor account has been created. You can now access the counselor dashboard to manage your appointments.
                     </p>
 
                     <div style="background-color: #f8f9fa; border: 1px solid #e5e5e5; border-radius: 8px; padding: 24px; margin-bottom: 32px;">
@@ -385,6 +385,21 @@ export async function sendCounselorWelcomeEmail(email: string, name: string) {
                 </tr>
                 <tr>
                   <td style="background-color: #f8f9fa; padding: 32px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0 0 12px; color: #666666; font-size: 14px; font-weight: 600;">
+                      Contact Us
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      88 Woji Road, Port Harcourt, Nigeria
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      470 Front St W, Toronto, Canada
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      +234 803 309 4050
+                    </p>
+                    <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
+                      hello@giltcounselling.com
+                    </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
                     </p>
@@ -402,14 +417,14 @@ export async function sendCounselorWelcomeEmail(email: string, name: string) {
     to: email,
     subject: 'Welcome to Gilt Counselling Consult - Counselor Account',
     html,
-    text: `Welcome ${name}! Your counselor account has been created. Email: ${email}. To sign in, visit ${loginUrl} and enter your email to receive a verification code.`,
+    text: `Hello ${firstName}! Your counselor account has been created. Email: ${email}. To sign in, visit ${loginUrl} and enter your email to receive a verification code.`,
   });
 }
 
 // Appointment Status Email
 export async function sendAppointmentStatusEmail(
   email: string,
-  name: string,
+  firstName: string,
   status: string,
   date: string,
   time: string,
@@ -467,7 +482,7 @@ export async function sendAppointmentStatusEmail(
                       ${statusInfo.title}
                     </h2>
                     <p style="margin: 0 0 24px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
-                      Dear ${name}, ${statusInfo.message}
+                      Hello ${firstName}, ${statusInfo.message}
                     </p>
 
                     <div style="background-color: #f8f9fa; border: 1px solid #e5e5e5; border-radius: 8px; padding: 24px; margin-bottom: 32px;">
@@ -500,6 +515,21 @@ export async function sendAppointmentStatusEmail(
                 </tr>
                 <tr>
                   <td style="background-color: #f8f9fa; padding: 32px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0 0 12px; color: #666666; font-size: 14px; font-weight: 600;">
+                      Contact Us
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      88 Woji Road, Port Harcourt, Nigeria
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      470 Front St W, Toronto, Canada
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      +234 803 309 4050
+                    </p>
+                    <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
+                      hello@giltcounselling.com
+                    </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
                     </p>
@@ -517,14 +547,14 @@ export async function sendAppointmentStatusEmail(
     to: email,
     subject: `${statusInfo.title} - Gilt Counselling Consult`,
     html,
-    text: `${statusInfo.title}: Dear ${name}, ${statusInfo.message} Service: ${service}, Date: ${date}, Time: ${time}`,
+    text: `${statusInfo.title}: Hello ${firstName}, ${statusInfo.message} Service: ${service}, Date: ${date}, Time: ${time}`,
   });
 }
 
 // Reschedule Email
 export async function sendRescheduleEmail(
   email: string,
-  name: string,
+  firstName: string,
   oldDate: string,
   oldTime: string,
   newDate: string,
@@ -555,7 +585,7 @@ export async function sendRescheduleEmail(
                       Appointment Rescheduled
                     </h2>
                     <p style="margin: 0 0 24px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
-                      Dear ${name}, your appointment has been rescheduled.
+                      Hello ${firstName}, your appointment has been rescheduled.
                     </p>
 
                     <div style="background-color: #fff3cd; border: 1px solid #ffc107; border-radius: 8px; padding: 16px; margin-bottom: 24px;">
@@ -595,6 +625,21 @@ export async function sendRescheduleEmail(
                 </tr>
                 <tr>
                   <td style="background-color: #f8f9fa; padding: 32px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0 0 12px; color: #666666; font-size: 14px; font-weight: 600;">
+                      Contact Us
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      88 Woji Road, Port Harcourt, Nigeria
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      470 Front St W, Toronto, Canada
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      +234 803 309 4050
+                    </p>
+                    <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
+                      hello@giltcounselling.com
+                    </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
                     </p>
@@ -612,6 +657,6 @@ export async function sendRescheduleEmail(
     to: email,
     subject: 'Appointment Rescheduled - Gilt Counselling Consult',
     html,
-    text: `Dear ${name}, your appointment has been rescheduled from ${oldDate} at ${oldTime} to ${newDate} at ${newTime}. Service: ${service}`,
+    text: `Hello ${firstName}, your appointment has been rescheduled from ${oldDate} at ${oldTime} to ${newDate} at ${newTime}. Service: ${service}`,
   });
 }

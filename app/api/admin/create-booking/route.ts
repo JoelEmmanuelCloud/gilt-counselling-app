@@ -42,7 +42,8 @@ export async function POST(request: NextRequest) {
     // Create appointment
     const appointment = new Appointment({
       userId: client._id,
-      userName: client.name,
+      userName: `${client.firstName} ${client.lastName}`,
+      userFirstName: client.firstName,
       userEmail: client.email,
       userPhone: client.phone,
       service,
@@ -58,7 +59,7 @@ export async function POST(request: NextRequest) {
     if (sendConfirmation && client.emailNotifications) {
       try {
         const { html } = generateAppointmentConfirmationEmail(
-          client.name,
+          client.firstName,
           service,
           date,
           time,

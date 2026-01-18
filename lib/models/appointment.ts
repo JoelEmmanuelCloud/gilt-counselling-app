@@ -4,6 +4,7 @@ export interface IAppointment {
   _id?: string;
   userId?: mongoose.Types.ObjectId | string | null;
   userName: string;
+  userFirstName?: string;
   userEmail: string;
   userPhone: string;
   counselorId?: mongoose.Types.ObjectId | string | null;
@@ -35,6 +36,10 @@ const AppointmentSchema = new Schema(
     userName: {
       type: String,
       required: [true, 'Name is required'],
+      trim: true,
+    },
+    userFirstName: {
+      type: String,
       trim: true,
     },
     userEmail: {
