@@ -70,7 +70,8 @@ function AdminDashboardContent() {
     if (!isAuthenticated) {
       router.push('/book-appointment');
     } else if (user?.role !== 'admin') {
-      router.push('/dashboard');
+      // Only admins can access this page - redirect everyone else to account
+      router.push('/account');
     }
   }, [status, isAuthenticated, user, router]);
 
