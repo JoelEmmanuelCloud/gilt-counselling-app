@@ -67,14 +67,13 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
         throw new Error(data.error || 'Failed to create account');
       }
 
-      setSuccessMessage('Account created! Switching to sign in...');
+      // Signup now sends OTP, go directly to OTP verification step
+      setSuccessMessage('Account created! Check your email for the verification code.');
+      setResendCountdown(30);
 
-      // Switch to sign in mode after successful signup
       setTimeout(() => {
-        setMode('signin');
         setSuccessMessage('');
-        setFirstName('');
-        setLastName('');
+        setStep('otp');
       }, 1500);
     } catch (err: any) {
       setError(err.message || 'An error occurred. Please try again.');
