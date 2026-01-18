@@ -19,7 +19,7 @@ export default function Home() {
   const pricingPlans = [
     {
       name: 'Individual',
-      price: '$250',
+      price: '₦375,000',
       description: 'For individual therapy sessions',
       features: [
         'Personalized treatment plan',
@@ -29,7 +29,7 @@ export default function Home() {
     },
     {
       name: 'Couples',
-      price: '$300',
+      price: '₦450,000',
       period: 'Per session',
       description: 'For couples counseling',
       features: [
@@ -41,7 +41,7 @@ export default function Home() {
     },
     {
       name: 'Business',
-      price: '$400',
+      price: '₦600,000',
       period: 'Per session',
       description: 'For business coaching',
       features: [
