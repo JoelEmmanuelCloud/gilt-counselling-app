@@ -9,21 +9,33 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import AuthModal from '@/components/AuthModal';
+import Link from 'next/link';
+
+interface UserProfile {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  phone?: string;
+  dateOfBirth?: string;
+  gender?: string;
+}
 
 export default function BookAppointment() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth(); // Custom auth context for OTP users
   const router = useRouter();
   const [showAuthModal, setShowAuthModal] = useState(false);
-  const [showUserInfoForm, setShowUserInfoForm] = useState(false);
+  const [profileComplete, setProfileComplete] = useState<boolean | null>(null);
+  const [profileData, setProfileData] = useState<UserProfile | null>(null);
+  const [checkingProfile, setCheckingProfile] = useState(true);
 
   // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const [formData, setFormData] = useState({
-    name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : '',
-    email: user?.email || '',
+    name: '',
+    email: '',
     phone: '',
     service: '',
     date: '',
@@ -34,23 +46,50 @@ export default function BookAppointment() {
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
-  // Check authentication status on mount
+  // Check authentication and profile completion on mount
   useEffect(() => {
     if (status === 'loading') return;
 
     // Check both auth systems
     if (!isAuthenticated) {
       setShowAuthModal(true);
-    } else if (user) {
-      // Update form data with user info
-      setFormData(prev => ({
-        ...prev,
-        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '',
-        email: user.email || '',
-        phone: user.phone || '',
-      }));
+      setCheckingProfile(false);
+    } else {
+      checkProfileCompletion();
     }
-  }, [status, isAuthenticated, user]);
+  }, [status, isAuthenticated]);
+
+  const checkProfileCompletion = async () => {
+    try {
+      setCheckingProfile(true);
+      const response = await api.get('/profile');
+      const profile: UserProfile = response.data.user || response.data;
+
+      // Check if key profile fields are filled
+      const hasPhone = !!profile.phone;
+      const hasDOB = !!profile.dateOfBirth;
+      const hasGender = !!profile.gender;
+
+      const isComplete = hasPhone && hasDOB && hasGender;
+      setProfileComplete(isComplete);
+      setProfileData(profile);
+
+      if (isComplete) {
+        // Pre-fill form with profile data
+        setFormData(prev => ({
+          ...prev,
+          name: `${profile.firstName || ''} ${profile.lastName || ''}`.trim(),
+          email: profile.email || '',
+          phone: profile.phone || '',
+        }));
+      }
+    } catch (error) {
+      console.error('Failed to check profile:', error);
+      setProfileComplete(false);
+    } finally {
+      setCheckingProfile(false);
+    }
+  };
 
   const services = [
     {
@@ -149,7 +188,7 @@ export default function BookAppointment() {
       await api.post('/appointments', formData);
       setSuccess('Your appointment request has been received. We\'ll be in touch within 24 hours to confirm your session.');
       setTimeout(() => {
-        router.push('/dashboard');
+        router.push('/account');
       }, 3000);
     } catch (err: any) {
       setError(err.response?.data?.message || 'We encountered an issue processing your request. Please try again or contact us directly.');
@@ -171,8 +210,8 @@ export default function BookAppointment() {
     );
   }
 
-  // Show loading state while checking auth
-  if (status === 'loading' && !token) {
+  // Show loading state while checking auth or profile
+  if (status === 'loading' || checkingProfile) {
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center">
         <div className="text-center">
@@ -183,75 +222,73 @@ export default function BookAppointment() {
     );
   }
 
-  // Show user info collection modal if needed
-  const UserInfoModal = () => (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg max-w-md w-full p-8">
-        <div className="text-center mb-6">
-          <div className="w-12 h-12 bg-soft-terracotta rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-            </svg>
+  // Show profile completion prompt if profile is incomplete
+  if (profileComplete === false) {
+    return (
+      <div className="min-h-screen bg-off-white">
+        <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+          <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+            <Card className="text-center p-8">
+              <div className="w-16 h-16 bg-soft-gold/20 rounded-full flex items-center justify-center mx-auto mb-6">
+                <svg className="w-8 h-8 text-soft-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+              <h1 className="text-2xl md:text-3xl font-heading font-bold text-gray-900 mb-4">
+                Complete Your Profile First
+              </h1>
+              <p className="text-gray-600 mb-6">
+                Before booking an appointment, please complete your profile with your phone number, date of birth, and gender. This information helps us serve you better and will be used for all your future bookings.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link href="/account?tab=profile">
+                  <Button variant="primary" className="w-full sm:w-auto">
+                    Complete Profile
+                  </Button>
+                </Link>
+                <Link href="/account">
+                  <Button variant="secondary" className="w-full sm:w-auto">
+                    Go to My Account
+                  </Button>
+                </Link>
+              </div>
+            </Card>
           </div>
-          <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Complete your profile</h2>
-          <p className="text-gray-600 text-sm">
-            We need a few more details to complete your booking
-          </p>
-        </div>
-
-        <form onSubmit={async (e) => {
-          e.preventDefault();
-          try {
-            // Update user profile with phone number
-            await api.patch('/profile', {
-              phone: formData.phone,
-            });
-            setShowUserInfoForm(false);
-          } catch (err) {
-            console.error('Failed to update profile:', err);
-            alert('Failed to update profile. Please try again.');
-          }
-        }} className="space-y-4">
-          <div>
-            <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              required
-              value={formData.phone}
-              onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent"
-              placeholder="+234 xxx xxx xxxx"
-            />
-          </div>
-
-          <Button
-            type="submit"
-            className="w-full"
-          >
-            Continue to Booking
-          </Button>
-        </form>
+        </section>
       </div>
-    </div>
-  );
+    );
+  }
 
   return (
-    <>
-      {showUserInfoForm && <UserInfoModal />}
-      <div className="min-h-screen bg-off-white">
-        {/* Hero Section */}
-        <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-6">Take the First Step</h1>
-          <p className="body-lg mb-4">
-            We're here to support you on your journey. Book a consultation at a time that works for you.
-          </p>
-          <p className="text-sm text-gray-600">
-            Not sure which service is right for you? That's okay—we'll help you find the best fit during your first session.
-          </p>
+    <div className="min-h-screen bg-off-white">
+      {/* Hero Section */}
+      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Back Button */}
+          <button
+            onClick={() => router.back()}
+            className="mb-6 inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors group"
+          >
+            <svg
+              className="w-5 h-5 group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span className="font-medium">Back</span>
+          </button>
+
+          <div className="text-center">
+            <h1 className="heading-xl mb-6">Take the First Step</h1>
+            <p className="body-lg mb-4">
+              We're here to support you on your journey. Book a consultation at a time that works for you.
+            </p>
+            <p className="text-sm text-gray-600">
+              Not sure which service is right for you? That's okay—we'll help you find the best fit during your first session.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -301,52 +338,28 @@ export default function BookAppointment() {
             )}
 
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Contact Information */}
+              {/* User Information (Read-only from profile) */}
               <div>
-                <h3 className="font-heading font-semibold text-lg text-gray-900 mb-4">Your Information</h3>
-                <div className="space-y-4">
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="font-heading font-semibold text-lg text-gray-900">Your Information</h3>
+                  <Link href="/account?tab=profile" className="text-sm text-gilt-gold hover:text-gilt-orange">
+                    Edit Profile
+                  </Link>
+                </div>
+                <div className="bg-gray-50 rounded-lg p-4 space-y-3">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
-                      <label htmlFor="name" className="label">Full Name</label>
-                      <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        required
-                        value={formData.name}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="Enter your full name"
-                      />
+                      <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Full Name</p>
+                      <p className="font-medium text-gray-900">{formData.name}</p>
                     </div>
-
                     <div>
-                      <label htmlFor="email" className="label">Email Address</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="input"
-                        placeholder="your.email@example.com"
-                      />
+                      <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Email Address</p>
+                      <p className="font-medium text-gray-900">{formData.email}</p>
                     </div>
                   </div>
-
                   <div>
-                    <label htmlFor="phone" className="label">Phone Number</label>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      required
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="input"
-                      placeholder="+234 xxx xxx xxxx"
-                    />
+                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">Phone Number</p>
+                    <p className="font-medium text-gray-900">{formData.phone}</p>
                   </div>
                 </div>
               </div>
@@ -483,7 +496,6 @@ export default function BookAppointment() {
           </div>
         </div>
       </section>
-      </div>
-    </>
+    </div>
   );
 }

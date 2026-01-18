@@ -57,7 +57,7 @@ function CounselorDashboardContent() {
       if (user?.role === 'admin') {
         router.push('/admin');
       } else {
-        router.push('/dashboard');
+        router.push('/account');
       }
     }
   }, [status, isAuthenticated, user, router]);

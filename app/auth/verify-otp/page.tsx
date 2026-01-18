@@ -175,7 +175,7 @@ function VerifyOTPContent() {
         if (data.user.role === "admin") {
           router.push("/admin");
         } else {
-          router.push("/dashboard");
+          router.push("/account");
         }
       }, 1500);
     } catch (error: any) {

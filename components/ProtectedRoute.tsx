@@ -34,7 +34,7 @@ export default function ProtectedRoute({
     }
 
     if (adminOnly && user.role !== 'admin') {
-      router.push('/dashboard');
+      router.push('/account');
     }
   }, [user, token, adminOnly, router, isChecking]);
 
@@ -66,7 +66,7 @@ export default function ProtectedRoute({
           <h2 className="text-2xl font-heading font-bold text-gray-900 mb-2">Access Denied</h2>
           <p className="text-gray-600 mb-6">You don't have permission to access this page.</p>
           <button
-            onClick={() => router.push('/dashboard')}
+            onClick={() => router.push('/account')}
             className="bg-gilt-gold text-white px-6 py-2 rounded-lg hover:bg-gilt-orange transition"
           >
             Go to Dashboard

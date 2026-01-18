@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
 
   const handleBookSession = () => {
     if (isAuthenticated) {
-      router.push('/dashboard');
+      router.push('/account');
     } else {
       setShowAuthModal(true);
       setMobileMenuOpen(false);
@@ -372,7 +372,7 @@ const Navbar: React.FC = () => {
       {showAuthModal && (
         <AuthModal
           onClose={() => setShowAuthModal(false)}
-          redirectTo="/dashboard"
+          redirectTo="/account"
         />
       )}
     </nav>

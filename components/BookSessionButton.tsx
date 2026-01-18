@@ -29,7 +29,7 @@ export default function BookSessionButton({
   const handleClick = () => {
     if (isAuthenticated) {
       // Authenticated - go to dashboard
-      router.push('/dashboard');
+      router.push('/account');
     } else {
       // Not authenticated - show auth modal
       setShowAuthModal(true);
@@ -48,7 +48,7 @@ export default function BookSessionButton({
       {showAuthModal && (
         <AuthModal
           onClose={() => setShowAuthModal(false)}
-          redirectTo="/dashboard"
+          redirectTo="/account"
         />
       )}
     </>
