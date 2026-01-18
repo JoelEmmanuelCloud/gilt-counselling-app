@@ -384,29 +384,32 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-soft-terracotta to-muted-coral text-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
+      <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-white mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
+          <div className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-relaxed">
             Ready to Begin Your Journey?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl lg:text-2xl mb-6 sm:mb-7 lg:mb-8 xl:mb-10 text-white/90">
+          <p className="text-base sm:text-lg md:text-xl lg:text-xl mb-6 sm:mb-7 lg:mb-8 xl:mb-10 text-gray-300">
             Take the first step towards a healthier, happier life. Book your consultation today.
           </p>
+          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
+            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
+            <p className="text-[10px] sm:text-xs lg:text-sm text-gray-400">All consultations are completely confidential</p>
+            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
+          </div>
           <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5 justify-center">
             <Link href="/book-appointment">
-              <Button className="bg-white text-soft-terracotta hover:bg-white hover:text-soft-terracotta w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl transition-all duration-300 hover:shadow-lg">
+              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl transition-all duration-300 hover:shadow-lg">
                 Book Session
               </Button>
             </Link>
             <Link href="/contact">
-              <Button className="bg-transparent border-2 border-white text-white hover:bg-white/10 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
+              <Button className="bg-transparent border-2 border-soft-terracotta text-soft-terracotta hover:bg-soft-terracotta/10 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
                 Contact Us
               </Button>
             </Link>
           </div>
-          <p className="text-[10px] sm:text-xs lg:text-sm text-white/80 mt-5 sm:mt-6 lg:mt-8">
-            All consultations are completely confidential.
-          </p>
         </div>
       </section>
     </div>
