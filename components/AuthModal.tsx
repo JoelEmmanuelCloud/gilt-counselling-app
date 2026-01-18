@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
@@ -29,8 +30,15 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
   const [successMessage, setSuccessMessage] = useState('');
   const [resendCountdown, setResendCountdown] = useState(0);
   const [remainingAttempts, setRemainingAttempts] = useState(3);
+  const [mounted, setMounted] = useState(false);
 
   const { sendOTP, verifyOTP, resendOTP } = useAuth();
+
+  // Mount check for portal (SSR compatibility)
+  useEffect(() => {
+    setMounted(true);
+    return () => setMounted(false);
+  }, []);
 
   // Resend countdown timer
   useEffect(() => {
@@ -177,9 +185,12 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
     setOtp('');
   };
 
-  return (
+  // Don't render on server or before mount
+  if (!mounted) return null;
+
+  const modalContent = (
     <div
-      className="fixed inset-0 bg-black/50 flex items-center justify-center z-[100] p-2 sm:p-4 lg:p-6"
+      className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-2 sm:p-4 lg:p-6"
       onClick={onClose}
     >
       <div
@@ -486,4 +497,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
       </div>
     </div>
   );
+
+  // Use portal to render at document body level, escaping any stacking contexts
+  return createPortal(modalContent, document.body);
 }
