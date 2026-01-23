@@ -9,6 +9,7 @@ import { Appointment } from '@/lib/types';
 import Card from '@/components/ui/Card';
 import axios from 'axios';
 import UserProfileModal from '@/components/admin/UserProfileModal';
+import AdminPhotoUpload from '@/components/admin/AdminPhotoUpload';
 
 type Tab = 'appointments' | 'clients' | 'counselors' | 'create-booking';
 
@@ -65,6 +66,7 @@ function AdminDashboardContent() {
     phone: '',
     specializations: '',
     bio: '',
+    profilePhoto: '',
   });
 
   useEffect(() => {
@@ -112,6 +114,7 @@ function AdminDashboardContent() {
       phone: '',
     },
     preferredContactMethod: 'phone',
+    profilePhoto: '',
   });
 
   useEffect(() => {
@@ -185,6 +188,7 @@ function AdminDashboardContent() {
         phone: '',
         specializations: '',
         bio: '',
+        profilePhoto: '',
       });
       fetchCounselors();
     } catch (error: any) {
@@ -262,6 +266,7 @@ function AdminDashboardContent() {
           phone: '',
         },
         preferredContactMethod: 'phone',
+        profilePhoto: '',
       });
       fetchClients();
     } catch (error: any) {
@@ -433,7 +438,16 @@ function AdminDashboardContent() {
         {/* Appointments Tab */}
         {activeTab === 'appointments' && (
           <Card>
-            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
+            {/* Print Header - Only visible when printing */}
+            <div className="print-header hidden print:block">
+              <h1 className="text-2xl font-bold">Gilt Counselling Services</h1>
+              <p className="text-sm text-gray-600">Appointments Report - {new Date().toLocaleDateString()}</p>
+              <p className="text-xs text-gray-500 mt-1">
+                {filter === 'all' ? 'All Appointments' : `${filter.charAt(0).toUpperCase() + filter.slice(1)} Appointments`} ({filteredAppointments.length} total)
+              </p>
+            </div>
+
+            <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6 print:hidden">
               <div>
                 <h2 className="heading-md">All Appointments</h2>
                 <p className="text-gray-600 text-sm mt-1">
@@ -445,6 +459,15 @@ function AdminDashboardContent() {
                 <button onClick={() => setFilter('pending')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'pending' ? 'bg-soft-gold text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>Pending</button>
                 <button onClick={() => setFilter('confirmed')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'confirmed' ? 'bg-olive-green text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>Confirmed</button>
                 <button onClick={() => setFilter('completed')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${filter === 'completed' ? 'bg-muted-teal text-white' : 'bg-light-grey text-gray-700 hover:bg-soft-beige'}`}>Completed</button>
+                <button
+                  onClick={() => window.print()}
+                  className="px-4 py-2 rounded-lg text-sm font-medium bg-gray-600 text-white hover:bg-gray-700 transition-colors flex items-center gap-2"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                  </svg>
+                  Print
+                </button>
               </div>
             </div>
 
@@ -466,7 +489,7 @@ function AdminDashboardContent() {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Service</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date & Time</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Actions</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase print:hidden">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-light-grey">
@@ -486,14 +509,15 @@ function AdminDashboardContent() {
                           <div className="text-sm text-gray-500">{appointment.time}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <select value={appointment.status} onChange={(e) => handleStatusChange(appointment.id, e.target.value)} className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer ${getStatusColor(appointment.status)}`}>
+                          <select value={appointment.status} onChange={(e) => handleStatusChange(appointment.id, e.target.value)} className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer ${getStatusColor(appointment.status)} print:hidden`}>
                             <option value="pending">Pending</option>
                             <option value="confirmed">Confirmed</option>
                             <option value="completed">Completed</option>
                             <option value="cancelled">Cancelled</option>
                           </select>
+                          <span className="hidden print:inline px-3 py-1 text-xs font-medium capitalize">{appointment.status}</span>
                         </td>
-                        <td className="px-6 py-4">
+                        <td className="px-6 py-4 print:hidden">
                           <button onClick={() => handleDeleteAppointment(appointment.id)} className="text-red-600 hover:text-red-800 font-medium text-sm">Delete</button>
                         </td>
                       </tr>
@@ -518,6 +542,14 @@ function AdminDashboardContent() {
             {showClientForm && (
               <form onSubmit={handleCreateClient} className="mb-8 p-6 bg-warm-cream rounded-lg">
                 <h3 className="font-semibold text-lg mb-4">Create New Client</h3>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Profile Photo</label>
+                  <AdminPhotoUpload
+                    currentPhotoUrl={clientForm.profilePhoto || undefined}
+                    onPhotoUploaded={(url) => setClientForm({...clientForm, profilePhoto: url})}
+                    onPhotoRemoved={() => setClientForm({...clientForm, profilePhoto: ''})}
+                  />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input type="text" placeholder="First Name *" required value={clientForm.firstName} onChange={(e) => setClientForm({...clientForm, firstName: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <input type="text" placeholder="Last Name *" required value={clientForm.lastName} onChange={(e) => setClientForm({...clientForm, lastName: e.target.value})} className="px-4 py-2 border rounded-lg" />
@@ -611,6 +643,14 @@ function AdminDashboardContent() {
             {showCounselorForm && (
               <form onSubmit={handleCreateCounselor} className="mb-8 p-6 bg-warm-cream rounded-lg">
                 <h3 className="font-semibold text-lg mb-4">Add New Counselor</h3>
+                <div className="mb-4">
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Profile Photo</label>
+                  <AdminPhotoUpload
+                    currentPhotoUrl={counselorForm.profilePhoto || undefined}
+                    onPhotoUploaded={(url) => setCounselorForm({...counselorForm, profilePhoto: url})}
+                    onPhotoRemoved={() => setCounselorForm({...counselorForm, profilePhoto: ''})}
+                  />
+                </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <input type="text" placeholder="First Name *" required value={counselorForm.firstName} onChange={(e) => setCounselorForm({...counselorForm, firstName: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <input type="text" placeholder="Last Name *" required value={counselorForm.lastName} onChange={(e) => setCounselorForm({...counselorForm, lastName: e.target.value})} className="px-4 py-2 border rounded-lg" />
