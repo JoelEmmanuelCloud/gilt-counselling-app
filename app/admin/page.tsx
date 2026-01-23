@@ -59,7 +59,8 @@ function AdminDashboardContent() {
   const [selectedUserId, setSelectedUserId] = useState<string | null>(null);
   const [showCounselorForm, setShowCounselorForm] = useState(false);
   const [counselorForm, setCounselorForm] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     specializations: '',
@@ -91,7 +92,8 @@ function AdminDashboardContent() {
   // Client form state
   const [showClientForm, setShowClientForm] = useState(false);
   const [clientForm, setClientForm] = useState({
-    name: '',
+    firstName: '',
+    lastName: '',
     email: '',
     phone: '',
     source: 'walk-in',
@@ -177,7 +179,8 @@ function AdminDashboardContent() {
       alert('Counselor created successfully! A welcome email has been sent.');
       setShowCounselorForm(false);
       setCounselorForm({
-        name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
         specializations: '',
@@ -239,7 +242,8 @@ function AdminDashboardContent() {
       alert('Client created successfully!');
       setShowClientForm(false);
       setClientForm({
-        name: '',
+        firstName: '',
+        lastName: '',
         email: '',
         phone: '',
         source: 'walk-in',
@@ -515,7 +519,8 @@ function AdminDashboardContent() {
               <form onSubmit={handleCreateClient} className="mb-8 p-6 bg-warm-cream rounded-lg">
                 <h3 className="font-semibold text-lg mb-4">Create New Client</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Full Name *" required value={clientForm.name} onChange={(e) => setClientForm({...clientForm, name: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="First Name *" required value={clientForm.firstName} onChange={(e) => setClientForm({...clientForm, firstName: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="Last Name *" required value={clientForm.lastName} onChange={(e) => setClientForm({...clientForm, lastName: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <input type="email" placeholder="Email *" required value={clientForm.email} onChange={(e) => setClientForm({...clientForm, email: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <input type="tel" placeholder="Phone *" required value={clientForm.phone} onChange={(e) => setClientForm({...clientForm, phone: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <select value={clientForm.source} onChange={(e) => setClientForm({...clientForm, source: e.target.value as any})} className="px-4 py-2 border rounded-lg">
@@ -607,10 +612,11 @@ function AdminDashboardContent() {
               <form onSubmit={handleCreateCounselor} className="mb-8 p-6 bg-warm-cream rounded-lg">
                 <h3 className="font-semibold text-lg mb-4">Add New Counselor</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <input type="text" placeholder="Full Name *" required value={counselorForm.name} onChange={(e) => setCounselorForm({...counselorForm, name: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="First Name *" required value={counselorForm.firstName} onChange={(e) => setCounselorForm({...counselorForm, firstName: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="Last Name *" required value={counselorForm.lastName} onChange={(e) => setCounselorForm({...counselorForm, lastName: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <input type="email" placeholder="Email *" required value={counselorForm.email} onChange={(e) => setCounselorForm({...counselorForm, email: e.target.value})} className="px-4 py-2 border rounded-lg" />
                   <input type="tel" placeholder="Phone" value={counselorForm.phone} onChange={(e) => setCounselorForm({...counselorForm, phone: e.target.value})} className="px-4 py-2 border rounded-lg" />
-                  <input type="text" placeholder="Specializations (comma-separated)" value={counselorForm.specializations} onChange={(e) => setCounselorForm({...counselorForm, specializations: e.target.value})} className="px-4 py-2 border rounded-lg" />
+                  <input type="text" placeholder="Specializations (comma-separated)" value={counselorForm.specializations} onChange={(e) => setCounselorForm({...counselorForm, specializations: e.target.value})} className="px-4 py-2 border rounded-lg md:col-span-2" />
                 </div>
                 <textarea placeholder="Bio / Description" value={counselorForm.bio} onChange={(e) => setCounselorForm({...counselorForm, bio: e.target.value})} rows={3} className="w-full px-4 py-2 border rounded-lg mt-4" />
                 <button type="submit" className="mt-4 px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition">Create Counselor</button>
