@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import ProfilePhotoUpload from '@/components/ProfilePhotoUpload';
+import { useToast } from '@/components/ui/Toast';
 
 interface User {
   firstName: string;
@@ -36,6 +37,7 @@ interface ProfileTabProps {
 }
 
 export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
+  const toast = useToast();
   const [formData, setFormData] = useState({
     firstName: user.firstName || '',
     lastName: user.lastName || '',
@@ -71,10 +73,10 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert('Profile updated successfully!');
+      toast.success('Profile updated successfully!');
       onUpdate();
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to update profile');
+      toast.error(error.response?.data?.message || 'Failed to update profile');
     } finally {
       setSaving(false);
     }

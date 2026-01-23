@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
+import { useToast } from '@/components/ui/Toast';
 
 interface ProfilePhotoUploadProps {
   currentPhoto?: string;
@@ -9,6 +10,7 @@ interface ProfilePhotoUploadProps {
 }
 
 export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: ProfilePhotoUploadProps) {
+  const toast = useToast();
   const [uploading, setUploading] = useState(false);
   const [preview, setPreview] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -20,13 +22,13 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
     // Validate file type
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
-      alert('Please select a valid image file (JPEG, PNG, or WebP)');
+      toast.warning('Please select a valid image file (JPEG, PNG, or WebP)');
       return;
     }
 
     // Validate file size (5MB)
     if (file.size > 5 * 1024 * 1024) {
-      alert('File size must be less than 5MB');
+      toast.warning('File size must be less than 5MB');
       return;
     }
 
@@ -58,9 +60,9 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
       onPhotoUpdate(response.data.photoUrl);
       setPreview(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
-      alert('Profile photo updated successfully!');
+      toast.success('Profile photo updated successfully!');
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to upload photo');
+      toast.error(error.response?.data?.message || 'Failed to upload photo');
     } finally {
       setUploading(false);
     }
@@ -80,9 +82,9 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
       onPhotoUpdate('');
       setPreview(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
-      alert('Profile photo removed successfully!');
+      toast.success('Profile photo removed successfully!');
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to remove photo');
+      toast.error(error.response?.data?.message || 'Failed to remove photo');
     }
   };
 

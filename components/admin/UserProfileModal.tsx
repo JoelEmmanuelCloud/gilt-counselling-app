@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '@/components/ui/Card';
+import { useToast } from '@/components/ui/Toast';
 
 interface UserProfileModalProps {
   userId: string;
@@ -11,6 +12,7 @@ interface UserProfileModalProps {
 }
 
 export default function UserProfileModal({ userId, isOpen, onClose }: UserProfileModalProps) {
+  const toast = useToast();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>(null);
 
@@ -30,7 +32,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
       setData(response.data);
     } catch (error) {
       console.error('Failed to fetch user profile', error);
-      alert('Failed to load user profile');
+      toast.error('Failed to load user profile');
     } finally {
       setLoading(false);
     }

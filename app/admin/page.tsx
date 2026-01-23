@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
 import Card from '@/components/ui/Card';
+import { useToast } from '@/components/ui/Toast';
 import axios from 'axios';
 import UserProfileModal from '@/components/admin/UserProfileModal';
 import AdminPhotoUpload from '@/components/admin/AdminPhotoUpload';
@@ -45,6 +46,7 @@ function AdminDashboardContent() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth();
   const router = useRouter();
+  const toast = useToast();
 
   // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
@@ -179,7 +181,7 @@ function AdminDashboardContent() {
       }, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert('Counselor created successfully! A welcome email has been sent.');
+      toast.success('Counselor created successfully! A welcome email has been sent.');
       setShowCounselorForm(false);
       setCounselorForm({
         firstName: '',
@@ -192,7 +194,7 @@ function AdminDashboardContent() {
       });
       fetchCounselors();
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to create counselor');
+      toast.error(error.response?.data?.message || 'Failed to create counselor');
     }
   };
 
@@ -208,7 +210,7 @@ function AdminDashboardContent() {
       fetchCounselors();
     } catch (error) {
       console.error('Failed to delete counselor', error);
-      alert('Unable to remove counselor. Please try again.');
+      toast.error('Unable to remove counselor. Please try again.');
     }
   };
 
@@ -218,7 +220,7 @@ function AdminDashboardContent() {
       fetchAppointments();
     } catch (error) {
       console.error('Failed to update appointment', error);
-      alert('Unable to update appointment status. Please try again.');
+      toast.error('Unable to update appointment status. Please try again.');
     }
   };
 
@@ -232,7 +234,7 @@ function AdminDashboardContent() {
       fetchAppointments();
     } catch (error) {
       console.error('Failed to delete appointment', error);
-      alert('Unable to delete appointment. Please try again.');
+      toast.error('Unable to delete appointment. Please try again.');
     }
   };
 
@@ -243,7 +245,7 @@ function AdminDashboardContent() {
       await axios.post('/api/admin/clients', clientForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert('Client created successfully!');
+      toast.success('Client created successfully!');
       setShowClientForm(false);
       setClientForm({
         firstName: '',
@@ -270,7 +272,7 @@ function AdminDashboardContent() {
       });
       fetchClients();
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to create client');
+      toast.error(error.response?.data?.message || 'Failed to create client');
     }
   };
 
@@ -281,7 +283,7 @@ function AdminDashboardContent() {
       await axios.post('/api/admin/create-booking', bookingForm, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      alert('Appointment created successfully!');
+      toast.success('Appointment created successfully!');
       setBookingForm({
         userId: '',
         service: '',
@@ -294,7 +296,7 @@ function AdminDashboardContent() {
       setActiveTab('appointments');
       fetchAppointments();
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to create appointment');
+      toast.error(error.response?.data?.message || 'Failed to create appointment');
     }
   };
 

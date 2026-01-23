@@ -9,6 +9,7 @@ import api from '@/lib/api';
 import { Appointment } from '@/lib/types';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import { useToast } from '@/components/ui/Toast';
 
 interface UserProfile {
   phone?: string;
@@ -30,6 +31,7 @@ function DashboardContent() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth();
   const router = useRouter();
+  const toast = useToast();
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [loading, setLoading] = useState(true);
   const [profileComplete, setProfileComplete] = useState(true);
@@ -96,7 +98,7 @@ function DashboardContent() {
       fetchAppointments();
     } catch (error) {
       console.error('Failed to cancel appointment', error);
-      alert('We encountered an issue canceling your appointment. Please contact us directly if you need to make changes.');
+      toast.error('We encountered an issue canceling your appointment. Please contact us directly if you need to make changes.');
     }
   };
 
@@ -109,7 +111,7 @@ function DashboardContent() {
     if (!rescheduleModal.appointment) return;
 
     if (!rescheduleForm.date || !rescheduleForm.time) {
-      alert('Please select both a new date and time.');
+      toast.warning('Please select both a new date and time.');
       return;
     }
 
@@ -121,10 +123,10 @@ function DashboardContent() {
       });
       setRescheduleModal({ isOpen: false, appointment: null });
       fetchAppointments();
-      alert('Your appointment has been rescheduled successfully. A confirmation email has been sent.');
+      toast.success('Your appointment has been rescheduled successfully. A confirmation email has been sent.');
     } catch (error: any) {
       console.error('Failed to reschedule appointment', error);
-      alert(error.response?.data?.message || 'We encountered an issue rescheduling your appointment. Please try again or contact us.');
+      toast.error(error.response?.data?.message || 'We encountered an issue rescheduling your appointment. Please try again or contact us.');
     } finally {
       setRescheduleLoading(false);
     }
@@ -187,7 +189,7 @@ function DashboardContent() {
       {/* Header */}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="heading-xl mb-3">Welcome back, {user?.firstName}!</h1>
+          <h1 className="heading-xl mb-3">Welcome back, {(user as any)?.firstName || (user as any)?.name?.split(' ')[0] || 'there'}!</h1>
           <p className="text-gray-600 text-lg">Here's an overview of your appointments and sessions.</p>
         </div>
       </section>

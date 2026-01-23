@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useToast } from '@/components/ui/Toast';
 
 interface Appointment {
   _id: string;
@@ -30,6 +31,7 @@ export default function AppointmentEditModal({
   onClose,
   onUpdate,
 }: AppointmentEditModalProps) {
+  const toast = useToast();
   const [formData, setFormData] = useState({
     service: appointment.service,
     date: appointment.date,
@@ -60,11 +62,11 @@ export default function AppointmentEditModal({
         headers: { Authorization: `Bearer ${token}` },
       });
 
-      alert('Appointment updated successfully!');
+      toast.success('Appointment updated successfully!');
       onUpdate();
       onClose();
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to update appointment');
+      toast.error(error.response?.data?.message || 'Failed to update appointment');
     } finally {
       setSaving(false);
     }

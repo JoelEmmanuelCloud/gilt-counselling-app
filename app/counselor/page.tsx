@@ -5,6 +5,7 @@ import { useSession } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/ui/Card';
+import { useToast } from '@/components/ui/Toast';
 import axios from 'axios';
 
 type Tab = 'appointments' | 'availability' | 'profile';
@@ -34,6 +35,7 @@ function CounselorDashboardContent() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth();
   const router = useRouter();
+  const toast = useToast();
 
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
@@ -102,7 +104,7 @@ function CounselorDashboardContent() {
       fetchAppointments();
     } catch (error) {
       console.error('Failed to update appointment', error);
-      alert('Unable to update appointment status. Please try again.');
+      toast.error('Unable to update appointment status. Please try again.');
     }
   };
 
@@ -116,10 +118,10 @@ function CounselorDashboardContent() {
       setSelectedAppointment(null);
       setCounselorNotes('');
       fetchAppointments();
-      alert('Notes saved successfully');
+      toast.success('Notes saved successfully');
     } catch (error) {
       console.error('Failed to save notes', error);
-      alert('Unable to save notes. Please try again.');
+      toast.error('Unable to save notes. Please try again.');
     }
   };
 
@@ -129,10 +131,10 @@ function CounselorDashboardContent() {
         availability,
         isAvailable,
       });
-      alert('Availability updated successfully');
+      toast.success('Availability updated successfully');
     } catch (error) {
       console.error('Failed to update availability', error);
-      alert('Unable to update availability. Please try again.');
+      toast.error('Unable to update availability. Please try again.');
     }
   };
 
@@ -187,7 +189,7 @@ function CounselorDashboardContent() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Counselor Dashboard</h1>
           <p className="text-gray-600 text-lg">
-            Welcome back, {user?.firstName || 'Counselor'}. Manage your appointments and availability.
+            Welcome back, {(user as any)?.firstName || (user as any)?.name || 'Counselor'}. Manage your appointments and availability.
           </p>
         </div>
       </section>
