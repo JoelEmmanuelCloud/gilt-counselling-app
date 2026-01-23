@@ -493,8 +493,8 @@ function AdminDashboardContent() {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-light-grey">
-                    {filteredAppointments.map((appointment) => (
-                      <tr key={appointment.id} className="hover:bg-warm-cream transition-colors">
+                    {filteredAppointments.map((appointment: any) => (
+                      <tr key={appointment._id || appointment.id} className="hover:bg-warm-cream transition-colors">
                         <td className="px-6 py-4">
                           <div className="text-sm font-medium text-gray-900">{appointment.userName}</div>
                           <div className="text-sm text-gray-500">{appointment.userEmail}</div>
@@ -509,7 +509,7 @@ function AdminDashboardContent() {
                           <div className="text-sm text-gray-500">{appointment.time}</div>
                         </td>
                         <td className="px-6 py-4">
-                          <select value={appointment.status} onChange={(e) => handleStatusChange(appointment.id, e.target.value)} className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer ${getStatusColor(appointment.status)} print:hidden`}>
+                          <select value={appointment.status} onChange={(e) => handleStatusChange(appointment._id || appointment.id, e.target.value)} className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer ${getStatusColor(appointment.status)} print:hidden`}>
                             <option value="pending">Pending</option>
                             <option value="confirmed">Confirmed</option>
                             <option value="completed">Completed</option>
@@ -518,7 +518,7 @@ function AdminDashboardContent() {
                           <span className="hidden print:inline px-3 py-1 text-xs font-medium capitalize">{appointment.status}</span>
                         </td>
                         <td className="px-6 py-4 print:hidden">
-                          <button onClick={() => handleDeleteAppointment(appointment.id)} className="text-red-600 hover:text-red-800 font-medium text-sm">Delete</button>
+                          <button onClick={() => handleDeleteAppointment(appointment._id || appointment.id)} className="text-red-600 hover:text-red-800 font-medium text-sm">Delete</button>
                         </td>
                       </tr>
                     ))}
