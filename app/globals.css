@@ -161,7 +161,10 @@
   button:not(.print\\:visible),
   select,
   input,
-  .no-print {
+  .no-print,
+  .admin-header,
+  .admin-stats,
+  .admin-tabs {
     display: none !important;
   }
 
@@ -210,7 +213,23 @@
     page-break-inside: avoid !important;
   }
 
-  /* Modal print styles */
+  /* Print content area - remove padding/margins */
+  .print-content-area {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Modal print styles - when modal is open, hide everything else */
+  .print-modal-backdrop {
+    position: fixed !important;
+    inset: 0 !important;
+    background: white !important;
+    z-index: 9999 !important;
+    overflow: visible !important;
+    display: block !important;
+    padding: 0 !important;
+  }
+
   .print-modal-content {
     position: static !important;
     width: 100% !important;
@@ -220,15 +239,28 @@
     background: white !important;
     box-shadow: none !important;
     border-radius: 0 !important;
-    padding: 0 !important;
+    padding: 20px !important;
     margin: 0 !important;
   }
 
-  /* Hide modal backdrop */
-  .print-modal-backdrop {
-    position: static !important;
-    background: transparent !important;
+  /* When modal is open, hide everything behind it */
+  body:has(.print-modal-backdrop) > *:not(.print-modal-backdrop):not(script):not(style) {
+    display: none !important;
+  }
+
+  body:has(.print-modal-backdrop) .print-modal-backdrop {
     display: block !important;
+  }
+
+  /* Fallback for browsers that don't support :has() - using printing-modal class on body */
+  body.printing-modal > *:not(.print-modal-backdrop):not(script):not(style) {
+    display: none !important;
+  }
+
+  body.printing-modal .print-modal-backdrop {
+    display: block !important;
+    position: static !important;
+    background: white !important;
   }
 
   /* Print header styles */
@@ -271,5 +303,11 @@
 
   tr, img, table {
     page-break-inside: avoid !important;
+  }
+
+  /* Appointments print - only show the appointments content */
+  .admin-content {
+    padding: 0 !important;
+    margin: 0 !important;
   }
 }

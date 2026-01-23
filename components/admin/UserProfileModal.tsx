@@ -36,9 +36,24 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
     }
   };
 
+  // Handle print cleanup
+  useEffect(() => {
+    const handleAfterPrint = () => {
+      document.body.classList.remove('printing-modal');
+    };
+
+    window.addEventListener('afterprint', handleAfterPrint);
+    return () => {
+      window.removeEventListener('afterprint', handleAfterPrint);
+      document.body.classList.remove('printing-modal');
+    };
+  }, []);
+
   if (!isOpen) return null;
 
   const handlePrint = () => {
+    // Add class to body to indicate modal printing
+    document.body.classList.add('printing-modal');
     window.print();
   };
 

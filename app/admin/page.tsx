@@ -350,16 +350,16 @@ function AdminDashboardContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Header */}
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
+      {/* Header - Hidden when printing */}
+      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16 admin-header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Admin Dashboard</h1>
           <p className="text-gray-600 text-lg">Manage clients, appointments, and bookings</p>
         </div>
       </section>
 
-      {/* Statistics Cards */}
-      <section className="section-container">
+      {/* Statistics Cards - Hidden when printing */}
+      <section className="section-container admin-stats">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
             <Card className="text-center">
@@ -390,9 +390,9 @@ function AdminDashboardContent() {
         </div>
       </section>
 
-      {/* Tabs */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200">
+      {/* Tabs - Hidden when printing */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 admin-content print-content-area">
+        <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 admin-tabs">
           <button
             onClick={() => setActiveTab('appointments')}
             className={`px-6 py-3 font-medium transition-all ${
