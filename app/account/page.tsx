@@ -55,7 +55,7 @@ function MyAccountContent() {
         },
       });
 
-      setUserData(profileRes.data.user);
+      setUserData(profileRes.data);
 
       // Fetch appointments
       const appointmentsRes = await axios.get('/api/appointments/my-appointments', {
