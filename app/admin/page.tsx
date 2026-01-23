@@ -14,9 +14,10 @@ type Tab = 'appointments' | 'clients' | 'counselors' | 'create-booking';
 
 interface Client {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  phone: string;
+  phone?: string;
   source?: string;
   dateOfBirth?: string;
   gender?: string;
@@ -29,7 +30,8 @@ interface Client {
 
 interface Counselor {
   _id: string;
-  name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone?: string;
   specializations?: string[];
@@ -306,11 +308,13 @@ function AdminDashboardContent() {
     filter === 'all' ? true : apt.status === filter
   );
 
-  const filteredClients = clients.filter(client =>
-    client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    client.phone.includes(searchTerm)
-  );
+  const filteredClients = clients.filter(client => {
+    const fullName = `${client.firstName || ''} ${client.lastName || ''}`.toLowerCase();
+    const search = searchTerm.toLowerCase();
+    return fullName.includes(search) ||
+      (client.email?.toLowerCase() || '').includes(search) ||
+      (client.phone || '').includes(searchTerm);
+  });
 
   const stats = {
     total: appointments.length,
@@ -570,7 +574,7 @@ function AdminDashboardContent() {
                         onClick={() => setSelectedUserId(client._id)}
                         className="hover:bg-warm-cream transition-colors cursor-pointer"
                       >
-                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{client.name}</td>
+                        <td className="px-6 py-4 text-sm font-medium text-gray-900">{client.firstName} {client.lastName}</td>
                         <td className="px-6 py-4">
                           <div className="text-sm text-gray-900">{client.email}</div>
                           <div className="text-sm text-gray-500">{client.phone}</div>
@@ -638,7 +642,7 @@ function AdminDashboardContent() {
                     {counselors.map((counselor) => (
                       <tr key={counselor._id} className="hover:bg-warm-cream transition-colors">
                         <td className="px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900">{counselor.name}</div>
+                          <div className="text-sm font-medium text-gray-900">{counselor.firstName} {counselor.lastName}</div>
                           {counselor.bio && <div className="text-sm text-gray-500 truncate max-w-xs">{counselor.bio}</div>}
                         </td>
                         <td className="px-6 py-4">
@@ -680,7 +684,7 @@ function AdminDashboardContent() {
                   <select required value={bookingForm.userId} onChange={(e) => setBookingForm({...bookingForm, userId: e.target.value})} className="w-full px-4 py-2 border rounded-lg">
                     <option value="">-- Select a client --</option>
                     {clients.map((client) => (
-                      <option key={client._id} value={client._id}>{client.name} ({client.email})</option>
+                      <option key={client._id} value={client._id}>{client.firstName} {client.lastName} ({client.email})</option>
                     ))}
                   </select>
                 </div>
