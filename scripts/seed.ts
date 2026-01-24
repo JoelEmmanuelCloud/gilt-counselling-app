@@ -1,8 +1,18 @@
 import mongoose from 'mongoose';
+import { config } from 'dotenv';
+import path from 'path';
+
+// Load environment variables from .env.local
+config({ path: path.resolve(process.cwd(), '.env.local') });
+
 import User from '../lib/models/user';
 import Appointment from '../lib/models/appointment';
 
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/gilt-counselling';
+const MONGODB_URI = process.env.MONGODB_URI;
+
+if (!MONGODB_URI) {
+  throw new Error('Please define MONGODB_URI in .env.local');
+}
 
 async function seed() {
   try {
@@ -17,10 +27,10 @@ async function seed() {
     console.log('Data cleared!');
 
     // ==========================================
-    // CREATE ADMIN USER
+    // CREATE ADMIN USERS
     // ==========================================
-    console.log('\n--- Creating Admin User ---');
-    const adminUser = new User({
+    console.log('\n--- Creating Admin Users ---');
+    const adminUser1 = new User({
       firstName: 'Gilt',
       lastName: 'Admin',
       email: 'wecare@giltcounselling.com',
@@ -35,8 +45,26 @@ async function seed() {
         country: 'Nigeria',
       },
     });
-    await adminUser.save();
+    await adminUser1.save();
     console.log('Admin created: wecare@giltcounselling.com');
+
+    const adminUser2 = new User({
+      firstName: 'Gilt',
+      lastName: 'Support',
+      email: 'support@giltcounselling.com',
+      phone: '+234 803 309 4050',
+      role: 'admin',
+      emailVerified: null, // Users must verify OTP on first login
+      gender: 'prefer-not-to-say',
+      occupation: 'Administrator',
+      address: {
+        city: 'Port Harcourt',
+        state: 'Rivers',
+        country: 'Nigeria',
+      },
+    });
+    await adminUser2.save();
+    console.log('Admin created: support@giltcounselling.com');
 
     // ==========================================
     // CREATE COUNSELORS
@@ -525,8 +553,9 @@ async function seed() {
     console.log('\nAll users must verify OTP on first login.');
     console.log('Email verification required before accessing dashboards.\n');
 
-    console.log('ADMIN:');
+    console.log('ADMINS:');
     console.log('  - wecare@giltcounselling.com (Gilt Admin)');
+    console.log('  - support@giltcounselling.com (Gilt Support)');
 
     console.log('\nCOUNSELORS:');
     console.log('  - joelcloud65@gmail.com (Joel Emmanuel)');

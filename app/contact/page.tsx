@@ -6,8 +6,10 @@ import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import { useToast } from '@/components/ui/Toast';
 
 export default function Contact() {
+  const toast = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -18,7 +20,7 @@ export default function Contact() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission (this would connect to an API in production)
-    alert('Thank you for reaching out. We will get back to you soon!');
+    toast.success('Thank you for reaching out. We will get back to you soon!');
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

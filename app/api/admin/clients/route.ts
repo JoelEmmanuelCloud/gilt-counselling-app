@@ -56,6 +56,7 @@ export async function POST(request: NextRequest) {
       emergencyContact,
       medicalHistory,
       preferredContactMethod,
+      profilePhoto,
     } = body;
 
     if (!firstName || !lastName || !email || !phone) {
@@ -91,6 +92,7 @@ export async function POST(request: NextRequest) {
       preferredContactMethod: preferredContactMethod || 'phone',
       emailNotifications: true,
       emailVerified: new Date(),
+      profilePhoto: profilePhoto || undefined,
     });
 
     await user.save();

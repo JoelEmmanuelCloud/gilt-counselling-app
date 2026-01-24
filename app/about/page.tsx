@@ -38,16 +38,25 @@ export default function About() {
 
   const team = [
     {
-      name: 'Dr. Sarah Johnson',
-      title: 'Lead Counsellor & Clinical Psychologist',
-      credentials: 'Ph.D. in Clinical Psychology, Licensed Family Therapist',
-      bio: 'Dr. Johnson has over 15 years of experience working with teens, youths, and families. She specializes in adolescent psychology, anxiety disorders, and family systems therapy. Her warm, empathetic approach helps clients feel safe and supported throughout their healing journey.',
+      name: 'Dame Prof Chinelo Joy Ugwu',
+      title: 'CEO, GILT COUNSELLING CONSULT',
+      credentials: 'FCASSON, CPCN, MNAE, KSM',
+      bio: 'Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.',
+      image: '/Dame Prof Chinelo Joy Ugwu.jpeg',
     },
     {
-      name: 'Dr. Michael Chen',
-      title: 'Consulting Psychologist',
-      credentials: 'Ph.D. in Counseling Psychology, Certified Career Counselor',
-      bio: 'Dr. Chen brings a decade of experience in career counseling and youth development. He is passionate about helping young people discover their strengths and navigate academic and career decisions with confidence. His approach combines evidence-based practices with genuine care for each individual.',
+      name: 'Prof (Mrs) Betty-Ruth Ngozi Irulor',
+      title: 'Consultant - Marital Counselling',
+      credentials: 'Professor of Counselling',
+      bio: 'Prof Betty-Ruth Ngozi Irulor brings a wealth of experience in marital and family counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
+      image: '/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
+    },
+    {
+      name: 'Dr Faith I. Barilera',
+      title: 'Counselling Psychologist',
+      credentials: 'Ph.D. in Counselling Psychology',
+      bio: 'Dr Faith I. Barilera is a dedicated counselling psychologist committed to supporting individuals through their mental health journeys. Her compassionate approach and professional expertise help clients achieve personal growth and emotional wellbeing.',
+      image: '/Dr Faith I. Barilera.jpeg',
     },
   ];
 
@@ -134,24 +143,21 @@ export default function About() {
           subtitle="Experienced professionals dedicated to your wellbeing and growth."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           {team.map((member, index) => (
-            <Card key={index} className="text-center md:text-left">
-              <div className="mb-6 relative h-[300px] w-[300px] mx-auto md:mx-0 rounded-lg overflow-hidden">
+            <Card key={index} className="text-center">
+              <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
                 <Image
-                  src={index === 0
-                    ? "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&h=300&fit=crop"
-                    : "https://images.unsplash.com/photo-1556157382-97eda2d62296?w=300&h=300&fit=crop"
-                  }
+                  src={member.image}
                   alt={`${member.name} - Professional Headshot`}
                   fill
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
               <h3 className="heading-sm mb-2">{member.name}</h3>
               <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
               <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
-              <p className="text-gray-700 leading-relaxed">{member.bio}</p>
+              <p className="text-gray-700 leading-relaxed text-sm">{member.bio}</p>
             </Card>
           ))}
         </div>

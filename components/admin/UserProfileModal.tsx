@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Card from '@/components/ui/Card';
+import { useToast } from '@/components/ui/Toast';
 
 interface UserProfileModalProps {
   userId: string;
@@ -11,6 +12,7 @@ interface UserProfileModalProps {
 }
 
 export default function UserProfileModal({ userId, isOpen, onClose }: UserProfileModalProps) {
+  const toast = useToast();
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<any>(null);
 
@@ -30,20 +32,46 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
       setData(response.data);
     } catch (error) {
       console.error('Failed to fetch user profile', error);
-      alert('Failed to load user profile');
+      toast.error('Failed to load user profile');
     } finally {
       setLoading(false);
     }
   };
 
+  // Handle print cleanup
+  useEffect(() => {
+    const handleAfterPrint = () => {
+      document.body.classList.remove('printing-modal');
+    };
+
+    window.addEventListener('afterprint', handleAfterPrint);
+    return () => {
+      window.removeEventListener('afterprint', handleAfterPrint);
+      document.body.classList.remove('printing-modal');
+    };
+  }, []);
+
   if (!isOpen) return null;
 
+  const handlePrint = () => {
+    // Add class to body to indicate modal printing
+    document.body.classList.add('printing-modal');
+    window.print();
+  };
+
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
-      <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto my-8">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto print-modal-backdrop">
+      <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto my-8 print-modal-content">
         <div className="p-6">
+          {/* Print Header - Only visible when printing */}
+          <div className="print-header hidden print:block">
+            <h1 className="text-2xl font-bold">Gilt Counselling Services</h1>
+            <p className="text-sm text-gray-600">Client Profile Report</p>
+            <p className="text-xs text-gray-500 mt-1">Generated on {new Date().toLocaleDateString()}</p>
+          </div>
+
           {/* Header */}
-          <div className="flex justify-between items-start mb-6 sticky top-0 bg-white pb-4 border-b border-gray-200">
+          <div className="flex justify-between items-start mb-6 sticky top-0 bg-white pb-4 border-b border-gray-200 print:static print:border-0">
             <div className="flex items-center gap-4">
               <img
                 src={data?.user?.profilePhoto || data?.user?.image || '/default-avatar.svg'}
@@ -63,14 +91,25 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 )}
               </div>
             </div>
-            <button
-              onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 transition"
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div className="flex items-center gap-2 print:hidden">
+              <button
+                onClick={handlePrint}
+                className="text-gray-600 hover:text-gray-800 transition p-2 rounded-lg hover:bg-gray-100"
+                title="Print profile"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+                </svg>
+              </button>
+              <button
+                onClick={onClose}
+                className="text-gray-400 hover:text-gray-600 transition"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
 
           {loading ? (

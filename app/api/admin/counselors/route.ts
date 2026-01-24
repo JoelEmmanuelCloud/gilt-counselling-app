@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
       specializations,
       bio,
       availability,
+      profilePhoto,
     } = body;
 
     if (!firstName || !lastName || !email) {
@@ -85,6 +86,7 @@ export async function POST(request: NextRequest) {
       isAvailable: true,
       emailNotifications: true,
       emailVerified: new Date(),
+      profilePhoto: profilePhoto || undefined,
     });
 
     await counselor.save();

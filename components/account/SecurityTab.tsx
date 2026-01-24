@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useToast } from '@/components/ui/Toast';
 
 interface SecurityTabProps {
   emailNotifications: boolean;
@@ -9,6 +10,7 @@ interface SecurityTabProps {
 }
 
 export default function SecurityTab({ emailNotifications, onUpdate }: SecurityTabProps) {
+  const toast = useToast();
   const [notificationsEnabled, setNotificationsEnabled] = useState(emailNotifications);
   const [savingNotifications, setSavingNotifications] = useState(false);
 
@@ -23,10 +25,10 @@ export default function SecurityTab({ emailNotifications, onUpdate }: SecurityTa
       });
 
       setNotificationsEnabled(!notificationsEnabled);
-      alert('Notification preferences updated successfully!');
+      toast.success('Notification preferences updated successfully!');
       onUpdate();
     } catch (error: any) {
-      alert(error.response?.data?.message || 'Failed to update preferences');
+      toast.error(error.response?.data?.message || 'Failed to update preferences');
     } finally {
       setSavingNotifications(false);
     }

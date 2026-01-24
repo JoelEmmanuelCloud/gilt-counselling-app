@@ -9,11 +9,13 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
 import AuthModal from '@/components/AuthModal';
+import { useToast } from '@/components/ui/Toast';
 
 export default function BookAppointment() {
   const { data: session, status } = useSession();
   const { user: customUser, token } = useAuth(); // Custom auth context for OTP users
   const router = useRouter();
+  const toast = useToast();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserInfoForm, setShowUserInfoForm] = useState(false);
 
@@ -22,7 +24,9 @@ export default function BookAppointment() {
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const [formData, setFormData] = useState({
-    name: user?.firstName && user?.lastName ? `${user.firstName} ${user.lastName}` : '',
+    name: (user as any)?.firstName && (user as any)?.lastName
+      ? `${(user as any).firstName} ${(user as any).lastName}`
+      : (user as any)?.name || '',
     email: user?.email || '',
     phone: '',
     service: '',
@@ -45,9 +49,11 @@ export default function BookAppointment() {
       // Update form data with user info
       setFormData(prev => ({
         ...prev,
-        name: user.firstName && user.lastName ? `${user.firstName} ${user.lastName}` : '',
+        name: (user as any).firstName && (user as any).lastName
+          ? `${(user as any).firstName} ${(user as any).lastName}`
+          : (user as any).name || '',
         email: user.email || '',
-        phone: user.phone || '',
+        phone: (user as any).phone || '',
       }));
     }
   }, [status, isAuthenticated, user]);
@@ -209,7 +215,7 @@ export default function BookAppointment() {
             setShowUserInfoForm(false);
           } catch (err) {
             console.error('Failed to update profile:', err);
-            alert('Failed to update profile. Please try again.');
+            toast.error('Failed to update profile. Please try again.');
           }
         }} className="space-y-4">
           <div>

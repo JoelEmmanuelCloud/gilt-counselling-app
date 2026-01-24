@@ -3,6 +3,7 @@ import { Playfair_Display, Inter } from 'next/font/google';
 import './globals.css';
 import SessionProvider from '@/components/SessionProvider';
 import { AuthProvider } from '@/lib/AuthContext';
+import { ToastProvider } from '@/components/ui/Toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 
@@ -37,13 +38,15 @@ export default function RootLayout({
       <body className="font-body">
         <SessionProvider>
           <AuthProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <ToastProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-grow">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </ToastProvider>
           </AuthProvider>
         </SessionProvider>
       </body>
