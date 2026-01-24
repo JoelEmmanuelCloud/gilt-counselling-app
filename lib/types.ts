@@ -9,6 +9,7 @@ export interface User {
 
 export interface Appointment {
   id: string;
+  _id?: string;
   userId: string;
   userName: string;
   userEmail: string;
