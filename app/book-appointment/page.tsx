@@ -155,7 +155,14 @@ export default function BookAppointment() {
       await api.post('/appointments', formData);
       setSuccess('Your appointment request has been received. We\'ll be in touch within 24 hours to confirm your session.');
       setTimeout(() => {
-        router.push('/dashboard');
+        // Redirect based on user role
+        if (user?.role === 'admin') {
+          router.push('/admin');
+        } else if (user?.role === 'counselor') {
+          router.push('/counselor');
+        } else {
+          router.push('/dashboard');
+        }
       }, 3000);
     } catch (err: any) {
       setError(err.response?.data?.message || 'We encountered an issue processing your request. Please try again or contact us directly.');
@@ -250,7 +257,24 @@ export default function BookAppointment() {
       <div className="min-h-screen bg-off-white">
         {/* Hero Section */}
         <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Back Button */}
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-6 group"
+          >
+            <svg
+              className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span className="font-medium">Go Back</span>
+          </button>
+
+          <div className="text-center">
           <h1 className="heading-xl mb-6">Take the First Step</h1>
           <p className="body-lg mb-4">
             We're here to support you on your journey. Book a consultation at a time that works for you.
@@ -258,6 +282,7 @@ export default function BookAppointment() {
           <p className="text-sm text-gray-600">
             Not sure which service is right for you? That's okay—we'll help you find the best fit during your first session.
           </p>
+          </div>
         </div>
       </section>
 

@@ -9,6 +9,7 @@ export interface User {
 
 export interface Appointment {
   id: string;
+  _id?: string;
   userId: string;
   userName: string;
   userEmail: string;
@@ -34,6 +35,6 @@ export interface AuthContextType {
   logout: () => void;
   token: string | null;
   sendOTP: (email: string) => Promise<void>;
-  verifyOTP: (email: string, code: string) => Promise<void>;
+  verifyOTP: (email: string, code: string) => Promise<User>;
   resendOTP: (email: string) => Promise<void>;
 }

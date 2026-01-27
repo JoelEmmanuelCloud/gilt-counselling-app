@@ -51,10 +51,21 @@ function DashboardContent() {
 
     if (!isAuthenticated) {
       router.push('/book-appointment');
-    } else {
-      fetchAppointments();
-      checkProfileCompletion();
+      return;
     }
+
+    // Redirect counselors and admins to their respective dashboards
+    if (user?.role === 'counselor') {
+      router.push('/counselor');
+      return;
+    }
+    if (user?.role === 'admin') {
+      router.push('/admin');
+      return;
+    }
+
+    fetchAppointments();
+    checkProfileCompletion();
   }, [status, isAuthenticated, router]);
 
   const fetchAppointments = async () => {
@@ -117,7 +128,7 @@ function DashboardContent() {
 
     setRescheduleLoading(true);
     try {
-      await api.patch(`/appointments/${rescheduleModal.appointment.id}`, {
+      await api.patch(`/appointments/${rescheduleModal.appointment._id || rescheduleModal.appointment.id}`, {
         date: rescheduleForm.date,
         time: rescheduleForm.time,
       });
@@ -320,7 +331,7 @@ function DashboardContent() {
                     </thead>
                     <tbody className="divide-y divide-light-grey">
                       {appointments.map((appointment) => (
-                        <tr key={appointment.id} className="hover:bg-warm-cream transition-colors duration-150">
+                        <tr key={appointment._id || appointment.id} className="hover:bg-warm-cream transition-colors duration-150">
                           <td className="px-6 py-4">
                             <div className="text-sm font-medium text-gray-900">
                               {appointment.service}
@@ -351,7 +362,7 @@ function DashboardContent() {
                                   Reschedule
                                 </button>
                                 <button
-                                  onClick={() => handleCancelAppointment(appointment.id)}
+                                  onClick={() => handleCancelAppointment(appointment._id || appointment.id)}
                                   className="text-muted-coral hover:text-soft-terracotta font-medium transition-colors duration-150"
                                 >
                                   Cancel
@@ -368,7 +379,7 @@ function DashboardContent() {
                 {/* Mobile Card View */}
                 <div className="md:hidden space-y-4">
                   {appointments.map((appointment) => (
-                    <div key={appointment.id} className="bg-warm-cream rounded-lg p-4 border border-light-grey">
+                    <div key={appointment._id || appointment.id} className="bg-warm-cream rounded-lg p-4 border border-light-grey">
                       <div className="flex items-start justify-between mb-3">
                         <h3 className="font-medium text-gray-900 flex-1">{appointment.service}</h3>
                         <span className={`px-2 py-1 inline-flex items-center gap-1 text-xs font-medium rounded-full ${getStatusColor(appointment.status)}`}>
@@ -406,7 +417,7 @@ function DashboardContent() {
                             Reschedule
                           </button>
                           <button
-                            onClick={() => handleCancelAppointment(appointment.id)}
+                            onClick={() => handleCancelAppointment(appointment._id || appointment.id)}
                             className="text-muted-coral hover:text-soft-terracotta font-medium text-sm transition-colors duration-150"
                           >
                             Cancel

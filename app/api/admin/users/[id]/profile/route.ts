@@ -37,10 +37,10 @@ export async function GET(
     // Calculate stats
     const stats = {
       totalAppointments: appointments.length,
-      pending: appointments.filter(a => a.status === 'pending').length,
-      confirmed: appointments.filter(a => a.status === 'confirmed').length,
-      completed: appointments.filter(a => a.status === 'completed').length,
-      cancelled: appointments.filter(a => a.status === 'cancelled').length,
+      pending: appointments.filter((a: any) => a.status === 'pending').length,
+      confirmed: appointments.filter((a: any) => a.status === 'confirmed').length,
+      completed: appointments.filter((a: any) => a.status === 'completed').length,
+      cancelled: appointments.filter((a: any) => a.status === 'cancelled').length,
     };
 
     return NextResponse.json({

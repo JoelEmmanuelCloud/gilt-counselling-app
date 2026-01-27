@@ -8,7 +8,7 @@ config({ path: path.resolve(process.cwd(), '.env.local') });
 import User from '../lib/models/user';
 import Appointment from '../lib/models/appointment';
 
-const MONGODB_URI = process.env.MONGODB_URI;
+const MONGODB_URI = process.env.MONGODB_URI as string;
 
 if (!MONGODB_URI) {
   throw new Error('Please define MONGODB_URI in .env.local');

@@ -112,14 +112,21 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
     setLoading(true);
 
     try {
-      await verifyOTP(email, otp);
+      const userData = await verifyOTP(email, otp);
       if (onClose) onClose();
 
-      if (redirectTo) {
-        setTimeout(() => {
+      // Redirect based on user role
+      setTimeout(() => {
+        if (userData?.role === 'admin') {
+          router.push('/admin');
+        } else if (userData?.role === 'counselor') {
+          router.push('/counselor');
+        } else if (redirectTo) {
           router.push(redirectTo);
-        }, 100);
-      }
+        } else {
+          router.push('/dashboard');
+        }
+      }, 100);
     } catch (err: any) {
       setError(err.message || 'Invalid verification code');
       if (remainingAttempts > 1) {

@@ -259,8 +259,48 @@
 
   body.printing-modal .print-modal-backdrop {
     display: block !important;
-    position: static !important;
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: auto !important;
     background: white !important;
+    overflow: visible !important;
+  }
+
+  /* Ensure all content within the print modal is visible */
+  body.printing-modal .print-modal-content,
+  body.printing-modal .print-modal-content * {
+    visibility: visible !important;
+    color-adjust: exact !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Ensure modal content takes full width and isn't clipped */
+  body.printing-modal .print-modal-content {
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+
+  /* Fix for profile modal print issues */
+  body.printing-modal .space-y-6 > * {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Ensure grid layouts print properly */
+  body.printing-modal .grid {
+    display: grid !important;
   }
 
   /* Print header styles */
@@ -309,5 +349,48 @@
   .admin-content {
     padding: 0 !important;
     margin: 0 !important;
+  }
+
+  /* User Profile Modal specific print styles */
+  #user-profile-modal {
+    position: absolute !important;
+    inset: 0 !important;
+    background: white !important;
+    z-index: 9999 !important;
+    overflow: visible !important;
+    display: block !important;
+    padding: 0 !important;
+    height: auto !important;
+  }
+
+  #print-content {
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    max-height: none !important;
+    height: auto !important;
+    overflow: visible !important;
+    background: white !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    padding: 20px !important;
+  }
+
+  /* Fix opacity backgrounds for print */
+  [class*="bg-opacity"] {
+    background-color: #f3f4f6 !important;
+  }
+
+  /* Ensure stats cards display properly */
+  .grid.grid-cols-2.md\\:grid-cols-5 {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+  }
+
+  .grid.grid-cols-2.md\\:grid-cols-5 > div {
+    flex: 1 1 18% !important;
+    min-width: 80px !important;
   }
 }

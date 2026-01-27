@@ -174,6 +174,8 @@ function VerifyOTPContent() {
       setTimeout(() => {
         if (data.user.role === "admin") {
           router.push("/admin");
+        } else if (data.user.role === "counselor") {
+          router.push("/counselor");
         } else {
           router.push("/dashboard");
         }

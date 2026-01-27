@@ -22,7 +22,14 @@ const Navbar: React.FC = () => {
 
   const handleBookSession = () => {
     if (isAuthenticated) {
-      router.push('/dashboard');
+      // Redirect based on user role
+      if (user?.role === 'admin') {
+        router.push('/admin');
+      } else if (user?.role === 'counselor') {
+        router.push('/counselor');
+      } else {
+        router.push('/dashboard');
+      }
     } else {
       setShowAuthModal(true);
       setMobileMenuOpen(false);
@@ -158,7 +165,15 @@ const Navbar: React.FC = () => {
                       Admin
                     </Link>
                   )}
-                  {user.role !== 'admin' && (
+                  {user.role === 'counselor' && (
+                    <Link
+                      href="/counselor"
+                      className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200"
+                    >
+                      Dashboard
+                    </Link>
+                  )}
+                  {user.role !== 'admin' && user.role !== 'counselor' && (
                     <Link
                       href="/account"
                       className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200"
@@ -318,6 +333,16 @@ const Navbar: React.FC = () => {
                       }`}
                     >
                       Admin Dashboard
+                    </Link>
+                  ) : user.role === 'counselor' ? (
+                    <Link
+                      href="/counselor"
+                      onClick={() => setMobileMenuOpen(false)}
+                      className={`block text-gray-700 hover:text-soft-terracotta active:text-soft-terracotta hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 py-3 sm:py-3.5 px-3 sm:px-4 rounded-lg font-semibold text-sm sm:text-base touch-manipulation ${
+                        pathname === '/counselor' ? 'bg-warm-cream text-soft-terracotta' : ''
+                      }`}
+                    >
+                      Dashboard
                     </Link>
                   ) : (
                     <Link
