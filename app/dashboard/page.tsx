@@ -51,10 +51,21 @@ function DashboardContent() {
 
     if (!isAuthenticated) {
       router.push('/book-appointment');
-    } else {
-      fetchAppointments();
-      checkProfileCompletion();
+      return;
     }
+
+    // Redirect counselors and admins to their respective dashboards
+    if (user?.role === 'counselor') {
+      router.push('/counselor');
+      return;
+    }
+    if (user?.role === 'admin') {
+      router.push('/admin');
+      return;
+    }
+
+    fetchAppointments();
+    checkProfileCompletion();
   }, [status, isAuthenticated, router]);
 
   const fetchAppointments = async () => {

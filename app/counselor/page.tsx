@@ -7,9 +7,18 @@ import { useRouter } from 'next/navigation';
 import Card from '@/components/ui/Card';
 import { useToast } from '@/components/ui/Toast';
 import NotificationBell from '@/components/ui/NotificationBell';
-import axios from 'axios';
+import ProfilePhotoUpload from '@/components/ProfilePhotoUpload';
+import api from '@/lib/api';
 
 type Tab = 'appointments' | 'availability' | 'profile';
+
+interface CounselorProfile {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+  profilePhoto?: string;
+  image?: string;
+}
 
 interface Appointment {
   _id: string;
@@ -50,6 +59,7 @@ function CounselorDashboardContent() {
   const [isAvailable, setIsAvailable] = useState(true);
   const [selectedAppointment, setSelectedAppointment] = useState<Appointment | null>(null);
   const [counselorNotes, setCounselorNotes] = useState('');
+  const [profile, setProfile] = useState<CounselorProfile | null>(null);
 
   useEffect(() => {
     if (status === 'loading') return;
@@ -57,8 +67,9 @@ function CounselorDashboardContent() {
     if (!isAuthenticated) {
       router.push('/auth/signin');
     } else if (user?.role !== 'counselor') {
-      // Only counselors can access this page - redirect everyone else to account
       router.push('/account');
+    } else {
+      fetchProfile();
     }
   }, [status, isAuthenticated, user, router]);
 
@@ -70,6 +81,15 @@ function CounselorDashboardContent() {
     }
   }, [activeTab]);
 
+  const fetchProfile = async () => {
+    try {
+      const response = await api.get('/profile');
+      setProfile(response.data);
+    } catch (error) {
+      console.error('Failed to fetch profile', error);
+    }
+  };
+
   const fetchAppointments = async () => {
     try {
       setLoading(true);
@@ -77,7 +97,7 @@ function CounselorDashboardContent() {
       if (filter !== 'all') params.append('status', filter);
       if (dateFilter) params.append('date', dateFilter);
 
-      const response = await axios.get(`/api/counselor/appointments?${params.toString()}`);
+      const response = await api.get(`/counselor/appointments?${params.toString()}`);
       setAppointments(response.data);
     } catch (error) {
       console.error('Failed to fetch appointments', error);
@@ -89,7 +109,7 @@ function CounselorDashboardContent() {
   const fetchAvailability = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/counselor/availability');
+      const response = await api.get('/counselor/availability');
       setAvailability(response.data.availability || []);
       setIsAvailable(response.data.isAvailable ?? true);
     } catch (error) {
@@ -101,7 +121,7 @@ function CounselorDashboardContent() {
 
   const handleStatusChange = async (id: string, newStatus: string) => {
     try {
-      await axios.patch(`/api/counselor/appointments/${id}`, { status: newStatus });
+      await api.patch(`/counselor/appointments/${id}`, { status: newStatus });
       fetchAppointments();
     } catch (error) {
       console.error('Failed to update appointment', error);
@@ -113,7 +133,7 @@ function CounselorDashboardContent() {
     if (!selectedAppointment) return;
 
     try {
-      await axios.patch(`/api/counselor/appointments/${selectedAppointment._id}`, {
+      await api.patch(`/counselor/appointments/${selectedAppointment._id}`, {
         counselorNotes,
       });
       setSelectedAppointment(null);
@@ -128,7 +148,7 @@ function CounselorDashboardContent() {
 
   const handleUpdateAvailability = async () => {
     try {
-      await axios.patch('/api/counselor/availability', {
+      await api.patch('/counselor/availability', {
         availability,
         isAvailable,
       });
@@ -189,11 +209,18 @@ function CounselorDashboardContent() {
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-start">
-            <div>
-              <h1 className="heading-xl mb-3">Counselor Dashboard</h1>
-              <p className="text-gray-600 text-lg">
-                Welcome back, {(user as any)?.firstName || (user as any)?.name || 'Counselor'}. Manage your appointments and availability.
-              </p>
+            <div className="flex items-center gap-6">
+              <img
+                src={profile?.profilePhoto || profile?.image || '/default-avatar.svg'}
+                alt="Profile"
+                className="w-20 h-20 rounded-full border-4 border-white shadow-lg object-cover"
+              />
+              <div>
+                <h1 className="heading-xl mb-3">Counselor Dashboard</h1>
+                <p className="text-gray-600 text-lg">
+                  Welcome back, {profile?.firstName || (user as any)?.firstName || (user as any)?.name || 'Counselor'}. Manage your appointments and availability.
+                </p>
+              </div>
             </div>
             <NotificationBell />
           </div>
@@ -250,6 +277,16 @@ function CounselorDashboardContent() {
             }`}
           >
             Availability
+          </button>
+          <button
+            onClick={() => setActiveTab('profile')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'profile'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Profile
           </button>
         </div>
 
@@ -496,6 +533,18 @@ function CounselorDashboardContent() {
                 Save Availability
               </button>
             </div>
+          </Card>
+        )}
+        {/* Profile Tab */}
+        {activeTab === 'profile' && (
+          <Card>
+            <h2 className="heading-md mb-6">Profile Photo</h2>
+            <ProfilePhotoUpload
+              currentPhoto={profile?.profilePhoto || profile?.image}
+              onPhotoUpdate={(newUrl) => {
+                setProfile((prev) => prev ? { ...prev, profilePhoto: newUrl } : prev);
+              }}
+            />
           </Card>
         )}
       </section>

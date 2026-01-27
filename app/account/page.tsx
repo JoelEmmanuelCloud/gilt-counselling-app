@@ -35,6 +35,16 @@ function MyAccountContent() {
       return;
     }
 
+    // Redirect counselors and admins to their respective dashboards
+    if (user?.role === 'counselor') {
+      router.push('/counselor');
+      return;
+    }
+    if (user?.role === 'admin') {
+      router.push('/admin');
+      return;
+    }
+
     // Set tab from URL param if provided
     const tab = searchParams.get('tab') as AccountTab;
     if (tab && ['overview', 'appointments', 'profile', 'security'].includes(tab)) {
