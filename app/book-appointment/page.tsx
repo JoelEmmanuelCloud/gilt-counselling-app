@@ -155,7 +155,14 @@ export default function BookAppointment() {
       await api.post('/appointments', formData);
       setSuccess('Your appointment request has been received. We\'ll be in touch within 24 hours to confirm your session.');
       setTimeout(() => {
-        router.push('/dashboard');
+        // Redirect based on user role
+        if (user?.role === 'admin') {
+          router.push('/admin');
+        } else if (user?.role === 'counselor') {
+          router.push('/counselor');
+        } else {
+          router.push('/dashboard');
+        }
       }, 3000);
     } catch (err: any) {
       setError(err.response?.data?.message || 'We encountered an issue processing your request. Please try again or contact us directly.');

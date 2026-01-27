@@ -512,6 +512,154 @@ export async function sendAppointmentStatusEmail(
   });
 }
 
+// Counselor Assignment Email - Notify counselor of new appointment assignment
+export async function sendCounselorAssignmentEmail(
+  counselorEmail: string,
+  counselorName: string,
+  clientName: string,
+  clientEmail: string,
+  clientPhone: string,
+  service: string,
+  date: string,
+  time: string,
+  appointmentId: string
+) {
+  const dashboardUrl = `${APP_URL}/counselor`;
+
+  const html = `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>New Appointment Assigned</title>
+      </head>
+      <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
+        <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+          <tr>
+            <td align="center">
+              <table width="100%" cellpadding="0" cellspacing="0" style="max-width: 600px; background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);">
+                <tr>
+                  <td style="background-color: #ffffff; padding: 40px 32px 32px; text-align: center; border-bottom: 1px solid #e5e5e5;">
+                    <img src="${LOGO_URL}" alt="Gilt Counselling Consult" style="max-width: 200px; height: auto; display: block; margin: 0 auto;" />
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding: 40px 32px;">
+                    <div style="width: 60px; height: 60px; background-color: #22c55e; border-radius: 50%; margin: 0 auto 24px; display: flex; align-items: center; justify-content: center;">
+                      <span style="color: white; font-size: 28px; line-height: 60px; text-align: center; display: block; width: 100%;">&#43;</span>
+                    </div>
+                    <h2 style="margin: 0 0 16px; color: #1a1a1a; font-size: 24px; font-weight: 600; text-align: center;">
+                      New Appointment Assigned
+                    </h2>
+                    <p style="margin: 0 0 24px; color: #666666; font-size: 16px; line-height: 1.5; text-align: center;">
+                      Hello ${counselorName}, you have been assigned a new appointment.
+                    </p>
+
+                    <!-- Client Details Box -->
+                    <div style="background-color: #e8f5e9; border: 1px solid #4caf50; border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+                      <p style="margin: 0 0 8px; color: #2e7d32; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">CLIENT INFORMATION</p>
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="padding: 8px 0; border-bottom: 1px solid rgba(46, 125, 50, 0.2);">
+                            <p style="margin: 0 0 4px; color: #2e7d32; font-size: 13px;">Name</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${clientName}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 8px 0; border-bottom: 1px solid rgba(46, 125, 50, 0.2);">
+                            <p style="margin: 0 0 4px; color: #2e7d32; font-size: 13px;">Email</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px;">${clientEmail}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 8px 0;">
+                            <p style="margin: 0 0 4px; color: #2e7d32; font-size: 13px;">Phone</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px;">${clientPhone}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <!-- Appointment Details Box -->
+                    <div style="background-color: #f8f9fa; border: 1px solid #e5e5e5; border-radius: 8px; padding: 24px; margin-bottom: 32px;">
+                      <p style="margin: 0 0 8px; color: #666666; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">APPOINTMENT DETAILS</p>
+                      <table width="100%" cellpadding="0" cellspacing="0">
+                        <tr>
+                          <td style="padding: 8px 0; border-bottom: 1px solid #e5e5e5;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">Service</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${service}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 8px 0; border-bottom: 1px solid #e5e5e5;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">Date</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${date}</p>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td style="padding: 8px 0;">
+                            <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">Time</p>
+                            <p style="margin: 0; color: #1a1a1a; font-size: 16px; font-weight: 500;">${time}</p>
+                          </td>
+                        </tr>
+                      </table>
+                    </div>
+
+                    <!-- Button -->
+                    <table width="100%" cellpadding="0" cellspacing="0">
+                      <tr>
+                        <td align="center" style="padding: 0 0 24px 0;">
+                          <a href="${dashboardUrl}" style="display: inline-block; background-color: #1a1a1a; color: #ffffff; text-decoration: none; padding: 14px 40px; border-radius: 6px; font-size: 16px; font-weight: 600;">
+                            View Dashboard
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.5; text-align: center;">
+                      Please review the appointment details and prepare for your session.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background-color: #f8f9fa; padding: 32px; text-align: center; border-top: 1px solid #e5e5e5;">
+                    <p style="margin: 0 0 12px; color: #666666; font-size: 14px; font-weight: 600;">
+                      Contact Us
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      88 Woji Road, Port Harcourt, Nigeria
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      470 Front St W, Toronto, Canada
+                    </p>
+                    <p style="margin: 0 0 4px; color: #999999; font-size: 13px;">
+                      +234 803 309 4050
+                    </p>
+                    <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
+                      hello@giltcounselling.com
+                    </p>
+                    <p style="margin: 0; color: #cccccc; font-size: 12px;">
+                      &copy; ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+    </html>
+  `;
+
+  return sendEmail({
+    to: counselorEmail,
+    subject: 'New Appointment Assigned - Gilt Counselling Consult',
+    html,
+    text: `Hello ${counselorName}, you have been assigned a new appointment. Client: ${clientName} (${clientEmail}, ${clientPhone}). Service: ${service}. Date: ${date} at ${time}. View your dashboard: ${dashboardUrl}`,
+  });
+}
+
 // Reschedule Email
 export async function sendRescheduleEmail(
   email: string,

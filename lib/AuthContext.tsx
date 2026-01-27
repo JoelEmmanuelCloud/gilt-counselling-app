@@ -48,13 +48,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  const verifyOTP = async (email: string, code: string) => {
+  const verifyOTP = async (email: string, code: string): Promise<User> => {
     try {
       const response = await api.post('/auth/verify-otp', { email, code });
       const { token, user } = response.data;
       localStorage.setItem('token', token);
       setToken(token);
       setUser(user);
+      return user; // Return user data for redirect logic
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Invalid verification code');
     }

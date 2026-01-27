@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
 import Card from '@/components/ui/Card';
 import { useToast } from '@/components/ui/Toast';
+import NotificationBell from '@/components/ui/NotificationBell';
 import axios from 'axios';
 
 type Tab = 'appointments' | 'availability' | 'profile';
@@ -187,10 +188,15 @@ function CounselorDashboardContent() {
       {/* Header */}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="heading-xl mb-3">Counselor Dashboard</h1>
-          <p className="text-gray-600 text-lg">
-            Welcome back, {(user as any)?.firstName || (user as any)?.name || 'Counselor'}. Manage your appointments and availability.
-          </p>
+          <div className="flex justify-between items-start">
+            <div>
+              <h1 className="heading-xl mb-3">Counselor Dashboard</h1>
+              <p className="text-gray-600 text-lg">
+                Welcome back, {(user as any)?.firstName || (user as any)?.name || 'Counselor'}. Manage your appointments and availability.
+              </p>
+            </div>
+            <NotificationBell />
+          </div>
         </div>
       </section>
 
@@ -336,18 +342,45 @@ function CounselorDashboardContent() {
                     {filteredAppointments.map((appointment) => (
                       <tr key={appointment._id} className="hover:bg-warm-cream transition-colors">
                         <td className="px-6 py-4">
-                          <div className="text-sm font-medium text-gray-900">{appointment.userName}</div>
-                          <div className="text-sm text-gray-500">{appointment.userEmail}</div>
-                          <div className="text-sm text-gray-500">{appointment.userPhone}</div>
+                          <div className="flex items-start gap-3">
+                            <div className="w-10 h-10 rounded-full bg-gilt-gold bg-opacity-10 flex items-center justify-center flex-shrink-0">
+                              <span className="text-gilt-gold font-semibold text-sm">
+                                {appointment.userName.charAt(0).toUpperCase()}
+                              </span>
+                            </div>
+                            <div>
+                              <div className="text-sm font-semibold text-gray-900">{appointment.userName}</div>
+                              <div className="flex items-center gap-1 text-sm text-gray-500 mt-0.5">
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                                <a href={`mailto:${appointment.userEmail}`} className="hover:text-gilt-gold">{appointment.userEmail}</a>
+                              </div>
+                              <div className="flex items-center gap-1 text-sm text-gray-500 mt-0.5">
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                                </svg>
+                                <a href={`tel:${appointment.userPhone}`} className="hover:text-gilt-gold">{appointment.userPhone}</a>
+                              </div>
+                            </div>
+                          </div>
                         </td>
                         <td className="px-6 py-4">
                           <div className="text-sm text-gray-900 font-medium">{appointment.service}</div>
                           {appointment.notes && (
-                            <div className="text-sm text-gray-500 mt-1">{appointment.notes}</div>
+                            <div className="text-sm text-gray-500 mt-1 max-w-xs truncate" title={appointment.notes}>{appointment.notes}</div>
+                          )}
+                          {appointment.counselorNotes && (
+                            <div className="text-xs text-muted-teal mt-1 flex items-center gap-1">
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                              </svg>
+                              Notes added
+                            </div>
                           )}
                         </td>
                         <td className="px-6 py-4">
-                          <div className="text-sm text-gray-900">{appointment.date}</div>
+                          <div className="text-sm text-gray-900 font-medium">{appointment.date}</div>
                           <div className="text-sm text-gray-500">{appointment.time}</div>
                         </td>
                         <td className="px-6 py-4">
@@ -372,7 +405,7 @@ function CounselorDashboardContent() {
                             }}
                             className="text-gilt-gold hover:text-gilt-orange font-medium text-sm"
                           >
-                            Add Notes
+                            {appointment.counselorNotes ? 'Edit Notes' : 'Add Notes'}
                           </button>
                         </td>
                       </tr>

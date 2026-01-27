@@ -45,17 +45,17 @@ export default function About() {
       image: '/Dame Prof Chinelo Joy Ugwu.jpeg',
     },
     {
-      name: 'Prof (Mrs) Betty-Ruth Ngozi Irulor',
+      name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
       title: 'Consultant - Marital Counselling',
       credentials: 'Professor of Counselling',
-      bio: 'Prof Betty-Ruth Ngozi Irulor brings a wealth of experience in marital and family counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
+      bio: 'Prof Betty-Ruth Ngozi Iruloh brings a wealth of experience in marital and family counselling. She has shown keen interest in Family Counselling by addressing specifically the issues of Pre-marital and Marital Counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
       image: '/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
     },
     {
       name: 'Dr Faith I. Barilera',
-      title: 'Counselling Psychologist',
-      credentials: 'Ph.D. in Counselling Psychology',
-      bio: 'Dr Faith I. Barilera is a dedicated counselling psychologist committed to supporting individuals through their mental health journeys. Her compassionate approach and professional expertise help clients achieve personal growth and emotional wellbeing.',
+      title: 'Strategic Planner & Counselling Psychologist',
+      credentials: 'Ph.D. in Educational Psychology, Licensed Trauma Information Manager, Certified JCIN Trainer',
+      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling consultant and licensed trauma information manager from the School of Trauma Informed Management. A certified JCIN trainer and mental health and leadership facilitator with a Doctorate in Educational Psychology from Ignatius Ajuru University of Education, and Master\'s and B.Sc.Ed degrees in Educational Psychology and Guidance & Counselling from the University of Port Harcourt, Choba, Nigeria. She serves as Strategic Planner at Gilt Counselling Consult while leading youth development initiatives as President of JCI Trans Amadi local Organization of the Junior Chamber International Nigeria. She specializes in person-centered, mental health and trauma-informed approaches and is a member of relevant professional bodies including CASSON, RIVCASSON, APROPCON, and the Nigerian Psychological Association (NPA), delivering practical, engaging, and impact-driven consultations and training for schools, organizations, and community groups.',
       image: '/Dr Faith I. Barilera.jpeg',
     },
   ];

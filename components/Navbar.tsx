@@ -22,7 +22,14 @@ const Navbar: React.FC = () => {
 
   const handleBookSession = () => {
     if (isAuthenticated) {
-      router.push('/dashboard');
+      // Redirect based on user role
+      if (user?.role === 'admin') {
+        router.push('/admin');
+      } else if (user?.role === 'counselor') {
+        router.push('/counselor');
+      } else {
+        router.push('/dashboard');
+      }
     } else {
       setShowAuthModal(true);
       setMobileMenuOpen(false);

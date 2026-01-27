@@ -122,6 +122,7 @@ function AdminDashboardContent() {
   useEffect(() => {
     if (activeTab === 'appointments') {
       fetchAppointments();
+      fetchCounselors(); // Also fetch counselors for assignment dropdown
     } else if (activeTab === 'clients' || activeTab === 'create-booking') {
       fetchClients();
     } else if (activeTab === 'counselors') {
@@ -221,6 +222,23 @@ function AdminDashboardContent() {
     } catch (error) {
       console.error('Failed to update appointment', error);
       toast.error('Unable to update appointment status. Please try again.');
+    }
+  };
+
+  const handleAssignCounselor = async (appointmentId: string, counselorId: string) => {
+    if (!counselorId) return;
+
+    try {
+      const token = localStorage.getItem('token');
+      await axios.patch(`/api/admin/appointments/${appointmentId}/assign`,
+        { counselorId },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      toast.success('Counselor assigned successfully! Notification sent.');
+      fetchAppointments();
+    } catch (error: any) {
+      console.error('Failed to assign counselor', error);
+      toast.error(error.response?.data?.message || 'Unable to assign counselor. Please try again.');
     }
   };
 
@@ -490,6 +508,7 @@ function AdminDashboardContent() {
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Client</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Service</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Date & Time</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Counselor</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Status</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase print:hidden">Actions</th>
                     </tr>
@@ -509,6 +528,25 @@ function AdminDashboardContent() {
                         <td className="px-6 py-4">
                           <div className="text-sm text-gray-900">{appointment.date}</div>
                           <div className="text-sm text-gray-500">{appointment.time}</div>
+                        </td>
+                        <td className="px-6 py-4">
+                          <select
+                            value={appointment.counselorId || ''}
+                            onChange={(e) => handleAssignCounselor(appointment._id || appointment.id, e.target.value)}
+                            className={`px-3 py-1 text-xs font-medium rounded-lg cursor-pointer border print:hidden ${
+                              appointment.counselorId
+                                ? 'bg-olive-green bg-opacity-10 text-olive-green border-olive-green'
+                                : 'bg-soft-gold bg-opacity-10 text-soft-gold border-soft-gold'
+                            }`}
+                          >
+                            <option value="">Unassigned</option>
+                            {counselors.map((counselor) => (
+                              <option key={counselor._id} value={counselor._id}>
+                                {counselor.firstName} {counselor.lastName}
+                              </option>
+                            ))}
+                          </select>
+                          <span className="hidden print:inline text-sm">{appointment.counselorName || 'Unassigned'}</span>
                         </td>
                         <td className="px-6 py-4">
                           <select value={appointment.status} onChange={(e) => handleStatusChange(appointment._id || appointment.id, e.target.value)} className={`px-3 py-1 text-xs font-medium rounded-full cursor-pointer ${getStatusColor(appointment.status)} print:hidden`}>
