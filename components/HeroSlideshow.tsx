@@ -5,11 +5,11 @@ import Image from 'next/image';
 
 const heroImages = [
   {
-    src: '/pixel1.jpg',
+    src: '/images/header1.jpg',
     alt: 'Professional counseling session - person in consultation',
   },
   {
-    src: '/pixel2.jpg',
+    src: '/images/header2.jpg',
     alt: 'Professional counseling environment - supportive atmosphere',
   },
 ];

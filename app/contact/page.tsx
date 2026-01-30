@@ -165,32 +165,16 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=400&fit=crop"
-              alt="Waiting Area - Nigeria Office"
+              src="/images/office1.jpg"
+              alt="Counselling Room - Comfortable seating area"
               fill
               className="object-cover"
             />
           </div>
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=400&fit=crop"
-              alt="Counselling Room - Nigeria Office"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=400&fit=crop"
-              alt="Waiting Area - Canada Office"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1497215842964-222b430dc094?w=400&h=400&fit=crop"
-              alt="Counselling Room - Canada Office"
+              src="/images/office2.jpg"
+              alt="Group Session Room - Meeting and workshop space"
               fill
               className="object-cover"
             />

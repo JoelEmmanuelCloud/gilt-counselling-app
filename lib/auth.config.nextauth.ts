@@ -93,7 +93,7 @@ export const authOptions: NextAuthOptions = {
 
                     <p style="font-size: 14px; color: #666;">
                       <strong>Contact us:</strong><br>
-                      📧 hello@giltcounselling.com<br>
+                      📧 wecare@giltcounselling.com<br>
                       📱 +234 803 309 4050
                     </p>
 
