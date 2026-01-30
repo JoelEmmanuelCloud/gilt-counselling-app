@@ -32,7 +32,7 @@ This document summarizes all features that have been implemented for your counse
 **Configuration needed:**
 ```env
 RESEND_API_KEY=re_xxxxxxxxxxxx
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 MAGIC_LINK_SECRET=your-secret-key
 ```
 
@@ -229,7 +229,7 @@ All necessary packages are already in `package.json`:
    JWT_SECRET=your-secret-key
    MAGIC_LINK_SECRET=your-magic-link-secret
    RESEND_API_KEY=re_xxxxxxxxxxxx
-   EMAIL_FROM=hello@giltcounselling.com
+   EMAIL_FROM=wecare@giltcounselling.com
    NEXT_PUBLIC_APP_URL=http://localhost:3000
    ```
 

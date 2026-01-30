@@ -57,7 +57,7 @@ MONGODB_URI=mongodb+srv://username:password@cluster.mongodb.net/gilt-counselling
 JWT_SECRET=your-production-secret-key
 MAGIC_LINK_SECRET=your-production-magic-link-secret
 RESEND_API_KEY=re_xxxxxxxxxxxx
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 NEXT_PUBLIC_APP_URL=https://giltcounselling.com
 WHATSAPP_NUMBER=+2348033094050
 ```

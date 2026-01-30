@@ -13,7 +13,7 @@
 
 ### 1.2 Professional Email Setup
 - [ ] Domain email addresses setup guide:
-  - hello@giltcounselling.com
+  - wecare@giltcounselling.com
   - support@giltcounselling.com
   - notification@giltcounselling.com
 - [ ] Email service configuration (Resend/SendGrid)
@@ -251,7 +251,7 @@ MAGIC_LINK_SECRET=
 
 # Email (Resend)
 RESEND_API_KEY=
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 
 # Payment (Paystack)
 PAYSTACK_SECRET_KEY=

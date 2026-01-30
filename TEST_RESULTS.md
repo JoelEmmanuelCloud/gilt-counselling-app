@@ -231,7 +231,7 @@ To test email features, add to `.env.local`:
 
 ```env
 RESEND_API_KEY=re_xxxxxxxxxxxx
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 MAGIC_LINK_SECRET=your-magic-link-secret
 ```
 

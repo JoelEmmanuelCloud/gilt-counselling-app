@@ -8,7 +8,7 @@ This guide will walk you through setting up professional branded email addresses
 ## Overview
 
 We'll be setting up the following email addresses:
-- `hello@giltcounselling.com` - General inquiries and bookings
+- `wecare@giltcounselling.com` - General inquiries and bookings
 - `support@giltcounselling.com` - Client support and assistance
 - `notification@giltcounselling.com` - Automated system notifications
 - `admin@giltcounselling.com` - Administrative communications
@@ -140,7 +140,7 @@ Value: mx2.resend.com
 5. Add to your `.env.local`:
    ```
    RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxx
-   EMAIL_FROM=hello@giltcounselling.com
+   EMAIL_FROM=wecare@giltcounselling.com
    ```
 
 ### 6. Test Email Sending
@@ -187,19 +187,19 @@ Priority: 10  Value: alt4.aspmx.l.google.com
 In Google Admin Console:
 1. Users > Add new user
 2. Create these accounts:
-   - hello@giltcounselling.com
+   - wecare@giltcounselling.com
    - support@giltcounselling.com
    - admin@giltcounselling.com
 
 ### 5. Setup Email Aliases
 For `notification@giltcounselling.com`:
-1. Go to Users > select hello@giltcounselling.com
+1. Go to Users > select wecare@giltcounselling.com
 2. User information > Email aliases
 3. Add alias: notification
 
 ### 6. Access Webmail
 - Go to https://mail.google.com
-- Sign in with: hello@giltcounselling.com
+- Sign in with: wecare@giltcounselling.com
 - Or use Gmail mobile app
 
 ---
@@ -264,7 +264,7 @@ If you want all emails to go to a personal inbox:
 1. Domain Dashboard > Email Forwarding
 2. Add forwarding rule:
    ```
-   hello@giltcounselling.com → yourpersonal@gmail.com
+   wecare@giltcounselling.com → yourpersonal@gmail.com
    ```
 
 ---
@@ -276,8 +276,8 @@ Test all functionality:
 - [ ] Send test email from Resend dashboard
 - [ ] Trigger magic link email (use "magic link" option on login page)
 - [ ] Book appointment and receive confirmation email
-- [ ] Send email from hello@giltcounselling.com to personal email
-- [ ] Reply from personal email to hello@giltcounselling.com
+- [ ] Send email from wecare@giltcounselling.com to personal email
+- [ ] Reply from personal email to wecare@giltcounselling.com
 - [ ] Check spam folder (emails should NOT be there)
 - [ ] Test on mobile device
 - [ ] Check email signatures and branding
