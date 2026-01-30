@@ -168,8 +168,8 @@ export default function Services() {
       <section className="section-container">
         <div className="relative h-[300px] max-w-5xl mx-auto rounded-lg overflow-hidden">
           <Image
-            src="https://images.unsplash.com/photo-1544027993-37dbfe43562a?w=1200&h=300&fit=crop"
-            alt="Calm Counselling Environment"
+            src="/images/ourservice.jpg"
+            alt="Counsellor holding client's hand during a session"
             fill
             className="object-cover"
           />

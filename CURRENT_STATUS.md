@@ -145,7 +145,7 @@ JWT_SECRET=your-super-secret-jwt-key
 
 # NEW - Email (Resend)
 RESEND_API_KEY=re_xxxxxxxxxxxxx
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 
 # NEW - Payment (Paystack)
 PAYSTACK_SECRET_KEY=sk_live_xxxxxxxxxxxxx
@@ -162,7 +162,7 @@ WHATSAPP_NUMBER=+2348033094050
 
 ### Email Domain Setup
 
-To use custom domain emails (hello@giltcounselling.com):
+To use custom domain emails (wecare@giltcounselling.com):
 
 1. **Purchase/Configure Domain**: giltcounselling.com
 2. **Choose Email Service**:
@@ -178,7 +178,7 @@ To use custom domain emails (hello@giltcounselling.com):
    ```
 
 4. **Email Addresses to Create**:
-   - hello@giltcounselling.com (general inquiries)
+   - wecare@giltcounselling.com (general inquiries)
    - support@giltcounselling.com (client support)
    - notification@giltcounselling.com (automated emails)
    - admin@giltcounselling.com (admin use)

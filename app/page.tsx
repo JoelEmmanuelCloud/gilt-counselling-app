@@ -125,7 +125,7 @@ export default function Home() {
                 Benefits of psychological<br className="hidden sm:block" />therapy by an expert.
               </h2>
               <p className="text-gray-300 mb-6 sm:mb-7 lg:mb-8 xl:mb-10 leading-relaxed text-sm sm:text-base lg:text-lg xl:text-xl">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris.
+                Our experienced counsellors provide a safe, non-judgmental space to help you navigate life's challenges. Through evidence-based therapeutic approaches, we empower individuals, couples, and families to build resilience, strengthen relationships, and achieve lasting wellbeing.
               </p>
               <div className="space-y-3 sm:space-y-4 lg:space-y-5">
                 <div className="flex justify-between items-center border-b border-gray-700 pb-2 sm:pb-3 lg:pb-4">
@@ -144,8 +144,8 @@ export default function Home() {
             </div>
             <div className="order-1 lg:order-2 relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] rounded-lg lg:rounded-xl xl:rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&h=400&fit=crop"
-                alt="Professional therapist consultation session"
+                src="/images/teaching.jpeg"
+                alt="Counsellor in a therapy session with a client"
                 fill
                 className="object-cover"
               />
@@ -279,8 +279,8 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center max-w-6xl xl:max-w-7xl mx-auto">
           <div className="order-2 lg:order-1 relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[600px] rounded-lg lg:rounded-xl xl:rounded-2xl overflow-hidden shadow-xl">
             <Image
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=500&fit=crop"
-              alt="Gilt Counselling Consult - Professional counselling environment"
+              src="/images/teens.jpg"
+              alt="Mother with two teenage sons sitting together on a swing"
               fill
               className="object-cover"
             />
@@ -347,8 +347,8 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
             <div className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] rounded-lg lg:rounded-xl xl:rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="https://images.unsplash.com/photo-1516302752625-fcc3c50ae61f?w=600&h=400&fit=crop"
-                alt="Professional counseling session"
+                src="/images/tagline.jpg"
+                alt="Counsellor teaching young people at a whiteboard session"
                 fill
                 className="object-cover"
               />
@@ -358,10 +358,10 @@ export default function Home() {
                 The Process
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 leading-tight">
-                An amazing tagline for your process...
+                How your journey with us begins.
               </h2>
               <p className="text-gray-600 leading-relaxed mb-5 sm:mb-6 lg:mb-8 text-sm sm:text-base lg:text-lg">
-                Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostrud exercitation ullamco laboris sed ut perspiciatis unde omnis iste natus error sit.
+                We follow a structured yet flexible approach tailored to your unique needs. From your first consultation to ongoing support, every step is designed to help you feel heard, understood, and empowered to make meaningful changes in your life.
               </p>
               <div className="bg-white rounded-lg lg:rounded-xl p-4 sm:p-5 lg:p-6 xl:p-8 shadow-sm">
                 <div className="flex items-start gap-3 sm:gap-4 lg:gap-5">

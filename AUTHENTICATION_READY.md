@@ -14,7 +14,7 @@ Your authentication system is now **100% ready** with both authentication method
 #### 1. ✅ Email Magic Link (Passwordless)
 - **Provider**: Resend
 - **Status**: ✅ Configured and ready
-- **Email From**: hello@giltcounselling.com
+- **Email From**: wecare@giltcounselling.com
 - **Features**:
   - No password required
   - Branded email template with Gilt colors
@@ -168,7 +168,7 @@ AUTH_TRUST_HOST=true ✅
 
 # Resend (Email)
 RESEND_API_KEY=configured ✅
-EMAIL_FROM=hello@giltcounselling.com ✅
+EMAIL_FROM=wecare@giltcounselling.com ✅
 
 # Google OAuth
 GOOGLE_CLIENT_ID=configured ✅

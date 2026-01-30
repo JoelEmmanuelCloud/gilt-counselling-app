@@ -3,7 +3,7 @@ import { generateOTPEmail as _generateOTPEmail } from './email-templates/otp';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-const FROM_EMAIL = process.env.EMAIL_FROM || 'Gilt Counselling Consult <hello@giltcounselling.com>';
+const FROM_EMAIL = process.env.EMAIL_FROM || 'Gilt Counselling Consult <wecare@giltcounselling.com>';
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
 const LOGO_URL = 'http://cdn.mcauto-images-production.sendgrid.net/f638e50cb4cb3520/2aca1832-4d5e-4457-a2d0-d15541acd0f2/7262x3077.jpg';
 
@@ -110,7 +110,7 @@ export function generateAppointmentConfirmationEmail(
                       Need to reschedule?
                     </p>
                     <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.5; text-align: center;">
-                      Contact us at <a href="tel:+2348033094050" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">+234 803 309 4050</a> or <a href="mailto:hello@giltcounselling.com" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">hello@giltcounselling.com</a>
+                      Contact us at <a href="tel:+2348033094050" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">+234 803 309 4050</a> or <a href="mailto:wecare@giltcounselling.com" style="color: #1a1a1a; text-decoration: none; font-weight: 500;">wecare@giltcounselling.com</a>
                     </p>
                   </td>
                 </tr>
@@ -131,7 +131,7 @@ export function generateAppointmentConfirmationEmail(
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
@@ -236,7 +236,7 @@ export async function sendWelcomeEmail(email: string, firstName: string) {
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
@@ -270,7 +270,7 @@ Gilt Counselling Consult
 Nigeria Office: 88 Woji Road, Port Harcourt
 Canada Office: 470 Front St W, Toronto
 Phone: +234 803 309 4050
-Email: hello@giltcounselling.com
+Email: wecare@giltcounselling.com
   `;
 
   return sendEmail({
@@ -359,7 +359,7 @@ export async function sendCounselorWelcomeEmail(email: string, firstName: string
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
@@ -470,7 +470,7 @@ export async function sendAppointmentStatusEmail(
                     </div>
 
                     <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.5; text-align: center;">
-                      If you have any questions, please contact us at <a href="mailto:hello@giltcounselling.com" style="color: #1a1a1a;">hello@giltcounselling.com</a>
+                      If you have any questions, please contact us at <a href="mailto:wecare@giltcounselling.com" style="color: #1a1a1a;">wecare@giltcounselling.com</a>
                     </p>
                   </td>
                 </tr>
@@ -489,7 +489,7 @@ export async function sendAppointmentStatusEmail(
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
@@ -637,7 +637,7 @@ export async function sendCounselorAssignmentEmail(
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       &copy; ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
@@ -728,7 +728,7 @@ export async function sendRescheduleEmail(
                     </div>
 
                     <p style="margin: 0; color: #666666; font-size: 14px; line-height: 1.5; text-align: center;">
-                      If you have any questions, please contact us at <a href="mailto:hello@giltcounselling.com" style="color: #1a1a1a;">hello@giltcounselling.com</a>
+                      If you have any questions, please contact us at <a href="mailto:wecare@giltcounselling.com" style="color: #1a1a1a;">wecare@giltcounselling.com</a>
                     </p>
                   </td>
                 </tr>
@@ -747,7 +747,7 @@ export async function sendRescheduleEmail(
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.

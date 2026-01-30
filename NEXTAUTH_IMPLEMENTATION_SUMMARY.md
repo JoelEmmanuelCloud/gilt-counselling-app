@@ -242,7 +242,7 @@ GOOGLE_CLIENT_SECRET=GOCSPX-xxxxxxxxxxxxx
 
 # Email Service (Resend)
 RESEND_API_KEY=re_xxxxxxxxxxxx
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 
 # App URL
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -310,7 +310,7 @@ GOOGLE_CLIENT_SECRET=GOCSPX-abcdefghijklmnop
 **D. Add to .env.local:**
 ```env
 RESEND_API_KEY=re_abcd1234xyz5678
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 ```
 
 **For Development (Without Domain):**

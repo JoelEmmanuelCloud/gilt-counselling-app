@@ -86,7 +86,7 @@ export function generateOTPEmail(email: string, code: string, firstName?: string
                       +234 803 309 4050
                     </p>
                     <p style="margin: 0 0 20px; color: #999999; font-size: 13px;">
-                      hello@giltcounselling.com
+                      wecare@giltcounselling.com
                     </p>
                     <p style="margin: 0; color: #cccccc; font-size: 12px;">
                       © ${new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
@@ -120,7 +120,7 @@ Empowering teens & youths for optimal development
 Nigeria Office: 88 Woji Road, Port Harcourt
 Canada Office: 470 Front St W, Toronto
 Phone: +234 803 309 4050
-Email: hello@giltcounselling.com
+Email: wecare@giltcounselling.com
   `;
 
   return { html, text };

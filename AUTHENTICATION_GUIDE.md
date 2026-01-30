@@ -138,7 +138,7 @@ GOOGLE_CLIENT_SECRET=your-secret
 
 # Email (Resend)
 RESEND_API_KEY=re_xxxxxxxxxxxx
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=hel@giltcounselling.com
 
 # App URL
 NEXT_PUBLIC_APP_URL=http://localhost:3000
@@ -186,7 +186,7 @@ NEXT_PUBLIC_APP_URL=http://localhost:3000
 6. Add to `.env.local`:
    ```env
    RESEND_API_KEY=re_xxxxxxxxxxxx
-   EMAIL_FROM=hello@giltcounselling.com
+   EMAIL_FROM=wecare@giltcounselling.com
    ```
 
 **Email templates included for:**

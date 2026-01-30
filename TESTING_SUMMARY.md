@@ -101,7 +101,7 @@ GOOGLE_CLIENT_SECRET=placeholder-get-from-google-cloud-console
 
 # Email Service (needs real API key)
 RESEND_API_KEY=re_placeholder_get_from_resend_com
-EMAIL_FROM=hello@giltcounselling.com
+EMAIL_FROM=wecare@giltcounselling.com
 
 # MongoDB (already configured)
 MONGODB_URI=mongodb+srv://... (configured)

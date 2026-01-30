@@ -16,11 +16,33 @@ export default function Contact() {
     phone: '',
     message: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission (this would connect to an API in production)
-    toast.success('Thank you for reaching out. We will get back to you soon!');
+    setIsSubmitting(true);
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        toast.error(data.message || 'Something went wrong. Please try again.');
+        return;
+      }
+
+      toast.success('Thank you for reaching out. We will get back to you soon!');
+      setFormData({ name: '', email: '', phone: '', message: '' });
+    } catch {
+      toast.error('Failed to send message. Please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -143,32 +165,16 @@ export default function Contact() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=400&h=400&fit=crop"
-              alt="Waiting Area - Nigeria Office"
+              src="/images/office1.jpg"
+              alt="Counselling Room - Comfortable seating area"
               fill
               className="object-cover"
             />
           </div>
           <div className="relative h-[400px] rounded-lg overflow-hidden">
             <Image
-              src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=400&h=400&fit=crop"
-              alt="Counselling Room - Nigeria Office"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&h=400&fit=crop"
-              alt="Waiting Area - Canada Office"
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
-            <Image
-              src="https://images.unsplash.com/photo-1497215842964-222b430dc094?w=400&h=400&fit=crop"
-              alt="Counselling Room - Canada Office"
+              src="/images/office2.jpg"
+              alt="Group Session Room - Meeting and workshop space"
               fill
               className="object-cover"
             />
@@ -241,8 +247,8 @@ export default function Contact() {
                 />
               </div>
 
-              <Button type="submit" variant="primary" className="w-full">
-                Send Message
+              <Button type="submit" variant="primary" className="w-full" disabled={isSubmitting}>
+                {isSubmitting ? 'Sending...' : 'Send Message'}
               </Button>
 
               <p className="text-sm text-gray-600 text-center mt-4">
