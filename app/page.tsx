@@ -61,9 +61,9 @@ export default function Home() {
                 <BookSessionButton className="w-full xs:w-auto bg-soft-terracotta hover:bg-soft-terracotta/90 text-white px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300 hover:shadow-lg">
                   Book Session
                 </BookSessionButton>
-                <Link href="/about">
+                <Link href="/services">
                   <Button className="w-full xs:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/20 px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
-                    About US
+                    Explore Our Services
                   </Button>
                 </Link>
               </div>
