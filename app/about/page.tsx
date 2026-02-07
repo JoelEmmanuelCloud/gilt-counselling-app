@@ -47,7 +47,7 @@ export default function About() {
     {
       name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
       title: 'Consultant - Marital Counselling',
-      credentials: 'Professor of Counselling',
+      credentials: 'Professor of Counselling Psychology',
       bio: 'Prof Betty-Ruth Ngozi Iruloh brings a wealth of experience in marital and family counselling. She has shown keen interest in Family Counselling by addressing specifically the issues of Pre-marital and Marital Counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
       image: '/images/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
     },
