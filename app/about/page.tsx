@@ -38,16 +38,9 @@ export default function About() {
 
   const team = [
     {
-      name: 'Dame Prof Chinelo Joy Ugwu',
-      title: 'CEO, GILT COUNSELLING CONSULT',
-      credentials: 'FCASSON, CPCN, MNAE, KSM',
-      bio: 'Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.',
-      image: '/images/Dame Prof Chinelo Joy Ugwu.jpeg',
-    },
-    {
       name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
       title: 'Consultant - Marital Counselling',
-      credentials: 'Professor of Counselling',
+      credentials: 'Professor of Counselling Psychology',
       bio: 'Prof Betty-Ruth Ngozi Iruloh brings a wealth of experience in marital and family counselling. She has shown keen interest in Family Counselling by addressing specifically the issues of Pre-marital and Marital Counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
       image: '/images/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
     },
@@ -55,7 +48,7 @@ export default function About() {
       name: 'Dr Faith I. Barilera',
       title: 'Strategic Planner & Counselling Psychologist',
       credentials: 'Ph.D. in Educational Psychology, Licensed Trauma Information Manager, Certified JCIN Trainer',
-      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling consultant and licensed trauma information manager from the School of Trauma Informed Management. A certified JCIN trainer and mental health and leadership facilitator with a Doctorate in Educational Psychology from Ignatius Ajuru University of Education, and Master\'s and B.Sc.Ed degrees in Educational Psychology and Guidance & Counselling from the University of Port Harcourt, Choba, Nigeria. She serves as Strategic Planner at Gilt Counselling Consult while leading youth development initiatives as President of JCI Trans Amadi local Organization of the Junior Chamber International Nigeria. She specializes in person-centered, mental health and trauma-informed approaches and is a member of relevant professional bodies including CASSON, RIVCASSON, APROPCON, and the Nigerian Psychological Association (NPA), delivering practical, engaging, and impact-driven consultations and training for schools, organizations, and community groups.',
+      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling psychologist and a licensed trauma information manager. She specializes in school and career counselling, person-centered, mental health and trauma-informed. Delivering practical, engaging, and impact-driven consultations.',
       image: '/images/Dr Faith I. Barilera.jpeg',
     },
   ];
@@ -136,35 +129,30 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
+      {/* Founder Section */}
       <section className="section-container bg-warm-cream">
-        <SectionHeading
-          title="Meet Our Counsellors"
-          subtitle="Experienced professionals dedicated to your wellbeing and growth."
-          centered
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {team.map((member, index) => (
-            <Card key={index} className="text-center">
-              <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
-                <Image
-                  src={member.image}
-                  alt={`${member.name} - Professional Headshot`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="(max-width: 768px) 280px, (max-width: 1024px) 280px, 280px"
-                  quality={60}
-                  placeholder="blur"
-                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
-                  loading="lazy"
-                />
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="relative h-[350px] md:h-[400px] w-full max-w-[350px] mx-auto rounded-lg overflow-hidden">
+              <Image
+                src="/images/Dame Prof Chinelo Joy Ugwu.jpeg"
+                alt="Dame Prof Chinelo Joy Ugwu - Founder & CEO"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+            <div>
+              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider mb-3">
+                Founder & CEO
               </div>
-              <h3 className="heading-sm mb-2">{member.name}</h3>
-              <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
-              <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
-              <p className="text-gray-700 leading-relaxed text-sm">{member.bio}</p>
-            </Card>
-          ))}
+              <h2 className="heading-md mb-2">Dame Prof Chinelo Joy Ugwu</h2>
+              <p className="text-soft-gold font-semibold mb-1">CEO, GILT COUNSELLING CONSULT</p>
+              <p className="text-sm text-gray-600 mb-4">FCASSON, CPCN, MNAE, KSM</p>
+              <p className="text-gray-700 leading-relaxed text-justify">
+                Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -240,6 +228,33 @@ export default function About() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Our Dedicated Consultants and Professional Counsellors"
+          subtitle="Experienced professionals dedicated to your wellbeing and growth."
+          centered
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          {team.map((member, index) => (
+            <Card key={index} className="text-center">
+              <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
+                <Image
+                  src={member.image}
+                  alt={`${member.name} - Professional Headshot`}
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <h3 className="heading-sm mb-2">{member.name}</h3>
+              <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
+              <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
+              <p className="text-gray-700 leading-relaxed text-sm text-justify">{member.bio}</p>
+            </Card>
+          ))}
         </div>
       </section>
     </div>
