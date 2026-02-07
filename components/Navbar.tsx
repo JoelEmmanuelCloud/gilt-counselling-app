@@ -149,7 +149,11 @@ const Navbar: React.FC = () => {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200 font-body"
+                  className={`transition-colors duration-200 font-body relative pb-1 ${
+                    pathname === link.href
+                      ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
+                      : 'text-gray-700 hover:text-soft-terracotta'
+                  }`}
                 >
                   {link.label}
                 </Link>
@@ -160,7 +164,11 @@ const Navbar: React.FC = () => {
                   {user.role === 'admin' && (
                     <Link
                       href="/admin"
-                      className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200"
+                      className={`transition-colors duration-200 relative pb-1 ${
+                        pathname === '/admin'
+                          ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
+                          : 'text-gray-700 hover:text-soft-terracotta'
+                      }`}
                     >
                       Admin
                     </Link>
@@ -168,7 +176,11 @@ const Navbar: React.FC = () => {
                   {user.role === 'counselor' && (
                     <Link
                       href="/counselor"
-                      className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200"
+                      className={`transition-colors duration-200 relative pb-1 ${
+                        pathname === '/counselor'
+                          ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
+                          : 'text-gray-700 hover:text-soft-terracotta'
+                      }`}
                     >
                       Dashboard
                     </Link>
@@ -176,7 +188,11 @@ const Navbar: React.FC = () => {
                   {user.role !== 'admin' && user.role !== 'counselor' && (
                     <Link
                       href="/account"
-                      className="text-gray-700 hover:text-soft-terracotta transition-colors duration-200"
+                      className={`transition-colors duration-200 relative pb-1 ${
+                        pathname === '/account'
+                          ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
+                          : 'text-gray-700 hover:text-soft-terracotta'
+                      }`}
                     >
                       My Account
                     </Link>
