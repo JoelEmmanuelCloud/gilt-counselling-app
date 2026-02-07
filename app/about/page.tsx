@@ -232,7 +232,7 @@ export default function About() {
               <h3 className="heading-sm mb-2">{member.name}</h3>
               <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
               <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
-              <p className="text-gray-700 leading-relaxed text-sm">{member.bio}</p>
+              <p className="text-gray-700 leading-relaxed text-sm text-justify">{member.bio}</p>
             </Card>
           ))}
         </div>
