@@ -210,6 +210,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
               alt="Gilt Counselling Consult"
               fill
               className="object-contain"
+              sizes="(max-width: 640px) 96px, (max-width: 1024px) 128px, 144px"
             />
           </div>
           <h2 className="text-xl sm:text-2xl lg:text-3xl font-heading font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
