@@ -214,7 +214,7 @@ export default function About() {
       {/* Team Section */}
       <section className="section-container bg-warm-cream">
         <SectionHeading
-          title="Meet Our Counsellors"
+          title="Our Dedicated Consultants and Professional Counsellors"
           subtitle="Experienced professionals dedicated to your wellbeing and growth."
           centered
         />
