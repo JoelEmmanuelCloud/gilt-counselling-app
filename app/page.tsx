@@ -114,7 +114,7 @@ export default function Home() {
             </div>
             <div className="order-1 lg:order-2 relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] rounded-lg lg:rounded-xl xl:rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src="/images/teaching.jpeg"
+                src="/images/DSC_9730.jpg"
                 alt="Counsellor in a therapy session with a client"
                 fill
                 className="object-cover"
