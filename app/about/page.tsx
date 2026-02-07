@@ -55,7 +55,7 @@ export default function About() {
       name: 'Dr Faith I. Barilera',
       title: 'Strategic Planner & Counselling Psychologist',
       credentials: 'Ph.D. in Educational Psychology, Licensed Trauma Information Manager, Certified JCIN Trainer',
-      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling consultant and licensed trauma information manager from the School of Trauma Informed Management. A certified JCIN trainer and mental health and leadership facilitator with a Doctorate in Educational Psychology from Ignatius Ajuru University of Education, and Master\'s and B.Sc.Ed degrees in Educational Psychology and Guidance & Counselling from the University of Port Harcourt, Choba, Nigeria. She serves as Strategic Planner at Gilt Counselling Consult while leading youth development initiatives as President of JCI Trans Amadi local Organization of the Junior Chamber International Nigeria. She specializes in person-centered, mental health and trauma-informed approaches and is a member of relevant professional bodies including CASSON, RIVCASSON, APROPCON, and the Nigerian Psychological Association (NPA), delivering practical, engaging, and impact-driven consultations and training for schools, organizations, and community groups.',
+      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling psychologist and a licensed trauma information manager. She specializes in school and career counselling, person-centered, mental health and trauma-informed. Delivering practical, engaging, and impact-driven consultations.',
       image: '/images/Dr Faith I. Barilera.jpeg',
     },
   ];
