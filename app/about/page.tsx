@@ -238,7 +238,7 @@ export default function About() {
           subtitle="Experienced professionals dedicated to your wellbeing and growth."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {team.map((member, index) => (
             <Card key={index} className="text-center">
               <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
