@@ -38,13 +38,6 @@ export default function About() {
 
   const team = [
     {
-      name: 'Dame Prof Chinelo Joy Ugwu',
-      title: 'CEO, GILT COUNSELLING CONSULT',
-      credentials: 'FCASSON, CPCN, MNAE, KSM',
-      bio: 'Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.',
-      image: '/images/Dame Prof Chinelo Joy Ugwu.jpeg',
-    },
-    {
       name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
       title: 'Consultant - Marital Counselling',
       credentials: 'Professor of Counselling Psychology',
@@ -133,6 +126,33 @@ export default function About() {
               </p>
             </div>
           </Card>
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className="section-container bg-warm-cream">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="relative h-[350px] md:h-[400px] w-full max-w-[350px] mx-auto rounded-lg overflow-hidden">
+              <Image
+                src="/images/Dame Prof Chinelo Joy Ugwu.jpeg"
+                alt="Dame Prof Chinelo Joy Ugwu - Founder & CEO"
+                fill
+                className="object-cover object-top"
+              />
+            </div>
+            <div>
+              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider mb-3">
+                Founder & CEO
+              </div>
+              <h2 className="heading-md mb-2">Dame Prof Chinelo Joy Ugwu</h2>
+              <p className="text-soft-gold font-semibold mb-1">CEO, GILT COUNSELLING CONSULT</p>
+              <p className="text-sm text-gray-600 mb-4">FCASSON, CPCN, MNAE, KSM</p>
+              <p className="text-gray-700 leading-relaxed text-justify">
+                Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
