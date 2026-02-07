@@ -111,16 +111,16 @@ export default function About() {
           <Card variant="warm" className="text-center">
             <h2 className="heading-md mb-6">Our Mission</h2>
             <div className="space-y-4 text-gray-700">
-              <p className="body-lg">
+              <p className="body-lg text-justify">
                 Empowering teens and youths for optimal development through professional,
                 compassionate counselling and comprehensive support services.
               </p>
-              <p className="body-md">
+              <p className="body-md text-justify">
                 At Gilt Counselling Consult, we are dedicated to providing high-quality mental health services,
                 educational consulting, and youth development programs. With offices in Nigeria and Canada, we serve
                 individuals, families, schools, and organizations with a commitment to excellence and care.
               </p>
-              <p className="body-md">
+              <p className="body-md text-justify">
                 Whether you need mental health support, academic guidance, career counselling, or organizational training,
                 we create a safe, confidential space where transformation and growth can happen.
               </p>
@@ -169,7 +169,7 @@ export default function About() {
               <div className={`${value.color} text-white rounded-xl p-8 mb-4 min-h-[200px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-2xl mb-3">{value.name}</h3>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed px-2">
+              <p className="text-sm text-gray-600 leading-relaxed px-2 text-justify">
                 {value.description}
               </p>
             </div>
@@ -193,7 +193,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="font-heading font-semibold text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{item.description}</p>
+                  <p className="text-gray-600 leading-relaxed text-justify">{item.description}</p>
                 </div>
               </div>
             </Card>

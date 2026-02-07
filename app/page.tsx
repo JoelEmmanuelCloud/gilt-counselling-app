@@ -88,7 +88,7 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
                 Benefits of psychological<br className="hidden sm:block" />therapy by an expert.
               </h2>
-              <p className="text-gray-300 mb-6 sm:mb-7 lg:mb-8 xl:mb-10 leading-relaxed text-sm sm:text-base lg:text-lg xl:text-xl">
+              <p className="text-gray-300 mb-6 sm:mb-7 lg:mb-8 xl:mb-10 leading-relaxed text-sm sm:text-base lg:text-lg xl:text-xl text-justify">
                 Our experienced counsellors provide a safe, non-judgmental space to help you navigate life's challenges. Through evidence-based therapeutic approaches, we empower individuals, couples, and families to build resilience, strengthen relationships, and achieve lasting wellbeing.
               </p>
               <div className="space-y-3 sm:space-y-4 lg:space-y-5">
@@ -131,7 +131,7 @@ export default function Home() {
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading font-bold text-gray-900 mb-4 sm:mb-5 lg:mb-6">
               How can I help you?
             </h2>
-            <p className="text-gray-600 mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg">
+            <p className="text-gray-600 mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg text-justify">
               If you're experiencing any kind of mental illness or problem in relations.
             </p>
             <ul className="space-y-2 sm:space-y-3 lg:space-y-4 mb-5 sm:mb-6 lg:mb-8">
@@ -203,10 +203,10 @@ export default function Home() {
               Empowering <span className="italic font-serif">Teens & Youths</span><br className="hidden sm:block" />
               for Optimal Development
             </h2>
-            <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed mb-4 sm:mb-5 lg:mb-6">
+            <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed mb-4 sm:mb-5 lg:mb-6 text-justify">
               We provide professional, compassionate counselling services designed to help young people, families, and communities thrive. With offices in Nigeria and Canada, we offer comprehensive support across mental health, education, career development, and more.
             </p>
-            <p className="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 leading-relaxed mb-5 sm:mb-6 lg:mb-8 xl:mb-10">
+            <p className="text-xs sm:text-sm lg:text-base xl:text-lg text-gray-600 leading-relaxed mb-5 sm:mb-6 lg:mb-8 xl:mb-10 text-justify">
               Our core values of Joy, Optimism, Confidentiality, Integrity, and Inclusion guide everything we do. Whether you're seeking individual counselling, family support, educational consulting, or organizational training, we're here to help you navigate life's challenges with confidence.
             </p>
             <div className="flex items-start gap-3 sm:gap-4 lg:gap-5 mb-5 sm:mb-6 lg:mb-8 xl:mb-10">
@@ -274,7 +274,7 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 leading-tight">
                 How your journey with us begins.
               </h2>
-              <p className="text-gray-600 leading-relaxed mb-5 sm:mb-6 lg:mb-8 text-sm sm:text-base lg:text-lg">
+              <p className="text-gray-600 leading-relaxed mb-5 sm:mb-6 lg:mb-8 text-sm sm:text-base lg:text-lg text-justify">
                 We follow a structured yet flexible approach tailored to your unique needs. From your first consultation to ongoing support, every step is designed to help you feel heard, understood, and empowered to make meaningful changes in your life.
               </p>
               <div className="bg-white rounded-lg lg:rounded-xl p-4 sm:p-5 lg:p-6 xl:p-8 shadow-sm">
@@ -286,7 +286,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="font-heading font-bold text-gray-900 mb-1 sm:mb-2 text-base sm:text-lg lg:text-xl">Personalized therapies</h3>
-                    <p className="text-gray-600 text-xs sm:text-sm lg:text-base">
+                    <p className="text-gray-600 text-xs sm:text-sm lg:text-base text-justify">
                       When you are in distressed or stressful period in life you need a supportive therapist. What can you accomplish with support and understanding.
                     </p>
                   </div>
