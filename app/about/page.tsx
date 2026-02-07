@@ -136,33 +136,6 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
-      <section className="section-container bg-warm-cream">
-        <SectionHeading
-          title="Meet Our Counsellors"
-          subtitle="Experienced professionals dedicated to your wellbeing and growth."
-          centered
-        />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {team.map((member, index) => (
-            <Card key={index} className="text-center">
-              <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
-                <Image
-                  src={member.image}
-                  alt={`${member.name} - Professional Headshot`}
-                  fill
-                  className="object-cover object-top"
-                />
-              </div>
-              <h3 className="heading-sm mb-2">{member.name}</h3>
-              <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
-              <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
-              <p className="text-gray-700 leading-relaxed text-sm">{member.bio}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
       {/* Core Values */}
       <section className="section-container bg-off-white">
         <SectionHeading
@@ -235,6 +208,33 @@ export default function About() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Team Section */}
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Meet Our Counsellors"
+          subtitle="Experienced professionals dedicated to your wellbeing and growth."
+          centered
+        />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {team.map((member, index) => (
+            <Card key={index} className="text-center">
+              <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
+                <Image
+                  src={member.image}
+                  alt={`${member.name} - Professional Headshot`}
+                  fill
+                  className="object-cover object-top"
+                />
+              </div>
+              <h3 className="heading-sm mb-2">{member.name}</h3>
+              <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
+              <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
+              <p className="text-gray-700 leading-relaxed text-sm">{member.bio}</p>
+            </Card>
+          ))}
         </div>
       </section>
     </div>
