@@ -16,42 +16,6 @@ export default function Home() {
     'Online Sessions',
   ];
 
-  const pricingPlans = [
-    {
-      name: 'Individual',
-      price: '₦375,000',
-      description: 'For individual therapy sessions',
-      features: [
-        'Personalized treatment plan',
-        'Equitable rate up to two hours',
-        'All sessions include materials',
-      ],
-    },
-    {
-      name: 'Couples',
-      price: '₦450,000',
-      period: 'Per session',
-      description: 'For couples counseling',
-      features: [
-        'Relationship focused sessions',
-        'Equitable rate up to two hours',
-        'Offers Session and Counseling',
-      ],
-      highlighted: true,
-    },
-    {
-      name: 'Business',
-      price: '₦600,000',
-      period: 'Per session',
-      description: 'For business coaching',
-      features: [
-        'Professional consultation',
-        'Equitable rate up to two hours',
-        'Helps business owners discover key',
-      ],
-    },
-  ];
-
   const testimonials = [
     {
       quote: 'The counselling sessions helped me understand myself better and gave me tools to manage my emotions. I feel more confident now.',
@@ -152,71 +116,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Pricing Section */}
-      <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-warm-cream">
-        <div className="max-w-6xl xl:max-w-7xl mx-auto text-center mb-8 sm:mb-10 lg:mb-12 xl:mb-16">
-          <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
-            Consultation Prices
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 leading-tight">
-            Simple prices, flexible options,<br className="hidden sm:block" />
-            & nothing hidden.
-          </h2>
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 xl:gap-10 max-w-6xl xl:max-w-7xl mx-auto">
-          {pricingPlans.map((plan, index) => (
-            <div
-              key={index}
-              className={`rounded-lg lg:rounded-xl xl:rounded-2xl p-5 sm:p-6 lg:p-8 xl:p-10 ${
-                plan.highlighted
-                  ? 'bg-soft-terracotta text-gray-900 shadow-xl sm:scale-105 lg:scale-110'
-                  : 'bg-white shadow-lg'
-              } transition-all duration-300 hover:shadow-2xl`}
-            >
-              <h3 className={`text-lg sm:text-xl lg:text-2xl font-heading font-bold mb-2 lg:mb-3 ${plan.highlighted ? 'text-gray-900' : 'text-gray-900'}`}>
-                {plan.name}
-              </h3>
-              <div className="mb-4 sm:mb-5 lg:mb-6 xl:mb-8">
-                <span className={`text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold ${plan.highlighted ? 'text-gray-900' : 'text-soft-terracotta'}`}>
-                  {plan.price}
-                </span>
-              </div>
-              <ul className="space-y-2 sm:space-y-3 lg:space-y-4 mb-6 sm:mb-7 lg:mb-8 xl:mb-10">
-                {plan.features.map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-2 sm:gap-3">
-                    <svg
-                      className={`w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 mt-0.5 flex-shrink-0 ${plan.highlighted ? 'text-gray-900' : 'text-soft-terracotta'}`}
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                    <span className={`text-xs sm:text-sm lg:text-base ${plan.highlighted ? 'text-gray-700' : 'text-gray-600'}`}>
-                      {feature}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-              <Link href="/book-appointment">
-                <Button
-                  className={`w-full uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide py-2.5 sm:py-3 lg:py-3.5 rounded-lg lg:rounded-xl ${
-                    plan.highlighted
-                      ? 'bg-white text-soft-terracotta hover:bg-white hover:text-soft-terracotta'
-                      : ''
-                  }`}
-                >
-                  Get Started
-                </Button>
-              </Link>
-            </div>
-          ))}
-        </div>
-        <p className="text-center text-gray-600 mt-6 sm:mt-8 lg:mt-10 text-[10px] sm:text-xs lg:text-sm">
-          *Hourly pricing for sessions on an equitable basis
-        </p>
       </section>
 
       {/* How Can I Help You & Call for Consultation Section */}
