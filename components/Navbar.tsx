@@ -138,6 +138,7 @@ const Navbar: React.FC = () => {
                   alt="Gilt Counselling Consult Logo"
                   fill
                   className="object-contain"
+                  sizes="128px"
                   priority
                 />
               </div>
@@ -291,6 +292,7 @@ const Navbar: React.FC = () => {
                   alt="Gilt Counselling Consult Logo"
                   fill
                   className="object-contain"
+                  sizes="(max-width: 475px) 96px, (max-width: 640px) 112px, 128px"
                 />
               </div>
             </Link>

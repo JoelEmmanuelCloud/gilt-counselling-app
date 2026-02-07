@@ -39,6 +39,8 @@ const Footer: React.FC = () => {
                   alt="Gilt Counselling Consult Logo"
                   fill
                   className="object-contain object-left"
+                  sizes="128px"
+                  loading="lazy"
                 />
               </div>
             </div>
