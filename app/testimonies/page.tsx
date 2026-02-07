@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import Button from '@/components/ui/Button';
@@ -93,6 +94,89 @@ export default function TestimoniesPage() {
               date={testimonial.date}
             />
           ))}
+        </div>
+      </section>
+
+      {/* Community Outreach */}
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Community Outreach"
+          subtitle="Making a difference beyond our counselling rooms — bringing support and awareness to communities."
+          centered
+        />
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Community
+              </span>
+              <span className="text-sm text-gray-500">December 2025</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              International World Day for Persons with Disabilities 2025
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">OTANA INCLUSIVE CENTRE</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult celebrated the 2025 International World Day for Persons with Disabilities
+              at Otana Inclusive Centre, championing the message that <strong>no child should be left behind</strong>.
+              The event brought together families, caregivers, and advocates to raise awareness about inclusion
+              and support for persons with disabilities.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/disability-day-1.jpeg"
+                  alt="Gilt Counselling at International World Day for Persons with Disabilities - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/disability-day-2.jpeg"
+                  alt="Gilt Counselling at International World Day for Persons with Disabilities - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/disability-day-3.jpeg"
+                  alt="Gilt Counselling at International World Day for Persons with Disabilities - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/disability-day-4.jpeg"
+                  alt="Gilt Counselling at International World Day for Persons with Disabilities - Event photo 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
