@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useParams } from 'next/navigation';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
 
@@ -19,6 +19,7 @@ export default function BlogPostPage() {
       date: 'December 15, 2024',
       readTime: '5 min read',
       author: 'Dr. Sarah Johnson',
+      image: '/images/blog/teen-anxiety.jpg',
       content: `
         <p class="body-lg mb-6">Anxiety in teenagers is more common than many parents realize. The teenage years bring significant changes—physical, emotional, and social—that can trigger feelings of worry and stress.</p>
 
@@ -62,6 +63,7 @@ export default function BlogPostPage() {
       date: 'December 10, 2024',
       readTime: '4 min read',
       author: 'Dr. Michael Chen',
+      image: '/images/blog/mental-health.jpg',
       content: `
         <p class="body-lg mb-6">Mental health isn't just about addressing problems when they arise—it's about building daily practices that strengthen your emotional resilience and wellbeing.</p>
 
@@ -89,6 +91,7 @@ export default function BlogPostPage() {
       date: 'December 5, 2024',
       readTime: '6 min read',
       author: 'Dr. Sarah Johnson',
+      image: '/images/blog/resilience.jpg',
       content: `
         <p class="body-lg mb-6">Resilience—the ability to bounce back from setbacks—isn't something you either have or don't have. It's a skill that can be learned and strengthened over time.</p>
 
@@ -156,17 +159,23 @@ export default function BlogPostPage() {
         </div>
       </section>
 
-      {/* Optional Header Image */}
-      <section className="section-container">
-        <div className="max-w-4xl mx-auto">
-          <ImagePlaceholder
-            description={`Header Image: ${post.title}`}
-            dimensions="400px"
-            usageNotes="Optional: Use nature, light, abstract, or workspace visuals that relate to the topic."
-            className="mb-12"
-          />
-        </div>
-      </section>
+      {/* Header Image */}
+      {post.image && (
+        <section className="section-container">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-12">
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 1024px) 100vw, 896px"
+                priority
+              />
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Article Content */}
       <article className="section-container">
