@@ -2,9 +2,9 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
-import ImagePlaceholder from '@/components/ui/ImagePlaceholder';
 import Button from '@/components/ui/Button';
 
 export default function BlogPage() {
@@ -20,6 +20,7 @@ export default function BlogPage() {
       date: 'December 15, 2024',
       readTime: '5 min read',
       slug: 'understanding-teen-anxiety',
+      image: '/images/blog/teen-anxiety.jpg',
     },
     {
       title: '5 Ways to Support Your Mental Health Daily',
@@ -28,6 +29,7 @@ export default function BlogPage() {
       date: 'December 10, 2024',
       readTime: '4 min read',
       slug: 'support-mental-health-daily',
+      image: '/images/blog/mental-health.jpg',
     },
     {
       title: 'Building Resilience in Young People',
@@ -36,6 +38,7 @@ export default function BlogPage() {
       date: 'December 5, 2024',
       readTime: '6 min read',
       slug: 'building-resilience-young-people',
+      image: '/images/blog/resilience.jpg',
     },
     {
       title: 'Family Communication: Creating Safe Spaces for Difficult Conversations',
@@ -44,6 +47,7 @@ export default function BlogPage() {
       date: 'November 28, 2024',
       readTime: '5 min read',
       slug: 'family-communication-safe-spaces',
+      image: '/images/blog/family-communication.jpg',
     },
     {
       title: 'When to Seek Professional Counselling: A Guide for Parents',
@@ -52,6 +56,7 @@ export default function BlogPage() {
       date: 'November 20, 2024',
       readTime: '7 min read',
       slug: 'when-to-seek-counselling',
+      image: '/images/blog/counselling.jpg',
     },
     {
       title: 'Self-Care is Not Selfish: A Message for Caregivers',
@@ -60,6 +65,7 @@ export default function BlogPage() {
       date: 'November 15, 2024',
       readTime: '4 min read',
       slug: 'self-care-not-selfish',
+      image: '/images/blog/self-care.jpg',
     },
   ];
 
@@ -105,12 +111,15 @@ export default function BlogPage() {
           {filteredPosts.map((post, index) => (
             <Link key={index} href={`/blog/${post.slug}`} className="block group">
               <Card className="h-full hover:shadow-calm-lg transition-all duration-300">
-                <ImagePlaceholder
-                  description={`Blog Image: ${post.title}`}
-                  dimensions="200px"
-                  usageNotes="Use nature, light, abstract, or workspace visuals. No faces required."
-                  className="mb-6"
-                />
+                <div className="relative w-full h-[200px] mb-6 rounded-lg overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                </div>
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <span className="px-3 py-1 bg-warm-sand rounded-full text-xs font-medium">
