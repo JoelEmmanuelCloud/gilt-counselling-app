@@ -118,6 +118,8 @@ export default function BlogPage() {
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-300"
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={60}
+                    loading="lazy"
                   />
                 </div>
                 <div className="space-y-3">
