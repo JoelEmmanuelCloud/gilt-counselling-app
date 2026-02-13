@@ -40,36 +40,26 @@ export default function About() {
     {
       name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
       title: 'Consultant - Marital Counselling',
-      credentials: 'Professor of Counselling Psychology',
-      bio: 'Prof Betty-Ruth Ngozi Iruloh brings a wealth of experience in marital and family counselling. She has shown keen interest in Family Counselling by addressing specifically the issues of Pre-marital and Marital Counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
       image: '/images/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
     },
     {
       name: 'Dr Faith I. Barilera',
       title: 'Strategic Planner & Counselling Psychologist',
-      credentials: 'Ph.D. in Educational Psychology, Licensed Trauma Information Manager, Certified JCIN Trainer',
-      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling psychologist and a licensed trauma information manager. She specializes in school and career counselling, person-centered, mental health and trauma-informed. Delivering practical, engaging, and impact-driven consultations.',
       image: '/images/Dr Faith I. Barilera.jpeg',
     },
     {
       name: 'Dr. Gideon Isukwem',
       title: 'Adolescent & Youth Psychologist',
-      credentials: 'Ph.D. in Educational Psychology, Lecturer at University of Port Harcourt',
-      bio: 'Dr. Gideon Isukwem is a Lecturer in the Department of Educational Psychology, Guidance and Counselling at the University of Port Harcourt. He holds a Ph.D. in Educational Psychology. Dr. Isukwem skillfully applies his scientific knowledge of psychology to counselling and mental health practice, with a special focus on adolescents and youths. He is also a passionate consultant at GILT Counselling Consult.',
       image: '/uploads/Dr. Gideon Isukwem.jpeg',
     },
     {
       name: 'Esther Ebifimoere Peters',
       title: 'Counsellor & Admin Officer',
-      credentials: 'B.Ed in Counselling Psychology, M.Ed in Educational Psychology',
-      bio: 'Esther is a practicing counselor at GILT Counselling Consult and an administrator. She holds a Bachelor of Education in Counselling Psychology and a Master\'s degree (M.Ed) in Educational Psychology. With her years of experience in the youth ministry, she professionally helps teens and youths discover their talents and get emotionally healed for personal growth and optimal development.',
       image: '/uploads/Esther Ebifimoere Peters.jpeg',
     },
     {
       name: 'Success Donald',
       title: 'Secretary',
-      credentials: '',
-      bio: 'Success Donald serves as the Secretary at Gilt Counseling Consult, combining organizational excellence with a warm, welcoming presence. She is dedicated to ensuring smooth operations while providing compassionate support to every client. With a keen eye for detail and a passion for service, Success helps foster the professional and supportive environment the firm is known for.',
       image: '/uploads/Success Donald.jpeg',
     },
   ];
@@ -271,11 +261,7 @@ export default function About() {
                 />
               </div>
               <h3 className="heading-sm mb-2">{member.name}</h3>
-              <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
-              {member.credentials && (
-                <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
-              )}
-              <p className="text-gray-700 leading-relaxed text-sm text-justify">{member.bio}</p>
+              <p className="text-soft-gold font-semibold">{member.title}</p>
             </Card>
           ))}
         </div>
