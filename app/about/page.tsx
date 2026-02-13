@@ -167,8 +167,43 @@ export default function About() {
         </div>
       </section>
 
-      {/* Core Values */}
+      {/* CCPA Conference Section */}
       <section className="section-container bg-off-white">
+        <SectionHeading
+          title="Committed to Evidence-Based Practice"
+          subtitle="Our founder is always updating knowledge in evidence-based research."
+          centered
+        />
+        <div className="max-w-5xl mx-auto">
+          <p className="body-md text-center text-gray-700 mb-8">
+            Prof Chinelo Ugwu, founder of Gilt Counselling Consult, at the 2025 Canadian Counselling
+            and Psychotherapy Association (CCPA) conference in Calgary.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {[
+              { src: '/images/ccpa-conference/ccpa-1.jpeg', alt: 'Prof Chinelo Ugwu at CCPA conference with fellow delegate' },
+              { src: '/images/ccpa-conference/ccpa-2.jpeg', alt: 'Prof Chinelo Ugwu speaking at the CCPA conference podium' },
+              { src: '/images/ccpa-conference/ccpa-3.jpeg', alt: 'Prof Chinelo Ugwu with colleagues at CCPA conference session' },
+              { src: '/images/ccpa-conference/ccpa-4.jpeg', alt: 'Prof Chinelo Ugwu networking with author Patricia Morgan at CCPA conference' },
+              { src: '/images/ccpa-conference/ccpa-5.jpeg', alt: 'Prof Chinelo Ugwu at the CCPA conference booth' },
+              { src: '/images/ccpa-conference/ccpa-6.jpeg', alt: 'Prof Chinelo Ugwu with fellow counselling professional at CCPA conference' },
+            ].map((photo, index) => (
+              <div key={index} className="relative h-[280px] rounded-lg overflow-hidden">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Core Values */}
+      <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Our Core Values"
           subtitle="These principles guide everything we do and shape the care we provide."
