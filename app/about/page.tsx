@@ -40,16 +40,27 @@ export default function About() {
     {
       name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
       title: 'Consultant - Marital Counselling',
-      credentials: 'Professor of Counselling Psychology',
-      bio: 'Prof Betty-Ruth Ngozi Iruloh brings a wealth of experience in marital and family counselling. She has shown keen interest in Family Counselling by addressing specifically the issues of Pre-marital and Marital Counselling. Her expertise helps couples and families navigate challenges, strengthen relationships, and build healthier communication patterns for lasting harmony.',
       image: '/images/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
     },
     {
       name: 'Dr Faith I. Barilera',
       title: 'Strategic Planner & Counselling Psychologist',
-      credentials: 'Ph.D. in Educational Psychology, Licensed Trauma Information Manager, Certified JCIN Trainer',
-      bio: 'JCIN Ambassador Faith Barilera (PhD) is a professional counselling psychologist and a licensed trauma information manager. She specializes in school and career counselling, person-centered, mental health and trauma-informed. Delivering practical, engaging, and impact-driven consultations.',
       image: '/images/Dr Faith I. Barilera.jpeg',
+    },
+    {
+      name: 'Dr. Gideon Isukwem',
+      title: 'Adolescent & Youth Psychologist',
+      image: '/uploads/Dr. Gideon Isukwem.jpeg',
+    },
+    {
+      name: 'Esther Ebifimoere Peters',
+      title: 'Counsellor & Admin Officer',
+      image: '/uploads/Esther Ebifimoere Peters.jpeg',
+    },
+    {
+      name: 'Success Donald',
+      title: 'Secretary',
+      image: '/uploads/Success Donald.jpeg',
     },
   ];
 
@@ -238,7 +249,7 @@ export default function About() {
           subtitle="Experienced professionals dedicated to your wellbeing and growth."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {team.map((member, index) => (
             <Card key={index} className="text-center">
               <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
@@ -250,9 +261,7 @@ export default function About() {
                 />
               </div>
               <h3 className="heading-sm mb-2">{member.name}</h3>
-              <p className="text-soft-gold font-semibold mb-2">{member.title}</p>
-              <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>
-              <p className="text-gray-700 leading-relaxed text-sm text-justify">{member.bio}</p>
+              <p className="text-soft-gold font-semibold">{member.title}</p>
             </Card>
           ))}
         </div>
