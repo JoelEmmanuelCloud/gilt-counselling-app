@@ -247,7 +247,7 @@ export default function About() {
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={75}
+                    quality={60}
                     loading="lazy"
                   />
                 </div>
