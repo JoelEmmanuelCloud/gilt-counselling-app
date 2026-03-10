@@ -207,6 +207,56 @@ export default function About() {
         </div>
       </section>
 
+      {/* Otana Inclusive Centre Outreach Section */}
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Community Outreach"
+          subtitle="Giving back to our community — one act of love at a time."
+          centered
+        />
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div className="space-y-4 text-gray-700">
+              <p className="body-lg font-semibold text-soft-terracotta">
+                Chairs Donated to Otana Inclusive Centre
+              </p>
+              <p className="body-md text-justify">
+                As part of our ongoing outreach programmes, Gilt Counselling Consult donated executive chairs
+                to Otana Inclusive Centre — a gesture born from a deep commitment to the wellbeing of every child,
+                regardless of ability.
+              </p>
+              <blockquote className="border-l-4 border-soft-gold pl-4 italic text-gray-600">
+                "You have provided executive chairs for our special children to sit on. God will surely make them
+                executive individuals in their life's endeavours. This heartfelt gift is proof of your love for
+                humanity and Otana Inclusive Centre. God bless you and your team at Gilt Counselling Consult."
+              </blockquote>
+              <p className="body-md text-justify text-gray-600">
+                We are honoured by the warm reception from the centre's leadership and remain committed to serving
+                communities in need through compassionate action.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 gap-4">
+              {[
+                { src: '/images/outreach/otana-outreach-1.jpeg', alt: 'Gilt Counselling Consult donating chairs to Otana Inclusive Centre' },
+                { src: '/images/outreach/otana-outreach-2.jpeg', alt: 'Executive chairs donated to special needs children at Otana Inclusive Centre' },
+              ].map((photo, index) => (
+                <div key={index} className="relative h-[260px] rounded-lg overflow-hidden shadow-md">
+                  <Image
+                    src={photo.src}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    quality={75}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Core Values */}
       <section className="section-container bg-warm-sand">
         <SectionHeading
