@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Our Services | Gilt Counselling Consult',
     description: 'Mental health support, educational consulting, youth counselling, family therapy, and more. Professional counselling services in Port Harcourt, Nigeria.',
-    url: 'https://www.giltcounsellingconsult.com/services',
+    url: 'https://giltcounselling.com/services',
   },
 };
 

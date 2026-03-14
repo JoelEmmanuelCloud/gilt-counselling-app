@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'About Us | Gilt Counselling Consult',
     description: 'Meet our team and learn about our mission to empower teens, youths, and families through professional counselling in Port Harcourt, Nigeria.',
-    url: 'https://www.giltcounsellingconsult.com/about',
+    url: 'https://giltcounselling.com/about',
     images: [
       {
         url: '/images/Dame Prof Chinelo Joy Ugwu.jpeg',

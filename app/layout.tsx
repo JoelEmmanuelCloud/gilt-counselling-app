@@ -21,7 +21,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.giltcounsellingconsult.com'),
+  metadataBase: new URL('https://giltcounselling.com'),
   title: {
     default: 'Gilt Counselling Consult | Professional Counselling in Port Harcourt',
     template: '%s | Gilt Counselling Consult',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_NG',
-    url: 'https://www.giltcounsellingconsult.com',
+    url: 'https://giltcounselling.com',
     siteName: 'Gilt Counselling Consult',
     title: 'Gilt Counselling Consult | Professional Counselling in Port Harcourt',
     description: 'Professional counselling services in Port Harcourt, Nigeria. Empowering teens, youths, and families through mental health support, educational consulting, and youth development.',
@@ -76,7 +76,7 @@ export const metadata: Metadata = {
     },
   },
   verification: {
-    google: 'rRCJL27uUwq8Mhuqx4VMwYC8yY_uGjDdPfs2Jyz0OFg',
+    google: 'MM39bK3cghM4HO7ojINNpw63OUTKp51YE2G3a3IQX6o',
   },
 };
 
