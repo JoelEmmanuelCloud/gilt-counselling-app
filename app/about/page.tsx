@@ -257,6 +257,64 @@ export default function About() {
         </div>
       </section>
 
+      {/* All Saints Cathedral Workshop Section */}
+      <section className="section-container bg-off-white">
+        <SectionHeading
+          title="All Saints Cathedral Workshop"
+          subtitle="CEO GILT coordinated a one-day workshop for the All Saints Cathedral Education and Empowerment Committee."
+          centered
+        />
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+            <div className="space-y-4 text-gray-700">
+              <p className="body-lg font-semibold text-soft-terracotta">
+                Education &amp; Empowerment Committee Workshop
+              </p>
+              <p className="body-md text-justify">
+                Dame Prof Chinelo Joy Ugwu, CEO of Gilt Counselling Consult, coordinated a one-day
+                workshop for the All Saints Cathedral Education and Empowerment Committee. The workshop
+                brought together members of the committee for a day of learning, empowerment, and
+                professional development.
+              </p>
+              <p className="body-md text-justify text-gray-600">
+                This initiative reflects Gilt Counselling Consult&apos;s dedication to extending
+                professional support beyond the counselling room and into the wider community.
+              </p>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              {[1, 2, 3, 6].map((i) => (
+                <div key={i} className="relative h-[200px] rounded-lg overflow-hidden shadow-md">
+                  <Image
+                    src={`/images/workshops/all-saints/all-saints-workshop-${i}.jpeg`}
+                    alt={`All Saints Cathedral Education and Empowerment Committee Workshop - Photo ${i}`}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 50vw, 25vw"
+                    quality={60}
+                    loading="lazy"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+            {[7, 9, 10, 14, 15].map((i) => (
+              <div key={i} className="relative h-[160px] rounded-lg overflow-hidden shadow-md">
+                <Image
+                  src={`/images/workshops/all-saints/all-saints-workshop-${i}.jpeg`}
+                  alt={`All Saints Cathedral workshop activity - Photo ${i}`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
+                  quality={60}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Core Values */}
       <section className="section-container bg-warm-sand">
         <SectionHeading

@@ -12,18 +12,26 @@ const heroImages = [
     src: '/images/header2.jpg',
     alt: 'Professional counseling environment - supportive atmosphere',
   },
+  {
+    src: '/images/workshops/all-saints/all-saints-workshop-14.jpeg',
+    alt: 'CEO Gilt Counselling Consult in a counseling session with a client',
+  },
 ];
 
-export default function HeroSlideshow() {
+export default function HeroSlideshow({ onSlideChange }: { onSlideChange?: (index: number) => void }) {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
-    }, 5000); // Change slide every 5 seconds
+      setCurrentSlide((prev) => {
+        const next = (prev + 1) % heroImages.length;
+        onSlideChange?.(next);
+        return next;
+      });
+    }, 5000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [onSlideChange]);
 
   return (
     <div className="absolute inset-0">
@@ -50,3 +58,5 @@ export default function HeroSlideshow() {
     </div>
   );
 }
+
+export { heroImages };

@@ -1,13 +1,14 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import BookSessionButton from '@/components/BookSessionButton';
-import HeroSlideshow from '@/components/HeroSlideshow';
+import HeroSlideshow, { heroImages } from '@/components/HeroSlideshow';
 
 export default function Home() {
+  const [currentSlide, setCurrentSlide] = useState(0);
   const helpOptions = [
     'Family Problems',
     'Breakups',
@@ -28,7 +29,7 @@ export default function Home() {
       service: 'Family Counselling',
     },
     {
-      quote: 'I was struggling with anxiety and depression. Dr. Lopez helped me find hope and develop coping strategies that actually work.',
+      quote: 'I was struggling with anxiety and depression. My counsellor helped me find hope and develop coping strategies that actually work.',
       firstName: 'David',
       service: 'Mental Health Support',
     },
@@ -40,7 +41,7 @@ export default function Home() {
       <section className="relative min-h-[100svh] lg:min-h-screen overflow-hidden">
         {/* Background Image Overlay */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40 z-10"></div>
-        <HeroSlideshow />
+        <HeroSlideshow onSlideChange={setCurrentSlide} />
 
         {/* Hero Content */}
         <div className="relative z-20 min-h-[100svh] lg:min-h-screen flex items-center py-20 sm:py-28 md:py-32 lg:py-36 xl:py-40">
@@ -69,8 +70,14 @@ export default function Home() {
               </div>
               {/* Slider Dots */}
               <div className="flex gap-2 lg:gap-3 mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14">
-                <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white rounded-full"></div>
-                <div className="w-2 h-2 lg:w-3 lg:h-3 bg-white/40 rounded-full"></div>
+                {heroImages.map((_, i) => (
+                  <div
+                    key={i}
+                    className={`w-2 h-2 lg:w-3 lg:h-3 rounded-full transition-all duration-500 ${
+                      i === currentSlide ? 'bg-white' : 'bg-white/40'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -163,7 +170,7 @@ export default function Home() {
               Call for Consultation
             </h2>
             <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-5 lg:mb-6 text-gray-800">
-              30 minutes free for first session. <Link href="/terms" className="underline font-semibold">T&C Apply</Link>
+              30 minutes free for first session. <span className="font-semibold">T&C Apply</span>
             </p>
             <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg lg:rounded-xl p-4 sm:p-5 lg:p-6 xl:p-8 mb-4 sm:mb-5 lg:mb-6">
               <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
