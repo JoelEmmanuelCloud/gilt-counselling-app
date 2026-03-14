@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Resources & Insights | Gilt Counselling Consult',
     description: 'Practical guidance and expert insights on mental health, teen development, family wellness, and self-care from professional counsellors in Port Harcourt.',
-    url: 'https://www.giltcounsellingconsult.com/blog',
+    url: 'https://giltcounselling.com/blog',
   },
 };
 

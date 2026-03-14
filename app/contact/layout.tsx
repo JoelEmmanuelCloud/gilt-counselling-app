@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Contact Us | Gilt Counselling Consult',
     description: 'Reach Gilt Counselling Consult at 88 Woji Road, GRA Phase 2, Port Harcourt. Call, WhatsApp, or book online. First 30-minute session is free.',
-    url: 'https://www.giltcounsellingconsult.com/contact',
+    url: 'https://giltcounselling.com/contact',
   },
 };
 

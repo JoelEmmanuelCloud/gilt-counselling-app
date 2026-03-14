@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Book an Appointment | Gilt Counselling Consult',
     description: 'Schedule your counselling session today. First 30 minutes free. In-person in Port Harcourt or online worldwide.',
-    url: 'https://www.giltcounsellingconsult.com/book-appointment',
+    url: 'https://giltcounselling.com/book-appointment',
   },
 };
 

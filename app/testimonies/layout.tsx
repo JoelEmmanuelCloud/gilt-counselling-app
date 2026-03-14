@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Client Testimonials | Gilt Counselling Consult',
     description: 'Real stories from clients who have experienced transformation through counselling at Gilt Counselling Consult in Port Harcourt, Nigeria.',
-    url: 'https://www.giltcounsellingconsult.com/testimonies',
+    url: 'https://giltcounselling.com/testimonies',
   },
 };
 

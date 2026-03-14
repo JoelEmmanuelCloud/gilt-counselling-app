@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/dashboard/', '/api/', '/auth/'],
     },
-    sitemap: 'https://www.giltcounsellingconsult.com/sitemap.xml',
+    sitemap: 'https://giltcounselling.com/sitemap.xml',
   };
 }
