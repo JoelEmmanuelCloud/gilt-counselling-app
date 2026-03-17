@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/book-appointment',
+  },
   title: 'Book an Appointment',
   description: 'Book a counselling session with Gilt Counselling Consult. Your first 30 minutes is free. In-person at GRA Phase 2 Port Harcourt, or online via video, phone, or WhatsApp.',
   openGraph: {

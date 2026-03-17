@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/services',
+  },
   title: 'Our Services',
   description: 'Explore Gilt Counselling Consult\'s full range of services — mental health support, educational consulting, youth counselling, family therapy, career guidance, and organizational training in Port Harcourt, Nigeria.',
   openGraph: {
