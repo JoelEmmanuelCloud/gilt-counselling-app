@@ -34,7 +34,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.excerpt,
       url: `https://giltcounselling.com/blog/${post.slug}`,
       type: 'article',
-      publishedTime: post.date,
+      publishedTime: post.isoDate,
       authors: [post.author],
       images: post.image
         ? [{ url: post.image, width: 1200, height: 630, alt: post.title }]

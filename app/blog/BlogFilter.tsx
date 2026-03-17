@@ -40,17 +40,19 @@ export default function BlogFilter({ posts }: { posts: BlogPost[] }) {
         {filteredPosts.map((post) => (
           <Link key={post.slug} href={`/blog/${post.slug}`} className="block group">
             <Card className="h-full hover:shadow-calm-lg transition-all duration-300">
-              <div className="relative w-full h-[200px] mb-6 rounded-lg overflow-hidden">
-                <Image
-                  src={post.image}
-                  alt={post.title}
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  quality={60}
-                  loading="lazy"
-                />
-              </div>
+              {post.image && (
+                <div className="relative w-full h-[200px] mb-6 rounded-lg overflow-hidden">
+                  <Image
+                    src={post.image}
+                    alt={post.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    quality={60}
+                    loading="lazy"
+                  />
+                </div>
+              )}
               <div className="space-y-3">
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <span className="px-3 py-1 bg-warm-sand rounded-full text-xs font-medium">
