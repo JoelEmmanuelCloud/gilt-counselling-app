@@ -4,6 +4,7 @@ export interface BlogPost {
   excerpt: string;
   category: string;
   date: string;
+  isoDate: string;
   readTime: string;
   author: string;
   image: string;
@@ -17,6 +18,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Learn to recognize the signs of anxiety in teenagers and discover practical ways to provide support and encouragement.',
     category: 'Teen Development',
     date: 'December 15, 2024',
+    isoDate: '2024-12-15',
     readTime: '5 min read',
     author: 'Gilt Counselling Consult',
     image: '/images/blog/teen-anxiety.jpg',
@@ -63,6 +65,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Small, consistent practices that can make a big difference in your emotional wellbeing and resilience.',
     category: 'Mental Health',
     date: 'December 10, 2024',
+    isoDate: '2024-12-10',
     readTime: '4 min read',
     author: 'Gilt Counselling Consult',
     image: '/images/blog/mental-health.jpg',
@@ -93,6 +96,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: "How to help teens and youths develop the inner strength to navigate life's challenges with confidence.",
     category: 'Teen Development',
     date: 'December 5, 2024',
+    isoDate: '2024-12-05',
     readTime: '6 min read',
     author: 'Gilt Counselling Consult',
     image: '/images/blog/resilience.jpg',
@@ -128,6 +132,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Practical tips for fostering open, honest dialogue within your family, even about tough topics.',
     category: 'Family',
     date: 'November 28, 2024',
+    isoDate: '2024-11-28',
     readTime: '5 min read',
     author: 'Gilt Counselling Consult',
     image: '/images/blog/family-communication.jpg',
@@ -160,6 +165,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Understanding the signs that your child or teen might benefit from professional support.',
     category: 'Parenting',
     date: 'November 20, 2024',
+    isoDate: '2024-11-20',
     readTime: '7 min read',
     author: 'Gilt Counselling Consult',
     image: '/images/blog/counselling.jpg',
@@ -195,6 +201,7 @@ export const blogPosts: BlogPost[] = [
     excerpt: 'Why taking care of yourself is essential to being able to care for others effectively.',
     category: 'Self-Care',
     date: 'November 15, 2024',
+    isoDate: '2024-11-15',
     readTime: '4 min read',
     author: 'Gilt Counselling Consult',
     image: '/images/blog/self-care.jpg',
