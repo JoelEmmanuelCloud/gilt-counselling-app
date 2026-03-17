@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
+  alternates: {
+    canonical: '/about',
+  },
   title: 'About Us',
   description: 'Learn about Gilt Counselling Consult, our founder Dame Prof Chinelo Joy Ugwu, our dedicated team, and our mission to empower teens and youths in Port Harcourt and beyond.',
   openGraph: {

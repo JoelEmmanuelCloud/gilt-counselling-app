@@ -22,6 +22,9 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://giltcounselling.com'),
+  alternates: {
+    canonical: '/',
+  },
   title: {
     default: 'Gilt Counselling Consult | Professional Counselling in Port Harcourt',
     template: '%s | Gilt Counselling Consult',
