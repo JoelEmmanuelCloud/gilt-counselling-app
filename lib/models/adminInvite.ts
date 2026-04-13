@@ -32,8 +32,7 @@ const AdminInviteSchema = new Schema(
       index: true,
     },
     invitedBy: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
+      type: String,
       required: [true, 'Invited by admin ID is required'],
     },
     expiresAt: {
@@ -52,8 +51,7 @@ const AdminInviteSchema = new Schema(
 );
 AdminInviteSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 const AdminInvite: Model<IAdminInvite> =
-  (mongoose.models.AdminInvite as Model<IAdminInvite>) ||
-  (mongoose.model('AdminInvite', AdminInviteSchema) as unknown as Model<IAdminInvite>);
+  mongoose.models.AdminInvite || mongoose.model<IAdminInvite>('AdminInvite', AdminInviteSchema);
 
 export default AdminInvite;
 export const createAdminInvite = async (email: string, token: string, invitedBy: string, expiresInHours: number = 48) => {
