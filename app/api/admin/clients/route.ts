@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { requireAdmin } from '@/lib/auth';
-
-// GET all clients (admin only)
 export async function GET(request: NextRequest) {
   const authResult = await requireAdmin();
 
@@ -30,8 +28,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
-// POST create new client (admin only)
 export async function POST(request: NextRequest) {
   const authResult = await requireAdmin();
 
@@ -67,8 +63,6 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Check if email already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return NextResponse.json(

@@ -14,7 +14,6 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    // Connect to database
     await connectDB();
 
     const user = authResult.user;

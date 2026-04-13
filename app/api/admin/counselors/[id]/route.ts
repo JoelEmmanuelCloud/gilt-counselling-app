@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { requireAdmin } from '@/lib/auth';
-
-// GET single counselor (admin only)
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -40,8 +38,6 @@ export async function GET(
     );
   }
 }
-
-// PATCH update counselor (admin only)
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -69,8 +65,6 @@ export async function PATCH(
         { status: 404 }
       );
     }
-
-    // Fields that can be updated
     const allowedFields = [
       'name',
       'email',
@@ -110,8 +104,6 @@ export async function PATCH(
     );
   }
 }
-
-// DELETE counselor (admin only) - actually changes role to user
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -137,8 +129,6 @@ export async function DELETE(
         { status: 404 }
       );
     }
-
-    // Instead of deleting, change role to user
     await User.findByIdAndUpdate(id, { role: 'user' });
 
     return NextResponse.json(

@@ -15,14 +15,11 @@ const Navbar: React.FC = () => {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
-
-  // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const handleBookSession = () => {
     if (isAuthenticated) {
-      // Redirect based on user role
       if (user?.role === 'admin') {
         router.push('/admin');
       } else if (user?.role === 'counselor') {
@@ -35,8 +32,6 @@ const Navbar: React.FC = () => {
       setMobileMenuOpen(false);
     }
   };
-
-  // Lock body scroll when drawer is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -47,19 +42,14 @@ const Navbar: React.FC = () => {
       document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]);
-
-  // Close drawer on route change
   useEffect(() => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
   const handleLogout = async () => {
-    // Handle both auth methods
     if (session) {
-      // NextAuth (Google) logout
       await signOut({ callbackUrl: '/' });
     } else if (token) {
-      // Custom OTP logout
       customLogout();
       router.push('/');
     }
@@ -77,7 +67,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-white sticky top-0 z-50">
-      {/* Top Bar */}
+      {}
       <div className="bg-warm-cream border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-10 text-sm">
@@ -127,11 +117,11 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Navigation */}
+      {}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
-            {/* Logo */}
+            {}
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative w-32 h-20 group-hover:scale-105 transition-transform duration-300">
                 <Image
@@ -145,7 +135,7 @@ const Navbar: React.FC = () => {
               </div>
             </Link>
 
-            {/* Desktop Navigation */}
+            {}
             <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -203,7 +193,7 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Contact & CTA */}
+            {}
             <div className="hidden lg:flex items-center space-x-6">
               <div className="flex items-center space-x-3 text-gray-700">
                 <svg className="w-5 h-5 text-soft-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -252,19 +242,9 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity duration-300 ${
-          mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}
-        onClick={() => setMobileMenuOpen(false)}
-        aria-hidden="true"
-      />
-
       {/* Mobile Menu Drawer */}
       <div
-        className={`lg:hidden fixed top-0 right-0 h-full bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out
-          w-[280px] xs:w-[300px] sm:w-[340px] md:w-[380px] max-w-[90vw]
+        className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out
           ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
         aria-modal="true"
@@ -389,7 +369,7 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {/* CTA Button - Right after contact info */}
+            {}
             <div className="mt-3 sm:mt-4">
               {user ? (
                 <button
@@ -412,7 +392,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Auth Modal */}
+      {}
       {showAuthModal && (
         <AuthModal
           onClose={() => setShowAuthModal(false)}

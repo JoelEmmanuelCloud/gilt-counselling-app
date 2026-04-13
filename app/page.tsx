@@ -37,13 +37,13 @@ export default function Home() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Full Width */}
+      {}
       <section className="relative min-h-[100svh] lg:min-h-screen overflow-hidden">
-        {/* Background Image Overlay */}
+        {}
         <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/40 z-10"></div>
         <HeroSlideshow onSlideChange={setCurrentSlide} />
 
-        {/* Hero Content */}
+        {}
         <div className="relative z-20 min-h-[100svh] lg:min-h-screen flex items-center py-20 sm:py-28 md:py-32 lg:py-36 xl:py-40">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
             <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
@@ -136,10 +136,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How Can I Help You & Call for Consultation Section */}
+      {}
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-white">
         <div className="max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
-          {/* How can I help you */}
+          {}
           <div className="bg-warm-cream rounded-lg lg:rounded-xl xl:rounded-2xl p-5 sm:p-6 lg:p-8 xl:p-10">
             <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading font-bold text-gray-900 mb-4 sm:mb-5 lg:mb-6">
               How can I help you?
@@ -263,7 +263,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Process Section */}
+      {}
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-warm-cream">
         <div className="max-w-6xl xl:max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
@@ -310,7 +310,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {}
       <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">
           <div className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>

@@ -67,7 +67,7 @@ export default function TestimoniesPage() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Hero Section */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-6">
@@ -82,7 +82,7 @@ export default function TestimoniesPage() {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
+      {}
       <section className="section-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
@@ -97,7 +97,7 @@ export default function TestimoniesPage() {
         </div>
       </section>
 
-      {/* Community Outreach */}
+      {}
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Community Outreach"
@@ -180,7 +180,7 @@ export default function TestimoniesPage() {
         </div>
       </section>
 
-      {/* Privacy Note */}
+      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
           <div className="bg-white rounded-xl p-8 shadow-calm">
@@ -199,7 +199,7 @@ export default function TestimoniesPage() {
         </div>
       </section>
 
-      {/* Share Your Story CTA */}
+      {}
       <section className="section-container bg-off-white">
         <div className="max-w-4xl mx-auto text-center">
           <SectionHeading

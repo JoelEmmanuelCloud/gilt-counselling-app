@@ -43,8 +43,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
 
   const handlePrint = () => {
     if (loading || !data) return;
-
-    // Create a new window for printing
     const printWindow = window.open('', '_blank', 'width=800,height=600');
     if (!printWindow) {
       toast.error('Please allow pop-ups to print');
@@ -54,8 +52,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
     const user = data.user;
     const stats = data.stats;
     const appointments = data.appointments || [];
-
-    // Build the print HTML
     const printContent = `
       <!DOCTYPE html>
       <html>
@@ -198,8 +194,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
 
     printWindow.document.write(printContent);
     printWindow.document.close();
-
-    // Wait for content to load, then print
     printWindow.onload = () => {
       printWindow.focus();
       printWindow.print();
@@ -211,7 +205,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto my-8" ref={printRef}>
         <div className="p-6">
-          {/* Header */}
+          {}
           <div className="flex justify-between items-start mb-6 sticky top-0 bg-white pb-4 border-b border-gray-200">
             <div className="flex items-center gap-4">
               <img
@@ -265,7 +259,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
             </div>
           ) : (
             <div className="space-y-6">
-              {/* Stats Cards */}
+              {}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <Card className="text-center">
                   <h3 className="text-xs font-medium text-gray-500 uppercase mb-1">Total</h3>
@@ -289,7 +283,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 </Card>
               </div>
 
-              {/* Profile Information */}
+              {}
               <Card>
                 <h3 className="text-lg font-semibold mb-4">Profile Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -327,7 +321,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                   </div>
                 </div>
 
-                {/* Address */}
+                {}
                 {data?.user?.address && (data.user.address.street || data.user.address.city) && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <p className="text-gray-500 mb-2">Address</p>
@@ -343,7 +337,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                   </div>
                 )}
 
-                {/* Emergency Contact */}
+                {}
                 {data?.user?.emergencyContact?.name && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <p className="text-gray-500 mb-2">Emergency Contact</p>
@@ -355,7 +349,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                   </div>
                 )}
 
-                {/* Medical History */}
+                {}
                 {data?.user?.medicalHistory && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <p className="text-gray-500 mb-2">Medical History</p>
@@ -364,7 +358,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 )}
               </Card>
 
-              {/* Appointments */}
+              {}
               <Card>
                 <h3 className="text-lg font-semibold mb-4">Appointment History</h3>
                 {data?.appointments?.length === 0 ? (
@@ -417,7 +411,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 )}
               </Card>
 
-              {/* Session Notes (Admin Only) */}
+              {}
               {data?.user?.sessionNotes?.length > 0 && (
                 <Card>
                   <h3 className="text-lg font-semibold mb-4">Session Notes</h3>

@@ -23,7 +23,7 @@ interface OverviewTabProps {
 export default function OverviewTab({ stats, upcomingAppointments }: OverviewTabProps) {
   return (
     <div className="space-y-6">
-      {/* Stats Cards */}
+      {}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <Card className="text-center p-6">
           <h3 className="text-xs font-medium text-gray-500 uppercase mb-2">Total Appointments</h3>
@@ -43,7 +43,7 @@ export default function OverviewTab({ stats, upcomingAppointments }: OverviewTab
         </Card>
       </div>
 
-      {/* Upcoming Appointments */}
+      {}
       <Card>
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-xl font-heading font-semibold">Upcoming Appointments</h2>
@@ -93,7 +93,7 @@ export default function OverviewTab({ stats, upcomingAppointments }: OverviewTab
         )}
       </Card>
 
-      {/* Quick Actions */}
+      {}
       <Card>
         <h2 className="text-xl font-heading font-semibold mb-4">Quick Actions</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

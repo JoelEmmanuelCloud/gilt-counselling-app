@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Appointment from '@/lib/models/appointment';
 import { requireCounselor } from '@/lib/auth';
-
-// GET all appointments assigned to the counselor
 export async function GET(request: NextRequest) {
   const authResult = await requireCounselor();
 

@@ -3,8 +3,6 @@ import { requireAuth } from '@/lib/auth';
 import { getAppointmentById, updateAppointment, deleteAppointment } from '@/lib/models/appointment';
 import connectDB from '@/lib/mongodb';
 import { sendAppointmentStatusEmail, sendRescheduleEmail } from '@/lib/email';
-
-// PATCH /api/appointments/[id] - Update appointment status
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -19,7 +17,6 @@ export async function PATCH(
   }
 
   try {
-    // Connect to database
     await connectDB();
 
     const user = authResult.user;
@@ -42,28 +39,21 @@ export async function PATCH(
         { status: 404 }
       );
     }
-
-    // Check if user has permission to update
     if (user.role !== 'admin' && appointment.userId?.toString() !== user.id) {
       return NextResponse.json(
         { message: 'Not authorized to update this appointment' },
         { status: 403 }
       );
     }
-
-    // Users can edit pending or confirmed appointments (not completed/cancelled)
     if (user.role !== 'admin' && !['pending', 'confirmed'].includes(appointment.status)) {
       return NextResponse.json(
         { message: 'You can only reschedule pending or confirmed appointments.' },
         { status: 403 }
       );
     }
-
-    // Track rescheduling
     const updateData: any = {};
 
     if (date || time) {
-      // If date or time is being changed, track it
       if ((date && date !== appointment.date) || (time && time !== appointment.time)) {
         updateData.rescheduledFrom = {
           date: appointment.date,
@@ -72,18 +62,12 @@ export async function PATCH(
         };
       }
     }
-
-    // Build update object
     if (status) updateData.status = status;
     if (date) updateData.date = date;
     if (time) updateData.time = time;
     if (service) updateData.service = service;
     if (notes !== undefined) updateData.notes = notes;
-
-    // Track who made the change
     updateData.lastModifiedBy = user.role === 'admin' ? 'admin' : 'user';
-
-    // If user cancels, track it
     if (status === 'cancelled' && user.role !== 'admin') {
       updateData.cancelledBy = 'user';
     } else if (status === 'cancelled') {
@@ -91,14 +75,10 @@ export async function PATCH(
     }
 
     const updatedAppointment = await updateAppointment(id, updateData);
-
-    // Send email notifications
     try {
-      // Use userFirstName if available, otherwise extract from userName
       const firstName = appointment.userFirstName || appointment.userName.split(' ')[0];
 
       if (updateData.rescheduledFrom) {
-        // Send reschedule notification
         await sendRescheduleEmail(
           appointment.userEmail,
           firstName,
@@ -109,7 +89,6 @@ export async function PATCH(
           appointment.service
         );
       } else if (status && status !== appointment.status) {
-        // Send status change notification
         await sendAppointmentStatusEmail(
           appointment.userEmail,
           firstName,
@@ -135,8 +114,6 @@ export async function PATCH(
     );
   }
 }
-
-// DELETE /api/appointments/[id] - Delete appointment (admin only)
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -151,7 +128,6 @@ export async function DELETE(
   }
 
   try {
-    // Connect to database
     await connectDB();
 
     const user = authResult.user;
@@ -172,8 +148,6 @@ export async function DELETE(
         { status: 404 }
       );
     }
-
-    // Only admin can delete appointments
     if (user.role !== 'admin') {
       return NextResponse.json(
         { message: 'Only admins can delete appointments' },

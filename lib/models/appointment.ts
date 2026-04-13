@@ -14,7 +14,7 @@ export interface IAppointment {
   time: string;
   status: 'pending' | 'confirmed' | 'cancelled' | 'completed';
   notes?: string;
-  counselorNotes?: string; // Private notes from counselor
+  counselorNotes?: string;
   cancelledBy?: 'user' | 'admin' | 'counselor';
   rescheduledFrom?: {
     date: string;
@@ -25,8 +25,6 @@ export interface IAppointment {
   createdAt?: Date;
   updatedAt?: Date;
 }
-
-// @ts-ignore - Complex schema types cause TypeScript compilation issues
 const AppointmentSchema = new Schema(
   {
     userId: {
@@ -105,8 +103,6 @@ const AppointmentSchema = new Schema(
     timestamps: true,
   }
 );
-
-// Prevent model recompilation in development
 let Appointment: any;
 if (mongoose.models.Appointment) {
   Appointment = mongoose.models.Appointment;
@@ -115,8 +111,6 @@ if (mongoose.models.Appointment) {
 }
 
 export default Appointment;
-
-// Helper functions for compatibility
 export const getAllAppointments = async () => {
   return await Appointment.find().sort({ createdAt: -1 });
 };

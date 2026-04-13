@@ -5,27 +5,24 @@ export interface IUser {
   firstName: string;
   lastName: string;
   email: string;
-  phone?: string; // Optional (for OAuth users)
+  phone?: string;
   role: 'user' | 'admin' | 'counselor';
-  // Counselor-specific fields
   specializations?: string[];
   bio?: string;
   availability?: Array<{
-    dayOfWeek: number; // 0 = Sunday, 6 = Saturday
-    startTime: string; // HH:mm format
-    endTime: string; // HH:mm format
+    dayOfWeek: number;
+    startTime: string;
+    endTime: string;
   }>;
-  isAvailable?: boolean; // Quick toggle for availability
-  emailVerified?: Date | null; // For NextAuth
-  verificationToken?: string; // For email verification
-  verificationTokenExpiry?: Date; // Token expiry time
-  image?: string; // For OAuth profile photos
-  // Profile information
+  isAvailable?: boolean;
+  emailVerified?: Date | null;
+  verificationToken?: string;
+  verificationTokenExpiry?: Date;
+  image?: string;
   profilePhoto?: string;
   dateOfBirth?: Date;
   gender?: 'male' | 'female' | 'other' | 'prefer-not-to-say';
   occupation?: string;
-  // Address information
   address?: {
     street?: string;
     city?: string;
@@ -33,24 +30,19 @@ export interface IUser {
     country?: string;
     postalCode?: string;
   };
-  // Emergency contact
   emergencyContact?: {
     name?: string;
     relationship?: string;
     phone?: string;
     email?: string;
   };
-  // Client source tracking
   source?: 'online' | 'phone' | 'whatsapp' | 'walk-in';
-  // Medical/counselling history
   medicalHistory?: string;
-  // Session notes (admin only, not exposed to user)
   sessionNotes?: Array<{
     date: Date;
     note: string;
     createdBy: string;
   }>;
-  // Additional preferences
   preferredContactMethod?: 'email' | 'phone' | 'whatsapp';
   emailNotifications?: boolean;
   createdAt?: Date;
@@ -84,7 +76,7 @@ const UserSchema = new Schema(
     },
     phone: {
       type: String,
-      required: false, // Optional for OAuth users
+      required: false,
       trim: true,
     },
     role: {
@@ -92,7 +84,6 @@ const UserSchema = new Schema(
       enum: ['user', 'admin', 'counselor'],
       default: 'user',
     },
-    // Counselor-specific fields
     specializations: [{
       type: String,
       trim: true,
@@ -114,7 +105,6 @@ const UserSchema = new Schema(
       type: Boolean,
       default: true,
     },
-    // NextAuth fields
     emailVerified: {
       type: Date,
       default: null,
@@ -126,9 +116,8 @@ const UserSchema = new Schema(
       type: Date,
     },
     image: {
-      type: String, // For OAuth profile photos (e.g., Google avatar)
+      type: String,
     },
-    // Profile information
     profilePhoto: {
       type: String,
     },
@@ -143,7 +132,6 @@ const UserSchema = new Schema(
       type: String,
       trim: true,
     },
-    // Address information
     address: {
       street: String,
       city: String,
@@ -151,24 +139,20 @@ const UserSchema = new Schema(
       country: String,
       postalCode: String,
     },
-    // Emergency contact
     emergencyContact: {
       name: String,
       relationship: String,
       phone: String,
       email: String,
     },
-    // Client source tracking
     source: {
       type: String,
       enum: ['online', 'phone', 'whatsapp', 'walk-in'],
       default: 'online',
     },
-    // Medical/counselling history
     medicalHistory: {
       type: String,
     },
-    // Session notes (admin only)
     sessionNotes: [{
       date: {
         type: Date,
@@ -177,7 +161,6 @@ const UserSchema = new Schema(
       note: String,
       createdBy: String,
     }],
-    // Additional preferences
     preferredContactMethod: {
       type: String,
       enum: ['email', 'phone', 'whatsapp'],
@@ -192,19 +175,14 @@ const UserSchema = new Schema(
     timestamps: true,
   }
 );
-
-// Prevent model recompilation in development
 let User: any;
 if (mongoose.models.User) {
   User = mongoose.models.User;
 } else {
-  // @ts-ignore - Complex schema types cause TypeScript compilation issues
   User = mongoose.model('User', UserSchema);
 }
 
 export default User;
-
-// Helper functions for compatibility
 export const findUserByEmail = async (email: string) => {
   return await User.findOne({ email });
 };

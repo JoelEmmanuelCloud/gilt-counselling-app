@@ -22,14 +22,11 @@ export default function BookSessionButton({
   const { user: customUser, token } = useAuth();
   const router = useRouter();
   const [showAuthModal, setShowAuthModal] = useState(false);
-
-  // Check both NextAuth (Google) and custom OTP auth
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const handleClick = () => {
     if (isAuthenticated) {
-      // Authenticated - redirect based on role
       if (user?.role === 'admin') {
         router.push('/admin');
       } else if (user?.role === 'counselor') {
@@ -38,7 +35,6 @@ export default function BookSessionButton({
         router.push('/dashboard');
       }
     } else {
-      // Not authenticated - show auth modal
       setShowAuthModal(true);
     }
   };

@@ -4,7 +4,7 @@ export interface IAdminInvite {
   _id?: string;
   email: string;
   token: string;
-  invitedBy: string; // Admin user ID who created the invite
+  invitedBy: string;
   expiresAt: Date;
   used: boolean;
   createdAt?: Date;
@@ -50,17 +50,11 @@ const AdminInviteSchema = new Schema(
     timestamps: true,
   }
 );
-
-// TTL Index: Automatically delete expired invites from database
 AdminInviteSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
-
-// Prevent model recompilation in development
 const AdminInvite: Model<IAdminInvite> =
   mongoose.models.AdminInvite || mongoose.model<IAdminInvite>('AdminInvite', AdminInviteSchema);
 
 export default AdminInvite;
-
-// Helper functions for admin invite management
 export const createAdminInvite = async (email: string, token: string, invitedBy: string, expiresInHours: number = 48) => {
   const expiresAt = new Date();
   expiresAt.setHours(expiresAt.getHours() + expiresInHours);
@@ -80,7 +74,7 @@ export const findAdminInviteByToken = async (token: string) => {
   return await AdminInvite.findOne({
     token,
     used: false,
-    expiresAt: { $gt: new Date() }, // Not expired
+    expiresAt: { $gt: new Date() },
   });
 };
 

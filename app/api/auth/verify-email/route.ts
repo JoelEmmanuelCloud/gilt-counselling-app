@@ -14,11 +14,9 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Find user with this verification token
     const user = await User.findOne({
       verificationToken: token,
-      verificationTokenExpiry: { $gt: new Date() }, // Token not expired
+      verificationTokenExpiry: { $gt: new Date() },
     });
 
     if (!user) {
@@ -27,8 +25,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // Update user - mark as verified and clear token
     user.emailVerified = new Date();
     user.verificationToken = undefined;
     user.verificationTokenExpiry = undefined;

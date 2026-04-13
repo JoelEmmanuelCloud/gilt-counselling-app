@@ -18,21 +18,15 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
-    // Validate file type
     const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
       toast.warning('Please select a valid image file (JPEG, PNG, or WebP)');
       return;
     }
-
-    // Validate file size (5MB)
     if (file.size > 5 * 1024 * 1024) {
       toast.warning('File size must be less than 5MB');
       return;
     }
-
-    // Show preview
     const reader = new FileReader();
     reader.onloadend = () => {
       setPreview(reader.result as string);
@@ -91,7 +85,7 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row items-center gap-6">
-        {/* Current/Preview Photo */}
+        {}
         <div className="relative">
           <img
             src={preview || currentPhoto || '/default-avatar.svg'}
@@ -100,7 +94,7 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
           />
         </div>
 
-        {/* Upload Controls */}
+        {}
         <div className="flex-1">
           <input
             ref={fileInputRef}

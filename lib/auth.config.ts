@@ -3,24 +3,15 @@ import Google from 'next-auth/providers/google';
 import { MongoDBAdapter } from '@auth/mongodb-adapter';
 import clientPromise from './mongodb-client';
 
-// NOTE: Email/OTP authentication is handled by custom API endpoints:
-// - POST /api/auth/send-otp - Send 6-digit verification code
-// - POST /api/auth/verify-otp - Verify code and authenticate user
-// - POST /api/auth/resend-otp - Resend verification code
-
 export const authConfig: NextAuthOptions = {
   adapter: MongoDBAdapter(clientPromise),
 
   providers: [
-    // Google OAuth Provider
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: true, // Allow linking if email matches
+      allowDangerousEmailAccountLinking: true,
     }),
-
-    // Email/OTP authentication handled by custom endpoints (see note above)
-    // No NextAuth Email provider needed - we use our own OTP system
   ],
 
   pages: {
@@ -30,25 +21,21 @@ export const authConfig: NextAuthOptions = {
   },
 
   session: {
-    strategy: 'jwt', // Use JWT for sessions (stored in HTTP-only cookies)
-    maxAge: 7 * 24 * 60 * 60, // 7 days
+    strategy: 'jwt',
+    maxAge: 7 * 24 * 60 * 60,
   },
 
   callbacks: {
     async signIn({ user, account, profile }) {
-      // Allow all sign-ins (admin-only checks are done elsewhere)
       return true;
     },
 
     async jwt({ token, user, account, trigger, session }) {
-      // On initial sign-in, add user data to token
       if (user) {
         token.userId = user.id;
         token.role = (user as any).role || 'user';
         token.phone = (user as any).phone;
       }
-
-      // Handle profile updates
       if (trigger === 'update' && session) {
         token.firstName = session.firstName;
         token.lastName = session.lastName;
@@ -59,7 +46,6 @@ export const authConfig: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      // Add custom fields to session from JWT token
       if (token && session.user) {
         session.user.id = token.userId as string;
         session.user.role = token.role as 'user' | 'admin' | 'counselor';
@@ -72,7 +58,6 @@ export const authConfig: NextAuthOptions = {
 
   events: {
     async createUser({ user }) {
-      // Log new user creation
       console.log('New user created:', user.email);
     },
 

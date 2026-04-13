@@ -19,7 +19,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          role: "user", // Default role for Google sign-ups
+          role: "user",
           emailVerified: profile.email_verified ? new Date() : null,
         };
       },
@@ -111,19 +111,14 @@ export const authOptions: NextAuthOptions = {
         }
       },
     }),
-    // Note: All authentication (including admin) uses OTP via email
   ],
   callbacks: {
     async signIn({ user, account, profile }) {
-      // If signing in with Google
       if (account?.provider === "google") {
         await connectDB();
-
-        // Check if user exists
         const existingUser = await User.findOne({ email: user.email });
 
         if (!existingUser) {
-          // Create new user with Google data (split name into firstName/lastName)
           const nameParts = (user.name || '').split(' ');
           const firstName = nameParts[0] || '';
           const lastName = nameParts.slice(1).join(' ') || '';
@@ -140,7 +135,6 @@ export const authOptions: NextAuthOptions = {
           });
           await newUser.save();
         } else if (!existingUser.emailVerified) {
-          // Auto-verify email if signing in with Google
           existingUser.emailVerified = new Date();
           await existingUser.save();
         }
@@ -149,14 +143,11 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async jwt({ token, user, trigger, session }) {
-      // Initial sign in
       if (user) {
         token.id = user.id;
         token.role = user.role || "user";
         token.emailVerified = (user as any).emailVerified || null;
       }
-
-      // Update token when session is updated
       if (trigger === "update" && session) {
         token.name = session.name;
         token.email = session.email;
@@ -179,11 +170,11 @@ export const authOptions: NextAuthOptions = {
     signOut: "/auth/signout",
     error: "/auth/error",
     verifyRequest: "/auth/verify-request",
-    newUser: "/dashboard", // Redirect new users here
+    newUser: "/dashboard",
   },
   session: {
     strategy: "jwt",
-    maxAge: 7 * 24 * 60 * 60, // 7 days
+    maxAge: 7 * 24 * 60 * 60,
   },
   secret: process.env.NEXTAUTH_SECRET,
   debug: process.env.NODE_ENV === "development",

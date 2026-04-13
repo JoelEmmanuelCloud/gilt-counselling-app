@@ -34,8 +34,6 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Fetch notifications
   const fetchNotifications = async () => {
     try {
       setLoading(true);
@@ -51,15 +49,12 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
       setLoading(false);
     }
   };
-
-  // Mark notification as read
   const markAsRead = async (notificationId: string) => {
     try {
       const token = localStorage.getItem('token');
       await axios.patch(`/api/notifications/${notificationId}`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      // Update local state
       setNotifications(prev =>
         prev.map(n => n._id === notificationId ? { ...n, read: true } : n)
       );
@@ -68,8 +63,6 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
       console.error('Failed to mark notification as read', error);
     }
   };
-
-  // Mark all as read
   const markAllAsRead = async () => {
     try {
       const token = localStorage.getItem('token');
@@ -82,8 +75,6 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
       console.error('Failed to mark all as read', error);
     }
   };
-
-  // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -94,11 +85,9 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
-
-  // Fetch on mount and periodically
   useEffect(() => {
     fetchNotifications();
-    const interval = setInterval(fetchNotifications, 60000); // Refresh every minute
+    const interval = setInterval(fetchNotifications, 60000);
     return () => clearInterval(interval);
   }, []);
 
@@ -156,7 +145,7 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
 
   return (
     <div className={`relative ${className}`} ref={dropdownRef}>
-      {/* Bell Button */}
+      {}
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="relative p-2 rounded-lg hover:bg-gray-100 transition-colors"
@@ -165,7 +154,7 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
         <svg className="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
         </svg>
-        {/* Badge */}
+        {}
         {unreadCount > 0 && (
           <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs font-bold rounded-full flex items-center justify-center">
             {unreadCount > 9 ? '9+' : unreadCount}
@@ -173,10 +162,10 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
         )}
       </button>
 
-      {/* Dropdown */}
+      {}
       {isOpen && (
         <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg border border-gray-200 z-50 max-h-[400px] overflow-hidden">
-          {/* Header */}
+          {}
           <div className="flex items-center justify-between px-4 py-3 border-b border-gray-200 bg-gray-50">
             <h3 className="font-semibold text-gray-900">Notifications</h3>
             {unreadCount > 0 && (
@@ -189,7 +178,7 @@ export default function NotificationBell({ className = '' }: NotificationBellPro
             )}
           </div>
 
-          {/* Notifications List */}
+          {}
           <div className="overflow-y-auto max-h-[320px]">
             {loading && notifications.length === 0 ? (
               <div className="text-center py-8">

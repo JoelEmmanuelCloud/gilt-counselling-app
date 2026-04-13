@@ -5,32 +5,18 @@ import * as jwt from 'jsonwebtoken';
 import connectDB from './mongodb';
 import User from './models/user';
 
-/**
- * Get the current session (server-side only)
- * @returns The current session or null
- */
 export async function getSession() {
   return await getServerSession(authConfig);
 }
 
-/**
- * Get the current user from session (server-side only)
- * @returns The current user or null
- */
 export async function getCurrentUser() {
   const session = await getSession();
   return session?.user || null;
 }
 
-/**
- * Verify JWT token and get user from database
- * @param token - JWT token string
- * @returns User object or null
- */
 async function verifyTokenAndGetUser(token: string) {
   try {
     const secret = process.env.JWT_SECRET || 'your-secret-key';
-    // Token payload uses 'userId' (from verify-otp) or 'id' (from generateToken)
     const decoded = jwt.verify(token, secret) as { userId?: string; id?: string; email: string };
     const userId = decoded.userId || decoded.id;
 
@@ -59,22 +45,7 @@ async function verifyTokenAndGetUser(token: string) {
   }
 }
 
-/**
- * Require authentication for API routes
- * Returns user if authenticated, error otherwise
- * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
- *
- * @param request - Optional NextRequest object to get headers from directly
- *
- * @example
- * const authResult = await requireAuth(request);
- * if (authResult.error) {
- *   return NextResponse.json({ message: authResult.error }, { status: authResult.status });
- * }
- * const user = authResult.user;
- */
 export async function requireAuth(request?: { headers: { get: (name: string) => string | null } }) {
-  // First, try NextAuth session (Google auth)
   const session = await getSession();
 
   if (session?.user) {
@@ -84,9 +55,6 @@ export async function requireAuth(request?: { headers: { get: (name: string) => 
       status: 200,
     };
   }
-
-  // If no NextAuth session, check for Bearer token (OTP auth)
-  // Try to get authorization from request headers first, then fall back to headers()
   let authorization: string | null = null;
 
   if (request?.headers) {
@@ -118,20 +86,6 @@ export async function requireAuth(request?: { headers: { get: (name: string) => 
   };
 }
 
-/**
- * Require admin role for API routes
- * Returns user if authenticated and admin, error otherwise
- * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
- *
- * @param request - Optional NextRequest object to get headers from directly
- *
- * @example
- * const authResult = await requireAdmin(request);
- * if (authResult.error) {
- *   return NextResponse.json({ message: authResult.error }, { status: authResult.status });
- * }
- * const adminUser = authResult.user;
- */
 export async function requireAdmin(request?: { headers: { get: (name: string) => string | null } }) {
   const authResult = await requireAuth(request);
 
@@ -150,13 +104,6 @@ export async function requireAdmin(request?: { headers: { get: (name: string) =>
   return authResult;
 }
 
-/**
- * Require counselor role for API routes
- * Returns user if authenticated and counselor, error otherwise
- * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
- *
- * @param request - Optional NextRequest object to get headers from directly
- */
 export async function requireCounselor(request?: { headers: { get: (name: string) => string | null } }) {
   const authResult = await requireAuth(request);
 
@@ -175,13 +122,6 @@ export async function requireCounselor(request?: { headers: { get: (name: string
   return authResult;
 }
 
-/**
- * Require admin or counselor role for API routes
- * Returns user if authenticated and admin or counselor, error otherwise
- * Supports both NextAuth sessions (Google) and JWT Bearer tokens (OTP)
- *
- * @param request - Optional NextRequest object to get headers from directly
- */
 export async function requireAdminOrCounselor(request?: { headers: { get: (name: string) => string | null } }) {
   const authResult = await requireAuth(request);
 
@@ -200,12 +140,6 @@ export async function requireAdminOrCounselor(request?: { headers: { get: (name:
   return authResult;
 }
 
-/**
- * Generate JWT token for user authentication
- * @param userId - User ID
- * @param email - User email
- * @returns JWT token string
- */
 export function generateToken(userId: string, email: string): string {
   const secret = process.env.JWT_SECRET || 'your-secret-key';
   return jwt.sign(

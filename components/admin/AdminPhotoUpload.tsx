@@ -23,28 +23,22 @@ export default function AdminPhotoUpload({
     if (!file) return;
 
     setError(null);
-
-    // Client-side validation
     const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
     if (!allowedTypes.includes(file.type)) {
       setError('Only JPEG, PNG, and WebP files are allowed.');
       return;
     }
 
-    const maxSize = 5 * 1024 * 1024; // 5MB
+    const maxSize = 5 * 1024 * 1024;
     if (file.size > maxSize) {
       setError('File size must be less than 5MB.');
       return;
     }
-
-    // Create preview
     const reader = new FileReader();
     reader.onload = (event) => {
       setPreviewUrl(event.target?.result as string);
     };
     reader.readAsDataURL(file);
-
-    // Upload file
     setUploading(true);
     try {
       const formData = new FormData();
@@ -84,7 +78,7 @@ export default function AdminPhotoUpload({
 
   return (
     <div className="flex items-center gap-4">
-      {/* Preview / Placeholder */}
+      {}
       <div className="relative">
         <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 flex items-center justify-center">
           {previewUrl ? (
@@ -116,7 +110,7 @@ export default function AdminPhotoUpload({
         )}
       </div>
 
-      {/* Controls */}
+      {}
       <div className="flex flex-col gap-2">
         <input
           type="file"

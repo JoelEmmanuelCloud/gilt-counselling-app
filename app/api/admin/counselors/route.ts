@@ -3,8 +3,6 @@ import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { requireAdmin } from '@/lib/auth';
 import { sendCounselorWelcomeEmail } from '@/lib/email';
-
-// GET all counselors (admin only)
 export async function GET(request: NextRequest) {
   const authResult = await requireAdmin();
 
@@ -31,8 +29,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
-// POST create new counselor (admin only)
 export async function POST(request: NextRequest) {
   const authResult = await requireAdmin();
 
@@ -64,8 +60,6 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Check if email already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
     if (existingUser) {
       return NextResponse.json(
@@ -90,8 +84,6 @@ export async function POST(request: NextRequest) {
     });
 
     await counselor.save();
-
-    // Send welcome email to counselor
     try {
       await sendCounselorWelcomeEmail(email, firstName);
     } catch (emailError) {

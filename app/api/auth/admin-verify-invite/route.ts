@@ -15,8 +15,6 @@ export async function GET(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Find valid invite
     const invite = await findAdminInviteByToken(token);
 
     if (!invite) {

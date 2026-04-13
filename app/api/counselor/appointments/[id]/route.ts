@@ -3,8 +3,6 @@ import connectDB from '@/lib/mongodb';
 import Appointment from '@/lib/models/appointment';
 import { requireCounselor } from '@/lib/auth';
 import { sendAppointmentStatusEmail } from '@/lib/email';
-
-// GET single appointment (counselor only)
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -45,8 +43,6 @@ export async function GET(
     );
   }
 }
-
-// PATCH update appointment (counselor only)
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -79,8 +75,6 @@ export async function PATCH(
         { status: 404 }
       );
     }
-
-    // Fields that counselor can update
     const allowedFields = ['status', 'counselorNotes'];
     const updates: any = { lastModifiedBy: 'counselor' };
 
@@ -89,8 +83,6 @@ export async function PATCH(
         updates[field] = body[field];
       }
     }
-
-    // Handle cancellation
     if (body.status === 'cancelled') {
       updates.cancelledBy = 'counselor';
     }
@@ -100,11 +92,8 @@ export async function PATCH(
       updates,
       { new: true }
     );
-
-    // Send email notification for status changes
     if (body.status && body.status !== appointment.status) {
       try {
-        // Use userFirstName if available, otherwise extract from userName
         const firstName = appointment.userFirstName || appointment.userName.split(' ')[0];
         await sendAppointmentStatusEmail(
           appointment.userEmail,

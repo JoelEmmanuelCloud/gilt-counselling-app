@@ -16,7 +16,6 @@ export default function ProtectedRoute({
   const [isChecking, setIsChecking] = useState(true);
 
   useEffect(() => {
-    // Give time for auth to initialize
     const timer = setTimeout(() => {
       setIsChecking(false);
     }, 500);
@@ -28,13 +27,11 @@ export default function ProtectedRoute({
     if (isChecking) return;
 
     if (!token || !user) {
-      // Redirect to home - user can sign in from there
       router.push('/');
       return;
     }
 
     if (adminOnly && user.role !== 'admin') {
-      // Redirect to appropriate dashboard based on role
       if (user.role === 'counselor') {
         router.push('/counselor');
       } else {
@@ -42,8 +39,6 @@ export default function ProtectedRoute({
       }
     }
   }, [user, token, adminOnly, router, isChecking]);
-
-  // Show loading state while checking auth
   if (isChecking) {
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center">

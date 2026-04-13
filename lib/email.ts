@@ -35,8 +35,6 @@ export async function sendEmail(options: EmailOptions) {
     throw error;
   }
 }
-
-// Appointment Confirmation Email Template
 export function generateAppointmentConfirmationEmail(
   firstName: string,
   service: string,
@@ -148,11 +146,7 @@ export function generateAppointmentConfirmationEmail(
 
   return { html, text: `Hello ${firstName}, your appointment for ${service} has been confirmed for ${date} at ${time}.` };
 }
-
-// OTP Email Template
 export const generateOTPEmail = _generateOTPEmail;
-
-// Welcome Email for new users
 export async function sendWelcomeEmail(email: string, firstName: string) {
   const dashboardUrl = `${APP_URL}/dashboard`;
   const displayName = firstName || email.split('@')[0];
@@ -280,8 +274,6 @@ Email: wecare@giltcounselling.com
     text,
   });
 }
-
-// Counselor Welcome Email
 export async function sendCounselorWelcomeEmail(email: string, firstName: string) {
   const loginUrl = `${APP_URL}/auth/signin`;
 
@@ -381,8 +373,6 @@ export async function sendCounselorWelcomeEmail(email: string, firstName: string
     text: `Hello ${firstName}! Your counselor account has been created. Email: ${email}. To sign in, visit ${loginUrl} and enter your email to receive a verification code.`,
   });
 }
-
-// Appointment Status Email
 export async function sendAppointmentStatusEmail(
   email: string,
   firstName: string,
@@ -511,8 +501,6 @@ export async function sendAppointmentStatusEmail(
     text: `${statusInfo.title}: Hello ${firstName}, ${statusInfo.message} Service: ${service}, Date: ${date}, Time: ${time}`,
   });
 }
-
-// Counselor Assignment Email - Notify counselor of new appointment assignment
 export async function sendCounselorAssignmentEmail(
   counselorEmail: string,
   counselorName: string,
@@ -659,8 +647,6 @@ export async function sendCounselorAssignmentEmail(
     text: `Hello ${counselorName}, you have been assigned a new appointment. Client: ${clientName} (${clientEmail}, ${clientPhone}). Service: ${service}. Date: ${date} at ${time}. View your dashboard: ${dashboardUrl}`,
   });
 }
-
-// Reschedule Email
 export async function sendRescheduleEmail(
   email: string,
   firstName: string,

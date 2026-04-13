@@ -6,11 +6,8 @@ import connectDB from "@/lib/mongodb";
 import User from "@/lib/models/user";
 import { createAdminInvite } from "@/lib/models/adminInvite";
 import { sendEmail } from "@/lib/email";
-
-// Send admin invitation
 export async function POST(request: NextRequest) {
   try {
-    // Get session to verify admin
     const session = await getServerSession(authOptions);
 
     if (!session || session.user.role !== "admin") {
@@ -27,8 +24,6 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Check if user already exists
     const existingUser = await User.findOne({ email: email.toLowerCase() });
 
     if (existingUser) {
@@ -37,14 +32,8 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // Generate unique token
     const token = uuidv4();
-
-    // Create admin invite (expires in 48 hours)
     await createAdminInvite(email, token, session.user.id, 48);
-
-    // Send invitation email
     const inviteUrl = `${process.env.NEXT_PUBLIC_APP_URL}/auth/admin-accept?token=${token}`;
 
     try {
