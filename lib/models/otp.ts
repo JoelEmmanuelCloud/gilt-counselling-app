@@ -11,7 +11,7 @@ export interface IOTP {
   updatedAt?: Date;
 }
 
-const OTPSchema = new Schema(
+const OTPSchema = new Schema<IOTP>(
   {
     email: {
       type: String,

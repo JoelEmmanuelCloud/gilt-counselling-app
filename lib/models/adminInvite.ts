@@ -11,7 +11,7 @@ export interface IAdminInvite {
   updatedAt?: Date;
 }
 
-const AdminInviteSchema = new Schema(
+const AdminInviteSchema = new Schema<IAdminInvite>(
   {
     email: {
       type: String,

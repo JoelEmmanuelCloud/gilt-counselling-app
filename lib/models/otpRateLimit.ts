@@ -10,7 +10,7 @@ export interface IOTPRateLimit {
   updatedAt?: Date;
 }
 
-const OTPRateLimitSchema = new Schema(
+const OTPRateLimitSchema = new Schema<IOTPRateLimit>(
   {
     email: {
       type: String,

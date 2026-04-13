@@ -20,7 +20,7 @@ export interface INotification {
   updatedAt?: Date;
 }
 
-const NotificationSchema = new Schema(
+const NotificationSchema = new Schema<INotification>(
   {
     userId: {
       type: Schema.Types.ObjectId,
