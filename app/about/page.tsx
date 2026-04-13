@@ -105,7 +105,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Hero Section */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-6">About Gilt Counselling Consult</h1>
@@ -116,7 +116,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Mission Statement */}
+      {}
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
           <Card variant="warm" className="text-center">
@@ -140,7 +140,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Founder Section */}
+      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
@@ -170,7 +170,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* CCPA Conference Section */}
+      {}
       <section className="section-container bg-off-white">
         <SectionHeading
           title="Committed to Evidence-Based Practice"
@@ -207,7 +207,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Otana Inclusive Centre Outreach Section */}
+      {}
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Community Outreach"

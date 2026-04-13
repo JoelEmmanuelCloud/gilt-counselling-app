@@ -41,8 +41,6 @@ function DashboardContent() {
   });
   const [rescheduleForm, setRescheduleForm] = useState({ date: '', time: '' });
   const [rescheduleLoading, setRescheduleLoading] = useState(false);
-
-  // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
@@ -53,8 +51,6 @@ function DashboardContent() {
       router.push('/book-appointment');
       return;
     }
-
-    // Redirect counselors and admins to their respective dashboards
     if (user?.role === 'counselor') {
       router.push('/counselor');
       return;
@@ -71,7 +67,6 @@ function DashboardContent() {
   const fetchAppointments = async () => {
     try {
       const response = await api.get('/appointments/my-appointments');
-      // API returns { appointments: [...] }
       setAppointments(response.data.appointments || response.data || []);
     } catch (error) {
       console.error('Failed to fetch appointments', error);
@@ -84,15 +79,11 @@ function DashboardContent() {
     try {
       const response = await api.get('/profile');
       const profile: UserProfile = response.data;
-
-      // Check if key profile fields are filled
       const hasPhone = !!profile.phone;
       const hasDOB = !!profile.dateOfBirth;
       const hasGender = !!profile.gender;
       const hasAddress = !!(profile.address?.city || profile.address?.street);
       const hasEmergencyContact = !!(profile.emergencyContact?.name && profile.emergencyContact?.phone);
-
-      // Profile is complete if at least phone, DOB, and gender are filled
       setProfileComplete(hasPhone && hasDOB && hasGender);
     } catch (error) {
       console.error('Failed to check profile completion', error);
@@ -197,7 +188,7 @@ function DashboardContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Header */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Welcome back, {(user as any)?.firstName || (user as any)?.name?.split(' ')[0] || 'there'}!</h1>
@@ -310,7 +301,7 @@ function DashboardContent() {
               </div>
             ) : (
               <div className="space-y-4">
-                {/* Desktop Table View */}
+                {}
                 <div className="hidden md:block overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -376,7 +367,7 @@ function DashboardContent() {
                   </table>
                 </div>
 
-                {/* Mobile Card View */}
+                {}
                 <div className="md:hidden space-y-4">
                   {appointments.map((appointment) => (
                     <div key={appointment._id || appointment.id} className="bg-warm-cream rounded-lg p-4 border border-light-grey">
@@ -433,7 +424,7 @@ function DashboardContent() {
         </div>
       </section>
 
-      {/* Help Section */}
+      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="heading-sm mb-4">Need Help?</h3>

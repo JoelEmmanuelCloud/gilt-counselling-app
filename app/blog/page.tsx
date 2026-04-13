@@ -8,7 +8,7 @@ import { blogPosts } from '@/lib/blogPosts';
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Hero Section */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-6">
@@ -21,12 +21,12 @@ export default function BlogPage() {
         </div>
       </section>
 
-      {/* Posts */}
+      {}
       <section className="section-container">
         <BlogFilter posts={blogPosts} />
       </section>
 
-      {/* CTA Section */}
+      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
           <SectionHeading

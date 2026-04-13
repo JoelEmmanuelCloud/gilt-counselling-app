@@ -9,8 +9,6 @@ import { sendEmail, generateOTPEmail } from '@/lib/email';
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
-
-    // Validate email format
     if (!email || typeof email !== 'string') {
       return NextResponse.json(
         { message: 'Email is required' },
@@ -27,8 +25,6 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Check rate limiting (resend counts towards the same limit)
     const rateLimitCheck = await checkOTPRateLimit(email);
     if (!rateLimitCheck.allowed) {
       return NextResponse.json(
@@ -39,29 +35,18 @@ export async function POST(request: NextRequest) {
         { status: 429 }
       );
     }
-
-    // Check if user exists
     const user = await User.findOne({ email: email.toLowerCase() });
-
-    // For security, don't reveal if user exists or not
     if (!user) {
-      // Still return success to prevent email enumeration
       return NextResponse.json(
         {
           message: 'If an account exists with this email, you will receive a new verification code shortly.',
-          expiresIn: 600, // 10 minutes in seconds
+          expiresIn: 600,
         },
         { status: 200 }
       );
     }
-
-    // Invalidate all previous unused OTPs for this email
     await invalidateOTPsForEmail(email.toLowerCase());
-
-    // Generate new 6-digit OTP
     const code = generateOTP();
-
-    // Validate OTP format (should always be valid, but double-check)
     if (!isValidOTPFormat(code)) {
       console.error('Generated OTP is invalid:', code);
       return NextResponse.json(
@@ -69,14 +54,8 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
-    // Create new OTP record with 10-minute expiration
     await createOTP(email.toLowerCase(), code, 10);
-
-    // Generate email content
     const { html, text } = generateOTPEmail(email, code, user.firstName);
-
-    // Send email
     await sendEmail({
       to: email,
       subject: 'Your new verification code for Gilt Counselling Consult',
@@ -87,7 +66,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         message: 'New verification code sent successfully. Please check your email.',
-        expiresIn: 600, // 10 minutes in seconds
+        expiresIn: 600,
       },
       { status: 200 }
     );

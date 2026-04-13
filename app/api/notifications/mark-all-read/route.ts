@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import { markAllAsRead } from '@/lib/models/notification';
 import { requireAuth } from '@/lib/auth';
-
-// PATCH - Mark all notifications as read
 export async function PATCH(request: NextRequest) {
   const authResult = await requireAuth(request);
 

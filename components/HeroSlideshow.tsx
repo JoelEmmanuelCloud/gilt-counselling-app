@@ -22,16 +22,16 @@ export default function HeroSlideshow({ onSlideChange }: { onSlideChange?: (inde
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    onSlideChange?.(currentSlide);
+  }, [currentSlide, onSlideChange]);
+
+  useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % heroImages.length;
-        onSlideChange?.(next);
-        return next;
-      });
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [onSlideChange]);
+  }, []);
 
   return (
     <div className="absolute inset-0">
@@ -47,9 +47,10 @@ export default function HeroSlideshow({ onSlideChange }: { onSlideChange?: (inde
             alt={image.alt}
             fill
             className="object-cover"
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
             quality={80}
             priority={index === 0}
+            loading={index === 0 ? 'eager' : 'lazy'}
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
           />

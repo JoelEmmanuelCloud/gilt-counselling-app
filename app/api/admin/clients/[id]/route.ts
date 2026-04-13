@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { requireAdmin } from '@/lib/auth';
-
-// GET single client details (admin only)
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -39,8 +37,6 @@ export async function GET(
     );
   }
 }
-
-// PATCH update client (admin only)
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -57,8 +53,6 @@ export async function PATCH(
 
   try {
     const body = await request.json();
-
-    // Remove fields that shouldn't be updated this way
     const { role, _id, ...updateData } = body;
 
     await connectDB();
@@ -91,8 +85,6 @@ export async function PATCH(
     );
   }
 }
-
-// POST add session note (admin only)
 export async function POST(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -127,8 +119,6 @@ export async function POST(
         { status: 404 }
       );
     }
-
-    // Add session note
     client.sessionNotes = client.sessionNotes || [];
     client.sessionNotes.push({
       date: new Date(),

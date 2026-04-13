@@ -13,13 +13,11 @@ import { useToast } from '@/components/ui/Toast';
 
 export default function BookAppointment() {
   const { data: session, status } = useSession();
-  const { user: customUser, token } = useAuth(); // Custom auth context for OTP users
+  const { user: customUser, token } = useAuth();
   const router = useRouter();
   const toast = useToast();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserInfoForm, setShowUserInfoForm] = useState(false);
-
-  // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
@@ -37,16 +35,11 @@ export default function BookAppointment() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
-
-  // Check authentication status on mount
   useEffect(() => {
     if (status === 'loading') return;
-
-    // Check both auth systems
     if (!isAuthenticated) {
       setShowAuthModal(true);
     } else if (user) {
-      // Update form data with user info
       setFormData(prev => ({
         ...prev,
         name: (user as any).firstName && (user as any).lastName
@@ -155,7 +148,6 @@ export default function BookAppointment() {
       await api.post('/appointments', formData);
       setSuccess('Your appointment request has been received. We\'ll be in touch within 24 hours to confirm your session.');
       setTimeout(() => {
-        // Redirect based on user role
         if (user?.role === 'admin') {
           router.push('/admin');
         } else if (user?.role === 'counselor') {
@@ -170,8 +162,6 @@ export default function BookAppointment() {
       setLoading(false);
     }
   };
-
-  // Show auth modal if not authenticated
   if (showAuthModal && !isAuthenticated) {
     return (
       <AuthModal
@@ -183,8 +173,6 @@ export default function BookAppointment() {
       />
     );
   }
-
-  // Show loading state while checking auth
   if (status === 'loading' && !token) {
     return (
       <div className="min-h-screen bg-off-white flex items-center justify-center">
@@ -195,8 +183,6 @@ export default function BookAppointment() {
       </div>
     );
   }
-
-  // Show user info collection modal if needed
   const UserInfoModal = () => (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg max-w-md w-full p-8">
@@ -215,7 +201,6 @@ export default function BookAppointment() {
         <form onSubmit={async (e) => {
           e.preventDefault();
           try {
-            // Update user profile with phone number
             await api.patch('/profile', {
               phone: formData.phone,
             });
@@ -255,10 +240,10 @@ export default function BookAppointment() {
     <>
       {showUserInfoForm && <UserInfoModal />}
       <div className="min-h-screen bg-off-white">
-        {/* Hero Section */}
+        {}
         <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back Button */}
+          {}
           <button
             onClick={() => router.back()}
             className="flex items-center gap-2 text-gray-600 hover:text-gray-900 transition-colors mb-6 group"
@@ -474,7 +459,7 @@ export default function BookAppointment() {
                 <p className="text-xs text-gray-500 mt-1">This helps us prepare for your session, but it's completely optional</p>
               </div>
 
-              {/* Submit Button */}
+              {}
               <div className="pt-4">
                 <Button
                   type="submit"
@@ -493,7 +478,7 @@ export default function BookAppointment() {
         </div>
       </section>
 
-      {/* Help Section */}
+      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
           <h3 className="heading-sm mb-4">Have Questions?</h3>

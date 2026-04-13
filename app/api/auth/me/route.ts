@@ -9,15 +9,11 @@ const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 export async function GET(request: NextRequest) {
   try {
-    // First, check for NextAuth session (Google auth)
     const session = await getServerSession(authConfig);
 
     if (session?.user) {
-      // NextAuth user (logged in via Google)
       return NextResponse.json({ user: session.user });
     }
-
-    // If no NextAuth session, check for custom JWT token (OTP auth)
     const authHeader = request.headers.get('authorization');
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
@@ -28,15 +24,11 @@ export async function GET(request: NextRequest) {
     }
 
     const token = authHeader.split(' ')[1];
-
-    // Verify JWT token
     const decoded = jwt.verify(token, JWT_SECRET) as {
       userId: string;
       email: string;
       role: string;
     };
-
-    // Fetch user from database
     await connectDB();
     const user = await User.findById(decoded.userId);
 
@@ -46,8 +38,6 @@ export async function GET(request: NextRequest) {
         { status: 404 }
       );
     }
-
-    // Return user data in same format as NextAuth
     return NextResponse.json({
       user: {
         id: user._id.toString(),

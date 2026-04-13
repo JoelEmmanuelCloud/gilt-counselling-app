@@ -1,4 +1,4 @@
-/** @type {import('tailwindcss').Config} */
+
 module.exports = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -15,13 +15,10 @@ module.exports = {
     },
     extend: {
       colors: {
-        // Primary Brand Colors from Logo
         'gilt-gold': '#D9A85D',
         'gilt-teal': '#1BA5BB',
         'gilt-green': '#5FB74E',
         'gilt-orange': '#F5A623',
-
-        // Complementary Colors
         'soft-gold': '#D9A85D',
         'warm-sand': '#FFF4E6',
         'muted-teal': '#1BA5BB',

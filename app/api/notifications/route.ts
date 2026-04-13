@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Notification, { getNotificationsByUserId, getUnreadCount } from '@/lib/models/notification';
 import { requireAuth } from '@/lib/auth';
-
-// GET notifications for the current user
 export async function GET(request: NextRequest) {
   const authResult = await requireAuth(request);
 

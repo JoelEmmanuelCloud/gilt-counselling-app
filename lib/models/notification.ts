@@ -62,17 +62,11 @@ const NotificationSchema = new Schema(
     timestamps: true,
   }
 );
-
-// Compound index for efficient queries
 NotificationSchema.index({ userId: 1, read: 1, createdAt: -1 });
-
-// Prevent model recompilation in development
 const Notification: Model<INotification> =
   mongoose.models.Notification || mongoose.model<INotification>('Notification', NotificationSchema);
 
 export default Notification;
-
-// Helper functions
 export const createNotification = async (notificationData: Partial<INotification>) => {
   const notification = new Notification(notificationData);
   return await notification.save();

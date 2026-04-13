@@ -15,8 +15,6 @@ function ProfileContent() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
-
-  // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
@@ -129,7 +127,7 @@ function ProfileContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Header */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">My Profile</h1>
@@ -137,7 +135,7 @@ function ProfileContent() {
         </div>
       </section>
 
-      {/* Messages */}
+      {}
       {message && (
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded">
@@ -154,7 +152,7 @@ function ProfileContent() {
         </div>
       )}
 
-      {/* Profile Form */}
+      {}
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
           <Card>

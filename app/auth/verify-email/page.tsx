@@ -39,8 +39,6 @@ function VerifyEmailContent() {
       if (response.ok) {
         setStatus("success");
         setMessage("Email verified successfully!");
-
-        // Redirect to sign in after 3 seconds
         setTimeout(() => {
           router.push("/auth/signin?verified=true");
         }, 3000);

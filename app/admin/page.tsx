@@ -47,8 +47,6 @@ function AdminDashboardContent() {
   const { user: customUser, token } = useAuth();
   const router = useRouter();
   const toast = useToast();
-
-  // Use either NextAuth user (Google) or custom auth user (OTP)
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
@@ -77,12 +75,9 @@ function AdminDashboardContent() {
     if (!isAuthenticated) {
       router.push('/book-appointment');
     } else if (user?.role !== 'admin') {
-      // Only admins can access this page - redirect everyone else to account
       router.push('/account');
     }
   }, [status, isAuthenticated, user, router]);
-
-  // Booking form state
   const [bookingForm, setBookingForm] = useState({
     userId: '',
     service: '',
@@ -92,8 +87,6 @@ function AdminDashboardContent() {
     status: 'confirmed',
     sendConfirmation: true,
   });
-
-  // Client form state
   const [showClientForm, setShowClientForm] = useState(false);
   const [clientForm, setClientForm] = useState({
     firstName: '',
@@ -122,7 +115,7 @@ function AdminDashboardContent() {
   useEffect(() => {
     if (activeTab === 'appointments') {
       fetchAppointments();
-      fetchCounselors(); // Also fetch counselors for assignment dropdown
+      fetchCounselors();
     } else if (activeTab === 'clients' || activeTab === 'create-booking') {
       fetchClients();
     } else if (activeTab === 'counselors') {
@@ -370,7 +363,7 @@ function AdminDashboardContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Header - Hidden when printing */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16 admin-header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Admin Dashboard</h1>
@@ -378,7 +371,7 @@ function AdminDashboardContent() {
         </div>
       </section>
 
-      {/* Statistics Cards - Hidden when printing */}
+      {}
       <section className="section-container admin-stats">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -410,7 +403,7 @@ function AdminDashboardContent() {
         </div>
       </section>
 
-      {/* Tabs - Hidden when printing */}
+      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 admin-content print-content-area">
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 admin-tabs">
           <button
@@ -455,10 +448,10 @@ function AdminDashboardContent() {
           </button>
         </div>
 
-        {/* Appointments Tab */}
+        {}
         {activeTab === 'appointments' && (
           <Card>
-            {/* Print Header - Only visible when printing */}
+            {}
             <div className="print-header hidden print:block">
               <h1 className="text-2xl font-bold">Gilt Counselling Services</h1>
               <p className="text-sm text-gray-600">Appointments Report - {new Date().toLocaleDateString()}</p>
@@ -569,7 +562,7 @@ function AdminDashboardContent() {
           </Card>
         )}
 
-        {/* Clients Tab */}
+        {}
         {activeTab === 'clients' && (
           <Card>
             <div className="flex justify-between items-center mb-6">
@@ -670,7 +663,7 @@ function AdminDashboardContent() {
           </Card>
         )}
 
-        {/* Counselors Tab */}
+        {}
         {activeTab === 'counselors' && (
           <Card>
             <div className="flex justify-between items-center mb-6">
@@ -759,7 +752,7 @@ function AdminDashboardContent() {
           </Card>
         )}
 
-        {/* Create Booking Tab */}
+        {}
         {activeTab === 'create-booking' && (
           <Card>
             <h2 className="heading-md mb-6">Create Appointment for Client</h2>
@@ -820,7 +813,7 @@ function AdminDashboardContent() {
         )}
       </section>
 
-      {/* User Profile Modal */}
+      {}
       {selectedUserId && (
         <UserProfileModal
           userId={selectedUserId}

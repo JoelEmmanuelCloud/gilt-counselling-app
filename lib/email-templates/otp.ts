@@ -1,11 +1,5 @@
 const LOGO_URL = 'http://cdn.mcauto-images-production.sendgrid.net/f638e50cb4cb3520/2aca1832-4d5e-4457-a2d0-d15541acd0f2/7262x3077.jpg';
 
-/**
- * Generate OTP email template
- * @param email - User's email address
- * @param code - 6-digit OTP code
- * @param firstName - Optional user first name for personalization
- */
 export function generateOTPEmail(email: string, code: string, firstName?: string) {
   const displayName = firstName || email.split('@')[0];
 

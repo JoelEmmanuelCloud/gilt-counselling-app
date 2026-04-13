@@ -20,8 +20,6 @@ export async function GET(
 
   try {
     await connectDB();
-
-    // Get user profile (include sessionNotes for admin)
     const user = await User.findById(id);
 
     if (!user) {
@@ -30,11 +28,7 @@ export async function GET(
         { status: 404 }
       );
     }
-
-    // Get all appointments for this user
     const appointments = await Appointment.find({ userId: id }).sort({ createdAt: -1 });
-
-    // Calculate stats
     const stats = {
       totalAppointments: appointments.length,
       pending: appointments.filter((a: any) => a.status === 'pending').length,

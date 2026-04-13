@@ -205,7 +205,7 @@ function CounselorDashboardContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Header */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-start">
@@ -227,7 +227,7 @@ function CounselorDashboardContent() {
         </div>
       </section>
 
-      {/* Statistics Cards */}
+      {}
       <section className="section-container">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
@@ -255,7 +255,7 @@ function CounselorDashboardContent() {
         </div>
       </section>
 
-      {/* Tabs */}
+      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200">
           <button
@@ -290,7 +290,7 @@ function CounselorDashboardContent() {
           </button>
         </div>
 
-        {/* Appointments Tab */}
+        {}
         {activeTab === 'appointments' && (
           <Card>
             <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-6">
@@ -454,7 +454,7 @@ function CounselorDashboardContent() {
           </Card>
         )}
 
-        {/* Availability Tab */}
+        {}
         {activeTab === 'availability' && (
           <Card>
             <div className="flex justify-between items-center mb-6">
@@ -535,7 +535,7 @@ function CounselorDashboardContent() {
             </div>
           </Card>
         )}
-        {/* Profile Tab */}
+        {}
         {activeTab === 'profile' && (
           <Card>
             <h2 className="heading-md mb-6">Profile Photo</h2>
@@ -549,7 +549,7 @@ function CounselorDashboardContent() {
         )}
       </section>
 
-      {/* Notes Modal */}
+      {}
       {selectedAppointment && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-lg w-full p-6">

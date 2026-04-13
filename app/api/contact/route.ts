@@ -21,8 +21,6 @@ export async function POST(request: NextRequest) {
     }
 
     const adminEmail = process.env.CONTACT_EMAIL || 'wecare@giltcounselling.com';
-
-    // Send notification to the team
     await sendEmail({
       to: adminEmail,
       subject: `New Contact Form Message from ${name}`,
@@ -76,8 +74,6 @@ export async function POST(request: NextRequest) {
       `,
       text: `New contact form message:\n\nName: ${name}\nEmail: ${email}\n${phone ? `Phone: ${phone}\n` : ''}Message: ${message}`,
     });
-
-    // Send confirmation to the user
     await sendEmail({
       to: email,
       subject: 'We received your message - Gilt Counselling Consult',

@@ -5,8 +5,6 @@ import User from '@/lib/models/user';
 import Notification, { createNotification } from '@/lib/models/notification';
 import { requireAdmin } from '@/lib/auth';
 import { sendCounselorAssignmentEmail } from '@/lib/email';
-
-// PATCH - Assign counselor to appointment
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -34,8 +32,6 @@ export async function PATCH(
         { status: 400 }
       );
     }
-
-    // Find the appointment
     const appointment = await Appointment.findById(id);
 
     if (!appointment) {
@@ -44,8 +40,6 @@ export async function PATCH(
         { status: 404 }
       );
     }
-
-    // Find the counselor
     const counselor = await User.findOne({
       _id: counselorId,
       role: 'counselor',
@@ -57,8 +51,6 @@ export async function PATCH(
         { status: 404 }
       );
     }
-
-    // Check if counselor is available
     if (counselor.isAvailable === false) {
       return NextResponse.json(
         { message: 'Counselor is not available for appointments' },
@@ -68,14 +60,10 @@ export async function PATCH(
 
     const counselorName = `${counselor.firstName} ${counselor.lastName}`;
     const previousCounselorId = appointment.counselorId?.toString();
-
-    // Update the appointment with counselor details
     appointment.counselorId = counselorId;
     appointment.counselorName = counselorName;
     appointment.lastModifiedBy = 'admin';
     await appointment.save();
-
-    // Create in-app notification for the counselor
     await createNotification({
       userId: counselorId,
       type: 'appointment_assigned',
@@ -92,8 +80,6 @@ export async function PATCH(
       },
       read: false,
     });
-
-    // Send email notification to counselor
     try {
       await sendCounselorAssignmentEmail(
         counselor.email,
@@ -108,7 +94,6 @@ export async function PATCH(
       );
     } catch (emailError) {
       console.error('Failed to send assignment email:', emailError);
-      // Don't fail the request if email fails
     }
 
     return NextResponse.json({

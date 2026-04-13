@@ -8,20 +8,18 @@ function VerifyOTPContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
-  const type = searchParams.get("type") || "signin"; // "signin" or "signup"
+  const type = searchParams.get("type") || "signin";
 
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const [isLoading, setIsLoading] = useState(false);
   const [isResending, setIsResending] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const [timeRemaining, setTimeRemaining] = useState(600); // 10 minutes in seconds
+  const [timeRemaining, setTimeRemaining] = useState(600);
   const [canResend, setCanResend] = useState(false);
   const [resendCooldown, setResendCooldown] = useState(0);
 
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
-
-  // Countdown timer for OTP expiration
   useEffect(() => {
     if (timeRemaining <= 0) return;
 
@@ -37,8 +35,6 @@ function VerifyOTPContent() {
 
     return () => clearInterval(timer);
   }, [timeRemaining]);
-
-  // Resend cooldown timer (60 seconds)
   useEffect(() => {
     if (resendCooldown <= 0) {
       setCanResend(true);
@@ -58,43 +54,30 @@ function VerifyOTPContent() {
 
     return () => clearInterval(timer);
   }, [resendCooldown]);
-
-  // Format time for display
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
     return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
-
-  // Handle input change
   const handleChange = (index: number, value: string) => {
-    // Only allow digits
     if (value && !/^\d$/.test(value)) return;
 
     const newOtp = [...otp];
     newOtp[index] = value;
     setOtp(newOtp);
     setErrorMessage("");
-
-    // Auto-focus next input
     if (value && index < 5) {
       inputRefs.current[index + 1]?.focus();
     }
-
-    // Auto-submit when all 6 digits entered
     if (value && index === 5 && newOtp.every((digit) => digit !== "")) {
       handleSubmit(newOtp.join(""));
     }
   };
-
-  // Handle key down for backspace navigation
   const handleKeyDown = (index: number, e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Backspace" && !otp[index] && index > 0) {
       inputRefs.current[index - 1]?.focus();
     }
   };
-
-  // Handle paste
   const handlePaste = (e: React.ClipboardEvent) => {
     e.preventDefault();
     const pastedData = e.clipboardData.getData("text").replace(/\D/g, "").slice(0, 6);
@@ -104,13 +87,9 @@ function VerifyOTPContent() {
       setOtp(newOtp);
       setErrorMessage("");
       inputRefs.current[5]?.focus();
-
-      // Auto-submit after paste
       handleSubmit(pastedData);
     }
   };
-
-  // Handle OTP verification
   const handleSubmit = async (code?: string) => {
     const otpCode = code || otp.join("");
 
@@ -139,18 +118,13 @@ function VerifyOTPContent() {
       if (!response.ok) {
         throw new Error(data.message || "Verification failed");
       }
-
-      // Store token and user info
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
-
-      // If signup, update user profile with stored data
       if (type === "signup") {
         const signupData = localStorage.getItem("signupData");
         if (signupData) {
           try {
             const { firstName, lastName, phone } = JSON.parse(signupData);
-            // Update user profile with firstName, lastName and phone
             await fetch("/api/user/profile", {
               method: "PUT",
               headers: {
@@ -159,18 +133,14 @@ function VerifyOTPContent() {
               },
               body: JSON.stringify({ firstName, lastName, phone }),
             });
-            // Clear signup data
             localStorage.removeItem("signupData");
           } catch (profileError) {
             console.error("Failed to update profile:", profileError);
-            // Continue anyway - user can update profile later
           }
         }
       }
 
       setSuccessMessage("Verification successful! Redirecting...");
-
-      // Redirect based on role
       setTimeout(() => {
         if (data.user.role === "admin") {
           router.push("/admin");
@@ -187,8 +157,6 @@ function VerifyOTPContent() {
       setIsLoading(false);
     }
   };
-
-  // Handle resend OTP
   const handleResend = async () => {
     if (!canResend || isResending) return;
 
@@ -211,13 +179,11 @@ function VerifyOTPContent() {
       }
 
       setSuccessMessage("New verification code sent!");
-      setTimeRemaining(600); // Reset timer
+      setTimeRemaining(600);
       setCanResend(false);
-      setResendCooldown(60); // 60 second cooldown
+      setResendCooldown(60);
       setOtp(["", "", "", "", "", ""]);
       inputRefs.current[0]?.focus();
-
-      // Clear success message after 3 seconds
       setTimeout(() => setSuccessMessage(""), 3000);
     } catch (error: any) {
       setErrorMessage(error.message || "Failed to resend code");
@@ -225,8 +191,6 @@ function VerifyOTPContent() {
       setIsResending(false);
     }
   };
-
-  // Redirect if no email provided
   if (!email) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4">
@@ -252,7 +216,7 @@ function VerifyOTPContent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
       <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl border border-gilt-gold/20">
-        {/* Header */}
+        {}
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
             Verify Your Email
@@ -265,7 +229,7 @@ function VerifyOTPContent() {
           </p>
         </div>
 
-        {/* Timer */}
+        {}
         {timeRemaining > 0 ? (
           <div className="text-center">
             <p className="text-xs sm:text-sm lg:text-base text-gray-500">
@@ -283,7 +247,7 @@ function VerifyOTPContent() {
           </div>
         )}
 
-        {/* Error/Success Message */}
+        {}
         {errorMessage && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
             <p className="text-xs sm:text-sm lg:text-base">{errorMessage}</p>
@@ -296,7 +260,7 @@ function VerifyOTPContent() {
           </div>
         )}
 
-        {/* OTP Input */}
+        {}
         <div className="flex justify-center gap-2 sm:gap-3 lg:gap-4">
           {otp.map((digit, index) => (
             <input
@@ -316,7 +280,7 @@ function VerifyOTPContent() {
           ))}
         </div>
 
-        {/* Verify Button */}
+        {}
         <button
           onClick={() => handleSubmit()}
           disabled={isLoading || otp.some((d) => !d) || !!successMessage}
@@ -337,7 +301,7 @@ function VerifyOTPContent() {
           )}
         </button>
 
-        {/* Resend OTP */}
+        {}
         <div className="text-center">
           <p className="text-xs sm:text-sm lg:text-base text-gray-600 mb-2">
             Didn't receive the code?

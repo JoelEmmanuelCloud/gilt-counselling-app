@@ -153,7 +153,7 @@ export default function Services() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Hero Section */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-6">Our Services</h1>
@@ -164,7 +164,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Optional Banner */}
+      {}
       <section className="section-container">
         <div className="relative h-[300px] max-w-5xl mx-auto rounded-lg overflow-hidden">
           <Image
@@ -181,7 +181,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Services Grid */}
+      {}
       <section className="section-container bg-off-white">
         <SectionHeading
           title="How We Can Support You"
@@ -200,7 +200,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* Service Details Section */}
+      {}
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="What to Expect"
@@ -232,7 +232,7 @@ export default function Services() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {}
       <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="text-4xl sm:text-5xl lg:text-6xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>

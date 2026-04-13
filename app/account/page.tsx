@@ -22,8 +22,6 @@ function MyAccountContent() {
   const [userData, setUserData] = useState<any>(null);
   const [appointments, setAppointments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-
-  // Check if user is authenticated
   const isAuthenticated = status === 'authenticated' || (token && customUser);
   const user = session?.user || customUser;
 
@@ -34,8 +32,6 @@ function MyAccountContent() {
       router.push('/book-appointment');
       return;
     }
-
-    // Redirect counselors and admins to their respective dashboards
     if (user?.role === 'counselor') {
       router.push('/counselor');
       return;
@@ -44,8 +40,6 @@ function MyAccountContent() {
       router.push('/admin');
       return;
     }
-
-    // Set tab from URL param if provided
     const tab = searchParams.get('tab') as AccountTab;
     if (tab && ['overview', 'appointments', 'profile', 'security'].includes(tab)) {
       setActiveTab(tab);
@@ -57,8 +51,6 @@ function MyAccountContent() {
   const fetchData = async () => {
     try {
       setLoading(true);
-
-      // Fetch user profile
       const profileRes = await axios.get('/api/profile', {
         headers: {
           Authorization: `Bearer ${token || ''}`,
@@ -66,8 +58,6 @@ function MyAccountContent() {
       });
 
       setUserData(profileRes.data);
-
-      // Fetch appointments
       const appointmentsRes = await axios.get('/api/appointments/my-appointments', {
         headers: {
           Authorization: `Bearer ${token || ''}`,
@@ -96,16 +86,12 @@ function MyAccountContent() {
   if (!isAuthenticated || !userData) {
     return null;
   }
-
-  // Calculate stats
   const stats = {
     total: appointments.length,
     pending: appointments.filter(a => a.status === 'pending').length,
     confirmed: appointments.filter(a => a.status === 'confirmed').length,
     completed: appointments.filter(a => a.status === 'completed').length,
   };
-
-  // Get upcoming appointments (not cancelled or completed, sorted by date)
   const upcomingAppointments = appointments
     .filter(a => a.status !== 'cancelled' && a.status !== 'completed')
     .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
@@ -113,11 +99,11 @@ function MyAccountContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Header Section */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center gap-6">
-            {/* Profile Photo */}
+            {}
             <div className="relative">
               <img
                 src={userData?.profilePhoto || userData?.image || '/default-avatar.svg'}
@@ -125,7 +111,7 @@ function MyAccountContent() {
                 className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
               />
             </div>
-            {/* User Info */}
+            {}
             <div className="text-center sm:text-left">
               <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-2">
                 My Account
@@ -140,9 +126,9 @@ function MyAccountContent() {
         </div>
       </section>
 
-      {/* Tabs and Content */}
+      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Tab Navigation */}
+        {}
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-2">
           <button
             onClick={() => setActiveTab('overview')}
@@ -191,7 +177,7 @@ function MyAccountContent() {
           </button>
         </div>
 
-        {/* Tab Content */}
+        {}
         <div className="mt-6">
           {activeTab === 'overview' && (
             <OverviewTab

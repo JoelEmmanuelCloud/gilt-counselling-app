@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
 import { requireCounselor } from '@/lib/auth';
-
-// GET counselor's availability
 export async function GET(request: NextRequest) {
   const authResult = await requireCounselor();
 
@@ -41,8 +39,6 @@ export async function GET(request: NextRequest) {
     );
   }
 }
-
-// PATCH update counselor's availability
 export async function PATCH(request: NextRequest) {
   const authResult = await requireCounselor();
 

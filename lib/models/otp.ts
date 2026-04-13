@@ -38,7 +38,7 @@ const OTPSchema = new Schema(
     expiresAt: {
       type: Date,
       required: [true, 'Expiration date is required'],
-      index: { expires: 0 }, // TTL index - automatically delete documents when expiresAt is reached
+      index: { expires: 0 },
     },
     used: {
       type: Boolean,
@@ -55,26 +55,12 @@ const OTPSchema = new Schema(
     timestamps: true,
   }
 );
-
-// Compound index for efficient lookups
 OTPSchema.index({ email: 1, createdAt: -1 });
-
-// Index for code lookups
 OTPSchema.index({ code: 1 });
-
-// Prevent model recompilation in development
 const OTP: Model<IOTP> = mongoose.models.OTP || mongoose.model<IOTP>('OTP', OTPSchema);
 
 export default OTP;
 
-// Helper functions
-
-/**
- * Create a new OTP record
- * @param email - User's email address
- * @param code - 6-digit OTP code
- * @param expiryMinutes - Minutes until OTP expires (default: 10)
- */
 export const createOTP = async (email: string, code: string, expiryMinutes: number = 10) => {
   const expiresAt = new Date(Date.now() + expiryMinutes * 60 * 1000);
 
@@ -89,10 +75,6 @@ export const createOTP = async (email: string, code: string, expiryMinutes: numb
   return await otp.save();
 };
 
-/**
- * Find the most recent valid OTP for an email
- * @param email - User's email address
- */
 export const findValidOTP = async (email: string) => {
   return await OTP.findOne({
     email: email.toLowerCase(),
@@ -101,11 +83,6 @@ export const findValidOTP = async (email: string) => {
   }).sort({ createdAt: -1 });
 };
 
-/**
- * Find OTP by email and code
- * @param email - User's email address
- * @param code - 6-digit OTP code
- */
 export const findOTPByCode = async (email: string, code: string) => {
   return await OTP.findOne({
     email: email.toLowerCase(),
@@ -115,10 +92,6 @@ export const findOTPByCode = async (email: string, code: string) => {
   });
 };
 
-/**
- * Mark OTP as used
- * @param otpId - OTP document ID
- */
 export const markOTPAsUsed = async (otpId: string) => {
   return await OTP.findByIdAndUpdate(
     otpId,
@@ -127,10 +100,6 @@ export const markOTPAsUsed = async (otpId: string) => {
   );
 };
 
-/**
- * Increment attempt count
- * @param otpId - OTP document ID
- */
 export const incrementAttempts = async (otpId: string) => {
   return await OTP.findByIdAndUpdate(
     otpId,
@@ -139,10 +108,6 @@ export const incrementAttempts = async (otpId: string) => {
   );
 };
 
-/**
- * Invalidate all unused OTPs for an email
- * @param email - User's email address
- */
 export const invalidateOTPsForEmail = async (email: string) => {
   return await OTP.updateMany(
     {

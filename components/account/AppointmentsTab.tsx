@@ -33,7 +33,7 @@ export default function AppointmentsTab({ appointments, onRefresh }: Appointment
 
   return (
     <div className="space-y-6">
-      {/* Filter Buttons */}
+      {}
       <div className="flex flex-wrap gap-2">
         <button
           onClick={() => setFilter('all')}
@@ -87,14 +87,14 @@ export default function AppointmentsTab({ appointments, onRefresh }: Appointment
         </button>
       </div>
 
-      {/* Appointments List */}
+      {}
       {filteredAppointments.length === 0 ? (
         <div className="text-center py-12 bg-gray-50 rounded-lg">
           <p className="text-gray-500">No {filter !== 'all' ? filter : ''} appointments found</p>
         </div>
       ) : (
         <div className="space-y-4">
-          {/* Desktop Table View */}
+          {}
           <div className="hidden md:block overflow-x-auto">
             <table className="w-full">
               <thead>
@@ -163,7 +163,7 @@ export default function AppointmentsTab({ appointments, onRefresh }: Appointment
             </table>
           </div>
 
-          {/* Mobile Card View */}
+          {}
           <div className="md:hidden space-y-3">
             {filteredAppointments.map((apt) => (
               <div key={apt._id} className="bg-white border border-gray-200 rounded-lg p-4 space-y-3">
@@ -206,7 +206,7 @@ export default function AppointmentsTab({ appointments, onRefresh }: Appointment
         </div>
       )}
 
-      {/* Edit Modal */}
+      {}
       {editingAppointment && (
         <AppointmentEditModal
           appointment={editingAppointment}

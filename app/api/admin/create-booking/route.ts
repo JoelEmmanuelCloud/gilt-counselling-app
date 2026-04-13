@@ -4,8 +4,6 @@ import User from '@/lib/models/user';
 import Appointment from '@/lib/models/appointment';
 import { requireAdmin } from '@/lib/auth';
 import { sendEmail, generateAppointmentConfirmationEmail } from '@/lib/email';
-
-// POST create appointment for client (admin-assisted booking)
 export async function POST(request: NextRequest) {
   const authResult = await requireAdmin();
 
@@ -28,8 +26,6 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Get client details
     const client = await User.findById(userId);
 
     if (!client) {
@@ -38,8 +34,6 @@ export async function POST(request: NextRequest) {
         { status: 404 }
       );
     }
-
-    // Create appointment
     const appointment = new Appointment({
       userId: client._id,
       userName: `${client.firstName} ${client.lastName}`,
@@ -54,8 +48,6 @@ export async function POST(request: NextRequest) {
     });
 
     await appointment.save();
-
-    // Send confirmation email if requested
     if (sendConfirmation && client.emailNotifications) {
       try {
         const { html } = generateAppointmentConfirmationEmail(
@@ -73,7 +65,6 @@ export async function POST(request: NextRequest) {
         });
       } catch (emailError) {
         console.error('Failed to send confirmation email:', emailError);
-        // Continue even if email fails
       }
     }
 

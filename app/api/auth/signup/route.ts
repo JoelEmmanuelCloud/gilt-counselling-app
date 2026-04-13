@@ -8,8 +8,6 @@ import { sendEmail, generateOTPEmail } from "@/lib/email";
 export async function POST(request: NextRequest) {
   try {
     const { firstName, lastName, email, phone } = await request.json();
-
-    // Validation
     if (!firstName || !lastName || !email) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -18,8 +16,6 @@ export async function POST(request: NextRequest) {
     }
 
     await connectDB();
-
-    // Check if user already exists
     const existingUser = await User.findOne({ email });
 
     if (existingUser) {
@@ -28,8 +24,6 @@ export async function POST(request: NextRequest) {
         { status: 400 }
       );
     }
-
-    // Create user (passwordless - they'll use OTP to sign in)
     const user = await User.create({
       firstName,
       lastName,
@@ -37,16 +31,12 @@ export async function POST(request: NextRequest) {
       phone: phone || "",
       role: "user",
       source: "online",
-      emailVerified: null, // Will be verified after OTP confirmation
+      emailVerified: null,
       preferredContactMethod: "email",
       emailNotifications: true,
     });
-
-    // Generate and send OTP for verification
     const code = generateOTP();
-    await createOTP(email.toLowerCase(), code, 10); // 10 minutes expiry
-
-    // Send OTP email
+    await createOTP(email.toLowerCase(), code, 10);
     const { html, text } = generateOTPEmail(email, code, firstName);
     await sendEmail({
       to: email,

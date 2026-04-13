@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
 import Notification from '@/lib/models/notification';
 import { requireAuth } from '@/lib/auth';
-
-// PATCH - Mark notification as read
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -22,8 +20,6 @@ export async function PATCH(
 
   try {
     await connectDB();
-
-    // Find notification and verify it belongs to the user
     const notification = await Notification.findOne({
       _id: id,
       userId: user.id,
@@ -35,8 +31,6 @@ export async function PATCH(
         { status: 404 }
       );
     }
-
-    // Update the notification
     notification.read = true;
     await notification.save();
 
@@ -49,8 +43,6 @@ export async function PATCH(
     );
   }
 }
-
-// DELETE - Delete a notification
 export async function DELETE(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
@@ -69,8 +61,6 @@ export async function DELETE(
 
   try {
     await connectDB();
-
-    // Find and delete notification, verifying it belongs to the user
     const notification = await Notification.findOneAndDelete({
       _id: id,
       userId: user.id,

@@ -84,7 +84,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
 
   return (
     <div className="space-y-6">
-      {/* Profile Photo */}
+      {}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <h2 className="text-xl font-heading font-semibold mb-4">Profile Photo</h2>
         <ProfilePhotoUpload
@@ -93,9 +93,9 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
         />
       </div>
 
-      {/* Personal Information Form */}
+      {}
       <form onSubmit={handleSubmit} className="space-y-6">
-        {/* Basic Information */}
+        {}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h2 className="text-xl font-heading font-semibold mb-4">Personal Information</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -180,7 +180,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
           </div>
         </div>
 
-        {/* Address Information */}
+        {}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h2 className="text-xl font-heading font-semibold mb-4">Address</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -253,7 +253,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
           </div>
         </div>
 
-        {/* Emergency Contact */}
+        {}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h2 className="text-xl font-heading font-semibold mb-4">Emergency Contact</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -312,7 +312,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
           </div>
         </div>
 
-        {/* Contact Preferences */}
+        {}
         <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
           <h2 className="text-xl font-heading font-semibold mb-4">Contact Preferences</h2>
           <div>
@@ -329,7 +329,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
           </div>
         </div>
 
-        {/* Submit Button */}
+        {}
         <div className="flex justify-end">
           <button
             type="submit"

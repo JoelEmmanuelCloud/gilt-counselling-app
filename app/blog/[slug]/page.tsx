@@ -69,7 +69,7 @@ export default async function BlogPostPage({ params }: Props) {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {/* Hero Section */}
+      {}
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
@@ -92,7 +92,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Header Image */}
+      {}
       {post.image && (
         <section className="section-container">
           <div className="max-w-4xl mx-auto">
@@ -111,7 +111,7 @@ export default async function BlogPostPage({ params }: Props) {
         </section>
       )}
 
-      {/* Article Content */}
+      {}
       <article className="section-container">
         <div className="max-w-3xl mx-auto">
           <div
@@ -121,7 +121,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </article>
 
-      {/* CTA */}
+      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
           <Card className="bg-white">
@@ -136,7 +136,7 @@ export default async function BlogPostPage({ params }: Props) {
         </div>
       </section>
 
-      {/* Related Posts */}
+      {}
       {relatedPosts.length > 0 && (
         <section className="section-container bg-off-white">
           <div className="max-w-6xl mx-auto">
