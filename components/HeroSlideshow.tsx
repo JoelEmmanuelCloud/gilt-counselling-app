@@ -22,16 +22,16 @@ export default function HeroSlideshow({ onSlideChange }: { onSlideChange?: (inde
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    onSlideChange?.(currentSlide);
+  }, [currentSlide, onSlideChange]);
+
+  useEffect(() => {
     const timer = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % heroImages.length;
-        onSlideChange?.(next);
-        return next;
-      });
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [onSlideChange]);
+  }, []);
 
   return (
     <div className="absolute inset-0">
