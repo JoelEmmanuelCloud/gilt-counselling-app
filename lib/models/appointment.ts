@@ -25,7 +25,7 @@ export interface IAppointment {
   createdAt?: Date;
   updatedAt?: Date;
 }
-const AppointmentSchema = new Schema<IAppointment>(
+const AppointmentSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
