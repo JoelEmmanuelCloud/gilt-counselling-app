@@ -4,14 +4,14 @@ export interface IAdminInvite {
   _id?: string;
   email: string;
   token: string;
-  invitedBy: mongoose.Types.ObjectId | string;
+  invitedBy: string;
   expiresAt: Date;
   used: boolean;
   createdAt?: Date;
   updatedAt?: Date;
 }
 
-const AdminInviteSchema = new Schema<IAdminInvite>(
+const AdminInviteSchema = new Schema(
   {
     email: {
       type: String,
