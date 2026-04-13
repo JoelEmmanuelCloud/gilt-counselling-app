@@ -49,7 +49,7 @@ export interface IUser {
   updatedAt?: Date;
 }
 
-const UserSchema = new Schema(
+const UserSchema = new Schema<IUser>(
   {
     firstName: {
       type: String,
