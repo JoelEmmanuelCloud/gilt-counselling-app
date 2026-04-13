@@ -4,7 +4,7 @@ export interface IAdminInvite {
   _id?: string;
   email: string;
   token: string;
-  invitedBy: string;
+  invitedBy: mongoose.Types.ObjectId | string;
   expiresAt: Date;
   used: boolean;
   createdAt?: Date;
