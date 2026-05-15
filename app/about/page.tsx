@@ -58,9 +58,9 @@ export default function About() {
       image: '/uploads/Esther Ebifimoere Peters.jpeg',
     },
     {
-      name: 'Success Donald',
-      title: 'Secretary',
-      image: '/uploads/Success Donald.jpeg',
+      name: 'Jane Nnakpee',
+      title: 'Secretary and Administrative Officer',
+      image: '/uploads/Jane Nnakpee.jpeg',
     },
   ];
 
