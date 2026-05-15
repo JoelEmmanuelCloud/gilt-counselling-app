@@ -51,8 +51,8 @@ export default function Home() {
                 Best counselling service in Port Harcourt
               </div>
               <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-heading font-bold text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 leading-tight">
-                Empowering Teens & Youths<br className="hidden xs:block" />
-                for <span className="italic font-serif">Optimal</span><br className="hidden xs:block" />
+                Empowering Teens & Youths<br />
+                for <span className="italic font-serif">Optimal</span><br />
                 Development.
               </h1>
               <p className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-5 sm:mb-6 md:mb-7 lg:mb-8 xl:mb-10 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl">
@@ -93,7 +93,7 @@ export default function Home() {
                 Discover a Process
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
-                Benefits of psychological<br className="hidden sm:block" />therapy by an expert.
+                Benefits of psychological<br />therapy by an expert.
               </h2>
               <p className="text-gray-300 mb-6 sm:mb-7 lg:mb-8 xl:mb-10 leading-relaxed text-sm sm:text-base lg:text-lg xl:text-xl text-justify">
                 Our experienced counsellors provide a safe, non-judgmental space to help you navigate life's challenges. Through evidence-based therapeutic approaches, we empower individuals, couples, and families to build resilience, strengthen relationships, and achieve lasting wellbeing.
