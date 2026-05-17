@@ -35,14 +35,14 @@ export default function BookAppointment() {
   const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${buildMessage()}`;
 
   return (
-    <main className="min-h-screen bg-gray-50 py-16 px-4">
+    <main className="min-h-screen bg-gray-50 py-8 sm:py-12 md:py-16 px-4">
       <div className="max-w-2xl mx-auto">
         <SectionHeading
           title="Book Your Session"
           subtitle="No forms, no sign-up required — just send our secretary a message on WhatsApp and she'll schedule everything for you."
         />
 
-        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mt-10">
+        <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 md:mt-10">
           {/* Step 1 */}
           <div className="mb-8">
             <p className="text-sm font-semibold text-[#8B7355] uppercase tracking-wide mb-3">

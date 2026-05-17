@@ -113,10 +113,10 @@ const Navbar: React.FC = () => {
       {}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
+          <div className="flex justify-between items-center h-16 md:h-20">
             {}
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-32 h-20 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative w-24 h-14 sm:w-28 sm:h-16 lg:w-32 lg:h-20 group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src="/Gilt Counselling Consult Profile.svg"
                   alt="Gilt Counselling Consult Logo"
@@ -208,7 +208,7 @@ const Navbar: React.FC = () => {
               ) : (
                 <button
                   onClick={handleBookSession}
-                  className="bg-soft-terracotta text-gray-900 px-6 py-2.5 rounded hover:bg-soft-terracotta/90 transition-colors duration-300 font-semibold uppercase text-sm tracking-wide"
+                  className="bg-soft-terracotta text-gray-900 px-5 py-3 rounded hover:bg-soft-terracotta/90 transition-colors duration-300 font-semibold uppercase text-sm tracking-wide"
                 >
                   Book Session
                 </button>
@@ -218,7 +218,7 @@ const Navbar: React.FC = () => {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
+              className="lg:hidden p-2.5 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -288,7 +288,7 @@ const Navbar: React.FC = () => {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-gray-700 hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 touch-manipulation text-sm sm:text-base font-medium"
+              className="px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-gray-700 hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 touch-manipulation text-sm sm:text-base font-medium"
               aria-label="Close menu"
             >
               Close

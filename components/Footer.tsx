@@ -28,18 +28,18 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-warm-cream border-t border-soft-beige">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
           {}
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="relative w-32 h-20">
+              <div className="relative w-24 h-14 sm:w-28 sm:h-16 md:w-32 md:h-20">
                 <Image
                   src="/Gilt Counselling Consult Profile.svg"
                   alt="Gilt Counselling Consult Logo"
                   fill
                   className="object-contain object-left"
-                  sizes="128px"
+                  sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, 128px"
                   loading="lazy"
                 />
               </div>
@@ -153,7 +153,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-soft-beige">
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-soft-beige">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-600 text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.

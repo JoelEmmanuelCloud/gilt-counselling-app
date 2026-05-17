@@ -55,9 +55,9 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-off-white">
       {}
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-6">Get in Touch</h1>
+          <h1 className="heading-xl mb-4 sm:mb-6">Get in Touch</h1>
           <p className="body-lg">
             We're here to answer your questions and support you on your journey.
             Reach out however feels most comfortable for you.
@@ -67,7 +67,7 @@ export default function Contact() {
 
       {/* Contact Information */}
       <section className="section-container">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Nigeria Office */}
           <Card variant="warm">
             <div className="flex items-start gap-3 mb-4">
@@ -139,7 +139,7 @@ export default function Contact() {
         </div>
 
         {/* Office Hours */}
-        <div className="max-w-2xl mx-auto mt-12">
+        <div className="max-w-2xl mx-auto mt-6 sm:mt-8 md:mt-12">
           <Card className="text-center">
             <h3 className="font-heading font-semibold text-xl text-gray-900 mb-4">Office Hours</h3>
             <div className="space-y-2 text-gray-700">
@@ -161,8 +161,8 @@ export default function Contact() {
           subtitle="We've created a welcoming, comfortable environment where you can feel safe and at ease."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
+          <div className="relative h-[240px] sm:h-[300px] md:h-[380px] lg:h-[420px] rounded-lg overflow-hidden">
             <Image
               src="/images/office1.jpg"
               alt="Counselling Room - Comfortable seating area"
@@ -175,7 +175,7 @@ export default function Contact() {
               loading="lazy"
             />
           </div>
-          <div className="relative h-[400px] rounded-lg overflow-hidden">
+          <div className="relative h-[240px] sm:h-[300px] md:h-[380px] lg:h-[420px] rounded-lg overflow-hidden">
             <Image
               src="/images/office2.jpg"
               alt="Group Session Room - Meeting and workshop space"

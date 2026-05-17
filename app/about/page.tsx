@@ -106,9 +106,9 @@ export default function About() {
   return (
     <div className="min-h-screen bg-off-white">
       {}
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-6">About Gilt Counselling Consult</h1>
+          <h1 className="heading-xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
           <p className="body-lg">
             Empowering teens and youths for optimal development through professional,
             compassionate counselling and support.
@@ -143,8 +143,8 @@ export default function About() {
       {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <div className="relative h-[350px] md:h-[400px] w-full max-w-[350px] mx-auto rounded-lg overflow-hidden">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
+            <div className="relative h-[280px] sm:h-[340px] md:h-[420px] w-full max-w-xs sm:max-w-sm md:max-w-[380px] mx-auto rounded-lg overflow-hidden">
               <Image
                 src="/images/Dame Prof Chinelo Joy Ugwu.jpeg"
                 alt="Dame Prof Chinelo Joy Ugwu - Founder & CEO"
@@ -182,7 +182,7 @@ export default function About() {
             Prof Chinelo Ugwu, founder of Gilt Counselling Consult, at the 2025 Canadian Counselling
             and Psychotherapy Association (CCPA) conference in Calgary.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {[
               { src: '/images/ccpa-conference/ccpa-1.jpeg', alt: 'Prof Chinelo Ugwu at CCPA conference with fellow delegate' },
               { src: '/images/ccpa-conference/ccpa-2.jpeg', alt: 'Prof Chinelo Ugwu speaking at the CCPA conference podium' },
@@ -191,7 +191,7 @@ export default function About() {
               { src: '/images/ccpa-conference/ccpa-5.jpeg', alt: 'Prof Chinelo Ugwu at the CCPA conference booth' },
               { src: '/images/ccpa-conference/ccpa-6.jpeg', alt: 'Prof Chinelo Ugwu with fellow counselling professional at CCPA conference' },
             ].map((photo, index) => (
-              <div key={index} className="relative h-[280px] rounded-lg overflow-hidden">
+              <div key={index} className="relative h-[200px] sm:h-[240px] md:h-[280px] rounded-lg overflow-hidden">
                 <Image
                   src={photo.src}
                   alt={photo.alt}
@@ -215,7 +215,7 @@ export default function About() {
           centered
         />
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
             <div className="space-y-4 text-gray-700">
               <p className="body-lg font-semibold text-soft-terracotta">
                 Chairs Donated to Otana Inclusive Centre
@@ -240,7 +240,7 @@ export default function About() {
                 { src: '/images/outreach/otana-outreach-1.jpeg', alt: 'Gilt Counselling Consult donating chairs to Otana Inclusive Centre' },
                 { src: '/images/outreach/otana-outreach-2.jpeg', alt: 'Executive chairs donated to special needs children at Otana Inclusive Centre' },
               ].map((photo, index) => (
-                <div key={index} className="relative h-[260px] rounded-lg overflow-hidden shadow-md">
+                <div key={index} className="relative h-[200px] sm:h-[230px] md:h-[260px] rounded-lg overflow-hidden shadow-md">
                   <Image
                     src={photo.src}
                     alt={photo.alt}
@@ -265,7 +265,7 @@ export default function About() {
           centered
         />
         <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center mb-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center mb-6 sm:mb-8">
             <div className="space-y-4 text-gray-700">
               <p className="body-lg font-semibold text-soft-terracotta">
                 Education &amp; Empowerment Committee Workshop
@@ -281,9 +281,9 @@ export default function About() {
                 professional support beyond the counselling room and into the wider community.
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-3">
+            <div className="grid grid-cols-2 gap-2 sm:gap-3">
               {[1, 2, 3, 6].map((i) => (
-                <div key={i} className="relative h-[200px] rounded-lg overflow-hidden shadow-md">
+                <div key={i} className="relative h-[140px] sm:h-[170px] md:h-[200px] rounded-lg overflow-hidden shadow-md">
                   <Image
                     src={`/images/workshops/all-saints/all-saints-workshop-${i}.jpeg`}
                     alt={`All Saints Cathedral Education and Empowerment Committee Workshop - Photo ${i}`}
@@ -297,9 +297,9 @@ export default function About() {
               ))}
             </div>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
             {[7, 9, 10, 14, 15].map((i) => (
-              <div key={i} className="relative h-[160px] rounded-lg overflow-hidden shadow-md">
+              <div key={i} className="relative h-[120px] sm:h-[140px] md:h-[160px] rounded-lg overflow-hidden shadow-md">
                 <Image
                   src={`/images/workshops/all-saints/all-saints-workshop-${i}.jpeg`}
                   alt={`All Saints Cathedral workshop activity - Photo ${i}`}
@@ -322,11 +322,11 @@ export default function About() {
           subtitle="These principles guide everything we do and shape the care we provide."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-xl p-8 mb-4 min-h-[200px] flex flex-col justify-center`}>
-                <h3 className="font-heading font-bold text-2xl mb-3">{value.name}</h3>
+              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] flex flex-col justify-center`}>
+                <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed px-2 text-justify">
                 {value.description}
@@ -343,7 +343,7 @@ export default function About() {
           subtitle="We combine professional excellence with genuine compassion for every person we serve."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
           {whyChooseUs.map((item, index) => (
             <Card key={index}>
               <div className="flex items-start gap-4">
@@ -397,10 +397,10 @@ export default function About() {
           subtitle="Experienced professionals dedicated to your wellbeing and growth."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
           {team.map((member, index) => (
             <Card key={index} className="text-center">
-              <div className="mb-6 relative h-[280px] w-[280px] mx-auto rounded-lg overflow-hidden">
+              <div className="mb-4 sm:mb-6 relative h-[200px] w-[200px] sm:h-[240px] sm:w-[240px] md:h-[260px] md:w-[260px] mx-auto rounded-lg overflow-hidden">
                 <Image
                   src={member.image}
                   alt={`${member.name} - Professional Headshot`}

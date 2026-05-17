@@ -154,9 +154,9 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-off-white">
       {}
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-6">Our Services</h1>
+          <h1 className="heading-xl mb-4 sm:mb-6">Our Services</h1>
           <p className="body-lg">
             Comprehensive counselling and consulting services designed to empower
             and support your journey toward growth and wellbeing.
@@ -166,7 +166,7 @@ export default function Services() {
 
       {}
       <section className="section-container">
-        <div className="relative h-[300px] max-w-5xl mx-auto rounded-lg overflow-hidden">
+        <div className="relative h-[200px] sm:h-[250px] md:h-[300px] max-w-5xl mx-auto rounded-lg overflow-hidden">
           <Image
             src="/images/ourservice.jpg"
             alt="Counsellor holding client's hand during a session"
@@ -188,7 +188,7 @@ export default function Services() {
           subtitle="Each service is designed with care to address specific needs and provide meaningful support."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
           {services.map((service, index) => (
             <ServiceCard
               key={index}
