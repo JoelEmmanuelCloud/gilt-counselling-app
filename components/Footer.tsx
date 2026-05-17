@@ -28,18 +28,18 @@ const Footer: React.FC = () => {
 
   return (
     <footer className="bg-warm-cream border-t border-soft-beige">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+
           <div className="lg:col-span-1">
             <div className="flex items-center mb-4">
-              <div className="relative w-32 h-20">
+              <div className="relative w-24 h-14 sm:w-28 sm:h-16 md:w-32 md:h-20">
                 <Image
                   src="/Gilt Counselling Consult Profile.svg"
                   alt="Gilt Counselling Consult Logo"
                   fill
                   className="object-contain object-left"
-                  sizes="128px"
+                  sizes="(max-width: 640px) 96px, (max-width: 768px) 112px, 128px"
                   loading="lazy"
                 />
               </div>
@@ -58,7 +58,7 @@ const Footer: React.FC = () => {
               ))}
             </div>
             <div className="flex items-center space-x-4">
-              <a href="https://www.facebook.com/giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 transition-opacity" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61588696223113" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 transition-opacity" aria-label="Facebook">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
@@ -68,12 +68,12 @@ const Footer: React.FC = () => {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
-              <a href="https://www.youtube.com/@giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:opacity-80 transition-opacity" aria-label="YouTube">
+              <a href="https://youtube.com/@giltcounsellingconsult?si=1bYd2MJEPiifgJ5A" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:opacity-80 transition-opacity" aria-label="YouTube">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@giltcounselling" target="_blank" rel="noopener noreferrer" className="text-[#000000] hover:opacity-80 transition-opacity" aria-label="TikTok">
+              <a href="https://www.tiktok.com/@giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#000000] hover:opacity-80 transition-opacity" aria-label="TikTok">
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
                 </svg>
@@ -86,7 +86,6 @@ const Footer: React.FC = () => {
             </div>
           </div>
 
-          {}
           <div>
             <h4 className="font-heading font-semibold text-gray-900 mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -103,7 +102,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {}
           <div>
             <h4 className="font-heading font-semibold text-gray-900 mb-4">Resources</h4>
             <ul className="space-y-2">
@@ -120,7 +118,6 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {}
           <div>
             <h4 className="font-heading font-semibold text-gray-900 mb-4">Contact Us</h4>
             <div className="space-y-4 text-sm">
@@ -132,12 +129,12 @@ const Footer: React.FC = () => {
                   Rivers State
                 </p>
                 <p className="text-gray-600 mt-2">
-                  <a href="tel:+2348033094050" className="hover:text-soft-gold transition-colors">
-                    +234 803 309 4050
-                  </a>
-                  <br />
                   <a href="tel:+2347065734165" className="hover:text-soft-gold transition-colors">
                     +234 706 573 4165
+                  </a>
+                  <br />
+                  <a href="tel:+2347064467658" className="hover:text-soft-gold transition-colors">
+                    +234 706 446 7658
                   </a>
                 </p>
               </div>
@@ -153,7 +150,7 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-soft-beige">
+        <div className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-soft-beige">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-600 text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.

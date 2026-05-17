@@ -188,7 +188,7 @@ function DashboardContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {}
+
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Welcome back, {(user as any)?.firstName || (user as any)?.name?.split(' ')[0] || 'there'}!</h1>
@@ -196,7 +196,7 @@ function DashboardContent() {
         </div>
       </section>
 
-      {/* Stats Cards */}
+      
       <section className="section-container">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -237,7 +237,7 @@ function DashboardContent() {
         </div>
       </section>
 
-      {/* Profile Completion Prompt */}
+      
       {!profileComplete && (
         <section className="section-container pt-0">
           <div className="max-w-7xl mx-auto">
@@ -267,7 +267,7 @@ function DashboardContent() {
         </section>
       )}
 
-      {/* Appointments List */}
+      
       <section className="section-container bg-off-white">
         <div className="max-w-7xl mx-auto">
           <Card>
@@ -301,7 +301,7 @@ function DashboardContent() {
               </div>
             ) : (
               <div className="space-y-4">
-                {}
+
                 <div className="hidden md:block overflow-x-auto">
                   <table className="w-full">
                     <thead>
@@ -367,7 +367,6 @@ function DashboardContent() {
                   </table>
                 </div>
 
-                {}
                 <div className="md:hidden space-y-4">
                   {appointments.map((appointment) => (
                     <div key={appointment._id || appointment.id} className="bg-warm-cream rounded-lg p-4 border border-light-grey">
@@ -424,7 +423,6 @@ function DashboardContent() {
         </div>
       </section>
 
-      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-4xl mx-auto text-center">
           <h3 className="heading-sm mb-4">Need Help?</h3>
@@ -437,7 +435,7 @@ function DashboardContent() {
         </div>
       </section>
 
-      {/* Reschedule Modal */}
+      
       {rescheduleModal.isOpen && rescheduleModal.appointment && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
           <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">

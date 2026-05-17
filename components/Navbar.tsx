@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
-import AuthModal from '@/components/AuthModal';
 
 const Navbar: React.FC = () => {
   const { data: session, status } = useSession();
@@ -14,23 +13,17 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
+  const WHATSAPP_NUMBER = '2347065734165';
+  const WHATSAPP_MESSAGE = encodeURIComponent(
+    'Hello, I would like to book a counselling session with Gilt Counselling Consult. Please help me schedule an appointment.'
+  );
+
   const handleBookSession = () => {
-    if (isAuthenticated) {
-      if (user?.role === 'admin') {
-        router.push('/admin');
-      } else if (user?.role === 'counselor') {
-        router.push('/counselor');
-      } else {
-        router.push('/dashboard');
-      }
-    } else {
-      setShowAuthModal(true);
-      setMobileMenuOpen(false);
-    }
+    setMobileMenuOpen(false);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, '_blank', 'noopener,noreferrer');
   };
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -67,7 +60,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-white sticky top-0 z-50">
-      {}
+
       <div className="bg-warm-cream border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-10 text-sm">
@@ -87,7 +80,7 @@ const Navbar: React.FC = () => {
               </span>
             </div>
             <div className="flex items-center space-x-4">
-              <a href="https://www.facebook.com/giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 transition-opacity" aria-label="Facebook">
+              <a href="https://www.facebook.com/profile.php?id=61588696223113" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 transition-opacity" aria-label="Facebook">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                 </svg>
@@ -97,12 +90,12 @@ const Navbar: React.FC = () => {
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
               </a>
-              <a href="https://www.youtube.com/@giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:opacity-80 transition-opacity" aria-label="YouTube">
+              <a href="https://youtube.com/@giltcounsellingconsult?si=1bYd2MJEPiifgJ5A" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:opacity-80 transition-opacity" aria-label="YouTube">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@giltcounselling" target="_blank" rel="noopener noreferrer" className="text-[#000000] hover:opacity-80 transition-opacity" aria-label="TikTok">
+              <a href="https://www.tiktok.com/@giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#000000] hover:opacity-80 transition-opacity" aria-label="TikTok">
                 <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
                 </svg>
@@ -117,13 +110,12 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {}
+          <div className="flex justify-between items-center h-16 md:h-20">
+
             <Link href="/" className="flex items-center space-x-3 group">
-              <div className="relative w-32 h-20 group-hover:scale-105 transition-transform duration-300">
+              <div className="relative w-24 h-14 sm:w-28 sm:h-16 lg:w-32 lg:h-20 group-hover:scale-105 transition-transform duration-300">
                 <Image
                   src="/Gilt Counselling Consult Profile.svg"
                   alt="Gilt Counselling Consult Logo"
@@ -135,7 +127,6 @@ const Navbar: React.FC = () => {
               </div>
             </Link>
 
-            {}
             <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -193,7 +184,6 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {}
             <div className="hidden lg:flex items-center space-x-6">
               <div className="flex items-center space-x-3 text-gray-700">
                 <svg className="w-5 h-5 text-soft-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -201,7 +191,7 @@ const Navbar: React.FC = () => {
                 </svg>
                 <div className="text-sm">
                   <div className="text-xs text-gray-500">LET'S CHAT</div>
-                  <a href="tel:+2348033094050" className="font-semibold hover:text-soft-terracotta transition-colors">+234 803 309 4050</a>
+                  <a href="tel:+2347065734165" className="font-semibold hover:text-soft-terracotta transition-colors">+234 706 573 4165</a>
                 </div>
               </div>
 
@@ -215,17 +205,17 @@ const Navbar: React.FC = () => {
               ) : (
                 <button
                   onClick={handleBookSession}
-                  className="bg-soft-terracotta text-gray-900 px-6 py-2.5 rounded hover:bg-soft-terracotta/90 transition-colors duration-300 font-semibold uppercase text-sm tracking-wide"
+                  className="bg-soft-terracotta text-gray-900 px-5 py-3 rounded hover:bg-soft-terracotta/90 transition-colors duration-300 font-semibold uppercase text-sm tracking-wide"
                 >
                   Book Session
                 </button>
               )}
             </div>
 
-            {/* Mobile Menu Button */}
+            
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
+              className="lg:hidden p-2.5 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -242,7 +232,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      
       <div
         className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out
           ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -250,11 +240,11 @@ const Navbar: React.FC = () => {
         aria-modal="true"
         aria-label="Navigation menu"
       >
-        {/* Drawer Header */}
+        
         <div className="border-b border-gray-200 safe-area-top">
-          {/* Social Links Row */}
+          
           <div className="flex items-center justify-center space-x-4 py-2 bg-warm-cream border-b border-gray-200">
-            <a href="https://www.facebook.com/giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="Facebook">
+            <a href="https://www.facebook.com/profile.php?id=61588696223113" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="Facebook">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
               </svg>
@@ -264,12 +254,12 @@ const Navbar: React.FC = () => {
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
             </a>
-            <a href="https://www.youtube.com/@giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="YouTube">
+            <a href="https://youtube.com/@giltcounsellingconsult?si=1bYd2MJEPiifgJ5A" target="_blank" rel="noopener noreferrer" className="text-[#FF0000] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="YouTube">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
               </svg>
             </a>
-            <a href="https://www.tiktok.com/@giltcounselling" target="_blank" rel="noopener noreferrer" className="text-[#000000] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="TikTok">
+            <a href="https://www.tiktok.com/@giltcounsellingconsult" target="_blank" rel="noopener noreferrer" className="text-[#000000] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="TikTok">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
               </svg>
@@ -280,7 +270,7 @@ const Navbar: React.FC = () => {
               </svg>
             </a>
           </div>
-          {/* Logo and Close Button Row */}
+          
           <div className="flex items-center justify-between p-3 sm:p-4">
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
               <div className="relative w-24 h-14 xs:w-28 xs:h-16 sm:w-32 sm:h-20">
@@ -295,7 +285,7 @@ const Navbar: React.FC = () => {
             </Link>
             <button
               onClick={() => setMobileMenuOpen(false)}
-              className="px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg text-gray-700 hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 touch-manipulation text-sm sm:text-base font-medium"
+              className="px-3 py-2.5 sm:px-4 sm:py-3 rounded-lg text-gray-700 hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 touch-manipulation text-sm sm:text-base font-medium"
               aria-label="Close menu"
             >
               Close
@@ -303,10 +293,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Drawer Content - Full height scrollable */}
+        
         <div className="h-[calc(100%-96px)] xs:h-[calc(100%-104px)] sm:h-[calc(100%-116px)] overflow-y-auto overscroll-contain">
           <div className="px-3 sm:px-4 py-4 sm:py-6">
-            {/* Navigation Links */}
+            
             <div className="space-y-0.5 sm:space-y-1">
               {navLinks.map((link) => (
                 <Link
@@ -358,18 +348,17 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Contact Info - Right after nav links */}
+            
             <div className="flex items-center space-x-3 text-gray-700 mt-4 sm:mt-6 p-3 sm:p-4 bg-warm-cream rounded-lg">
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-soft-terracotta flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
               </svg>
               <div className="text-sm sm:text-base">
                 <div className="text-xs sm:text-sm text-gray-500">LET'S CHAT</div>
-                <a href="tel:+2348033094050" className="font-semibold hover:text-soft-terracotta active:text-soft-terracotta transition-colors touch-manipulation">+234 803 309 4050</a>
+                <a href="tel:+2347065734165" className="font-semibold hover:text-soft-terracotta active:text-soft-terracotta transition-colors touch-manipulation">+234 706 573 4165</a>
               </div>
             </div>
 
-            {}
             <div className="mt-3 sm:mt-4">
               {user ? (
                 <button
@@ -392,13 +381,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {}
-      {showAuthModal && (
-        <AuthModal
-          onClose={() => setShowAuthModal(false)}
-          redirectTo="/dashboard"
-        />
-      )}
     </nav>
   );
 };

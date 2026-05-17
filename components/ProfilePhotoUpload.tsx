@@ -85,7 +85,7 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
   return (
     <div className="space-y-4">
       <div className="flex flex-col sm:flex-row items-center gap-6">
-        {}
+
         <div className="relative">
           <img
             src={preview || currentPhoto || '/default-avatar.svg'}
@@ -94,7 +94,6 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
           />
         </div>
 
-        {}
         <div className="flex-1">
           <input
             ref={fileInputRef}

@@ -25,9 +25,26 @@
 }
 
 @layer components {
+  /* Primary CTA — vivid amber gradient */
+  .btn-cta {
+    background: linear-gradient(135deg, #E8952A 0%, #C07818 100%);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(200, 120, 24, 0.35);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .btn-cta:hover {
+    background: linear-gradient(135deg, #F0A030 0%, #CC8020 100%);
+    box-shadow: 0 6px 22px rgba(200, 120, 24, 0.5);
+    transform: translateY(-2px);
+  }
+  .btn-cta:active {
+    transform: translateY(0);
+  }
+
   /* Emotionally Safe Button Styles */
   .btn-primary {
-    @apply bg-soft-terracotta text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-soft-terracotta/90 focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:ring-offset-2;
+    @apply bg-soft-terracotta text-gray-900 px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-soft-terracotta/90 focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:ring-offset-2;
   }
 
   .btn-secondary {
@@ -49,7 +66,7 @@
 
   /* Form Input Styles - Emotionally Safe */
   .input {
-    @apply w-full px-4 py-3 border border-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all duration-200 bg-white;
+    @apply w-full px-3 py-2.5 sm:px-4 sm:py-3 border border-light-grey rounded-lg focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all duration-200 bg-white text-sm sm:text-base;
   }
 
   .label {
@@ -58,33 +75,33 @@
 
   /* Section Container */
   .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16;
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-14 lg:py-16;
   }
 
   /* Heading Styles */
   .heading-xl {
-    @apply text-4xl md:text-5xl lg:text-6xl font-heading font-bold text-gray-900;
+    @apply text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-heading font-bold text-gray-900;
   }
 
   .heading-lg {
-    @apply text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-gray-900;
+    @apply text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900;
   }
 
   .heading-md {
-    @apply text-2xl md:text-3xl font-heading font-semibold text-gray-900;
+    @apply text-lg sm:text-xl md:text-2xl lg:text-3xl font-heading font-semibold text-gray-900;
   }
 
   .heading-sm {
-    @apply text-xl md:text-2xl font-heading font-semibold text-gray-900;
+    @apply text-base sm:text-lg md:text-xl lg:text-2xl font-heading font-semibold text-gray-900;
   }
 
   /* Body Text */
   .body-lg {
-    @apply text-lg md:text-xl text-gray-600 leading-relaxed;
+    @apply text-base sm:text-lg md:text-xl text-gray-600 leading-relaxed;
   }
 
   .body-md {
-    @apply text-base md:text-lg text-gray-600 leading-relaxed;
+    @apply text-sm sm:text-base md:text-lg text-gray-600 leading-relaxed;
   }
 
   /* Status Badge Styles - Calm Colors */

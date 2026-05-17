@@ -151,7 +151,6 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
     }
   };
 
-
   const handleBack = () => {
     setStep('form');
     setOtp('');
@@ -192,7 +191,6 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
           </svg>
         </button>
 
-        {}
         <div className="text-center mb-4 sm:mb-6 md:mb-8 lg:mb-10">
           <div className="relative w-24 h-16 sm:w-32 sm:h-20 lg:w-36 lg:h-24 mx-auto mb-3 sm:mb-4 lg:mb-5">
             <Image
@@ -221,7 +219,6 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
           </p>
         </div>
 
-        {}
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
             {error}
@@ -233,17 +230,15 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
           </div>
         )}
 
-        {}
         {successMessage && (
           <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
             {successMessage}
           </div>
         )}
 
-        {}
         {mode === 'signin' && step === 'form' && (
           <div className="space-y-3 sm:space-y-4 lg:space-y-5">
-            {}
+
             <form onSubmit={handleEmailSubmit} className="space-y-3 sm:space-y-4 lg:space-y-5">
               <div>
                 <label htmlFor="signin-email" className="block text-xs sm:text-sm lg:text-base font-medium text-gray-700 mb-1 sm:mb-2">
@@ -270,7 +265,6 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
               By continuing, you agree to our Terms of Service and Privacy Policy.
             </p>
 
-            {}
             <div className="text-center mt-3 sm:mt-4 lg:mt-5 pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
               <p className="text-xs sm:text-sm lg:text-base text-gray-600">
                 Don't have an account?{' '}
@@ -286,10 +280,10 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
           </div>
         )}
 
-        {/* Sign Up Form */}
+        
         {mode === 'signup' && step === 'form' && (
           <div className="space-y-3 sm:space-y-4 lg:space-y-5">
-            {/* Sign Up Form */}
+            
             <form onSubmit={handleSignUpSubmit} className="space-y-3 sm:space-y-4 lg:space-y-5">
               <div className="grid grid-cols-1 xs:grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
                 <div>
@@ -349,7 +343,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
               By signing up, you agree to our Terms of Service and Privacy Policy.
             </p>
 
-            {/* Sign In Link */}
+            
             <div className="text-center mt-3 sm:mt-4 lg:mt-5 pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
               <p className="text-xs sm:text-sm lg:text-base text-gray-600">
                 Already have an account?{' '}
@@ -365,7 +359,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
           </div>
         )}
 
-        {/* OTP Verification Step */}
+        
         {step === 'otp' && (
           <form onSubmit={handleOTPVerify} className="space-y-4 sm:space-y-6 lg:space-y-8">
             <div className="text-center mb-4 sm:mb-6 lg:mb-8">
@@ -436,6 +430,5 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
     </div>
   );
 
-  // Use portal to render at document body level, escaping any stacking contexts
   return createPortal(modalContent, document.body);
 }

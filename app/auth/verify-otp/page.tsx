@@ -216,7 +216,7 @@ function VerifyOTPContent() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
       <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl border border-gilt-gold/20">
-        {}
+
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
             Verify Your Email
@@ -229,7 +229,6 @@ function VerifyOTPContent() {
           </p>
         </div>
 
-        {}
         {timeRemaining > 0 ? (
           <div className="text-center">
             <p className="text-xs sm:text-sm lg:text-base text-gray-500">
@@ -247,7 +246,6 @@ function VerifyOTPContent() {
           </div>
         )}
 
-        {}
         {errorMessage && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
             <p className="text-xs sm:text-sm lg:text-base">{errorMessage}</p>
@@ -260,7 +258,6 @@ function VerifyOTPContent() {
           </div>
         )}
 
-        {}
         <div className="flex justify-center gap-2 sm:gap-3 lg:gap-4">
           {otp.map((digit, index) => (
             <input
@@ -280,7 +277,6 @@ function VerifyOTPContent() {
           ))}
         </div>
 
-        {}
         <button
           onClick={() => handleSubmit()}
           disabled={isLoading || otp.some((d) => !d) || !!successMessage}
@@ -301,7 +297,6 @@ function VerifyOTPContent() {
           )}
         </button>
 
-        {}
         <div className="text-center">
           <p className="text-xs sm:text-sm lg:text-base text-gray-600 mb-2">
             Didn't receive the code?
@@ -321,7 +316,7 @@ function VerifyOTPContent() {
           </button>
         </div>
 
-        {/* Back Link */}
+        
         <div className="text-center pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
           <Link
             href={type === "signup" ? "/auth/signup" : "/auth/signin"}
