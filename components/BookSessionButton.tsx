@@ -1,11 +1,12 @@
 'use client';
 
-import React, { useState } from 'react';
-import { useSession } from 'next-auth/react';
-import { useAuth } from '@/lib/AuthContext';
-import { useRouter } from 'next/navigation';
-import AuthModal from '@/components/AuthModal';
+import React from 'react';
 import Button from '@/components/ui/Button';
+
+const PHONE_NUMBER = '2347065734165';
+const DEFAULT_MESSAGE = encodeURIComponent(
+  'Hello, I would like to book a counselling session with Gilt Counselling Consult. Please help me schedule an appointment.'
+);
 
 interface BookSessionButtonProps {
   children?: React.ReactNode;
@@ -18,42 +19,13 @@ export default function BookSessionButton({
   className = '',
   variant = 'primary'
 }: BookSessionButtonProps) {
-  const { data: session, status } = useSession();
-  const { user: customUser, token } = useAuth();
-  const router = useRouter();
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const user = session?.user || customUser;
-  const isAuthenticated = status === 'authenticated' || (token && customUser);
-
   const handleClick = () => {
-    if (isAuthenticated) {
-      if (user?.role === 'admin') {
-        router.push('/admin');
-      } else if (user?.role === 'counselor') {
-        router.push('/counselor');
-      } else {
-        router.push('/dashboard');
-      }
-    } else {
-      setShowAuthModal(true);
-    }
+    window.open(`https://wa.me/${PHONE_NUMBER}?text=${DEFAULT_MESSAGE}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <>
-      <Button
-        onClick={handleClick}
-        className={className}
-      >
-        {children}
-      </Button>
-
-      {showAuthModal && (
-        <AuthModal
-          onClose={() => setShowAuthModal(false)}
-          redirectTo="/dashboard"
-        />
-      )}
-    </>
+    <Button onClick={handleClick} className={className}>
+      {children}
+    </Button>
   );
 }

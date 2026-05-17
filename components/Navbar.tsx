@@ -6,7 +6,6 @@ import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
-import AuthModal from '@/components/AuthModal';
 
 const Navbar: React.FC = () => {
   const { data: session, status } = useSession();
@@ -14,23 +13,17 @@ const Navbar: React.FC = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [showAuthModal, setShowAuthModal] = useState(false);
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
+  const WHATSAPP_NUMBER = '2347065734165';
+  const WHATSAPP_MESSAGE = encodeURIComponent(
+    'Hello, I would like to book a counselling session with Gilt Counselling Consult. Please help me schedule an appointment.'
+  );
+
   const handleBookSession = () => {
-    if (isAuthenticated) {
-      if (user?.role === 'admin') {
-        router.push('/admin');
-      } else if (user?.role === 'counselor') {
-        router.push('/counselor');
-      } else {
-        router.push('/dashboard');
-      }
-    } else {
-      setShowAuthModal(true);
-      setMobileMenuOpen(false);
-    }
+    setMobileMenuOpen(false);
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${WHATSAPP_MESSAGE}`, '_blank', 'noopener,noreferrer');
   };
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -392,13 +385,6 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {}
-      {showAuthModal && (
-        <AuthModal
-          onClose={() => setShowAuthModal(false)}
-          redirectTo="/dashboard"
-        />
-      )}
     </nav>
   );
 };

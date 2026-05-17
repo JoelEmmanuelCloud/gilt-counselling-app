@@ -5,21 +5,21 @@ import React, { useState } from 'react';
 export default function WhatsAppButton() {
   const [hovered, setHovered] = useState(false);
   const phoneNumber = '2347065734165';
-  const message = encodeURIComponent('Hello, I would like to book a counselling session with Gilt Counselling Consult.');
+  const message = encodeURIComponent('Hello, I would like to book a counselling session with Gilt Counselling Consult. Please help me schedule an appointment.');
 
   return (
     <a
       href={`https://wa.me/${phoneNumber}?text=${message}`}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label="Chat with us on WhatsApp"
+      aria-label="Book a session on WhatsApp"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       className="fixed bottom-6 right-6 z-50 flex items-center gap-3 group"
     >
       {hovered && (
         <span className="bg-gray-900 text-white text-sm px-3 py-2 rounded-lg shadow-lg whitespace-nowrap animate-fade-in">
-          Chat with us
+          Book a session
         </span>
       )}
       <div className="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300">
