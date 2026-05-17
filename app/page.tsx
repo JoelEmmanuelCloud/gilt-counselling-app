@@ -3,12 +3,50 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Button from '@/components/ui/Button';
 import BookSessionButton from '@/components/BookSessionButton';
 import HeroSlideshow, { heroImages } from '@/components/HeroSlideshow';
 import FadeUp from '@/components/FadeUp';
 import AnimatedStats from '@/components/AnimatedStats';
+
+type HeadingLine = string | { before?: string; italic: string; after?: string };
+
+interface SlideContent {
+  badge: string;
+  lines: HeadingLine[];
+  sub: string;
+}
+
+const heroContent: SlideContent[] = [
+  {
+    badge: 'Best Counselling Service in Port Harcourt',
+    lines: [
+      'Empowering Teens & Youths',
+      { before: 'for ', italic: 'Optimal' },
+      'Development.',
+    ],
+    sub: "Professional counselling and support services designed to help young people navigate life's challenges with confidence and hope.",
+  },
+  {
+    badge: 'Safe · Confidential · Compassionate',
+    lines: [
+      'A Safe Space',
+      { before: 'to ', italic: 'Heal' },
+      'and Grow.',
+    ],
+    sub: 'We offer a warm, non-judgmental environment where you can be truly heard and begin your journey to lasting emotional wellness.',
+  },
+  {
+    badge: 'Community Outreach · Education',
+    lines: [
+      'Reaching Communities',
+      { italic: 'Across' },
+      'Nigeria.',
+    ],
+    sub: 'From schools to churches, we bring professional counselling and mental health awareness to every corner of our community.',
+  },
+];
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -51,45 +89,57 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
             <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
 
-              {/* Badge */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-                className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-md lg:rounded-lg mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-[10px] sm:text-xs md:text-sm lg:text-base uppercase tracking-wider"
-              >
-                Best counselling service in Port Harcourt
-              </motion.div>
+              {/* Text changes per slide — exits old, enters new */}
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentSlide}
+                  exit={{ opacity: 0, y: -18, filter: 'blur(4px)', transition: { duration: 0.28, ease: 'easeIn' } }}
+                >
+                  {/* Badge */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+                    className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-md lg:rounded-lg mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-[10px] sm:text-xs md:text-sm lg:text-base uppercase tracking-wider"
+                  >
+                    {heroContent[currentSlide].badge}
+                  </motion.div>
 
-              {/* Headline */}
-              <motion.h1
-                initial={{ opacity: 0, y: 35 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.75, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-heading font-bold text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 leading-tight"
-              >
-                Empowering Teens & Youths<br />
-                for <span className="italic font-serif">Optimal</span><br />
-                Development.
-              </motion.h1>
+                  {/* Heading — each line blurs+slides in with stagger */}
+                  <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-heading font-bold text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 leading-tight">
+                    {heroContent[currentSlide].lines.map((line, i) => (
+                      <motion.span
+                        key={i}
+                        initial={{ opacity: 0, y: 30, filter: 'blur(10px)' }}
+                        animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                        transition={{ duration: 0.65, delay: 0.18 + i * 0.14, ease: [0.22, 1, 0.36, 1] }}
+                        className="block"
+                      >
+                        {typeof line === 'string' ? line : (
+                          <>
+                            {line.before}
+                            <span className="italic font-serif">{line.italic}</span>
+                            {line.after}
+                          </>
+                        )}
+                      </motion.span>
+                    ))}
+                  </h1>
 
-              {/* Subheading */}
-              <motion.p
-                initial={{ opacity: 0, y: 25 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.65, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-5 sm:mb-6 md:mb-7 lg:mb-8 xl:mb-10 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl"
-              >
-                Professional counselling and support services designed to help young people navigate life's challenges with confidence and hope.
-              </motion.p>
+                  {/* Subheading */}
+                  <motion.p
+                    initial={{ opacity: 0, y: 18, filter: 'blur(6px)' }}
+                    animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+                    transition={{ duration: 0.6, delay: 0.62, ease: [0.22, 1, 0.36, 1] }}
+                    className="text-sm sm:text-base md:text-lg lg:text-xl xl:text-2xl text-white/90 mb-5 sm:mb-6 md:mb-7 lg:mb-8 xl:mb-10 leading-relaxed max-w-lg lg:max-w-xl xl:max-w-2xl"
+                  >
+                    {heroContent[currentSlide].sub}
+                  </motion.p>
+                </motion.div>
+              </AnimatePresence>
 
-              {/* CTA Buttons */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.65, ease: [0.22, 1, 0.36, 1] }}
-                className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5"
-              >
+              {/* CTA Buttons — static, stay put during slide changes */}
+              <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5">
                 <BookSessionButton className="w-full xs:w-auto btn-cta px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl">
                   Book Session
                 </BookSessionButton>
@@ -98,15 +148,10 @@ export default function Home() {
                     Explore Our Services
                   </Button>
                 </Link>
-              </motion.div>
+              </div>
 
               {/* Slider Dots */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.9 }}
-                className="flex gap-2 lg:gap-3 mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14"
-              >
+              <div className="flex gap-2 lg:gap-3 mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14">
                 {heroImages.map((_, i) => (
                   <div
                     key={i}
@@ -115,7 +160,7 @@ export default function Home() {
                     }`}
                   />
                 ))}
-              </motion.div>
+              </div>
 
             </div>
           </div>
