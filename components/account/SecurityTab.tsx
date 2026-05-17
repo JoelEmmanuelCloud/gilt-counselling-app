@@ -36,7 +36,7 @@ export default function SecurityTab({ emailNotifications, onUpdate }: SecurityTa
 
   return (
     <div className="space-y-6">
-      {}
+
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <h2 className="text-xl font-heading font-semibold mb-4">Notifications</h2>
         <div className="flex items-center justify-between">
@@ -62,7 +62,6 @@ export default function SecurityTab({ emailNotifications, onUpdate }: SecurityTa
         </div>
       </div>
 
-      {}
       <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200">
         <h2 className="text-xl font-heading font-semibold mb-4">Account Information</h2>
         <div className="space-y-3">
@@ -77,7 +76,6 @@ export default function SecurityTab({ emailNotifications, onUpdate }: SecurityTa
         </div>
       </div>
 
-      {}
       <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
         <h2 className="text-xl font-heading font-semibold mb-2">Secure Authentication</h2>
         <p className="text-gray-700">

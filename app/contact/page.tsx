@@ -54,7 +54,7 @@ export default function Contact() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {}
+
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-4 sm:mb-6">Get in Touch</h1>
@@ -65,10 +65,10 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Contact Information */}
+      
       <section className="section-container">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 lg:gap-12 max-w-6xl mx-auto">
-          {/* Nigeria Office */}
+          
           <Card variant="warm">
             <div className="flex items-start gap-3 mb-4">
               <svg className="w-6 h-6 text-soft-gold flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -109,7 +109,7 @@ export default function Contact() {
             </div>
           </Card>
 
-          {/* Canada Office */}
+          
           <Card variant="warm">
             <div className="flex items-start gap-3 mb-4">
               <svg className="w-6 h-6 text-soft-gold flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +138,7 @@ export default function Contact() {
           </Card>
         </div>
 
-        {/* Office Hours */}
+        
         <div className="max-w-2xl mx-auto mt-6 sm:mt-8 md:mt-12">
           <Card className="text-center">
             <h3 className="font-heading font-semibold text-xl text-gray-900 mb-4">Office Hours</h3>
@@ -154,7 +154,7 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* Office Photos */}
+      
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Our Space"
@@ -191,7 +191,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {}
       <section className="section-container bg-off-white">
         <div className="max-w-2xl mx-auto">
           <SectionHeading
@@ -268,7 +267,6 @@ export default function Contact() {
         </div>
       </section>
 
-      {}
       <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="text-4xl sm:text-5xl lg:text-6xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>

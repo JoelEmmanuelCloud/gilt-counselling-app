@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
 
   return (
     <nav className="bg-white sticky top-0 z-50">
-      {}
+
       <div className="bg-warm-cream border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-10 text-sm">
@@ -110,11 +110,10 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {}
       <div className="bg-white shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16 md:h-20">
-            {}
+
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative w-24 h-14 sm:w-28 sm:h-16 lg:w-32 lg:h-20 group-hover:scale-105 transition-transform duration-300">
                 <Image
@@ -128,7 +127,6 @@ const Navbar: React.FC = () => {
               </div>
             </Link>
 
-            {}
             <div className="hidden lg:flex items-center space-x-8">
               {navLinks.map((link) => (
                 <Link
@@ -186,7 +184,6 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {}
             <div className="hidden lg:flex items-center space-x-6">
               <div className="flex items-center space-x-3 text-gray-700">
                 <svg className="w-5 h-5 text-soft-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -215,7 +212,7 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Mobile Menu Button */}
+            
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className="lg:hidden p-2.5 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
@@ -235,7 +232,7 @@ const Navbar: React.FC = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Drawer */}
+      
       <div
         className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-2xl transform transition-transform duration-300 ease-in-out
           ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
@@ -243,9 +240,9 @@ const Navbar: React.FC = () => {
         aria-modal="true"
         aria-label="Navigation menu"
       >
-        {/* Drawer Header */}
+        
         <div className="border-b border-gray-200 safe-area-top">
-          {/* Social Links Row */}
+          
           <div className="flex items-center justify-center space-x-4 py-2 bg-warm-cream border-b border-gray-200">
             <a href="https://www.facebook.com/profile.php?id=61588696223113" target="_blank" rel="noopener noreferrer" className="text-[#1877F2] hover:opacity-80 active:opacity-60 transition-opacity p-1 touch-manipulation" aria-label="Facebook">
               <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
@@ -273,7 +270,7 @@ const Navbar: React.FC = () => {
               </svg>
             </a>
           </div>
-          {/* Logo and Close Button Row */}
+          
           <div className="flex items-center justify-between p-3 sm:p-4">
             <Link href="/" onClick={() => setMobileMenuOpen(false)} className="flex items-center">
               <div className="relative w-24 h-14 xs:w-28 xs:h-16 sm:w-32 sm:h-20">
@@ -296,10 +293,10 @@ const Navbar: React.FC = () => {
           </div>
         </div>
 
-        {/* Drawer Content - Full height scrollable */}
+        
         <div className="h-[calc(100%-96px)] xs:h-[calc(100%-104px)] sm:h-[calc(100%-116px)] overflow-y-auto overscroll-contain">
           <div className="px-3 sm:px-4 py-4 sm:py-6">
-            {/* Navigation Links */}
+            
             <div className="space-y-0.5 sm:space-y-1">
               {navLinks.map((link) => (
                 <Link
@@ -351,7 +348,7 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            {/* Contact Info - Right after nav links */}
+            
             <div className="flex items-center space-x-3 text-gray-700 mt-4 sm:mt-6 p-3 sm:p-4 bg-warm-cream rounded-lg">
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-soft-terracotta flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -362,7 +359,6 @@ const Navbar: React.FC = () => {
               </div>
             </div>
 
-            {}
             <div className="mt-3 sm:mt-4">
               {user ? (
                 <button

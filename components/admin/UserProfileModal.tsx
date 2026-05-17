@@ -205,7 +205,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 overflow-y-auto">
       <div className="bg-white rounded-lg max-w-6xl w-full max-h-[90vh] overflow-y-auto my-8" ref={printRef}>
         <div className="p-6">
-          {}
+
           <div className="flex justify-between items-start mb-6 sticky top-0 bg-white pb-4 border-b border-gray-200">
             <div className="flex items-center gap-4">
               <img
@@ -259,7 +259,7 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
             </div>
           ) : (
             <div className="space-y-6">
-              {}
+
               <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
                 <Card className="text-center">
                   <h3 className="text-xs font-medium text-gray-500 uppercase mb-1">Total</h3>
@@ -283,7 +283,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 </Card>
               </div>
 
-              {}
               <Card>
                 <h3 className="text-lg font-semibold mb-4">Profile Information</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
@@ -321,7 +320,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                   </div>
                 </div>
 
-                {}
                 {data?.user?.address && (data.user.address.street || data.user.address.city) && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <p className="text-gray-500 mb-2">Address</p>
@@ -337,7 +335,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                   </div>
                 )}
 
-                {}
                 {data?.user?.emergencyContact?.name && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <p className="text-gray-500 mb-2">Emergency Contact</p>
@@ -349,7 +346,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                   </div>
                 )}
 
-                {}
                 {data?.user?.medicalHistory && (
                   <div className="mt-4 pt-4 border-t border-gray-200">
                     <p className="text-gray-500 mb-2">Medical History</p>
@@ -358,7 +354,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 )}
               </Card>
 
-              {}
               <Card>
                 <h3 className="text-lg font-semibold mb-4">Appointment History</h3>
                 {data?.appointments?.length === 0 ? (
@@ -411,7 +406,6 @@ export default function UserProfileModal({ userId, isOpen, onClose }: UserProfil
                 )}
               </Card>
 
-              {}
               {data?.user?.sessionNotes?.length > 0 && (
                 <Card>
                   <h3 className="text-lg font-semibold mb-4">Session Notes</h3>

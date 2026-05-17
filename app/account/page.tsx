@@ -99,11 +99,11 @@ function MyAccountContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {}
+
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center gap-6">
-            {}
+
             <div className="relative">
               <img
                 src={userData?.profilePhoto || userData?.image || '/default-avatar.svg'}
@@ -111,7 +111,7 @@ function MyAccountContent() {
                 className="w-24 h-24 rounded-full border-4 border-white shadow-lg object-cover"
               />
             </div>
-            {}
+
             <div className="text-center sm:text-left">
               <h1 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-2">
                 My Account
@@ -126,9 +126,8 @@ function MyAccountContent() {
         </div>
       </section>
 
-      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {}
+
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 pb-2">
           <button
             onClick={() => setActiveTab('overview')}
@@ -177,7 +176,6 @@ function MyAccountContent() {
           </button>
         </div>
 
-        {}
         <div className="mt-6">
           {activeTab === 'overview' && (
             <OverviewTab

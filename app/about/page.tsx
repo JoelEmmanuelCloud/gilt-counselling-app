@@ -105,7 +105,7 @@ export default function About() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {}
+
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1 className="heading-xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
@@ -116,7 +116,6 @@ export default function About() {
         </div>
       </section>
 
-      {}
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
           <Card variant="warm" className="text-center">
@@ -140,7 +139,6 @@ export default function About() {
         </div>
       </section>
 
-      {}
       <section className="section-container bg-warm-cream">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
@@ -170,7 +168,6 @@ export default function About() {
         </div>
       </section>
 
-      {}
       <section className="section-container bg-off-white">
         <SectionHeading
           title="Committed to Evidence-Based Practice"
@@ -207,7 +204,6 @@ export default function About() {
         </div>
       </section>
 
-      {}
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Community Outreach"
@@ -257,7 +253,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* All Saints Cathedral Workshop Section */}
+      
       <section className="section-container bg-off-white">
         <SectionHeading
           title="All Saints Cathedral Workshop"
@@ -315,7 +311,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Core Values */}
+      
       <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Our Core Values"
@@ -336,7 +332,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Why Choose Us */}
+      
       <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Why Choose Gilt Counselling?"
@@ -360,7 +356,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      
       <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="text-4xl sm:text-5xl lg:text-6xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>
@@ -390,7 +386,7 @@ export default function About() {
         </div>
       </section>
 
-      {/* Team Section */}
+      
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Our Dedicated Consultants and Professional Counsellors"

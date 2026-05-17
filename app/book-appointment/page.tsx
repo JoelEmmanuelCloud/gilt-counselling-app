@@ -43,7 +43,7 @@ export default function BookAppointment() {
         />
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 md:mt-10">
-          {/* Step 1 */}
+          
           <div className="mb-8">
             <p className="text-sm font-semibold text-[#8B7355] uppercase tracking-wide mb-3">
               Step 1 — Optional
@@ -73,7 +73,7 @@ export default function BookAppointment() {
             </div>
           </div>
 
-          {/* Step 2 */}
+          
           <div className="mb-8">
             <p className="text-sm font-semibold text-[#8B7355] uppercase tracking-wide mb-3">
               Step 2
@@ -95,14 +95,14 @@ export default function BookAppointment() {
             </a>
           </div>
 
-          {/* Divider */}
+          
           <div className="flex items-center gap-4 mb-8">
             <div className="flex-1 h-px bg-gray-200" />
             <span className="text-gray-400 text-sm">or prefer to call?</span>
             <div className="flex-1 h-px bg-gray-200" />
           </div>
 
-          {/* Call option */}
+          
           <a
             href={`tel:${DISPLAY_NUMBER.replace(/\s/g, '')}`}
             className="flex items-center justify-center gap-3 w-full border-2 border-gray-200 hover:border-[#8B7355] text-gray-700 hover:text-[#8B7355] font-semibold text-base py-4 rounded-2xl transition-all duration-200"
@@ -114,7 +114,7 @@ export default function BookAppointment() {
           </a>
         </div>
 
-        {/* Info note */}
+        
         <p className="text-center text-gray-500 text-sm mt-6 leading-relaxed">
           Our secretary is available <strong>Monday – Friday, 9 AM – 5 PM</strong>.<br />
           Messages received outside office hours will be attended to the next business day.

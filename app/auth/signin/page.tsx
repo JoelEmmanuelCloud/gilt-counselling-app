@@ -40,11 +40,10 @@ function SignInContent() {
     }
   };
 
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
       <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl border border-gilt-gold/20">
-        {}
+
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
             Welcome Back
@@ -54,7 +53,6 @@ function SignInContent() {
           </p>
         </div>
 
-        {}
         {(errorMessage || error) && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
             <p className="text-xs sm:text-sm lg:text-base">
@@ -66,7 +64,6 @@ function SignInContent() {
           </div>
         )}
 
-        {}
         <div className="relative">
           <div className="relative flex justify-center text-xs sm:text-sm lg:text-base">
             <span className="px-3 sm:px-4 lg:px-5 bg-white text-gray-500">
@@ -75,7 +72,6 @@ function SignInContent() {
           </div>
         </div>
 
-        {}
         <form onSubmit={handleOTPSignIn} className="space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-7">
           <div>
             <label
@@ -109,7 +105,7 @@ function SignInContent() {
           </button>
         </form>
 
-        {/* Sign Up Link */}
+        
         <div className="text-center">
           <p className="text-xs sm:text-sm lg:text-base text-gray-600">
             New to Gilt Counselling?{" "}
@@ -122,7 +118,7 @@ function SignInContent() {
           </p>
         </div>
 
-        {/* Admin Login Link */}
+        
         <div className="pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
           <p className="text-center text-[10px] sm:text-xs lg:text-sm text-gray-500">
             Are you an admin?{" "}

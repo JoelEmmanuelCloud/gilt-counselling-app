@@ -79,9 +79,9 @@ export default function Home() {
   return (
     <div className="min-h-screen">
 
-      {/* ─── HERO ─────────────────────────────────────────────── */}
+      
       <section className="relative min-h-[100svh] lg:min-h-screen overflow-hidden">
-        {/* Lighter overlay so photos breathe */}
+        
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-black/10 z-10" />
         <HeroSlideshow onSlideChange={setCurrentSlide} />
 
@@ -89,13 +89,13 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 w-full">
             <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl">
 
-              {/* Text changes per slide — exits old, enters new */}
+              
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
                   exit={{ opacity: 0, y: -18, filter: 'blur(4px)', transition: { duration: 0.28, ease: 'easeIn' } }}
                 >
-                  {/* Badge */}
+                  
                   <motion.div
                     initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -105,7 +105,7 @@ export default function Home() {
                     {heroContent[currentSlide].badge}
                   </motion.div>
 
-                  {/* Heading — each line blurs+slides in with stagger */}
+                  
                   <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-heading font-bold text-white mb-3 sm:mb-4 md:mb-5 lg:mb-6 xl:mb-8 leading-tight">
                     {heroContent[currentSlide].lines.map((line, i) => (
                       <motion.span
@@ -126,7 +126,7 @@ export default function Home() {
                     ))}
                   </h1>
 
-                  {/* Subheading */}
+                  
                   <motion.p
                     initial={{ opacity: 0, y: 18, filter: 'blur(6px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
@@ -138,7 +138,7 @@ export default function Home() {
                 </motion.div>
               </AnimatePresence>
 
-              {/* CTA Buttons — static, stay put during slide changes */}
+              
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5">
                 <BookSessionButton className="w-full xs:w-auto btn-cta px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl">
                   Book Session
@@ -150,7 +150,7 @@ export default function Home() {
                 </Link>
               </div>
 
-              {/* Slider Dots */}
+              
               <div className="flex gap-2 lg:gap-3 mt-6 sm:mt-8 md:mt-10 lg:mt-12 xl:mt-14">
                 {heroImages.map((_, i) => (
                   <div
@@ -167,7 +167,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── BENEFITS ─────────────────────────────────────────── */}
+      
       <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
@@ -216,10 +216,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── ANIMATED STATS ───────────────────────────────────── */}
+      
       <AnimatedStats />
 
-      {/* ─── HOW CAN I HELP ───────────────────────────────────── */}
+      
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-[#FFF8F1]">
         <div className="max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
           <FadeUp>
@@ -283,7 +283,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── ABOUT ────────────────────────────────────────────── */}
+      
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-white">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center max-w-6xl xl:max-w-7xl mx-auto">
           <FadeUp delay={0.1} className="order-2 lg:order-1 relative h-[300px] sm:h-[350px] md:h-[400px] lg:h-[500px] xl:h-[600px] rounded-lg lg:rounded-xl xl:rounded-2xl overflow-hidden shadow-xl">
@@ -338,7 +338,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── TESTIMONIAL ──────────────────────────────────────── */}
+      
       <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
         <FadeUp distance={30}>
           <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">
@@ -365,7 +365,7 @@ export default function Home() {
         </FadeUp>
       </section>
 
-      {/* ─── THE PROCESS ──────────────────────────────────────── */}
+      
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-warm-cream">
         <div className="max-w-6xl xl:max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
@@ -416,7 +416,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── FINAL CTA ────────────────────────────────────────── */}
+      
       <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <FadeUp distance={30}>
           <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">

@@ -78,7 +78,7 @@ export default function AdminPhotoUpload({
 
   return (
     <div className="flex items-center gap-4">
-      {}
+
       <div className="relative">
         <div className="w-20 h-20 rounded-full overflow-hidden bg-gray-100 border-2 border-gray-200 flex items-center justify-center">
           {previewUrl ? (
@@ -110,7 +110,6 @@ export default function AdminPhotoUpload({
         )}
       </div>
 
-      {}
       <div className="flex flex-col gap-2">
         <input
           type="file"

@@ -363,7 +363,7 @@ function AdminDashboardContent() {
 
   return (
     <div className="min-h-screen bg-off-white">
-      {}
+
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16 admin-header">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="heading-xl mb-3">Admin Dashboard</h1>
@@ -371,7 +371,6 @@ function AdminDashboardContent() {
         </div>
       </section>
 
-      {}
       <section className="section-container admin-stats">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -403,7 +402,6 @@ function AdminDashboardContent() {
         </div>
       </section>
 
-      {}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 admin-content print-content-area">
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200 admin-tabs">
           <button
@@ -448,10 +446,9 @@ function AdminDashboardContent() {
           </button>
         </div>
 
-        {}
         {activeTab === 'appointments' && (
           <Card>
-            {}
+
             <div className="print-header hidden print:block">
               <h1 className="text-2xl font-bold">Gilt Counselling Services</h1>
               <p className="text-sm text-gray-600">Appointments Report - {new Date().toLocaleDateString()}</p>
@@ -562,7 +559,6 @@ function AdminDashboardContent() {
           </Card>
         )}
 
-        {}
         {activeTab === 'clients' && (
           <Card>
             <div className="flex justify-between items-center mb-6">
@@ -663,7 +659,6 @@ function AdminDashboardContent() {
           </Card>
         )}
 
-        {}
         {activeTab === 'counselors' && (
           <Card>
             <div className="flex justify-between items-center mb-6">
@@ -752,7 +747,6 @@ function AdminDashboardContent() {
           </Card>
         )}
 
-        {}
         {activeTab === 'create-booking' && (
           <Card>
             <h2 className="heading-md mb-6">Create Appointment for Client</h2>
@@ -813,7 +807,6 @@ function AdminDashboardContent() {
         )}
       </section>
 
-      {}
       {selectedUserId && (
         <UserProfileModal
           userId={selectedUserId}
