@@ -37,6 +37,25 @@ module.exports = {
         'heading': ['Playfair Display', 'Lora', 'serif'],
         'body': ['Inter', 'Open Sans', 'sans-serif'],
       },
+      keyframes: {
+        'ken-burns': {
+          '0%': { transform: 'scale(1.07)' },
+          '100%': { transform: 'scale(1)' },
+        },
+        'pulse-ring': {
+          '0%': { transform: 'scale(1)', opacity: '0.7' },
+          '100%': { transform: 'scale(2.2)', opacity: '0' },
+        },
+        'float': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+      },
+      animation: {
+        'ken-burns': 'ken-burns 8s ease-out forwards',
+        'pulse-ring': 'pulse-ring 2s ease-out infinite',
+        'float': 'float 3s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

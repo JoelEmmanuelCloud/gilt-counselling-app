@@ -25,9 +25,26 @@
 }
 
 @layer components {
+  /* Primary CTA — vivid amber gradient */
+  .btn-cta {
+    background: linear-gradient(135deg, #E8952A 0%, #C07818 100%);
+    color: #ffffff;
+    font-weight: 700;
+    box-shadow: 0 4px 16px rgba(200, 120, 24, 0.35);
+    transition: box-shadow 0.3s ease, transform 0.2s ease;
+  }
+  .btn-cta:hover {
+    background: linear-gradient(135deg, #F0A030 0%, #CC8020 100%);
+    box-shadow: 0 6px 22px rgba(200, 120, 24, 0.5);
+    transform: translateY(-2px);
+  }
+  .btn-cta:active {
+    transform: translateY(0);
+  }
+
   /* Emotionally Safe Button Styles */
   .btn-primary {
-    @apply bg-soft-terracotta text-white px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-soft-terracotta/90 focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:ring-offset-2;
+    @apply bg-soft-terracotta text-gray-900 px-6 py-3 rounded-lg font-medium transition-colors duration-300 hover:bg-soft-terracotta/90 focus:outline-none focus:ring-2 focus:ring-soft-terracotta focus:ring-offset-2;
   }
 
   .btn-secondary {
