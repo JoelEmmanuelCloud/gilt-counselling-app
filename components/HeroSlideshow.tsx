@@ -13,8 +13,8 @@ const heroImages = [
     alt: 'Professional counseling environment - supportive atmosphere',
   },
   {
-    src: '/images/workshops/all-saints/all-saints-workshop-14.jpeg',
-    alt: 'CEO Gilt Counselling Consult in a counseling session with a client',
+    src: '/images/events/disability-day-1.jpeg',
+    alt: 'Gilt Counselling Consult community outreach event',
   },
 ];
 
