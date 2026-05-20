@@ -345,7 +345,7 @@ export default function About() {
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 50vw"
-                quality={70}
+                quality={60}
                 loading="lazy"
               />
             </div>
@@ -358,7 +358,7 @@ export default function About() {
               fill
               className="object-cover object-center"
               sizes="100vw"
-              quality={70}
+              quality={60}
               loading="lazy"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
@@ -413,7 +413,7 @@ export default function About() {
                   fill
                   className="object-cover"
                   sizes="(max-width: 640px) 100vw, 33vw"
-                  quality={70}
+                  quality={60}
                   loading="lazy"
                 />
               </div>
@@ -431,6 +431,99 @@ export default function About() {
               <p className="text-sm font-semibold text-gray-700">School Counsellor, Niger Delta Science School</p>
             </footer>
           </blockquote>
+
+        </div>
+      </section>
+
+      <section className="section-container bg-off-white">
+        <SectionHeading
+          title="Emotional Intelligence Workshop"
+          subtitle="Great Beulah Heritage School, Rumuigbo — When a session changes how you feel before it even ends."
+          centered
+        />
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+            <div className="space-y-4 text-gray-700">
+              <p className="body-lg font-semibold text-soft-terracotta">
+                A Visit That Left a Mark.
+              </p>
+              <p className="body-md text-justify">
+                Gilt Counselling Consult brought their Emotional Intelligence programme to Great Beulah
+                Heritage School, Rumuigbo — and the impact was felt even before the session was over.
+                One student arrived that morning feeling low and withdrawn. By the time the team finished,
+                something had shifted.
+              </p>
+              <p className="body-md text-justify text-gray-600">
+                The session equipped students with practical tools for recognising their emotional states,
+                understanding their triggers, and managing their responses — skills that matter every day,
+                inside and outside the classroom.
+              </p>
+            </div>
+            <div className="relative h-[280px] sm:h-[340px] md:h-[400px] rounded-xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/outreach/gbhs/gbhs-counsellor-students.jpeg"
+                alt="Gilt Counselling Consult facilitator with Great Beulah Heritage School students in front of the branded Gilt Counselling Consult banner"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {[
+              { src: '/images/outreach/gbhs/gbhs-session-active.jpeg', alt: 'Gilt Counselling Consult facilitator actively engaging Great Beulah Heritage School students during the session' },
+              { src: '/images/outreach/gbhs/gbhs-students-engaged.jpeg', alt: 'Great Beulah Heritage School students listening attentively during the Emotional Intelligence workshop' },
+              { src: '/images/outreach/gbhs/gbhs-students-classroom.jpeg', alt: 'Students at Great Beulah Heritage School seated and engaged during the counselling outreach session' },
+            ].map((photo, index) => (
+              <div key={index} className="relative h-[180px] sm:h-[210px] rounded-xl overflow-hidden shadow-md">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  quality={60}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div>
+            <h3 className="font-heading font-bold text-lg sm:text-xl text-gray-900 mb-4 text-center">
+              In Their Own Words
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I arrived this morning feeling depressed and heavy inside. I wasn&apos;t sure anything
+                  could change that. But after this session, I genuinely feel better — lighter. Something
+                  shifted in me today.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Male Student</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  This presentation on Emotional Intelligence gave me real clues on how to handle my
+                  anger. I have always struggled with it, but now I have a clearer picture of what to
+                  do when I feel it rising.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Female Student</p>
+                </div>
+              </div>
+            </div>
+          </div>
 
         </div>
       </section>
