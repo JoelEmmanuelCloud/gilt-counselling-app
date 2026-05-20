@@ -311,7 +311,130 @@ export default function About() {
         </div>
       </section>
 
-      
+
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Emotional Intelligence Workshop"
+          subtitle="Niger Delta Science School, Rumuola — Bringing mental wellness education to the next generation."
+          centered
+        />
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+            <div className="space-y-4 text-gray-700">
+              <p className="body-lg font-semibold text-soft-terracotta">
+                Hundreds of Students. One Powerful Conversation.
+              </p>
+              <p className="body-md text-justify">
+                Our team visited Niger Delta Science School, Rumuola, for a school-wide session on emotional
+                intelligence and self-awareness. The assembly hall filled with hundreds of eager students —
+                a vivid reminder of how deeply these conversations matter to young people navigating the
+                pressures of adolescence.
+              </p>
+              <p className="body-md text-justify text-gray-600">
+                The session explored practical tools for understanding and managing emotions — from
+                recognising personal triggers to building empathy for others. Students engaged
+                thoughtfully, and many stayed back afterwards to share how the teaching had already
+                begun to shift their perspective.
+              </p>
+            </div>
+            <div className="relative h-[260px] sm:h-[320px] md:h-[380px] rounded-xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/outreach/ndss/ndss-session-hall.jpeg"
+                alt="Hundreds of Niger Delta Science School students gathered for the Gilt Counselling emotional intelligence session"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={70}
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div className="relative h-[220px] sm:h-[300px] md:h-[360px] rounded-xl overflow-hidden shadow-lg">
+            <Image
+              src="/images/outreach/ndss/ndss-school-gate.jpeg"
+              alt="Students of Niger Delta Science School, Rumuola gathered at the school entrance"
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              quality={70}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-5 sm:bottom-6 sm:left-8">
+              <p className="text-white font-heading font-bold text-lg sm:text-2xl drop-shadow">Niger Delta Science School</p>
+              <p className="text-white/85 text-sm sm:text-base drop-shadow">Rumuola, Port Harcourt</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-heading font-bold text-lg sm:text-xl text-gray-900 mb-4 text-center">
+              In Their Own Words
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I have struggled with anger for a long time. This session on emotional intelligence
+                  showed me practical ways to manage my reactions — to pause, reflect, and respond
+                  rather than explode.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Male Student</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I had never truly understood how to read what others were feeling. What I learned
+                  today opened my eyes — I now know I can do better at understanding the people
+                  around me.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Female Student</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            {[
+              { src: '/images/outreach/ndss/ndss-students-attentive.jpeg', alt: 'Niger Delta Science School students listening attentively during the emotional intelligence session' },
+              { src: '/images/outreach/ndss/ndss-session-active.jpeg', alt: 'Gilt Counselling Consult facilitator engaging students during the workshop session' },
+              { src: '/images/outreach/ndss/ndss-counsellor-students.jpeg', alt: 'Gilt Counselling Consult counsellor pictured with a group of Niger Delta Science School students' },
+            ].map((photo, index) => (
+              <div key={index} className="relative h-[180px] sm:h-[210px] rounded-xl overflow-hidden shadow-md">
+                <Image
+                  src={photo.src}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 640px) 100vw, 33vw"
+                  quality={70}
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+
+          <blockquote className="border-l-4 border-soft-gold pl-5 sm:pl-6 italic text-gray-600 bg-white rounded-r-xl py-4 sm:py-5 pr-5 sm:pr-6 shadow-sm">
+            <p className="body-md text-justify">
+              &ldquo;This session has enriched my own understanding of emotional intelligence in a profound way.
+              It has given me fresh insight into how to build and sustain healthy, meaningful relationships —
+              both personally and professionally.&rdquo;
+            </p>
+            <footer className="mt-3 flex items-center gap-2">
+              <div className="h-0.5 w-6 bg-soft-gold rounded-full" />
+              <p className="text-sm font-semibold text-gray-700">School Counsellor, Niger Delta Science School</p>
+            </footer>
+          </blockquote>
+
+        </div>
+      </section>
+
       <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Our Core Values"
