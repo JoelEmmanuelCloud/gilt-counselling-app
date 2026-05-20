@@ -773,6 +773,136 @@ export default function About() {
         </div>
       </section>
 
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Emotional Intelligence Workshop"
+          subtitle="Priqueen International Academy, Rumuigbo — Three students. Three perspectives. One powerful realisation."
+          centered
+        />
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+            <div className="relative h-[340px] sm:h-[420px] md:h-[480px] rounded-xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/outreach/priqueen/priqueen-student-focused.jpeg"
+                alt="A Priqueen International Academy student with glasses, pen in hand, listening with deep concentration during the Gilt Counselling Consult session"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+            <div className="space-y-4 text-gray-700">
+              <p className="body-lg font-semibold text-soft-terracotta">
+                When Students Go Beyond Listening.
+              </p>
+              <p className="body-md text-justify">
+                At Priqueen International Academy, Rumuigbo, the Gilt Counselling Consult team
+                encountered something rare — students who didn&apos;t just receive the session,
+                but truly processed it. Hands went up. Questions were asked. And when students
+                were invited to reflect on what they had learned, the responses were among the
+                most thoughtful of the entire outreach.
+              </p>
+              <p className="body-md text-justify text-gray-600">
+                The session on Emotional Intelligence covered self-awareness, empathy, and the
+                critical skill of responding rather than reacting — and it clearly landed. The
+                principal&apos;s endorsement afterwards spoke directly to why this work matters
+                so much at every school.
+              </p>
+            </div>
+          </div>
+
+          <div className="relative h-[260px] sm:h-[340px] md:h-[400px] rounded-xl overflow-hidden shadow-lg">
+            <Image
+              src="/images/outreach/priqueen/priqueen-hands-raised.jpeg"
+              alt="Priqueen International Academy students enthusiastically raising their hands to participate during the Gilt Counselling Consult emotional intelligence session"
+              fill
+              className="object-cover object-center"
+              sizes="100vw"
+              quality={60}
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
+            <div className="absolute bottom-4 left-5 sm:bottom-5 sm:left-8">
+              <p className="text-white text-sm sm:text-base font-semibold drop-shadow">Active participation — students respond to the session</p>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-heading font-bold text-lg sm:text-xl text-gray-900 mb-4 text-center">
+              In Their Own Words
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  This teaching has shown me the right way to approach people. I now understand
+                  that how I carry myself emotionally shapes every interaction I have.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Student 1</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I now understand why Emotional Intelligence matters — so that I am never
+                  overwhelmed by my feelings in the moment, but can face any situation with
+                  a clear and steady mind.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Student 2</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-5 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I have learned that Emotional Intelligence begins with me — not just knowing
+                  my own emotions, but also recognising and understanding the emotions of the
+                  people around me.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Student 3</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-center">
+            <div className="md:col-span-1 relative h-[200px] sm:h-[240px] rounded-xl overflow-hidden shadow-md">
+              <Image
+                src="/images/outreach/priqueen/priqueen-group-photo.jpeg"
+                alt="Gilt Counselling Consult team with Priqueen International Academy students at the close of the emotional intelligence workshop"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+            <div className="md:col-span-2">
+              <blockquote className="border-l-4 border-soft-gold pl-5 sm:pl-6 italic text-gray-600 bg-white rounded-r-xl py-5 sm:py-6 pr-5 sm:pr-6 shadow-sm h-full flex flex-col justify-center">
+                <p className="body-md text-justify leading-relaxed">
+                  &ldquo;Every student needs emotional intelligence. It is what guides them in how
+                  to respond to the world around them — to challenges, to people, to pressure.
+                  This programme gave our students that foundation, and we are deeply grateful
+                  for it.&rdquo;
+                </p>
+                <footer className="mt-4 flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-gold rounded-full" />
+                  <p className="text-sm font-semibold text-gray-700">The Principal, Priqueen International Academy</p>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Our Core Values"
