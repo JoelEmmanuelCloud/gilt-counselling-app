@@ -352,7 +352,7 @@ export default function About() {
           subtitle="We combine professional excellence with genuine compassion for every person we serve."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
           {whyChooseUs.map((item, index) => (
             <Card key={index}>
               <div className="flex items-start gap-4">
