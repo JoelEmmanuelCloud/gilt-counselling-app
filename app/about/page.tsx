@@ -647,6 +647,132 @@ export default function About() {
         </div>
       </section>
 
+      <section className="section-container bg-off-white">
+        <SectionHeading
+          title="Emotional Intelligence Workshop"
+          subtitle="The Grove School Secondary, GRA Phase 2 — A structured, curriculum-grade session that the school counsellor called transformative."
+          centered
+        />
+        <div className="max-w-5xl mx-auto space-y-8 sm:space-y-10">
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 items-center">
+            <div className="relative h-[300px] sm:h-[360px] md:h-[420px] rounded-xl overflow-hidden shadow-lg">
+              <Image
+                src="/images/outreach/grove/grove-team-sign.jpeg"
+                alt="Gilt Counselling Consult team of five in branded shirts standing in front of The Grove School Secondary sign"
+                fill
+                className="object-cover object-top"
+                sizes="(max-width: 768px) 100vw, 50vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+            <div className="space-y-4 text-gray-700">
+              <p className="body-lg font-semibold text-soft-terracotta">
+                Structure Meets Heart.
+              </p>
+              <p className="body-md text-justify">
+                The Gilt Counselling Consult team brought a full, structured Emotional Intelligence
+                session to The Grove School Secondary, GRA Phase 2 — complete with a projector
+                presentation, visual aids, and interactive delivery. Students in their distinctive
+                red and white uniforms filled the hall and gave the session their full attention.
+              </p>
+              <p className="body-md text-justify text-gray-600">
+                The session covered the meaning of emotional intelligence, how to recognise personal
+                emotional states, and — critically — how to regulate those emotions rather than be
+                ruled by them. Students left with both language and tools they could apply immediately.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="relative h-[220px] sm:h-[260px] rounded-xl overflow-hidden shadow-md">
+              <Image
+                src="/images/outreach/grove/grove-session-presentation.jpeg"
+                alt="Gilt Counselling Consult facilitators presenting Emotional Intelligence slides on a projector screen to Grove School Secondary students"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+            <div className="relative h-[220px] sm:h-[260px] rounded-xl overflow-hidden shadow-md">
+              <Image
+                src="/images/outreach/grove/grove-session-wide.jpeg"
+                alt="Wide view of the Gilt Counselling Consult session at The Grove School Secondary showing facilitators, projector screen, and the full student audience"
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 50vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+          </div>
+
+          <div>
+            <h3 className="font-heading font-bold text-lg sm:text-xl text-gray-900 mb-4 text-center">
+              In Their Own Words
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I am happy because I have finally learned how to regulate my emotions. I now
+                  understand that I have the power to choose how I respond — and that makes
+                  a real difference.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Male Student</p>
+                </div>
+              </div>
+              <div className="bg-white rounded-xl p-5 sm:p-6 shadow-sm border border-soft-beige">
+                <div className="text-3xl text-soft-terracotta font-serif leading-none mb-3">&ldquo;</div>
+                <p className="text-gray-700 leading-relaxed italic text-justify mb-4">
+                  I have learned something I truly needed to hear — that managing my emotions is
+                  not just possible, it is necessary. I now see the importance of it in a way
+                  I never did before.
+                </p>
+                <div className="flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-terracotta rounded-full" />
+                  <p className="text-sm font-semibold text-gray-600">Female Student</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-center">
+            <div className="md:col-span-1 relative h-[200px] sm:h-[240px] rounded-xl overflow-hidden shadow-md">
+              <Image
+                src="/images/outreach/grove/grove-students-seated.jpeg"
+                alt="Grove School Secondary students seated attentively during the Gilt Counselling Consult emotional intelligence session"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+                quality={60}
+                loading="lazy"
+              />
+            </div>
+            <div className="md:col-span-2">
+              <blockquote className="border-l-4 border-soft-gold pl-5 sm:pl-6 italic text-gray-600 bg-white rounded-r-xl py-5 sm:py-6 pr-5 sm:pr-6 shadow-sm h-full flex flex-col justify-center">
+                <p className="body-md text-justify leading-relaxed">
+                  &ldquo;This teaching has truly enlightened our students on the importance of
+                  self-regulation. They now have a much clearer understanding of their emotions
+                  and how managing them well is foundational to everything — their relationships,
+                  their learning, and their future.&rdquo;
+                </p>
+                <footer className="mt-4 flex items-center gap-2">
+                  <div className="h-0.5 w-6 bg-soft-gold rounded-full" />
+                  <p className="text-sm font-semibold text-gray-700">School Counsellor, The Grove School Secondary</p>
+                </footer>
+              </blockquote>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
       <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Our Core Values"
