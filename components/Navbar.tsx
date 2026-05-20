@@ -62,7 +62,7 @@ const Navbar: React.FC = () => {
 
       <div className="bg-warm-cream border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-10 text-sm">
+          <div className="flex justify-between items-center h-10 text-sm lg:text-base">
             <div className="hidden md:flex items-center space-x-6 text-gray-600">
               <span className="flex items-center space-x-2">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -214,7 +214,7 @@ const Navbar: React.FC = () => {
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2.5 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
+              className="lg:hidden p-3 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (

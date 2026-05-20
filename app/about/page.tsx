@@ -334,10 +334,10 @@ export default function About() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] flex flex-col justify-center`}>
+              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed px-2 text-justify">
+              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-justify">
                 {value.description}
               </p>
             </div>
