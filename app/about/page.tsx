@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React from 'react';
 import Link from 'next/link';
@@ -6,6 +6,7 @@ import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
+import OutreachShowcase from '@/components/OutreachShowcase';
 
 export default function About() {
   const coreValues = [
@@ -207,7 +208,7 @@ export default function About() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Community Outreach"
-          subtitle="Giving back to our community — one act of love at a time."
+          subtitle="Giving back to our community â€” one act of love at a time."
           centered
         />
         <div className="max-w-5xl mx-auto">
@@ -218,7 +219,7 @@ export default function About() {
               </p>
               <p className="body-md text-justify">
                 As part of our ongoing outreach programmes, Gilt Counselling Consult donated executive chairs
-                to Otana Inclusive Centre — a gesture born from a deep commitment to the wellbeing of every child,
+                to Otana Inclusive Centre â€” a gesture born from a deep commitment to the wellbeing of every child,
                 regardless of ability.
               </p>
               <blockquote className="border-l-4 border-soft-gold pl-4 italic text-gray-600">
@@ -311,7 +312,19 @@ export default function About() {
         </div>
       </section>
 
-      
+
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Schools Outreach Programme"
+          subtitle="Bringing Emotional Intelligence education to secondary schools across Port Harcourt."
+          centered
+        />
+        <div className="max-w-5xl mx-auto">
+          <OutreachShowcase />
+        </div>
+      </section>
+
+
       <section className="section-container bg-warm-sand">
         <SectionHeading
           title="Our Core Values"
