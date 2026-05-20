@@ -32,7 +32,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "tsx scripts/seed.ts"
+    "seed": "tsx scripts/seed.ts",
+    "generate-qr": "tsx scripts/generate-qr-codes.ts"
   },
   "eslintConfig": {
     "extends": [
@@ -53,8 +54,10 @@
   },
   "devDependencies": {
     "@types/nodemailer": "^7.0.4",
+    "@types/qrcode": "^1.5.6",
     "autoprefixer": "^10.4.16",
     "postcss": "^8.4.32",
+    "qrcode": "^1.5.4",
     "tailwindcss": "^3.3.6",
     "tsx": "^4.21.0"
   }
