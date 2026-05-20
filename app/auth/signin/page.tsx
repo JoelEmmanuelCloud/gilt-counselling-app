@@ -91,7 +91,7 @@ function SignInContent() {
               className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
               placeholder="you@example.com"
             />
-            <p className="mt-1 sm:mt-2 lg:mt-3 text-[10px] sm:text-xs lg:text-sm text-gray-500">
+            <p className="mt-1 sm:mt-2 lg:mt-3 text-xs lg:text-sm text-gray-500">
               We'll send you a 6-digit verification code
             </p>
           </div>
@@ -120,7 +120,7 @@ function SignInContent() {
 
         
         <div className="pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
-          <p className="text-center text-[10px] sm:text-xs lg:text-sm text-gray-500">
+          <p className="text-center text-xs lg:text-sm text-gray-500">
             Are you an admin?{" "}
             <Link
               href="/auth/admin-login"

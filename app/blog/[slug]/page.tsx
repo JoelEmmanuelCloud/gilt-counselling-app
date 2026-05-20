@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
       {post.image && (
         <section className="section-container">
           <div className="max-w-4xl mx-auto">
-            <div className="relative w-full h-[400px] rounded-xl overflow-hidden mb-12">
+            <div className="relative w-full h-[240px] sm:h-[300px] md:h-[400px] rounded-xl overflow-hidden mb-12">
               <Image
                 src={post.image}
                 alt={post.title}

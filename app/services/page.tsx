@@ -186,7 +186,7 @@ export default function Services() {
           subtitle="Each service is designed with care to address specific needs and provide meaningful support."
           centered
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 md:gap-6 lg:gap-8 xl:gap-10">
           {services.map((service, index) => (
             <ServiceCard
               key={index}

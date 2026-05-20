@@ -100,7 +100,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-md lg:rounded-lg mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-[10px] sm:text-xs md:text-sm lg:text-base uppercase tracking-wider"
+                    className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-md lg:rounded-lg mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-xs md:text-sm lg:text-base uppercase tracking-wider"
                   >
                     {heroContent[currentSlide].badge}
                   </motion.div>
@@ -140,11 +140,11 @@ export default function Home() {
 
               
               <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5">
-                <BookSessionButton className="w-full xs:w-auto btn-cta px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl">
+                <BookSessionButton className="w-full xs:w-auto btn-cta px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 uppercase text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl">
                   Book Session
                 </BookSessionButton>
                 <Link href="/services">
-                  <Button className="w-full xs:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/25 px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
+                  <Button className="w-full xs:w-auto bg-white/10 backdrop-blur-sm border-2 border-white text-white hover:bg-white/25 px-5 sm:px-6 md:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 uppercase text-xs md:text-sm lg:text-base tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
                     Explore Our Services
                   </Button>
                 </Link>
@@ -172,7 +172,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
             <FadeUp className="order-2 lg:order-1">
-              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-soft-terracotta px-2.5 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-md lg:rounded-lg text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
+              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-soft-terracotta px-2.5 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-md lg:rounded-lg text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
                 Discover a Process
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
@@ -248,7 +248,7 @@ export default function Home() {
                 ))}
               </ul>
               <Link href="/services">
-                <Button className="btn-cta uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide py-2.5 sm:py-3 lg:py-3.5 px-5 sm:px-6 lg:px-8 rounded-lg lg:rounded-xl">
+                <Button className="btn-cta uppercase text-xs lg:text-sm tracking-wide py-3 lg:py-3.5 px-5 sm:px-6 lg:px-8 rounded-lg lg:rounded-xl">
                   Explore Programs
                 </Button>
               </Link>
@@ -271,7 +271,7 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="text-[10px] sm:text-xs lg:text-sm text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
+                    <div className="text-xs lg:text-sm text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
                     <a href="tel:+2347065734165" className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold hover:opacity-80 transition-opacity">
                       +234 706 573 4165
                     </a>
@@ -300,7 +300,7 @@ export default function Home() {
             />
           </FadeUp>
           <FadeUp className="order-1 lg:order-2">
-            <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
+            <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
               About Us
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 xl:mb-6 leading-tight">
@@ -324,13 +324,13 @@ export default function Home() {
                   <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
                   <div>
                     <p className="font-semibold text-gray-900 text-sm sm:text-base lg:text-lg">Gilt Counselling Consult</p>
-                    <p className="text-[10px] sm:text-xs lg:text-sm text-gray-600">Professional Counselling Services</p>
+                    <p className="text-xs lg:text-sm text-gray-600">Professional Counselling Services</p>
                   </div>
                 </div>
               </div>
             </div>
             <Link href="/about">
-              <Button className="btn-cta uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide py-2.5 sm:py-3 lg:py-3.5 px-5 sm:px-6 lg:px-8 rounded-lg lg:rounded-xl">
+              <Button className="btn-cta uppercase text-xs lg:text-sm tracking-wide py-3 lg:py-3.5 px-5 sm:px-6 lg:px-8 rounded-lg lg:rounded-xl">
                 Learn More About Us
               </Button>
             </Link>
@@ -358,7 +358,7 @@ export default function Home() {
               <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
               <div>
                 <p className="font-semibold text-sm sm:text-base lg:text-lg">Client Testimonial</p>
-                <p className="text-[10px] sm:text-xs lg:text-sm text-gray-400">Youth Counselling Program</p>
+                <p className="text-xs lg:text-sm text-gray-400">Youth Counselling Program</p>
               </div>
             </div>
           </div>
@@ -383,7 +383,7 @@ export default function Home() {
               />
             </FadeUp>
             <FadeUp>
-              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-[10px] sm:text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
+              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
                 The Process
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 leading-tight">
@@ -429,17 +429,17 @@ export default function Home() {
             </p>
             <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
               <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-              <p className="text-[10px] sm:text-xs lg:text-sm text-gray-400">All consultations are completely confidential</p>
+              <p className="text-xs lg:text-sm text-gray-400">All consultations are completely confidential</p>
               <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
             </div>
             <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5 justify-center">
               <Link href="/book-appointment">
-                <Button className="btn-cta w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl">
+                <Button className="btn-cta w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 uppercase text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl">
                   Book Session
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button className="bg-transparent border-2 border-soft-terracotta text-soft-terracotta hover:bg-soft-terracotta/10 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-2.5 sm:py-3 lg:py-3.5 xl:py-4 uppercase text-[10px] sm:text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
+                <Button className="bg-transparent border-2 border-soft-terracotta text-soft-terracotta hover:bg-soft-terracotta/10 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 uppercase text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-xl transition-all duration-300">
                   Contact Us
                 </Button>
               </Link>

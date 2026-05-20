@@ -261,7 +261,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
               </Button>
             </form>
 
-            <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 text-center mt-4 sm:mt-6 lg:mt-8">
+            <p className="text-xs lg:text-sm text-gray-500 text-center mt-4 sm:mt-6 lg:mt-8">
               By continuing, you agree to our Terms of Service and Privacy Policy.
             </p>
 
@@ -339,7 +339,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
               </Button>
             </form>
 
-            <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 text-center mt-3 sm:mt-4 lg:mt-6">
+            <p className="text-xs lg:text-sm text-gray-500 text-center mt-3 sm:mt-4 lg:mt-6">
               By signing up, you agree to our Terms of Service and Privacy Policy.
             </p>
 
@@ -393,7 +393,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                 disabled={loading}
                 autoFocus
               />
-              <p className="text-[10px] sm:text-xs lg:text-sm text-gray-500 mt-1 sm:mt-2 lg:mt-3 text-center">
+              <p className="text-xs lg:text-sm text-gray-500 mt-1 sm:mt-2 lg:mt-3 text-center">
                 Enter the 6-digit code from your email
               </p>
             </div>

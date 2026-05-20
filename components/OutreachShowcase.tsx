@@ -236,14 +236,14 @@ export default function OutreachShowcase() {
                 : 'bg-white text-gray-500 border-soft-beige hover:border-soft-terracotta hover:text-soft-terracotta'
             }`}
           >
-            <span className={`text-[10px] mb-0.5 ${i === activeIndex ? 'text-white/70' : 'text-gray-400'}`}>{s.number}</span>
+            <span className={`text-xs mb-0.5 ${i === activeIndex ? 'text-white/70' : 'text-gray-400'}`}>{s.number}</span>
             <span>{s.short}</span>
           </button>
         ))}
       </div>
 
       {/* Main animated panel */}
-      <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg border border-soft-beige min-h-[420px]">
+      <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg border border-soft-beige">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={school.id}
@@ -257,7 +257,7 @@ export default function OutreachShowcase() {
             <div className="grid grid-cols-1 md:grid-cols-5">
 
               {/* Hero image */}
-              <div className="md:col-span-2 relative h-[240px] sm:h-[300px] md:h-full min-h-[380px] overflow-hidden rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+              <div className="md:col-span-2 relative h-[260px] sm:h-[300px] md:h-full md:min-h-[400px] lg:min-h-[450px] xl:min-h-[500px] overflow-hidden rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
                 <Image
                   src={school.hero.src}
                   alt={school.hero.alt}
@@ -354,7 +354,7 @@ export default function OutreachShowcase() {
                   variants={photoVariants}
                   initial="hidden"
                   animate="visible"
-                  className="relative h-[90px] sm:h-[120px] md:h-[140px] rounded-lg overflow-hidden"
+                  className="relative h-[110px] sm:h-[130px] md:h-[150px] rounded-lg overflow-hidden"
                 >
                   <Image
                     src={photo.src}

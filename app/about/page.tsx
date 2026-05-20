@@ -334,10 +334,10 @@ export default function About() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] flex flex-col justify-center`}>
+              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed px-2 text-justify">
+              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-justify">
                 {value.description}
               </p>
             </div>
@@ -352,7 +352,7 @@ export default function About() {
           subtitle="We combine professional excellence with genuine compassion for every person we serve."
           centered
         />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
           {whyChooseUs.map((item, index) => (
             <Card key={index}>
               <div className="flex items-start gap-4">
