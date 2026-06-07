@@ -3,19 +3,19 @@ import Link from 'next/link';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
 import Card from '@/components/ui/Card';
-import { blogPosts, getBlogPost } from '@/lib/blogPosts';
+import connectDB from '@/lib/mongodb';
+import { getArticleBySlug, getPublishedArticles } from '@/lib/models/article';
+
+export const dynamic = 'force-dynamic';
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPost(slug);
+  await connectDB();
+  const post = await getArticleBySlug(slug);
 
   if (!post) {
     return {
@@ -51,7 +51,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function BlogPostPage({ params }: Props) {
   const { slug } = await params;
-  const post = getBlogPost(slug) ?? {
+  await connectDB();
+  const post = (await getArticleBySlug(slug)) ?? {
     slug,
     title: 'Post Not Found',
     excerpt: '',
@@ -63,7 +64,8 @@ export default async function BlogPostPage({ params }: Props) {
     image: '',
   };
 
-  const relatedPosts = blogPosts
+  const allPosts = await getPublishedArticles();
+  const relatedPosts = allPosts
     .filter((p) => p.slug !== slug)
     .slice(0, 3);
 

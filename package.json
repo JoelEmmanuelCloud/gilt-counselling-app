@@ -33,6 +33,7 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts",
+    "seed-articles": "tsx scripts/seed-articles.ts",
     "generate-qr": "tsx scripts/generate-qr-codes.ts"
   },
   "eslintConfig": {
