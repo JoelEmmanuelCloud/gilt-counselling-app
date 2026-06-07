@@ -52,7 +52,7 @@ function AdminDashboardContent() {
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
 
-  const [activeTab, setActiveTab] = useState<Tab>('appointments');
+  const [activeTab, setActiveTab] = useState<Tab>('gallery');
   const [appointments, setAppointments] = useState<Appointment[]>([]);
   const [clients, setClients] = useState<Client[]>([]);
   const [counselors, setCounselors] = useState<Counselor[]>([]);
@@ -71,15 +71,8 @@ function AdminDashboardContent() {
     profilePhoto: '',
   });
 
-  useEffect(() => {
-    if (status === 'loading') return;
-
-    if (!isAuthenticated) {
-      router.push('/book-appointment');
-    } else if (user?.role !== 'admin') {
-      router.push('/account');
-    }
-  }, [status, isAuthenticated, user, router]);
+  // Admin access guard removed — the dashboard is open and the APIs behind it
+  // are unauthenticated. Re-add a redirect here to restore role-based access.
   const [bookingForm, setBookingForm] = useState({
     userId: '',
     service: '',

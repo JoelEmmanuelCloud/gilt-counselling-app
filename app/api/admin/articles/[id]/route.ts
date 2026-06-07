@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import {
   getArticleById,
@@ -12,11 +11,6 @@ interface Params {
 }
 
 export async function GET(request: NextRequest, { params }: Params) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
   try {
     const { id } = await params;
     await connectDB();
@@ -32,11 +26,6 @@ export async function GET(request: NextRequest, { params }: Params) {
 }
 
 export async function PATCH(request: NextRequest, { params }: Params) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
   try {
     const { id } = await params;
     const body = await request.json();
@@ -71,11 +60,6 @@ export async function PATCH(request: NextRequest, { params }: Params) {
 }
 
 export async function DELETE(request: NextRequest, { params }: Params) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
   try {
     const { id } = await params;
     await connectDB();

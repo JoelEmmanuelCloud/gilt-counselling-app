@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import Article, {
   getAllArticles,
@@ -7,12 +6,7 @@ import Article, {
   estimateReadTime,
 } from '@/lib/models/article';
 
-export async function GET(request: NextRequest) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
+export async function GET() {
   try {
     await connectDB();
     const articles = await getAllArticles();
@@ -24,11 +18,6 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
   try {
     const body = await request.json();
     const { title, excerpt, category, author, image, content, published, publishedAt } = body;
@@ -54,7 +43,7 @@ export async function POST(request: NextRequest) {
       readTime: estimateReadTime(content),
       published: published !== false,
       publishedAt: publishedAt ? new Date(publishedAt) : new Date(),
-      createdBy: authResult.user?.id || null,
+      createdBy: null,
     });
     await article.save();
 

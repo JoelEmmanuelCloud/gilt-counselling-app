@@ -53,9 +53,7 @@ export default function AdminImageUpload({
       const token = localStorage.getItem('token');
       const response = await fetch('/api/admin/upload-image', {
         method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         body: formData,
       });
 
@@ -84,16 +82,23 @@ export default function AdminImageUpload({
 
   return (
     <div className="space-y-3">
-      <div className="relative w-full max-w-md aspect-video rounded-lg overflow-hidden bg-gray-100 border-2 border-dashed border-gray-300 flex items-center justify-center">
+      {/* The label is the click target — clicking it natively opens the file
+          picker, so no JS .click() is needed (more reliable across browsers). */}
+      <label
+        className={`relative block w-full max-w-md aspect-video rounded-lg overflow-hidden bg-gray-100 border-2 border-dashed border-gray-300 cursor-pointer ${
+          uploading ? 'pointer-events-none opacity-70' : ''
+        }`}
+      >
         {previewUrl ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img src={previewUrl} alt="Preview" className="w-full h-full object-cover" />
         ) : (
-          <div className="text-center text-gray-400 p-6">
-            <svg className="w-10 h-10 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400 p-6 text-center">
+            <svg className="w-10 h-10 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
-            <p className="text-sm">No image selected</p>
+            <p className="text-sm font-medium">Click to upload an image</p>
+            <p className="text-xs mt-1">JPEG, PNG or WebP · max 8MB</p>
           </div>
         )}
         {uploading && (
@@ -101,9 +106,6 @@ export default function AdminImageUpload({
             <div className="w-8 h-8 border-2 border-gilt-gold border-t-transparent rounded-full animate-spin"></div>
           </div>
         )}
-      </div>
-
-      <div className="flex items-center gap-2">
         <input
           type="file"
           ref={fileInputRef}
@@ -111,14 +113,22 @@ export default function AdminImageUpload({
           accept="image/jpeg,image/png,image/webp"
           className="hidden"
         />
-        <button
-          type="button"
-          onClick={() => fileInputRef.current?.click()}
-          disabled={uploading}
-          className="px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded transition disabled:opacity-50"
+      </label>
+
+      <div className="flex items-center gap-2">
+        <label
+          className={`px-4 py-2 text-sm bg-gray-100 hover:bg-gray-200 text-gray-700 rounded transition cursor-pointer inline-block ${
+            uploading ? 'pointer-events-none opacity-50' : ''
+          }`}
         >
           {previewUrl ? 'Change Image' : 'Upload Image'}
-        </button>
+          <input
+            type="file"
+            onChange={handleFileSelect}
+            accept="image/jpeg,image/png,image/webp"
+            className="hidden"
+          />
+        </label>
         {previewUrl && (
           <button
             type="button"

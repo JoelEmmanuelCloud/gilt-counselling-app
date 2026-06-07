@@ -1,14 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/auth';
 import connectDB from '@/lib/mongodb';
 import { getAllGalleryItems, createGalleryItem } from '@/lib/models/gallery';
 
-export async function GET(request: NextRequest) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
+export async function GET() {
   try {
     await connectDB();
     const items = await getAllGalleryItems();
@@ -20,11 +14,6 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-  const authResult = await requireAdmin(request);
-  if (authResult.error) {
-    return NextResponse.json({ message: authResult.error }, { status: authResult.status });
-  }
-
   try {
     const body = await request.json();
     const { title, description, imageUrl, category, order } = body;
@@ -43,7 +32,7 @@ export async function POST(request: NextRequest) {
       imageUrl,
       category: category || 'General',
       order: typeof order === 'number' ? order : 0,
-      createdBy: authResult.user?.id || null,
+      createdBy: null,
     });
 
     return NextResponse.json(item, { status: 201 });

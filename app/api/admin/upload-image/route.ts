@@ -1,21 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { requireAdmin } from '@/lib/auth';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
-// Folders the admin is allowed to upload into, to prevent path traversal.
+// Folders the uploader is allowed to write into, to prevent path traversal.
 const ALLOWED_FOLDERS = ['gallery', 'articles'];
 
 export async function POST(request: NextRequest) {
-  const authResult = await requireAdmin();
-
-  if (authResult.error) {
-    return NextResponse.json(
-      { message: authResult.error },
-      { status: authResult.status }
-    );
-  }
-
   try {
     const formData = await request.formData();
     const file = formData.get('image') as File | null;
