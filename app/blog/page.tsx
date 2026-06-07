@@ -3,9 +3,24 @@ import Link from 'next/link';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Button from '@/components/ui/Button';
 import BlogFilter from './BlogFilter';
-import { blogPosts } from '@/lib/blogPosts';
+import connectDB from '@/lib/mongodb';
+import { getPublishedArticles } from '@/lib/models/article';
 
-export default function BlogPage() {
+export const dynamic = 'force-dynamic';
+
+async function getPosts() {
+  try {
+    await connectDB();
+    return await getPublishedArticles();
+  } catch (error) {
+    console.error('Failed to load articles:', error);
+    return [];
+  }
+}
+
+export default async function BlogPage() {
+  const blogPosts = await getPosts();
+
   return (
     <div className="min-h-screen bg-off-white">
 

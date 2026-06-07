@@ -1,9 +1,13 @@
 import type { MetadataRoute } from 'next';
+import connectDB from '@/lib/mongodb';
+import { getPublishedArticles } from '@/lib/models/article';
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export const dynamic = 'force-dynamic';
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = 'https://giltcounselling.com';
 
-  return [
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: baseUrl,
       lastModified: new Date(),
@@ -41,46 +45,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog`,
+      url: `${baseUrl}/gallery`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.7,
     },
     {
-      url: `${baseUrl}/blog/understanding-teen-anxiety`,
-      lastModified: new Date('2024-12-15'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/support-mental-health-daily`,
-      lastModified: new Date('2024-12-10'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/building-resilience-young-people`,
-      lastModified: new Date('2024-12-05'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/family-communication-safe-spaces`,
-      lastModified: new Date('2024-11-28'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/when-to-seek-counselling`,
-      lastModified: new Date('2024-11-20'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog/self-care-not-selfish`,
-      lastModified: new Date('2024-11-15'),
-      changeFrequency: 'yearly',
-      priority: 0.6,
+      url: `${baseUrl}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.7,
     },
   ];
+
+  let articleRoutes: MetadataRoute.Sitemap = [];
+  try {
+    await connectDB();
+    const articles = await getPublishedArticles();
+    articleRoutes = articles.map((article) => ({
+      url: `${baseUrl}/blog/${article.slug}`,
+      lastModified: new Date(article.isoDate),
+      changeFrequency: 'yearly',
+      priority: 0.6,
+    }));
+  } catch (error) {
+    console.error('Failed to build article sitemap entries:', error);
+  }
+
+  return [...staticRoutes, ...articleRoutes];
 }

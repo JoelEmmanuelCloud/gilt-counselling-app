@@ -11,8 +11,10 @@ import { useToast } from '@/components/ui/Toast';
 import axios from 'axios';
 import UserProfileModal from '@/components/admin/UserProfileModal';
 import AdminPhotoUpload from '@/components/admin/AdminPhotoUpload';
+import GalleryManager from '@/components/admin/GalleryManager';
+import ArticleManager from '@/components/admin/ArticleManager';
 
-type Tab = 'appointments' | 'clients' | 'counselors' | 'create-booking';
+type Tab = 'appointments' | 'clients' | 'counselors' | 'create-booking' | 'gallery' | 'articles';
 
 interface Client {
   _id: string;
@@ -444,6 +446,26 @@ function AdminDashboardContent() {
           >
             Create Booking
           </button>
+          <button
+            onClick={() => setActiveTab('gallery')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'gallery'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Gallery
+          </button>
+          <button
+            onClick={() => setActiveTab('articles')}
+            className={`px-6 py-3 font-medium transition-all ${
+              activeTab === 'articles'
+                ? 'border-b-2 border-gilt-gold text-gilt-gold'
+                : 'text-gray-600 hover:text-gray-900'
+            }`}
+          >
+            Articles
+          </button>
         </div>
 
         {activeTab === 'appointments' && (
@@ -805,6 +827,10 @@ function AdminDashboardContent() {
             </form>
           </Card>
         )}
+
+        {activeTab === 'gallery' && <GalleryManager />}
+
+        {activeTab === 'articles' && <ArticleManager />}
       </section>
 
       {selectedUserId && (
