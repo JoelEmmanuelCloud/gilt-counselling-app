@@ -33,7 +33,9 @@
     "start": "next start",
     "lint": "next lint",
     "seed": "tsx scripts/seed.ts",
-    "generate-qr": "tsx scripts/generate-qr-codes.ts"
+    "generate-qr": "tsx scripts/generate-qr-codes.ts",
+    "generate-bootcamp-qr": "tsx scripts/generate-bootcamp-qr.ts",
+    "export-qr-png": "tsx scripts/export-qr-png.ts"
   },
   "eslintConfig": {
     "extends": [

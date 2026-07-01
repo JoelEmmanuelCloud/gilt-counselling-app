@@ -4,9 +4,10 @@ import path from 'path';
 
 const SITE_URL = 'https://giltcounselling.com';
 const OUT_DIR = path.join(process.cwd(), 'qr-codes');
+const LOGO_PATH = path.join(process.cwd(), 'public', 'Gilt Counselling Consult Profile.svg');
+const LOGO_ASPECT_RATIO = 11692.91 / 8267.72;
 
 const BRAND_GOLD = '#D9A85D';
-const BRAND_NAME = 'Gilt Counselling Consult';
 const BRAND_SITE = 'giltcounselling.com';
 
 const platforms = [
@@ -59,35 +60,41 @@ function extractQrContent(svgString: string): { viewBox: string; paths: string }
   return { viewBox, paths };
 }
 
-function buildCard(platform: typeof platforms[0], qrViewBox: string, qrPaths: string): string {
+function buildCard(platform: typeof platforms[0], qrViewBox: string, qrPaths: string, logoDataUri: string): string {
   const W = 500;
-  const H = 620;
+  const H = 700;
   const CORNER_R = 24;
 
-  // Sections (top to bottom, no overlapping)
-  const HEADER_H = 100;
   const FOOTER_H = 80;
-  const FOOTER_Y = H - FOOTER_H;   // 540
+  const FOOTER_Y = H - FOOTER_H;   // 620
 
-  // Platform icon + labels sit between header and QR
+  // Logo header
+  const LOGO_H = 130;
+  const LOGO_W = LOGO_H * LOGO_ASPECT_RATIO;
+  const LOGO_Y = 24;
+  const LOGO_X = (W - LOGO_W) / 2;
+
+  const DIVIDER_Y = LOGO_Y + LOGO_H + 16;      // 194
+
+  // Platform icon + labels sit between the logo and the QR code
   const ICON_SIZE = 36;
-  const ICON_Y = HEADER_H + 12;                // 112
-  const ICON_X = (W - ICON_SIZE) / 2;          // 232
-  const NAME_Y = ICON_Y + ICON_SIZE + 18;      // 166
-  const HANDLE_Y = NAME_Y + 24;                // 190
+  const ICON_Y = DIVIDER_Y + 16;                // 210
+  const ICON_X = (W - ICON_SIZE) / 2;
+  const NAME_Y = ICON_Y + ICON_SIZE + 18;
+  const HANDLE_Y = NAME_Y + 24;
 
   // QR code block sits below the platform labels
-  const QR_SIZE = 300;
-  const QR_Y = HANDLE_Y + 20;                  // 210
-  const QR_X = (W - QR_SIZE) / 2;              // 100
+  const QR_SIZE = 260;
+  const QR_Y = HANDLE_Y + 20;
+  const QR_X = (W - QR_SIZE) / 2;
 
   // Scan instruction between QR and footer
-  const SCAN_Y = QR_Y + QR_SIZE + 24;          // 534 — fits within footer gap
+  const SCAN_Y = QR_Y + QR_SIZE + 30;
 
   const isAllLinks = platform.filename === 'qr-all-links';
 
   return `<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
     <clipPath id="card-clip">
       <rect width="${W}" height="${H}" rx="${CORNER_R}" ry="${CORNER_R}"/>
@@ -97,11 +104,9 @@ function buildCard(platform: typeof platforms[0], qrViewBox: string, qrPaths: st
   <!-- Card background -->
   <rect width="${W}" height="${H}" rx="${CORNER_R}" ry="${CORNER_R}" fill="#ffffff"/>
 
-  <!-- Header bar -->
-  <rect width="${W}" height="${HEADER_H}" fill="${BRAND_GOLD}" clip-path="url(#card-clip)"/>
-  <text x="${W / 2}" y="42" text-anchor="middle" font-family="Georgia, serif" font-size="20" font-weight="bold" fill="#ffffff" letter-spacing="0.5">${BRAND_NAME}</text>
-  <text x="${W / 2}" y="68" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="rgba(255,255,255,0.85)" letter-spacing="1.5">COUNSELLING · COMMUNITY · CARE</text>
-  <line x1="${W / 2 - 45}" y1="80" x2="${W / 2 + 45}" y2="80" stroke="rgba(255,255,255,0.45)" stroke-width="1"/>
+  <!-- Logo header -->
+  <image x="${LOGO_X}" y="${LOGO_Y}" width="${LOGO_W}" height="${LOGO_H}" href="${logoDataUri}" xlink:href="${logoDataUri}"/>
+  <line x1="${W / 2 - 60}" y1="${DIVIDER_Y}" x2="${W / 2 + 60}" y2="${DIVIDER_Y}" stroke="${BRAND_GOLD}" stroke-width="1.5"/>
 
   <!-- Platform icon (36×36) -->
   ${isAllLinks
@@ -137,6 +142,9 @@ async function generate() {
     fs.mkdirSync(OUT_DIR, { recursive: true });
   }
 
+  const logoBase64 = fs.readFileSync(LOGO_PATH).toString('base64');
+  const logoDataUri = `data:image/svg+xml;base64,${logoBase64}`;
+
   for (const platform of platforms) {
     const qrSvgString = await QRCode.toString(platform.url, {
       type: 'svg',
@@ -146,7 +154,7 @@ async function generate() {
     });
 
     const { viewBox, paths } = extractQrContent(qrSvgString);
-    const card = buildCard(platform, viewBox, paths);
+    const card = buildCard(platform, viewBox, paths, logoDataUri);
 
     const outPath = path.join(OUT_DIR, `${platform.filename}.svg`);
     fs.writeFileSync(outPath, card, 'utf-8');
