@@ -36,12 +36,12 @@ const schools: School[] = [
       'Following the session, students came forward to share how the teaching had already begun to shift their perspective on managing emotions and understanding others.',
     ],
     quotes: [
-      { text: 'I have struggled with anger for a long time. This session showed me practical ways to manage my reactions — to pause, reflect, and respond rather than explode.', author: 'Male Student' },
-      { text: 'I had never truly understood how to read what others were feeling. What I learned today opened my eyes — I know I can do better at understanding the people around me.', author: 'Female Student' },
+      { text: 'I have been struggling with anger issues. Thank God, the teaching on Emotional Intelligence has taught me how I can control anger.', author: 'Student' },
+      { text: 'I did not know how to understand people\'s emotions, but with this teaching, I will do better.', author: 'Student' },
     ],
     authority: {
-      text: 'This session has enriched my own understanding of emotional intelligence. It gave me fresh insight into how to build and sustain healthy, meaningful relationships — personally and professionally.',
-      role: 'School Counsellor, Niger Delta Science School',
+      text: 'This teaching has enlightened me to have a successful relationship.',
+      role: 'Counsellor, Niger Delta Science School',
     },
     photos: [
       { src: '/images/outreach/ndss/ndss-school-gate.jpeg', alt: 'Students at Niger Delta Science School gate' },
@@ -64,8 +64,8 @@ const schools: School[] = [
       'The session equipped students with practical tools for recognising their emotional states, understanding their triggers, and managing their responses — skills that matter every single day.',
     ],
     quotes: [
-      { text: 'I arrived this morning feeling depressed and heavy inside. But after this session, I genuinely feel better — lighter. Something shifted in me today.', author: 'Male Student' },
-      { text: 'This presentation on Emotional Intelligence gave me real clues on how to handle my anger. I have always struggled with it, but now I have a clearer picture of what to do.', author: 'Female Student' },
+      { text: 'I was feeling depressed earlier before the team\'s arrival, but after the event, I feel better.', author: 'Student' },
+      { text: 'The teaching on Emotional Intelligence has given me clues on how to manage anger issues.', author: 'Student' },
     ],
     photos: [
       { src: '/images/outreach/gbhs/gbhs-session-active.jpeg', alt: 'Facilitator engaging GBHS students' },
@@ -88,11 +88,11 @@ const schools: School[] = [
       'Students left equipped not just with knowledge, but with renewed self-awareness and confidence. The school\'s principal was equally moved by the session\'s impact on student mindset.',
     ],
     quotes: [
-      { text: 'I am so grateful to have been given the opportunity to learn about emotional intelligence. This is knowledge I did not know I needed — but now I feel truly empowered.', author: 'Female Student' },
-      { text: 'Through this teaching, I now understand my own emotions more deeply — and I have learned how to express them well, whether in good times or difficult ones.', author: 'Female Student' },
+      { text: 'I am very happy for the opportunity to learn about Emotional Intelligence.', author: 'Student' },
+      { text: 'Through the teaching I got to understand my emotions and how to express them in both positive and negative situations.', author: 'Student' },
     ],
     authority: {
-      text: 'This programme has genuinely helped shape our students\' minds. They now understand how to handle emotions, relate better with others, and make decisions that serve their future.',
+      text: 'This has helped in shaping the students\' minds on how to have a productive life.',
       role: 'The Principal, Olivet Height International School',
     },
     photos: [
@@ -116,11 +116,11 @@ const schools: School[] = [
       'The session covered self-awareness, emotional regulation, and the critical skill of responding rather than reacting — and it clearly landed deeply with both students and staff.',
     ],
     quotes: [
-      { text: 'I am happy because I have finally learned how to regulate my emotions. I understand now that I have the power to choose how I respond — and that makes a real difference.', author: 'Male Student' },
-      { text: 'I have learned something I truly needed to hear — that managing my emotions is not just possible, it is necessary. I see its importance in a way I never did before.', author: 'Female Student' },
+      { text: 'I am happy because I have learnt how to regulate my emotions.', author: 'Student' },
+      { text: 'I have learnt and seen the need to manage my emotions.', author: 'Student' },
     ],
     authority: {
-      text: 'This teaching has truly enlightened our students on the importance of self-regulation. They now understand that managing emotions well is foundational to everything — relationships, learning, and their future.',
+      text: 'The teaching has enlightened the students on the need for self-regulation.',
       role: 'School Counsellor, The Grove School Secondary',
     },
     photos: [
@@ -144,18 +144,42 @@ const schools: School[] = [
       'Three students articulated what they had learned with remarkable clarity. The principal\'s endorsement tied it together with a statement that speaks to the heart of why this work matters.',
     ],
     quotes: [
-      { text: 'This teaching has shown me the right way to approach people. How I carry myself emotionally shapes every interaction I have.', author: 'Student 1' },
-      { text: 'I now understand why Emotional Intelligence matters — so that I am never overwhelmed by my feelings, but can face any situation with a clear and steady mind.', author: 'Student 2' },
-      { text: 'Emotional Intelligence begins with me — not just knowing my own emotions, but also recognising and understanding the emotions of the people around me.', author: 'Student 3' },
+      { text: 'The teaching has made me understand the right way to approach people.', author: 'Student 1' },
+      { text: 'I have seen the need for Emotional Intelligence so as not to get overwhelmed by emotions in any given situation.', author: 'Student 2' },
+      { text: 'I have learnt that Emotional Intelligence starts with me, and not just knowing my emotions, but also knowing and understanding the emotions of others around me.', author: 'Student 3' },
     ],
-    authority: {
-      text: 'Every student needs emotional intelligence. It is what guides them in how to respond to the world — to challenges, to people, to pressure. This programme gave our students that foundation.',
-      role: 'The Principal, Priqueen International Academy',
-    },
     photos: [
       { src: '/images/outreach/priqueen/priqueen-student-focused.jpeg', alt: 'Priqueen student focused and taking notes' },
       { src: '/images/outreach/priqueen/priqueen-hands-raised.jpeg', alt: 'Students raising hands in participation' },
       { src: '/images/outreach/priqueen/priqueen-group-photo.jpeg', alt: 'Group photo at Priqueen International Academy' },
+    ],
+  },
+  {
+    id: 'christ',
+    number: '06',
+    name: 'Christ International School',
+    short: 'Christ Intl',
+    location: 'Port Harcourt',
+    hero: {
+      src: '/images/outreach/christ/christ-group-photo.jpeg',
+      alt: 'Gilt Counselling Consult team and Christ International School staff group photo with event banner',
+    },
+    narrative: [
+      'Gilt Counselling Consult brought the Emotional Intelligence programme to Christ International School, continuing the outreach\'s mission of equipping students with practical tools for self-awareness and emotional regulation.',
+      'Students engaged with the session\'s message on managing emotions, and the school\'s leadership affirmed the lasting value of the teaching beyond the classroom.',
+    ],
+    quotes: [
+      { text: 'There is need to control our emotions.', author: 'Student' },
+      { text: 'I learnt how to balance and regulate my emotions and also relate with others.', author: 'Student' },
+    ],
+    authority: {
+      text: 'We need emotional intelligence in order to build a life of success beyond the classroom.',
+      role: 'The Principal, Christ International School',
+    },
+    photos: [
+      { src: '/images/outreach/christ/christ-session-presentation.jpeg', alt: 'Facilitator presenting to Christ International School students' },
+      { src: '/images/outreach/christ/christ-students-engaged.jpeg', alt: 'Christ International School student raising her hand in participation' },
+      { src: '/images/outreach/christ/christ-student-speaking.jpeg', alt: 'Christ International School student speaking on the microphone' },
     ],
   },
 ];
@@ -213,7 +237,7 @@ export default function OutreachShowcase() {
       {/* Stats bar */}
       <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mb-8 sm:mb-10">
         {[
-          { value: '5', label: 'Schools Visited' },
+          { value: '6', label: 'Schools Visited' },
           { value: '1,000+', label: 'Students Reached' },
           { value: 'May 2026', label: 'Port Harcourt' },
         ].map(stat => (

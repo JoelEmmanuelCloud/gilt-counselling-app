@@ -102,7 +102,404 @@ export default function TestimoniesPage() {
           subtitle="Making a difference beyond our counselling rooms — bringing support and awareness to communities."
           centered
         />
-        <div className="max-w-5xl mx-auto">
+        <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Community
+              </span>
+              <span className="text-sm text-gray-500">2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              CASSON Rivers State Chapter 6th Biennial Conference &amp; Induction Ceremony
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">IGNATIUS AJURU UNIVERSITY OF EDUCATION</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult was represented at the Counselling Association of Nigeria (CASSON)
+              Rivers State Chapter&apos;s 6th Biennial Conference, Induction Ceremony, and Fund Raise, themed
+              &ldquo;Counselling for Transformation: Accelerating Mental Health for Sustainable Development in
+              Nigeria.&rdquo; Our team presented at the podium and received a Certificate of Participation,
+              joining fellow counselling professionals from across Rivers State.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/casson-conference-2026-1.jpeg"
+                  alt="Gilt Counselling Consult representative speaking at the CASSON Rivers State Chapter 6th Biennial Conference - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/casson-conference-2026-2.jpeg"
+                  alt="Esther Ebifimoere Peters receiving the Certificate of Participation at the CASSON 6th Biennial Conference - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/casson-conference-2026-3.jpeg"
+                  alt="Gilt Counselling Consult team at Ignatius Ajuru University of Education for the CASSON 6th Biennial Conference - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/casson-conference-2026-4.jpeg"
+                  alt="Gilt Counselling Consult team with CASSON Rivers State Chapter officials - Event photo 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/casson-conference-2026-5.jpeg"
+                  alt="Conference theme screen at the CASSON Rivers State Chapter 6th Biennial Conference - Event photo 5"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/casson-conference-2026-6.jpeg"
+                  alt="Gilt Counselling Consult representative presenting at the CASSON Rivers State Chapter 6th Biennial Conference - Event photo 6"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Community
+              </span>
+              <span className="text-sm text-gray-500">June 2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              Gilt Counselling Consult, in Partnership with CASSON Rivers State, Honours International Guest Lecturer Tracy Heath in Canada
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">CANADA</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult, in partnership with the Counselling Association of Nigeria (CASSON)
+              Rivers State Chapter, honoured international guest lecturer Tracy Heath in Canada in appreciation
+              of her contributions and partnership. The visit was marked with a warm exchange of gifts,
+              including a token from Nigeria and a copy of &ldquo;Before Goodbye,&rdquo; celebrating the
+              relationship between both parties.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/tracy-heath-canada-1.jpeg"
+                  alt="Gilt Counselling Consult representative presenting a gift to Tracy Heath in Canada - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/tracy-heath-canada-2.jpeg"
+                  alt="Tracy Heath holding a Nigerian gift plaque presented by Gilt Counselling Consult - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/tracy-heath-canada-3.jpeg"
+                  alt="Gilt Counselling Consult team with Tracy Heath in Canada - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/tracy-heath-canada-4.jpeg"
+                  alt="Gilt Counselling Consult representative and Tracy Heath sharing a warm embrace in Canada - Event photo 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/tracy-heath-canada-5.jpeg"
+                  alt="Tracy Heath holding the book Before Goodbye, gifted by Gilt Counselling Consult - Event photo 5"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <video
+              controls
+              preload="none"
+              poster="/images/events/tracy-heath-canada-1.jpeg"
+              className="w-full rounded-lg"
+            >
+              <source src="/videos/tracy-heath-canada.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Community
+              </span>
+              <span className="text-sm text-gray-500">May 2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              2026 Children&apos;s Day Celebration
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">PORT HARCOURT MALL</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult joined the 2026 Children&apos;s Day celebration at Port Harcourt Mall,
+              bringing colour, joy, and our message of mental wellness to families across the city. Our team
+              engaged children and parents at our branded stand, sharing information on our services while
+              celebrating the day dedicated to <strong>every child&apos;s wellbeing and growth</strong>.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/childrens-day-2026-1.jpeg"
+                  alt="Gilt Counselling Consult team and families at the 2026 Children's Day celebration - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/childrens-day-2026-2.jpeg"
+                  alt="Gilt Counselling Consult registration table at the 2026 Children's Day celebration - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/childrens-day-2026-3.jpeg"
+                  alt="Children celebrating with cake at the 2026 Children's Day celebration - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/childrens-day-2026-4.jpeg"
+                  alt="Gilt Counselling Consult team member engaging with children at the 2026 Children's Day celebration - Event photo 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Community
+              </span>
+              <span className="text-sm text-gray-500">June 2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              The Destructive Effect of Substance Abuse and Internet Fraud on Youth
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">2026 DIOCESAN WOMEN CONFERENCE, DIOCESE OF IDEATO</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult was invited to speak at the 2026 Diocesan Women Conference, Arondizuogu
+              Archdeaconry, Diocese of Ideato (Anglican Communion), held at the Cathedral of St. Peter, Ndiawa
+              Arondizuogu. The session addressed the destructive effect of substance abuse and internet fraud
+              on youth, equipping the hundreds of women in attendance with insight to guide the young people
+              in their care.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/ideato-women-conference-1.jpeg"
+                  alt="Gilt Counselling Consult speaker addressing the 2026 Diocesan Women Conference - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/ideato-women-conference-2.jpeg"
+                  alt="Gilt Counselling Consult speaker at the podium with the conference banner - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/ideato-women-conference-3.jpeg"
+                  alt="Gilt Counselling Consult team with Diocese of Ideato Women's Guild leaders - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[180px] sm:h-[220px] md:h-[260px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/ideato-women-conference-4.jpeg"
+                  alt="Hundreds of women in attendance at the 2026 Diocesan Women Conference - Event photo 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Community
+              </span>
+              <span className="text-sm text-gray-500">June 2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              2026 Teachers Training: Championing Dyslexia, Dyscalculia, and Dysgraphia Awareness
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">LIGHTVIEW INITIATIVE FOR EMPOWERMENT &times; AFRICA DYSLEXIA ORGANISATION</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult took part in the 2026 teachers training championing Dyslexia, Dyscalculia,
+              and Dysgraphia awareness, organised by the Lightview Initiative for Empowerment in partnership
+              with the Africa Dyslexia Organisation. The training equipped teachers with the knowledge to
+              identify and support students with learning differences in the classroom.
+            </p>
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/dyslexia-training-2026-1.jpeg"
+                  alt="Gilt Counselling Consult representative at the 2026 teachers training on Dyslexia, Dyscalculia, and Dysgraphia awareness - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/dyslexia-training-2026-2.jpeg"
+                  alt="Gilt Counselling Consult facilitating a session at the 2026 teachers training on Dyslexia, Dyscalculia, and Dysgraphia awareness - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/events/dyslexia-training-2026-3.jpeg"
+                  alt="Gilt Counselling Consult representative with fellow facilitators at the 2026 teachers training on Dyslexia, Dyscalculia, and Dysgraphia awareness - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
           <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
             <div className="flex flex-wrap items-center gap-3 mb-4">
               <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
@@ -164,6 +561,120 @@ export default function TestimoniesPage() {
                 <Image
                   src="/images/events/disability-day-4.jpeg"
                   alt="Gilt Counselling at International World Day for Persons with Disabilities - Event photo 4"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section-container bg-off-white">
+        <SectionHeading
+          title="Media & Press Features"
+          subtitle="Sharing our expertise on mental health and wellness with the wider public through radio."
+          centered
+        />
+        <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Media
+              </span>
+              <span className="text-sm text-gray-500">June 2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              92.3 Nigeria Info PH Interview on Navigating Men&apos;s Mental Health
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">IN CELEBRATION OF MEN&apos;S MENTAL WELLNESS MONTH</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult joined 92.3 Nigeria Info Port Harcourt for a studio conversation on
+              navigating men&apos;s mental health, part of the station&apos;s programming in celebration of
+              Men&apos;s Mental Wellness Month. The discussion explored the unique pressures men face and
+              practical ways to build emotional resilience and seek support.
+            </p>
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/media/nigeria-info-studio.jpeg"
+                  alt="Gilt Counselling Consult team in the 92.3 Nigeria Info Port Harcourt studio - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/media/nigeria-info-group.jpeg"
+                  alt="Gilt Counselling Consult team with 92.3 Nigeria Info Port Harcourt host - Event photo 2"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/media/nigeria-info-onair.jpeg"
+                  alt="Gilt Counselling Consult representative on-air at 92.3 Nigeria Info Port Harcourt - Event photo 3"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 33vw, 20vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+            <div className="flex flex-wrap items-center gap-3 mb-4">
+              <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+                Media
+              </span>
+              <span className="text-sm text-gray-500">June 2026</span>
+            </div>
+            <h3 className="heading-sm mb-2">
+              Kids FM PH 101.7 Radio Talk on Men&apos;s Mental Health
+            </h3>
+            <p className="text-soft-gold font-semibold mb-2">KIDS FM PORT HARCOURT, 101.7FM</p>
+            <p className="text-gray-700 leading-relaxed mb-6 text-justify">
+              Gilt Counselling Consult sat down with Kids FM Port Harcourt, 101.7FM, for a radio talk on
+              men&apos;s mental health, continuing the conversation on emotional wellbeing and the importance
+              of men feeling safe to speak openly about what they carry.
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="relative h-[220px] sm:h-[280px] md:h-[320px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/media/kidsfm-interview-1.jpeg"
+                  alt="Gilt Counselling Consult representative on-air at Kids FM Port Harcourt 101.7FM - Event photo 1"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 50vw, 25vw"
+                  quality={60}
+                  placeholder="blur"
+                  blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
+                  loading="lazy"
+                />
+              </div>
+              <div className="relative h-[220px] sm:h-[280px] md:h-[320px] rounded-lg overflow-hidden">
+                <Image
+                  src="/images/media/kidsfm-interview-2.jpeg"
+                  alt="Gilt Counselling Consult representative on-air at Kids FM Port Harcourt 101.7FM - Event photo 2"
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 50vw, 25vw"
