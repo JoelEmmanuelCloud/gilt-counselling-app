@@ -55,7 +55,7 @@ export default function About() {
     },
     {
       name: 'Esther Ebifimoere Peters',
-      title: 'Counsellor & Admin Officer',
+      title: 'Counsellor',
       image: '/uploads/Esther Ebifimoere Peters.jpeg',
     },
     {
