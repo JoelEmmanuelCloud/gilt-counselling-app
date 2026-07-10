@@ -250,7 +250,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                   placeholder="your.email@example.com"
                   disabled={loading}
                 />
@@ -296,7 +296,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                     placeholder="John"
                     disabled={loading}
                   />
@@ -311,7 +311,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                     placeholder="Doe"
                     disabled={loading}
                   />
@@ -328,7 +328,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                   placeholder="you@example.com"
                   disabled={loading}
                 />

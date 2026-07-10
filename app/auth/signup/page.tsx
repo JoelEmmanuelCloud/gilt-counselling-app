@@ -106,7 +106,7 @@ export default function SignUpPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, firstName: e.target.value })
                 }
-                className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
+                className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
                 placeholder="John"
               />
             </div>
@@ -126,7 +126,7 @@ export default function SignUpPage() {
                 onChange={(e) =>
                   setFormData({ ...formData, lastName: e.target.value })
                 }
-                className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
+                className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
                 placeholder="Doe"
               />
             </div>
@@ -149,7 +149,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
-              className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
+              className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
               placeholder="you@example.com"
             />
           </div>
@@ -170,7 +170,7 @@ export default function SignUpPage() {
               onChange={(e) =>
                 setFormData({ ...formData, phone: e.target.value })
               }
-              className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-sm sm:text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
+              className="appearance-none block w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-4 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent transition-all"
               placeholder="+234 800 000 0000"
             />
             <p className="mt-1 lg:mt-2 text-xs lg:text-sm text-gray-500">
