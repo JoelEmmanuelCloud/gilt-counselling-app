@@ -87,7 +87,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
     <div
       className={`
         flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg backdrop-blur-sm
-        transform transition-all duration-300 ease-out min-w-[320px] max-w-[420px]
+        transform transition-all duration-300 ease-out w-full sm:min-w-[320px] sm:w-auto sm:max-w-[420px]
         ${styles[toast.type]}
         ${isExiting ? 'opacity-0 translate-x-full' : 'opacity-100 translate-x-0'}
       `}
@@ -143,7 +143,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
 
       <div
-        className="fixed top-4 right-4 z-[9999] flex flex-col gap-3 pointer-events-none"
+        className="fixed top-4 left-4 right-4 sm:left-auto sm:right-4 z-[9999] flex flex-col items-stretch sm:items-end gap-3 pointer-events-none"
         aria-live="polite"
         aria-atomic="true"
       >
