@@ -119,7 +119,7 @@ export default function TestimoniesPage() {
               Rivers State Chapter&apos;s 6th Biennial Conference, Induction Ceremony, and Fund Raise, themed
               &ldquo;Counselling for Transformation: Accelerating Mental Health for Sustainable Development in
               Nigeria.&rdquo; Our team presented at the podium and received a Certificate of Participation,
-              joining fellow counselling professionals from across Rivers State.
+              joining fellow counselling professionals across Rivers State.
             </p>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
               <div className="relative h-[150px] sm:h-[190px] md:h-[220px] rounded-lg overflow-hidden">
@@ -306,9 +306,9 @@ export default function TestimoniesPage() {
             <h3 className="heading-sm mb-2">
               2026 Children&apos;s Day Celebration
             </h3>
-            <p className="text-soft-gold font-semibold mb-2">PORT HARCOURT MALL</p>
+            <p className="text-soft-gold font-semibold mb-2">VINEYARD</p>
             <p className="text-gray-700 leading-relaxed mb-6 text-justify">
-              Gilt Counselling Consult joined the 2026 Children&apos;s Day celebration at Port Harcourt Mall,
+              Gilt Counselling Consult joined the 2026 Children&apos;s Day celebration at Vineyard,
               bringing colour, joy, and our message of mental wellness to families across the city. Our team
               engaged children and parents at our branded stand, sharing information on our services while
               celebrating the day dedicated to <strong>every child&apos;s wellbeing and growth</strong>.
