@@ -182,6 +182,36 @@ const schools: School[] = [
       { src: '/images/outreach/christ/christ-student-speaking.jpeg', alt: 'Christ International School student speaking on the microphone' },
     ],
   },
+  {
+    id: 'als',
+    number: '07',
+    name: 'Abundant Life School',
+    short: 'Abundant Life',
+    location: 'Port Harcourt',
+    hero: {
+      src: '/images/outreach/als/als-hero-group.jpeg',
+      alt: 'Abundant Life School students filling the hall for the Emotional Intelligence session',
+    },
+    narrative: [
+      'Gilt Counselling Consult brought their Emotional Intelligence programme to Abundant Life School, where students filled the hall for a session centred on self-worth, self-belief, and esteeming one\'s own value.',
+      'Several students stepped forward to share what the teaching meant to them, and the school\'s principal, moved by the session\'s impact, asked that it become a termly fixture at the school.',
+    ],
+    quotes: [
+      { text: 'I learnt that I should never stop believing in myself, I should have a high regard for myself.', author: 'Student' },
+      { text: 'My highlight from today\'s teaching is that we should always esteem ourselves by saying words like "I am beautiful, smart, intelligent," etc. To other students like me, I want to tell you that you should believe in yourself.', author: 'Student' },
+      { text: 'I learnt that I am valuable and I am important. To other students out there, don\'t let people define you, you are valuable, so just believe in yourself.', author: 'Student' },
+      { text: 'I have learnt that no matter the matter, I matter.', author: 'Student' },
+    ],
+    authority: {
+      text: 'The teaching was a timely one, and I as a person have learned a lot. I have asked the team to make it a termly thing.',
+      role: 'The Principal, Abundant Life School',
+    },
+    photos: [
+      { src: '/images/outreach/als/als-session-standing.jpeg', alt: 'Abundant Life School student standing to speak into the microphone during the session' },
+      { src: '/images/outreach/als/als-counsellor-student-mic.jpeg', alt: 'School counsellor standing beside a student sharing her reflection on the microphone' },
+      { src: '/images/outreach/als/als-students-attentive.jpeg', alt: 'Abundant Life School students listening attentively in their uniforms' },
+    ],
+  },
 ];
 
 const panelVariants = {
@@ -237,7 +267,7 @@ export default function OutreachShowcase() {
       {/* Stats bar */}
       <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mb-8 sm:mb-10">
         {[
-          { value: '6', label: 'Schools Visited' },
+          { value: '7', label: 'Schools Visited' },
           { value: '1,000+', label: 'Students Reached' },
           { value: 'May 2026', label: 'Port Harcourt' },
         ].map(stat => (
