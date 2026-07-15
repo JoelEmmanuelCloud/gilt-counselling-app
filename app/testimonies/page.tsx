@@ -65,6 +65,56 @@ export default function TestimoniesPage() {
     },
   ];
 
+  const schoolTestimonials = [
+    {
+      school: "Great Beulah Heritage School",
+      quotes: [
+        { text: "I was feeling depressed earlier before the team's arrival, but after the event, I feel better.", role: "Student" },
+        { text: "The teaching on Emotional Intelligence has given me clues on how to manage anger issues.", role: "Student" },
+      ],
+    },
+    {
+      school: "Niger Delta Science School",
+      quotes: [
+        { text: "I have been struggling with anger issues. Thank God, the teaching on Emotional Intelligence has taught me how I can control anger.", role: "Student" },
+        { text: "I did not know how to understand people's emotions, but with this teaching, I will do better.", role: "Student" },
+        { text: "This teaching has enlightened me to have a successful relationship.", role: "Counsellor" },
+      ],
+    },
+    {
+      school: "Oliveth Height International School",
+      quotes: [
+        { text: "I am very happy for the opportunity to learn about Emotional Intelligence.", role: "Student" },
+        { text: "Through the teaching I got to understand my emotions and how to express them in both positive and negative situation.", role: "Student" },
+        { text: "This has helped in shaping the students' minds on how to have a productive life.", role: "Principal" },
+      ],
+    },
+    {
+      school: "Christ International School",
+      quotes: [
+        { text: "There is need to control our emotions.", role: "Student" },
+        { text: "I learnt how to balance and regulate my emotions and also relate with others.", role: "Student" },
+        { text: "We need emotional intelligence in order to build a life of success beyond the classroom.", role: "Principal" },
+      ],
+    },
+    {
+      school: "The Groove School",
+      quotes: [
+        { text: "I am happy because I have learnt how to regulate my emotions.", role: "Student" },
+        { text: "I have learnt and seen the need to manage my emotions.", role: "Student" },
+        { text: "The teaching has enlightened the students on the need for self-regulation.", role: "School Counsellor" },
+      ],
+    },
+    {
+      school: "Priqueen International School",
+      quotes: [
+        { text: "The teaching has made me understand the right way to approach people.", role: "Student" },
+        { text: "I have seen the need for Emotional Intelligence so as not to get overwhelmed by emotions in any given situation.", role: "Student" },
+        { text: "I have learnt that Emotional Intelligence starts with me, and not just knowing my emotions, but also knowing and understanding the emotions of others around me.", role: "Student" },
+      ],
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-off-white">
 
@@ -97,6 +147,29 @@ export default function TestimoniesPage() {
       </section>
 
       <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="School Outreach Testimonies"
+          subtitle="Feedback from our Emotional Intelligence sessions with students, counsellors, and principals across schools."
+          centered
+        />
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
+          {schoolTestimonials.map((entry, index) => (
+            <div key={index} className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+              <h3 className="heading-sm mb-4">{entry.school}</h3>
+              <div className="space-y-4">
+                {entry.quotes.map((quote, quoteIndex) => (
+                  <div key={quoteIndex} className="border-t border-soft-beige pt-4 first:border-t-0 first:pt-0">
+                    <p className="text-gray-700 leading-relaxed italic mb-1">"{quote.text}"</p>
+                    <p className="text-sm text-soft-gold font-semibold">{quote.role}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-container bg-off-white">
         <SectionHeading
           title="Community Outreach"
           subtitle="Making a difference beyond our counselling rooms — bringing support and awareness to communities."
