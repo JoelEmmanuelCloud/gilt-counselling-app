@@ -63,6 +63,12 @@ export default function TestimoniesPage() {
       service: 'Individual Counselling',
       date: 'September 2025',
     },
+    {
+      quote: 'I would like to express my heartfelt gratitude to Gilt Counselling Services for the incredible work they are doing. One day, a female therapist from your organization reached out to me after my 13-year-old niece had searched online for a female therapist and contacted your team for help. During their conversation, the therapist realized that my niece was living in an abusive environment and urgently needed protection. The therapist acted with compassion, professionalism, and wisdom by ensuring the situation was brought to my attention. As soon as I learned what was happening, I immediately contacted the appropriate authorities, and swift action was taken to remove her from the abusive environment. Today, my niece is safe, receiving the care and support she needs, and we are deeply grateful for the role Gilt Counselling Services played in changing the course of her life. Your commitment to listening, believing, and responding to vulnerable children has made an immeasurable difference to our family. Thank you for your dedication, courage, and genuine concern for those in need. May your organization continue to be a source of hope, healing, and protection for many more people.',
+      firstName: 'Dr. Mensah',
+      service: 'Child Safeguarding & Protection',
+      date: 'July 2026',
+    },
   ];
 
   const schoolTestimonials = [
