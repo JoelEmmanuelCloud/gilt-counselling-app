@@ -118,16 +118,9 @@ function SignInContent() {
           </p>
         </div>
 
-        
         <div className="pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
           <p className="text-center text-xs lg:text-sm text-gray-500">
-            Are you an admin?{" "}
-            <Link
-              href="/auth/admin-login"
-              className="font-medium text-gilt-teal hover:text-gilt-green transition-colors"
-            >
-              Admin Login
-            </Link>
+            Admins and counselors sign in with the same form above.
           </p>
         </div>
       </div>
