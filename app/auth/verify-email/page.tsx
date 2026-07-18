@@ -122,16 +122,10 @@ function VerifyEmailContent() {
               <p className="text-gray-600 mb-6">{message}</p>
               <div className="space-y-3">
                 <Link
-                  href="/auth/resend-verification"
+                  href="/auth/signin"
                   className="block w-full py-3 px-4 bg-gradient-to-r from-gilt-gold to-gilt-orange text-white rounded-lg hover:from-gilt-orange hover:to-gilt-gold transition-all font-medium"
                 >
-                  Resend Verification Email
-                </Link>
-                <Link
-                  href="/auth/signin"
-                  className="block w-full py-3 px-4 border-2 border-gilt-gold text-gilt-gold rounded-lg hover:bg-gilt-gold/10 transition-all font-medium"
-                >
-                  Back to Sign In
+                  Sign In to Get a New Code
                 </Link>
               </div>
             </>
