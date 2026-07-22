@@ -167,7 +167,28 @@ export default function Home() {
         </div>
       </section>
 
-      
+
+      <section className="bg-gradient-to-r from-gilt-gold via-soft-terracotta to-gilt-teal py-6 sm:py-7 md:py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
+            <div className="text-center sm:text-left">
+              <p className="text-white font-heading font-bold text-lg sm:text-xl md:text-2xl">
+                Holiday Psycho-Social Skills Bootcamp · 10th-28th Aug 2026
+              </p>
+              <p className="text-white/90 text-sm sm:text-base mt-1">
+                Ages 9-14 &amp; 15-18. Create your &ldquo;I&apos;m Attending&rdquo; badge and share the news.
+              </p>
+            </div>
+            <Link href="/bootcamp/attending" className="flex-shrink-0">
+              <Button className="bg-white text-gray-900 hover:bg-white/90 px-6 sm:px-8 py-3 uppercase text-xs md:text-sm tracking-wide rounded-lg lg:rounded-xl whitespace-nowrap">
+                I&apos;m Attending
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+
       <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
