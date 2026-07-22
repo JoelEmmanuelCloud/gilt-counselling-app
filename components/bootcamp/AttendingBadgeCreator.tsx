@@ -133,15 +133,39 @@ export default function AttendingBadgeCreator() {
       const titleFontFamily = bootcampTitleFont.style.fontFamily;
       const scriptFontFamily = bootcampScriptFont.style.fontFamily;
 
-      const [logoImg, subjectImg] = await Promise.all([
-        loadImage(LOGO_SRC),
-        photoDataUrl ? loadImage(photoDataUrl) : loadImage(PLACEHOLDER_SRC),
-        document.fonts.load(`italic 700 56px ${titleFontFamily}`),
-        document.fonts.load(`400 100px ${scriptFontFamily}`),
-        document.fonts.ready,
+      await Promise.all([
+        document.fonts.load(`italic 700 56px ${titleFontFamily}`).catch(() => {}),
+        document.fonts.load(`400 100px ${scriptFontFamily}`).catch(() => {}),
+        document.fonts.ready.catch(() => {}),
       ]);
 
       if (cancelled) return;
+
+      const logoImg = await loadImage(LOGO_SRC).catch(() => null);
+
+      let subjectImg: HTMLImageElement | null = null;
+      if (photoDataUrl) {
+        subjectImg = await loadImage(photoDataUrl).catch(() => null);
+        if (!subjectImg) {
+          if (!cancelled) {
+            toast.error('That photo could not be used. Please try a different photo (JPG, PNG, or WebP).');
+            setPhotoDataUrl(null);
+          }
+          return;
+        }
+      } else {
+        subjectImg = await loadImage(PLACEHOLDER_SRC).catch(() => null);
+      }
+
+      if (cancelled) return;
+
+      if (!logoImg || !subjectImg) {
+        if (!cancelled) {
+          toast.error('The badge could not be generated. Please check your connection and try again.');
+          setIsDrawing(false);
+        }
+        return;
+      }
 
       ctx.clearRect(0, 0, CANVAS_W, CANVAS_H);
       roundedRectPath(ctx, 0, 0, CANVAS_W, CANVAS_H, 48);
@@ -244,7 +268,12 @@ export default function AttendingBadgeCreator() {
       if (!cancelled) setIsDrawing(false);
     }
 
-    draw();
+    draw().catch(() => {
+      if (!cancelled) {
+        setIsDrawing(false);
+        toast.error('Something went wrong loading the badge. Please refresh and try again.');
+      }
+    });
     return () => {
       cancelled = true;
     };
@@ -254,9 +283,10 @@ export default function AttendingBadgeCreator() {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
-    if (!allowedTypes.includes(file.type)) {
-      toast.warning('Please select a valid image file (JPEG, PNG, or WebP)');
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
+    const looksLikeImage = file.type.startsWith('image/');
+    if (!looksLikeImage || (file.type && !allowedTypes.includes(file.type))) {
+      toast.warning('Please select a valid image file (JPEG, PNG, or WebP works best).');
       return;
     }
     if (file.size > 8 * 1024 * 1024) {
@@ -265,8 +295,15 @@ export default function AttendingBadgeCreator() {
     }
 
     const reader = new FileReader();
-    reader.onloadend = () => {
-      setPhotoDataUrl(reader.result as string);
+    reader.onload = () => {
+      if (typeof reader.result === 'string') {
+        setPhotoDataUrl(reader.result);
+      } else {
+        toast.error('That photo could not be read. Please try a different one.');
+      }
+    };
+    reader.onerror = () => {
+      toast.error('That photo could not be read. Please try a different one.');
     };
     reader.readAsDataURL(file);
   };
@@ -336,7 +373,7 @@ export default function AttendingBadgeCreator() {
       <span aria-hidden className={`${bootcampTitleFont.className} ${bootcampScriptFont.className} hidden`}>.</span>
       <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
         <div className="flex flex-col items-center">
-          <div className="w-full max-w-sm mx-auto rounded-[2rem] shadow-xl overflow-hidden bg-white ring-1 ring-gray-100">
+          <div className="relative w-full max-w-sm mx-auto rounded-[2rem] shadow-xl overflow-hidden bg-white ring-1 ring-gray-100">
             <canvas
               ref={canvasRef}
               width={CANVAS_W}
@@ -344,12 +381,21 @@ export default function AttendingBadgeCreator() {
               className="w-full h-auto block"
               aria-label="I'm attending the Gilt Consult Bootcamp badge preview"
             />
+            {isDrawing && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/80">
+                <svg className="w-8 h-8 animate-spin text-gilt-gold" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                </svg>
+                <span className="text-sm font-medium text-gray-600">Loading your badge…</span>
+              </div>
+            )}
           </div>
 
           <input
             ref={fileInputRef}
             type="file"
-            accept="image/jpeg,image/jpg,image/png,image/webp"
+            accept="image/jpeg,image/jpg,image/png,image/webp,image/heic,image/heif"
             onChange={handleFileSelect}
             className="hidden"
             id="bootcamp-photo-upload"
