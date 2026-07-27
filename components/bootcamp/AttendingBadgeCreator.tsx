@@ -231,8 +231,15 @@ export default function AttendingBadgeCreator() {
       if (nameLine) {
         ctx.textAlign = 'center';
         ctx.fillStyle = NAVY;
-        ctx.font = '700 42px Arial, sans-serif';
-        ctx.fillText(nameLine.toUpperCase(), CANVAS_W / 2, 772);
+        const nameText = nameLine.toUpperCase();
+        const maxNameWidth = 900;
+        let nameFontSize = 42;
+        ctx.font = `700 ${nameFontSize}px Arial, sans-serif`;
+        while (ctx.measureText(nameText).width > maxNameWidth && nameFontSize > 22) {
+          nameFontSize -= 2;
+          ctx.font = `700 ${nameFontSize}px Arial, sans-serif`;
+        }
+        ctx.fillText(nameText, CANVAS_W / 2, 772);
       }
 
       ctx.textAlign = 'center';
@@ -511,7 +518,10 @@ export default function AttendingBadgeCreator() {
             </div>
             <textarea
               value={caption}
-              onChange={(e) => setCaption(e.target.value)}
+              onChange={(e) => {
+                captionEditedRef.current = true;
+                setCaption(e.target.value);
+              }}
               rows={5}
               className="w-full rounded-lg border border-gray-300 bg-white p-3 text-sm text-gray-700 leading-relaxed focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
             />
