@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import { bootcampTitleFont, bootcampScriptFont } from '@/lib/bootcampFonts';
 
 const CANVAS_W = 1080;
-const CANVAS_H = 1350;
+const CANVAS_H = 1410;
 
 const GOLD = '#D9A85D';
 const ORANGE = '#F5A623';
@@ -34,7 +34,11 @@ export const WHATSAPP_REGISTER_URL = `https://wa.me/${WHATSAPP_NUMBER}?text=${en
 
 export const PAGE_URL = 'https://giltcounselling.com/bootcamp/attending';
 
-const DEFAULT_CAPTION = `I'm attending the ${EVENT_SUBTITLE} ${EVENT_TITLE}! 🎉\n"${EVENT_THEME}"\n${EVENT_AGES} · ${EVENT_DATE}\n\nJoin me — register here: ${PAGE_URL}`;
+function buildDefaultCaption(firstName: string, lastName: string): string {
+  const name = `${firstName.trim()} ${lastName.trim()}`.trim();
+  const intro = name ? `I, ${name}, will be attending` : "I'll be attending";
+  return `${intro} the ${EVENT_SUBTITLE} ${EVENT_TITLE}! 🎉\n"${EVENT_THEME}"\n${EVENT_AGES} · ${EVENT_DATE}\n\nJoin me — register here: ${PAGE_URL}`;
+}
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -104,10 +108,18 @@ export default function AttendingBadgeCreator() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const photoImgRef = useRef<HTMLImageElement | null>(null);
 
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [photoDataUrl, setPhotoDataUrl] = useState<string | null>(null);
-  const [caption, setCaption] = useState(DEFAULT_CAPTION);
+  const [caption, setCaption] = useState(buildDefaultCaption('', ''));
   const [isDrawing, setIsDrawing] = useState(true);
   const [canShareFiles, setCanShareFiles] = useState(false);
+  const captionEditedRef = useRef(false);
+
+  useEffect(() => {
+    if (captionEditedRef.current) return;
+    setCaption(buildDefaultCaption(firstName, lastName));
+  }, [firstName, lastName]);
 
   useEffect(() => {
     if (typeof navigator !== 'undefined' && 'canShare' in navigator) {
@@ -215,11 +227,19 @@ export default function AttendingBadgeCreator() {
       drawCover(ctx, subjectImg, photoCx, photoCy, photoR);
       ctx.restore();
 
+      const nameLine = `${firstName.trim()} ${lastName.trim()}`.trim();
+      if (nameLine) {
+        ctx.textAlign = 'center';
+        ctx.fillStyle = NAVY;
+        ctx.font = '700 42px Arial, sans-serif';
+        ctx.fillText(nameLine.toUpperCase(), CANVAS_W / 2, 772);
+      }
+
       ctx.textAlign = 'center';
       ctx.fillStyle = NAVY;
       ctx.font = `italic 700 54px ${titleFontFamily}`;
       const titleLines = wrapLines(ctx, EVENT_TITLE_SERIF, 820);
-      let cursorY = drawCenteredLines(ctx, titleLines, CANVAS_W / 2, 787, 58);
+      let cursorY = drawCenteredLines(ctx, titleLines, CANVAS_W / 2, 847, 58);
 
       ctx.fillStyle = ORANGE;
       ctx.font = `400 110px ${scriptFontFamily}`;
@@ -277,7 +297,7 @@ export default function AttendingBadgeCreator() {
     return () => {
       cancelled = true;
     };
-  }, [photoDataUrl]);
+  }, [photoDataUrl, firstName, lastName]);
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -367,12 +387,45 @@ export default function AttendingBadgeCreator() {
 
   const shareTextEncoded = encodeURIComponent(caption);
   const hasPhoto = Boolean(photoDataUrl);
+  const hasName = Boolean(firstName.trim() && lastName.trim());
+  const canExport = hasPhoto && hasName;
 
   return (
     <div className="bg-white rounded-3xl shadow-lg border border-gray-100 p-5 sm:p-8 md:p-10">
       <span aria-hidden className={`${bootcampTitleFont.className} ${bootcampScriptFont.className} hidden`}>.</span>
       <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-start">
         <div className="flex flex-col items-center">
+          <div className="w-full max-w-sm mx-auto mb-4 grid grid-cols-2 gap-3">
+            <div>
+              <label htmlFor="bootcamp-first-name" className="block text-xs font-semibold text-gray-600 mb-1">
+                First Name
+              </label>
+              <input
+                id="bootcamp-first-name"
+                type="text"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+                placeholder="Amadi"
+                maxLength={40}
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+              />
+            </div>
+            <div>
+              <label htmlFor="bootcamp-last-name" className="block text-xs font-semibold text-gray-600 mb-1">
+                Last Name
+              </label>
+              <input
+                id="bootcamp-last-name"
+                type="text"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+                placeholder="John"
+                maxLength={40}
+                className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+              />
+            </div>
+          </div>
+
           <div className="relative w-full max-w-sm mx-auto rounded-[2rem] shadow-xl overflow-hidden bg-white ring-1 ring-gray-100">
             <canvas
               ref={canvasRef}
@@ -422,14 +475,14 @@ export default function AttendingBadgeCreator() {
               <h3 className="font-heading text-base sm:text-lg font-bold text-gray-900">Download or share your badge</h3>
             </div>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button onClick={handleDownload} disabled={!hasPhoto || isDrawing} variant="primary" className="w-full sm:w-auto inline-flex items-center justify-center gap-2">
+              <Button onClick={handleDownload} disabled={!canExport || isDrawing} variant="primary" className="w-full sm:w-auto inline-flex items-center justify-center gap-2">
                 <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
                 </svg>
                 Download Badge
               </Button>
               {canShareFiles && (
-                <Button onClick={handleShare} disabled={!hasPhoto || isDrawing} variant="secondary" className="w-full sm:w-auto inline-flex items-center justify-center gap-2">
+                <Button onClick={handleShare} disabled={!canExport || isDrawing} variant="secondary" className="w-full sm:w-auto inline-flex items-center justify-center gap-2">
                   <svg className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
                   </svg>
@@ -437,12 +490,16 @@ export default function AttendingBadgeCreator() {
                 </Button>
               )}
             </div>
-            {!hasPhoto && (
+            {!canExport && (
               <p className="text-sm text-gray-500 mt-3 flex items-center gap-1.5">
                 <svg className="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                Add your photo above to unlock these.
+                {!hasName && !hasPhoto
+                  ? 'Add your name and photo above to unlock these.'
+                  : !hasName
+                    ? 'Add your name above to unlock these.'
+                    : 'Add your photo above to unlock these.'}
               </p>
             )}
           </div>
