@@ -36,6 +36,7 @@
     "generate-qr": "tsx scripts/generate-qr-codes.ts",
     "generate-bootcamp-qr": "tsx scripts/generate-bootcamp-qr.ts",
     "generate-bootcamp-attending-qr": "tsx scripts/generate-bootcamp-attending-qr.ts",
+    "generate-registration-qr": "tsx scripts/generate-registration-qr.ts",
     "export-qr-png": "tsx scripts/export-qr-png.ts"
   },
   "eslintConfig": {
