@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
 import { config } from 'dotenv';
 import path from 'path';
+import dns from 'dns';
 
 config({ path: path.resolve(process.cwd(), '.env.local') });
+
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 import Testimonial from '../lib/models/testimonial';
 
