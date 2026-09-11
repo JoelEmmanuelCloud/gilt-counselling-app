@@ -19,6 +19,9 @@ export interface IUser {
   verificationToken?: string;
   verificationTokenExpiry?: Date;
   image?: string;
+  password?: string;
+  failedLoginAttempts?: number;
+  lockUntil?: Date;
   profilePhoto?: string;
   dateOfBirth?: Date;
   gender?: 'male' | 'female' | 'other' | 'prefer-not-to-say';
@@ -117,6 +120,17 @@ const UserSchema = new Schema(
     },
     image: {
       type: String,
+    },
+    password: {
+      type: String,
+      select: false,
+    },
+    failedLoginAttempts: {
+      type: Number,
+      default: 0,
+    },
+    lockUntil: {
+      type: Date,
     },
     profilePhoto: {
       type: String,

@@ -37,4 +37,5 @@ export interface AuthContextType {
   sendOTP: (email: string) => Promise<void>;
   verifyOTP: (email: string, code: string) => Promise<User>;
   resendOTP: (email: string) => Promise<void>;
+  adminLogin: (email: string, password: string) => Promise<User>;
 }
