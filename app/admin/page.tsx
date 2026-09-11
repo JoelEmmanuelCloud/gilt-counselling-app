@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import { useSession } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
 import { useRouter } from 'next/navigation';
@@ -365,9 +366,17 @@ function AdminDashboardContent() {
     <div className="min-h-screen bg-off-white">
 
       <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16 admin-header">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="heading-xl mb-3">Admin Dashboard</h1>
-          <p className="text-gray-600 text-lg">Manage clients, appointments, and bookings</p>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h1 className="heading-xl mb-3">Admin Dashboard</h1>
+            <p className="text-gray-600 text-lg">Manage clients, appointments, and bookings</p>
+          </div>
+          <Link
+            href="/admin/testimonials"
+            className="px-5 py-2.5 rounded-lg font-medium bg-white border-2 border-gilt-gold text-gilt-gold hover:bg-gilt-gold hover:text-white transition-colors"
+          >
+            Manage Testimonials
+          </Link>
         </div>
       </section>
 
