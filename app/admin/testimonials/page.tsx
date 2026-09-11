@@ -96,6 +96,7 @@ function AdminTestimonialsContent() {
   const toast = useToast();
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
+  const authLoading = status === 'loading' || (!!token && !customUser);
 
   const [activeCategory, setActiveCategory] = useState<Category>('client');
   const [items, setItems] = useState<Testimonial[]>([]);
@@ -106,14 +107,14 @@ function AdminTestimonialsContent() {
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
-    if (status === 'loading') return;
+    if (authLoading) return;
 
     if (!isAuthenticated) {
-      router.push('/book-appointment');
+      router.push('/admin');
     } else if (user?.role !== 'admin') {
       router.push('/account');
     }
-  }, [status, isAuthenticated, user, router]);
+  }, [authLoading, isAuthenticated, user, router]);
 
   useEffect(() => {
     if (user?.role === 'admin') {
