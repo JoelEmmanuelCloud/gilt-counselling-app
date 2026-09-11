@@ -48,3 +48,5 @@ tmp/
 # Uploaded files
 public/uploads/profiles/*
 !public/uploads/profiles/.gitkeep
+.vercel
+.env*
