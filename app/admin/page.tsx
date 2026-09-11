@@ -50,6 +50,7 @@ function AdminDashboardContent() {
   const toast = useToast();
   const user = session?.user || customUser;
   const isAuthenticated = status === 'authenticated' || (token && customUser);
+  const authLoading = status === 'loading' || (!!token && !customUser);
 
   const [loginEmail, setLoginEmail] = useState('wecare@giltcounselling.com');
   const [loginPassword, setLoginPassword] = useState('');
@@ -89,12 +90,12 @@ function AdminDashboardContent() {
   });
 
   useEffect(() => {
-    if (status === 'loading') return;
+    if (authLoading) return;
 
     if (isAuthenticated && user?.role !== 'admin') {
       router.push('/account');
     }
-  }, [status, isAuthenticated, user, router]);
+  }, [authLoading, isAuthenticated, user, router]);
   const [bookingForm, setBookingForm] = useState({
     userId: '',
     service: '',
@@ -378,7 +379,7 @@ function AdminDashboardContent() {
     'Online Counseling Sessions',
   ];
 
-  if (status === 'loading') {
+  if (authLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-off-white">
         <div className="w-10 h-10 border-4 border-gilt-gold border-t-transparent rounded-full animate-spin" />
