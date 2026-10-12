@@ -95,11 +95,12 @@ const toFormState = (item: Testimonial): FormState => ({
 
 const ADMIN_PAGE_SIZE = 5;
 
-const GROUP_STYLES: Record<string, { dot: string; bar: string; chip: string; text: string; ring: string; icon: string }> = {
+const GROUP_STYLES: Record<string, { dot: string; bar: string; chip: string; chipDark: string; text: string; ring: string; icon: string }> = {
   Testimonies: {
     dot: 'bg-gilt-teal',
     bar: 'bg-gilt-teal',
     chip: 'bg-gilt-teal/15 text-gilt-teal-strong',
+    chipDark: 'bg-gilt-teal/20 text-gilt-teal',
     text: 'text-gilt-teal-strong',
     ring: 'ring-gilt-teal',
     icon: 'M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z',
@@ -108,6 +109,7 @@ const GROUP_STYLES: Record<string, { dot: string; bar: string; chip: string; tex
     dot: 'bg-gilt-green',
     bar: 'bg-gilt-green',
     chip: 'bg-gilt-green/15 text-gilt-green-strong',
+    chipDark: 'bg-gilt-green/20 text-gilt-green',
     text: 'text-gilt-green-strong',
     ring: 'ring-gilt-green',
     icon: 'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z',
@@ -116,11 +118,22 @@ const GROUP_STYLES: Record<string, { dot: string; bar: string; chip: string; tex
     dot: 'bg-gilt-orange',
     bar: 'bg-gilt-orange',
     chip: 'bg-gilt-orange/20 text-gilt-orange-strong',
+    chipDark: 'bg-gilt-orange/20 text-gilt-orange',
     text: 'text-gilt-orange-strong',
     ring: 'ring-gilt-orange',
     icon: 'M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46',
   },
 };
+
+const CATEGORY_ICONS: Record<Category, string> = {
+  client: 'M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 01.865-.501 48.172 48.172 0 003.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z',
+  school: 'M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5',
+  community: 'M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z',
+  event: 'M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5',
+  media: 'M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46',
+};
+
+const SIDEBAR_STORAGE_KEY = 'admin-sidebar-collapsed';
 
 const entryTitle = (item: Testimonial) => {
   if (item.category === 'client') return item.name || 'Client testimonial';
@@ -153,6 +166,23 @@ function AdminDashboardContent() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm('client'));
   const [saving, setSaving] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  useEffect(() => {
+    try {
+      setSidebarCollapsed(localStorage.getItem(SIDEBAR_STORAGE_KEY) === 'true');
+    } catch {}
+  }, []);
+
+  const toggleSidebar = () => {
+    setSidebarCollapsed((previous) => {
+      const next = !previous;
+      try {
+        localStorage.setItem(SIDEBAR_STORAGE_KEY, String(next));
+      } catch {}
+      return next;
+    });
+  };
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
@@ -360,50 +390,112 @@ function AdminDashboardContent() {
 
   return (
     <div className="fixed inset-0 z-[60] flex bg-gray-50 font-body">
-      <aside className="hidden w-72 flex-shrink-0 flex-col bg-gray-900 text-white lg:flex">
-        <div className="flex items-center gap-3 border-b border-white/10 px-6 py-5">
-          <div className="relative h-11 w-11 flex-shrink-0 overflow-hidden rounded-lg bg-white">
-            <Image src="/Gilt Counselling Consult Profile.svg" alt="" fill sizes="44px" className="object-contain p-1" />
-          </div>
-          <div className="min-w-0">
-            <p className="truncate text-[15px] font-semibold leading-tight">Gilt Counselling</p>
-            <p className="text-xs text-gray-400">Content Manager</p>
-          </div>
+      <aside
+        aria-label="Admin sidebar"
+        className={`hidden flex-shrink-0 flex-col bg-gray-900 text-white transition-[width] duration-200 ease-out motion-reduce:transition-none lg:flex ${
+          sidebarCollapsed ? 'w-20' : 'w-72'
+        }`}
+      >
+        <div
+          className={`flex items-center border-b border-white/10 py-5 ${
+            sidebarCollapsed ? 'justify-center px-3' : 'justify-between gap-3 px-5'
+          }`}
+        >
+          {!sidebarCollapsed && (
+            <div className="flex min-w-0 items-center gap-3">
+              <div className="relative h-11 w-11 flex-shrink-0 overflow-hidden rounded-lg bg-white">
+                <Image src="/Gilt Counselling Consult Profile.svg" alt="" fill sizes="44px" className="object-contain p-1" />
+              </div>
+              <div className="min-w-0">
+                <p className="truncate text-[15px] font-semibold leading-tight">Gilt Counselling</p>
+                <p className="text-xs text-gray-400">Content Manager</p>
+              </div>
+            </div>
+          )}
+          <button
+            type="button"
+            onClick={toggleSidebar}
+            aria-expanded={!sidebarCollapsed}
+            aria-label={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            title={sidebarCollapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+            className="inline-flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-md text-gray-300 transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
+          >
+            <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
+              {sidebarCollapsed ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" />
+              )}
+            </svg>
+          </button>
         </div>
 
-        <nav aria-label="Content sections" className="flex-1 space-y-7 overflow-y-auto px-4 py-6">
+        <nav aria-label="Content sections" className={`flex-1 overflow-y-auto py-6 ${sidebarCollapsed ? 'space-y-5 px-3' : 'space-y-7 px-4'}`}>
           {CATEGORY_GROUPS.map((group) => {
             const style = GROUP_STYLES[group.page];
             return (
               <div key={group.page}>
-                <p className="mb-2 flex items-center gap-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
-                  <span className={`h-2 w-2 rounded-full ${style.dot}`} aria-hidden="true" />
-                  {group.page} page
-                </p>
+                {sidebarCollapsed ? (
+                  <span className={`mx-auto mb-2 block h-1 w-6 rounded-full ${style.dot}`} aria-hidden="true" />
+                ) : (
+                  <p className="mb-2 flex items-center gap-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+                    <span className={`h-2 w-2 rounded-full ${style.dot}`} aria-hidden="true" />
+                    {group.page} page
+                  </p>
+                )}
                 <ul className="space-y-1">
                   {group.categories.map((cat) => {
                     const selected = cat === activeCategory;
+                    const label = CATEGORY_DETAILS[cat].label;
+                    const count = loading ? '–' : countFor(cat);
                     return (
                       <li key={cat}>
                         <button
                           type="button"
                           onClick={() => selectCategory(cat)}
                           aria-current={selected ? 'page' : undefined}
-                          className={`relative flex w-full items-center justify-between rounded-md px-3 py-2.5 text-left text-[15px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta ${
-                            selected ? 'bg-white/10 font-semibold text-white' : 'font-medium text-gray-300 hover:bg-white/5 hover:text-white'
-                          }`}
+                          aria-label={sidebarCollapsed ? `${label} (${group.page} page), ${count} entries` : undefined}
+                          title={sidebarCollapsed ? `${label} · ${count}` : undefined}
+                          className={`relative flex w-full items-center rounded-md text-left text-[15px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta ${
+                            sidebarCollapsed ? 'h-12 justify-center' : 'justify-between px-3 py-2.5'
+                          } ${selected ? 'bg-white/10 font-semibold text-white' : 'font-medium text-gray-300 hover:bg-white/5 hover:text-white'}`}
                         >
                           {selected && (
                             <span className="absolute inset-y-1.5 left-0 w-[3px] rounded-full bg-soft-terracotta" aria-hidden="true" />
                           )}
-                          <span className="pl-1">{CATEGORY_DETAILS[cat].label}</span>
-                          <span
-                            className={`min-w-[28px] rounded-full px-2 py-0.5 text-center text-xs font-semibold tabular-nums ${
-                              selected ? 'bg-soft-terracotta text-gray-900' : 'bg-white/10 text-gray-300'
-                            }`}
-                          >
-                            {loading ? '–' : countFor(cat)}
-                          </span>
+                          {sidebarCollapsed ? (
+                            <>
+                              <span className={`flex h-9 w-9 items-center justify-center rounded-lg ${style.chipDark}`} aria-hidden="true">
+                                <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d={CATEGORY_ICONS[cat]} />
+                                </svg>
+                              </span>
+                              <span
+                                className={`absolute right-1 top-0.5 min-w-[20px] rounded-full px-1 text-center text-[11px] font-semibold leading-5 tabular-nums ${
+                                  selected ? 'bg-soft-terracotta text-gray-900' : 'bg-gray-700 text-gray-200'
+                                }`}
+                                aria-hidden="true"
+                              >
+                                {count}
+                              </span>
+                            </>
+                          ) : (
+                            <>
+                              <span className="flex items-center gap-3 pl-1">
+                                <svg className="h-5 w-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
+                                  <path strokeLinecap="round" strokeLinejoin="round" d={CATEGORY_ICONS[cat]} />
+                                </svg>
+                                {label}
+                              </span>
+                              <span
+                                className={`min-w-[28px] rounded-full px-2 py-0.5 text-center text-xs font-semibold tabular-nums ${
+                                  selected ? 'bg-soft-terracotta text-gray-900' : 'bg-white/10 text-gray-300'
+                                }`}
+                              >
+                                {count}
+                              </span>
+                            </>
+                          )}
                         </button>
                       </li>
                     );
@@ -414,30 +506,58 @@ function AdminDashboardContent() {
           })}
         </nav>
 
-        <div className="space-y-3 border-t border-white/10 px-6 py-5">
-          {user?.email && (
-            <p className="truncate text-sm text-gray-400" title={user.email}>
-              Signed in as <span className="font-medium text-gray-200">{user.email}</span>
-            </p>
-          )}
-          <div className="flex gap-2">
+        {sidebarCollapsed ? (
+          <div className="flex flex-col items-center gap-1 border-t border-white/10 py-4">
             <a
               href="/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex h-10 flex-1 items-center justify-center rounded-md bg-white/10 px-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
+              aria-label="View website (opens in a new tab)"
+              title="View website"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-gray-300 transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
             >
-              View website<span className="sr-only"> (opens in a new tab)</span>
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
+              </svg>
             </a>
             <button
               type="button"
               onClick={logout}
-              className="inline-flex h-10 items-center justify-center rounded-md px-3 text-sm font-medium text-gray-300 transition-colors duration-150 hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
+              aria-label="Sign out"
+              title="Sign out"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-md text-gray-300 transition-colors duration-150 hover:bg-white/10 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
             >
-              Sign out
+              <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l-3 3m0 0l3 3m-3-3h12.75" />
+              </svg>
             </button>
           </div>
-        </div>
+        ) : (
+          <div className="space-y-3 border-t border-white/10 px-6 py-5">
+            {user?.email && (
+              <p className="truncate text-sm text-gray-400" title={user.email}>
+                Signed in as <span className="font-medium text-gray-200">{user.email}</span>
+              </p>
+            )}
+            <div className="flex gap-2">
+              <a
+                href="/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex h-10 flex-1 items-center justify-center rounded-md bg-white/10 px-3 text-sm font-medium text-white transition-colors duration-150 hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
+              >
+                View website<span className="sr-only"> (opens in a new tab)</span>
+              </a>
+              <button
+                type="button"
+                onClick={logout}
+                className="inline-flex h-10 items-center justify-center rounded-md px-3 text-sm font-medium text-gray-300 transition-colors duration-150 hover:bg-white/5 hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta"
+              >
+                Sign out
+              </button>
+            </div>
+          </div>
+        )}
       </aside>
 
       <div className="flex min-w-0 flex-1 flex-col overflow-y-auto">
