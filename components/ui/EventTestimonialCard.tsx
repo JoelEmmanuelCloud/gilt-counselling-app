@@ -38,7 +38,7 @@ export default function EventTestimonialCard({
       </div>
       <h3 className="heading-sm mb-2">{title}</h3>
       {organization && (
-        <p className="text-soft-gold font-semibold mb-2">{organization}</p>
+        <p className="font-semibold text-gray-800 mb-2">{organization}</p>
       )}
       <p className="text-gray-700 leading-relaxed mb-6 text-left">{description}</p>
       {images.length > 0 && (
