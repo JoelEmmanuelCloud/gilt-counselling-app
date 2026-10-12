@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Testimonial from '@/lib/models/testimonial';
+import Testimonial, { isStoryCategory, isTestimonialCategory } from '@/lib/models/testimonial';
 import { requireAdmin } from '@/lib/auth';
 
 export async function GET(request: NextRequest) {
@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { category } = body;
 
-    if (!category || !['client', 'school', 'community', 'media'].includes(category)) {
+    if (!isTestimonialCategory(category)) {
       return NextResponse.json(
         { message: 'A valid category is required' },
         { status: 400 }
@@ -74,7 +74,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    if ((category === 'community' || category === 'media') && (!body.title || !body.description)) {
+    if (isStoryCategory(category) && (!body.title || !body.description)) {
       return NextResponse.json(
         { message: 'Title and description are required' },
         { status: 400 }

@@ -7,8 +7,15 @@ import { useToast } from '@/components/ui/Toast';
 import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
 import AdminLoginForm from '@/components/admin/AdminLoginForm';
 import Skeleton from '@/components/ui/Skeleton';
+import {
+  CATEGORY_LABELS,
+  CATEGORY_PAGES,
+  STORY_CATEGORIES,
+  TESTIMONIAL_CATEGORIES,
+  TestimonialCategory as Category,
+  isStoryCategory,
+} from '@/lib/testimonialCategories';
 
-type Category = 'client' | 'school' | 'community' | 'media';
 
 interface SchoolQuote {
   text: string;
@@ -34,6 +41,7 @@ interface Testimonial {
 }
 
 interface FormState {
+  section: Category;
   quote: string;
   name: string;
   service: string;
@@ -49,14 +57,8 @@ interface FormState {
   order: number;
 }
 
-const CATEGORIES: { value: Category; label: string }[] = [
-  { value: 'client', label: 'Client Testimonials' },
-  { value: 'school', label: 'School Outreach' },
-  { value: 'community', label: 'Community Outreach' },
-  { value: 'media', label: 'Media & Press' },
-];
-
-const emptyForm = (): FormState => ({
+const emptyForm = (section: Category): FormState => ({
+  section,
   quote: '',
   name: '',
   service: '',
@@ -73,6 +75,7 @@ const emptyForm = (): FormState => ({
 });
 
 const toFormState = (item: Testimonial): FormState => ({
+  section: item.category,
   quote: item.quote || '',
   name: item.name || '',
   service: item.service || '',
@@ -97,7 +100,7 @@ function AdminDashboardContent() {
   const [loading, setLoading] = useState(true);
   const [formOpen, setFormOpen] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [form, setForm] = useState<FormState>(emptyForm());
+  const [form, setForm] = useState<FormState>(emptyForm('client'));
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -130,7 +133,7 @@ function AdminDashboardContent() {
 
   const openCreateForm = () => {
     setEditingId(null);
-    setForm(emptyForm());
+    setForm(emptyForm(activeCategory));
     setFormOpen(true);
   };
 
@@ -143,12 +146,12 @@ function AdminDashboardContent() {
   const closeForm = () => {
     setFormOpen(false);
     setEditingId(null);
-    setForm(emptyForm());
+    setForm(emptyForm(activeCategory));
   };
 
   const buildPayload = () => {
     const base: Record<string, unknown> = {
-      category: activeCategory,
+      category: isStoryCategory(activeCategory) ? form.section : activeCategory,
       published: form.published,
       order: form.order,
     };
@@ -182,12 +185,16 @@ function AdminDashboardContent() {
         await axios.patch(`/api/admin/testimonials/${editingId}`, payload, {
           headers: authHeaders(),
         });
-        toast.success('Testimonial updated successfully');
+        toast.success(
+          form.section !== activeCategory
+            ? `Entry moved to ${CATEGORY_LABELS[form.section]}`
+            : 'Entry updated successfully'
+        );
       } else {
         await axios.post('/api/admin/testimonials', payload, {
           headers: authHeaders(),
         });
-        toast.success('Testimonial added successfully');
+        toast.success('Entry added successfully');
       }
       closeForm();
       fetchTestimonials();
@@ -261,26 +268,39 @@ function AdminDashboardContent() {
           <div>
             <h1 className="heading-lg">Admin Dashboard</h1>
             <p className="text-gray-600 mt-1">
-              Add, edit, and publish the content shown on the public testimonials page.
+              Add, edit, and publish testimonials, outreach stories, media features, and news.
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-6 border-b border-gray-200">
-          {CATEGORIES.map((cat) => (
+          {TESTIMONIAL_CATEGORIES.map((cat) => (
             <button
-              key={cat.value}
-              onClick={() => setActiveCategory(cat.value)}
+              key={cat}
+              onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2.5 text-sm font-medium border-b-2 transition-colors ${
-                activeCategory === cat.value
+                activeCategory === cat
                   ? 'border-gilt-gold text-gray-900'
                   : 'border-transparent text-gray-500 hover:text-gray-700'
               }`}
             >
-              {cat.label}
+              {CATEGORY_LABELS[cat]}
             </button>
           ))}
         </div>
+
+        <p className="-mt-3 mb-4 text-sm text-gray-600">
+          Shown on the{' '}
+          <a
+            href={CATEGORY_PAGES[activeCategory].href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4"
+          >
+            {CATEGORY_PAGES[activeCategory].label}
+          </a>{' '}
+          page.
+        </p>
 
         <div className="flex justify-end mb-4">
           {!formOpen && (
@@ -400,8 +420,23 @@ function AdminDashboardContent() {
               </>
             )}
 
-            {(activeCategory === 'community' || activeCategory === 'media') && (
+            {isStoryCategory(activeCategory) && (
               <>
+                <div>
+                  <label htmlFor="entry-section" className="block text-sm font-medium text-gray-700 mb-1">Section</label>
+                  <select
+                    id="entry-section"
+                    value={form.section}
+                    onChange={(e) => setForm({ ...form, section: e.target.value as Category })}
+                    className="w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
+                  >
+                    {STORY_CATEGORIES.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {CATEGORY_LABELS[cat]} ({CATEGORY_PAGES[cat].label} page)
+                      </option>
+                    ))}
+                  </select>
+                </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
                   <input
@@ -534,7 +569,7 @@ function AdminDashboardContent() {
                       <p className="text-sm text-gray-500 mt-1">{item.quotes?.length || 0} quote(s)</p>
                     </>
                   )}
-                  {(item.category === 'community' || item.category === 'media') && (
+                  {isStoryCategory(item.category) && (
                     <>
                       <p className="font-semibold text-gray-900">{item.title}</p>
                       <p className="text-sm text-gray-500 mt-1">

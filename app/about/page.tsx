@@ -1,12 +1,12 @@
-﻿'use client';
+'use client';
 
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import OutreachShowcase from '@/components/OutreachShowcase';
 
 export default function About() {
   const coreValues = [
@@ -107,28 +107,12 @@ export default function About() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold stripes-left">
-        <div className="relative aspect-[16/10] w-full sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
-          <Image
-            src="/images/DSC_9730.jpg"
-            alt="Gilt counsellors and young people holding hands around a table in the counselling office"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-        <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:flex lg:min-h-[480px] lg:items-center lg:px-8 lg:py-24">
-          <div className="lg:w-1/2 lg:pr-12">
-            <p className="eyebrow mb-4">About us</p>
-            <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
-            <p className="body-lg max-w-2xl text-gray-900/85">
-              Empowering teens and youths for optimal development through professional,
-              compassionate counselling and support.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="About us"
+        title="About Gilt Counselling Consult"
+        description="Empowering teens and youths for optimal development through professional, compassionate counselling and support."
+        image={{ src: '/images/DSC_9730.jpg', alt: 'Gilt counsellors and young people holding hands around a table in the counselling office' }}
+      />
 
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
@@ -184,232 +168,6 @@ export default function About() {
 
       <section className="section-container bg-off-white">
         <SectionHeading
-          title="Committed to Evidence-Based Practice"
-          subtitle="Our founder is always updating knowledge in evidence-based research."
-          centered
-        />
-        <div className="max-w-5xl mx-auto">
-          <p className="body-md text-center text-gray-700 mb-8">
-            Prof Chinelo Ugwu, founder of Gilt Counselling Consult, at the 2025 Canadian Counselling
-            and Psychotherapy Association (CCPA) conference in Calgary.
-          </p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-            {[
-              { src: '/images/ccpa-conference/ccpa-1.jpeg', alt: 'Prof Chinelo Ugwu at CCPA conference with fellow delegate' },
-              { src: '/images/ccpa-conference/ccpa-2.jpeg', alt: 'Prof Chinelo Ugwu speaking at the CCPA conference podium' },
-              { src: '/images/ccpa-conference/ccpa-3.jpeg', alt: 'Prof Chinelo Ugwu with colleagues at CCPA conference session' },
-              { src: '/images/ccpa-conference/ccpa-4.jpeg', alt: 'Prof Chinelo Ugwu networking with author Patricia Morgan at CCPA conference' },
-              { src: '/images/ccpa-conference/ccpa-5.jpeg', alt: 'Prof Chinelo Ugwu at the CCPA conference booth' },
-              { src: '/images/ccpa-conference/ccpa-6.jpeg', alt: 'Prof Chinelo Ugwu with fellow counselling professional at CCPA conference' },
-            ].map((photo, index) => (
-              <div key={index} className="relative h-[200px] sm:h-[240px] md:h-[280px] rounded-lg overflow-hidden">
-                <Image
-                  src={photo.src}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                  quality={60}
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section className="section-container bg-warm-cream">
-        <SectionHeading
-          title="Community Outreach"
-          subtitle="Giving back to our community â€” one act of love at a time."
-          centered
-        />
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center">
-            <div className="space-y-4 text-gray-700">
-              <p className="body-lg font-semibold text-soft-terracotta">
-                Chairs Donated to Otana Inclusive Centre
-              </p>
-              <p className="body-md text-left">
-                As part of our ongoing outreach programmes, Gilt Counselling Consult donated executive chairs
-                to Otana Inclusive Centre â€” a gesture born from a deep commitment to the wellbeing of every child,
-                regardless of ability.
-              </p>
-              <blockquote className="border-l-4 border-soft-gold pl-4 italic text-gray-600">
-                "You have provided executive chairs for our special children to sit on. God will surely make them
-                executive individuals in their life's endeavours. This heartfelt gift is proof of your love for
-                humanity and Otana Inclusive Centre. God bless you and your team at Gilt Counselling Consult."
-              </blockquote>
-              <p className="body-md text-left text-gray-600">
-                We are honoured by the warm reception from the centre's leadership and remain committed to serving
-                communities in need through compassionate action.
-              </p>
-            </div>
-            <div className="grid grid-cols-1 gap-4">
-              {[
-                { src: '/images/outreach/otana-outreach-1.jpeg', alt: 'Gilt Counselling Consult donating chairs to Otana Inclusive Centre' },
-                { src: '/images/outreach/otana-outreach-2.jpeg', alt: 'Executive chairs donated to special needs children at Otana Inclusive Centre' },
-              ].map((photo, index) => (
-                <div key={index} className="relative h-[200px] sm:h-[230px] md:h-[260px] rounded-lg overflow-hidden shadow-md">
-                  <Image
-                    src={photo.src}
-                    alt={photo.alt}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 100vw, 50vw"
-                    quality={60}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      
-      <section className="section-container bg-off-white">
-        <SectionHeading
-          title="All Saints Cathedral Workshop"
-          subtitle="CEO GILT coordinated a one-day workshop for the All Saints Cathedral Education and Empowerment Committee."
-          centered
-        />
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8 items-center mb-6 sm:mb-8">
-            <div className="space-y-4 text-gray-700">
-              <p className="body-lg font-semibold text-soft-terracotta">
-                Education &amp; Empowerment Committee Workshop
-              </p>
-              <p className="body-md text-left">
-                Dame Prof Chinelo Joy Ugwu, CEO of Gilt Counselling Consult, coordinated a one-day
-                workshop for the All Saints Cathedral Education and Empowerment Committee. The workshop
-                brought together members of the committee for a day of learning, empowerment, and
-                professional development.
-              </p>
-              <p className="body-md text-left text-gray-600">
-                This initiative reflects Gilt Counselling Consult&apos;s dedication to extending
-                professional support beyond the counselling room and into the wider community.
-              </p>
-            </div>
-            <div className="grid grid-cols-2 gap-2 sm:gap-3">
-              {[1, 2, 3, 6].map((i) => (
-                <div key={i} className="relative h-[140px] sm:h-[170px] md:h-[200px] rounded-lg overflow-hidden shadow-md">
-                  <Image
-                    src={`/images/workshops/all-saints/all-saints-workshop-${i}.jpeg`}
-                    alt={`All Saints Cathedral Education and Empowerment Committee Workshop - Photo ${i}`}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 25vw"
-                    quality={60}
-                    loading="lazy"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
-            {[7, 9, 10, 14, 15].map((i) => (
-              <div key={i} className="relative h-[120px] sm:h-[140px] md:h-[160px] rounded-lg overflow-hidden shadow-md">
-                <Image
-                  src={`/images/workshops/all-saints/all-saints-workshop-${i}.jpeg`}
-                  alt={`All Saints Cathedral workshop activity - Photo ${i}`}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
-                  quality={60}
-                  loading="lazy"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-
-      <section className="section-container bg-warm-cream">
-        <SectionHeading
-          title="Schools Outreach Programme"
-          subtitle="Bringing Emotional Intelligence education to secondary schools across Port Harcourt."
-          centered
-        />
-        <div className="max-w-5xl mx-auto">
-          <OutreachShowcase />
-        </div>
-      </section>
-
-
-      <section className="section-container bg-warm-sand">
-        <SectionHeading
-          title="Our Core Values"
-          subtitle="These principles guide everything we do and shape the care we provide."
-          centered
-        />
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
-          {coreValues.map((value, index) => (
-            <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
-                <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
-              </div>
-              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-left">
-                {value.description}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      
-      <section className="section-container bg-warm-sand">
-        <SectionHeading
-          title="Why Choose Gilt Counselling?"
-          subtitle="We combine professional excellence with genuine compassion for every person we serve."
-          centered
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
-          {whyChooseUs.map((item, index) => (
-            <Card key={index}>
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-soft-gold">
-                  {item.icon}
-                </div>
-                <div>
-                  <h3 className="font-heading font-semibold text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-left">{item.description}</p>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      
-      <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="eyebrow mb-4">Your journey starts here</p>
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold tracking-tight mb-4 sm:mb-5 lg:mb-6 leading-tight">
-            Ready to Begin Your Journey?
-          </h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-900/85">
-            We're here to support you every step of the way. Let's talk about how we can help.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4">
-            <Link href="/book-appointment">
-              <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
-                Book an Appointment
-              </Button>
-            </Link>
-            <Link href="/services">
-              <Button className="bg-transparent border border-gray-900 text-gray-900 hover:bg-gray-900/5 w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
-                Explore Our Services
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      
-      <section className="section-container bg-warm-cream">
-        <SectionHeading
           title="Our Dedicated Consultants and Professional Counsellors"
           subtitle="Experienced professionals dedicated to your wellbeing and growth."
           centered
@@ -432,6 +190,112 @@ export default function About() {
               <p className="text-soft-gold font-semibold">{member.title}</p>
             </Card>
           ))}
+        </div>
+      </section>
+
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="Our Core Values"
+          subtitle="These principles guide everything we do and shape the care we provide."
+          centered
+        />
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
+          {coreValues.map((value, index) => (
+            <div key={index} className="text-center">
+              <div className={`${value.color} text-white rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
+                <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
+              </div>
+              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-left">
+                {value.description}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-container bg-off-white">
+        <SectionHeading
+          title="Why Choose Gilt Counselling?"
+          subtitle="We combine professional excellence with genuine compassion for every person we serve."
+          centered
+        />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 max-w-5xl mx-auto">
+          {whyChooseUs.map((item, index) => (
+            <Card key={index}>
+              <div className="flex items-start gap-4">
+                <div className="flex-shrink-0 text-soft-gold">
+                  {item.icon}
+                </div>
+                <div>
+                  <h3 className="font-heading font-semibold text-lg mb-2">{item.title}</h3>
+                  <p className="text-gray-600 leading-relaxed text-left">{item.description}</p>
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      <section className="section-container bg-warm-cream">
+        <SectionHeading
+          title="See Our Work in Action"
+          subtitle="Our impact reaches beyond the counselling room into schools, communities, and the media."
+          centered
+        />
+        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+          {[
+            {
+              href: '/outreach',
+              eyebrow: 'Outreach',
+              title: 'Schools & Community Outreach',
+              text: 'Emotional Intelligence sessions in secondary schools across Port Harcourt, plus workshops and donations in our community.',
+            },
+            {
+              href: '/news',
+              eyebrow: 'News & Media',
+              title: 'Media, Events & Milestones',
+              text: 'Radio and television features, conferences, awards, and the programmes that mark our journey.',
+            },
+          ].map((item) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className="group card flex flex-col justify-between transition-colors duration-150 hover:border-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+            >
+              <div>
+                <p className="eyebrow mb-3 text-gray-600">{item.eyebrow}</p>
+                <h3 className="heading-sm mb-2">{item.title}</h3>
+                <p className="text-gray-700 leading-relaxed">{item.text}</p>
+              </div>
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 group-hover:decoration-gray-900">
+                Explore {item.eyebrow}
+              </span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Your journey starts here</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold tracking-tight mb-4 sm:mb-5 lg:mb-6 leading-tight">
+            Ready to Begin Your Journey?
+          </h2>
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-900/85">
+            We're here to support you every step of the way. Let's talk about how we can help.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <Link href="/book-appointment">
+              <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
+                Book an Appointment
+              </Button>
+            </Link>
+            <Link href="/services">
+              <Button className="bg-transparent border border-gray-900 text-gray-900 hover:bg-gray-900/5 w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
+                Explore Our Services
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
     </div>

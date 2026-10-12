@@ -42,11 +42,14 @@ const Navbar: React.FC = () => {
   };
 
   const navLinks = [
+    { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/services', label: 'Programs' },
+    { href: '/services', label: 'Services' },
+    { href: '/outreach', label: 'Outreach' },
+    { href: '/news', label: 'News & Media' },
     { href: '/testimonies', label: 'Testimonies' },
+    { href: '/blog', label: 'Resources' },
     { href: '/contact', label: 'Contact' },
-    { href: '/blog', label: 'Pages' },
   ];
 
   return (
@@ -56,18 +59,24 @@ const Navbar: React.FC = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-10 text-sm lg:text-base">
             <div className="hidden md:flex items-center space-x-6 text-gray-600">
-              <span className="flex items-center space-x-2">
+              <span className="flex items-center space-x-2 whitespace-nowrap">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
                 <span>Port Harcourt, Nigeria | Toronto, Canada</span>
               </span>
-              <span className="flex items-center space-x-2">
+              <span className="flex items-center space-x-2 whitespace-nowrap">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
                 <a href="mailto:wecare@giltcounselling.com" className="hover:text-soft-terracotta transition-colors">wecare@giltcounselling.com</a>
+              </span>
+              <span className="hidden lg:flex items-center space-x-2 whitespace-nowrap">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                </svg>
+                <a href="tel:+2347065734165" className="hover:text-soft-terracotta transition-colors">+234 706 573 4165</a>
               </span>
             </div>
             <div className="flex items-center space-x-4">
@@ -118,12 +127,12 @@ const Navbar: React.FC = () => {
               </div>
             </Link>
 
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden xl:flex items-center gap-x-6 2xl:gap-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`transition-colors duration-200 font-body relative pb-1 ${
+                  className={`whitespace-nowrap transition-colors duration-200 font-body relative pb-1 ${
                     pathname === link.href
                       ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
                       : 'text-gray-700 hover:text-soft-terracotta'
@@ -147,17 +156,7 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            <div className="hidden lg:flex items-center space-x-6">
-              <div className="flex items-center space-x-3 text-gray-700">
-                <svg className="w-5 h-5 text-soft-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                <div className="text-sm">
-                  <div className="text-xs text-gray-500">LET'S CHAT</div>
-                  <a href="tel:+2347065734165" className="font-semibold hover:text-soft-terracotta transition-colors">+234 706 573 4165</a>
-                </div>
-              </div>
-
+            <div className="hidden xl:flex items-center space-x-6">
               {user ? (
                 <button
                   onClick={handleLogout}
@@ -178,7 +177,7 @@ const Navbar: React.FC = () => {
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-3 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
+              className="xl:hidden p-3 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -197,11 +196,12 @@ const Navbar: React.FC = () => {
 
       
       <div
-        className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out
+        className={`xl:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out
           ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
         aria-modal="true"
         aria-label="Navigation menu"
+        inert={!mobileMenuOpen}
       >
         
         <div className="border-b border-gray-200 safe-area-top">

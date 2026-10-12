@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ServiceCard from '@/components/ui/ServiceCard';
 import Button from '@/components/ui/Button';
@@ -154,28 +155,12 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold stripes-left">
-        <div className="relative aspect-[16/10] w-full sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
-          <Image
-            src="/images/ourservice.jpg"
-            alt="Counsellor holding a client's hand during a session"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-        <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:flex lg:min-h-[480px] lg:items-center lg:px-8 lg:py-24">
-          <div className="lg:w-1/2 lg:pr-12">
-            <p className="eyebrow mb-4">Services</p>
-            <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Our Services</h1>
-            <p className="body-lg max-w-2xl text-gray-900/85">
-              Comprehensive counselling and consulting services designed to empower
-              and support your journey toward growth and wellbeing.
-            </p>
-          </div>
-        </div>
-      </section>
+      <PageHeader
+        eyebrow="Services"
+        title="Our Services"
+        description="Comprehensive counselling and consulting services designed to empower and support your journey toward growth and wellbeing."
+        image={{ src: '/images/ourservice.jpg', alt: "Counsellor holding a client's hand during a session" }}
+      />
 
 
       <section className="section-container bg-off-white">
