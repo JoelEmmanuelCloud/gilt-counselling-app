@@ -48,7 +48,6 @@ const Navbar: React.FC = () => {
     { href: '/outreach', label: 'Outreach' },
     { href: '/news', label: 'News & Media' },
     { href: '/testimonies', label: 'Testimonies' },
-    { href: '/blog', label: 'Resources' },
     { href: '/contact', label: 'Contact' },
   ];
 
@@ -127,7 +126,7 @@ const Navbar: React.FC = () => {
               </div>
             </Link>
 
-            <div className="hidden xl:flex items-center gap-x-6 2xl:gap-x-8">
+            <div className="hidden lg:flex items-center gap-x-5 xl:gap-x-7 2xl:gap-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -156,7 +155,7 @@ const Navbar: React.FC = () => {
               )}
             </div>
 
-            <div className="hidden xl:flex items-center space-x-6">
+            <div className="hidden lg:flex items-center space-x-6">
               {user ? (
                 <button
                   onClick={handleLogout}
@@ -177,7 +176,7 @@ const Navbar: React.FC = () => {
             
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="xl:hidden p-3 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
+              className="lg:hidden p-3 rounded-lg text-gray-700 hover:bg-warm-cream transition-colors duration-200"
               aria-label="Toggle menu"
             >
               {mobileMenuOpen ? (
@@ -196,7 +195,7 @@ const Navbar: React.FC = () => {
 
       
       <div
-        className={`xl:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out
+        className={`lg:hidden fixed top-0 right-0 h-full w-full bg-white z-50 shadow-lg transform transition-transform duration-300 ease-in-out
           ${mobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}
         role="dialog"
         aria-modal="true"

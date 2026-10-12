@@ -14,8 +14,7 @@ const Footer: React.FC = () => {
     { href: '/testimonies', label: 'Testimonies' },
   ];
 
-  const resources = [
-    { href: '/blog', label: 'Resources' },
+  const supportLinks = [
     { href: '/contact', label: 'Contact' },
     { href: '/book-appointment', label: 'Book Appointment' },
   ];
@@ -105,9 +104,9 @@ const Footer: React.FC = () => {
           </div>
 
           <div>
-            <h4 className="font-heading font-semibold text-gray-900 mb-4">Resources</h4>
+            <h4 className="font-heading font-semibold text-gray-900 mb-4">Get Support</h4>
             <ul className="space-y-2">
-              {resources.map((link) => (
+              {supportLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
