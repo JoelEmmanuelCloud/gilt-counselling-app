@@ -3,16 +3,17 @@ import Link from 'next/link';
 export default function TermsPage() {
   return (
     <div className="min-h-screen bg-off-white">
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-4 sm:mb-6">Terms of Service</h1>
-          <p className="body-lg">Gilt Counselling Consult</p>
+      <section className="panel-gold py-14 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Legal</p>
+          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Terms of Service</h1>
+          <p className="body-lg max-w-2xl text-gray-900/85">Gilt Counselling Consult</p>
         </div>
       </section>
 
       <section className="section-container">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-warm-cream border border-soft-gold/40 rounded-xl px-5 py-4 mb-10">
+          <div className="bg-warm-cream border border-soft-gold/40 rounded-lg px-5 py-4 mb-10">
             <p className="body-md">
               This page is a placeholder while our full Terms of Service are being finalized.
               It does not yet reflect our final, legally reviewed terms. If you have questions

@@ -34,8 +34,8 @@ module.exports = {
         'light-gold': '#FFF4E6',
       },
       fontFamily: {
-        'heading': ['Playfair Display', 'Lora', 'serif'],
-        'body': ['Inter', 'Open Sans', 'sans-serif'],
+        'heading': ['var(--font-body)', 'Inter', 'system-ui', 'sans-serif'],
+        'body': ['var(--font-body)', 'Inter', 'system-ui', 'sans-serif'],
       },
       keyframes: {
         'ken-burns': {

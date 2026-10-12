@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { applyDnsServerOverride } from './dns-override';
 
 const MONGODB_URI = process.env.MONGODB_URI!;
 
@@ -31,6 +32,7 @@ async function connectDB() {
       bufferCommands: false,
     };
 
+    applyDnsServerOverride();
     cached.promise = mongoose.connect(MONGODB_URI, opts).then((mongoose) => {
       console.log('✅ MongoDB connected successfully');
       return mongoose;

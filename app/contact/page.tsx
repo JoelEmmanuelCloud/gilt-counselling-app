@@ -55,10 +55,11 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-4 sm:mb-6">Get in Touch</h1>
-          <p className="body-lg">
+      <section className="panel-gold py-14 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Contact</p>
+          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Get in Touch</h1>
+          <p className="body-lg max-w-2xl text-gray-900/85">
             We're here to answer your questions and support you on your journey.
             Reach out however feels most comfortable for you.
           </p>
@@ -267,22 +268,17 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-4xl sm:text-5xl lg:text-6xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 leading-relaxed">
+      <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">We're here to help</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold tracking-tight mb-4 sm:mb-5 lg:mb-6 leading-tight">
             Prefer to Book Directly?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-300">
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-900/85">
             Skip the form and schedule your appointment right away.
           </p>
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-            <p className="text-xs sm:text-sm text-gray-400">We're here to help</p>
-            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-          </div>
           <Link href="/book-appointment">
-            <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs tracking-wide rounded-lg transition-all duration-300 hover:shadow-lg">
+            <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
               Book an Appointment
             </Button>
           </Link>

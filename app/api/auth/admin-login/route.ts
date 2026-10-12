@@ -3,8 +3,8 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import connectDB from '@/lib/mongodb';
 import User from '@/lib/models/user';
+import { getJwtSecret } from '@/lib/auth';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 const MAX_ATTEMPTS = 5;
 const LOCK_MINUTES = 15;
 
@@ -64,7 +64,7 @@ export async function POST(request: NextRequest) {
         email: user.email,
         role: user.role,
       },
-      JWT_SECRET,
+      getJwtSecret(),
       { expiresIn: '7d' }
     );
 

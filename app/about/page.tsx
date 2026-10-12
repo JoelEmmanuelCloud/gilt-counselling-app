@@ -107,10 +107,11 @@ export default function About() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
-          <p className="body-lg">
+      <section className="panel-gold py-14 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">About us</p>
+          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
+          <p className="body-lg max-w-2xl text-gray-900/85">
             Empowering teens and youths for optimal development through professional,
             compassionate counselling and support.
           </p>
@@ -122,16 +123,16 @@ export default function About() {
           <Card variant="warm" className="text-center">
             <h2 className="heading-md mb-6">Our Mission</h2>
             <div className="space-y-4 text-gray-700">
-              <p className="body-lg text-justify">
+              <p className="body-lg text-left">
                 Empowering teens and youths for optimal development through professional,
                 compassionate counselling and comprehensive support services.
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 At Gilt Counselling Consult, we are dedicated to providing high-quality mental health services,
                 educational consulting, and youth development programs. With offices in Nigeria and Canada, we serve
                 individuals, families, schools, and organizations with a commitment to excellence and care.
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 Whether you need mental health support, academic guidance, career counselling, or organizational training,
                 we create a safe, confidential space where transformation and growth can happen.
               </p>
@@ -155,13 +156,13 @@ export default function About() {
               />
             </div>
             <div>
-              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider mb-3">
+              <div className="eyebrow text-gray-600 mb-3">
                 Founder & CEO
               </div>
               <h2 className="heading-md mb-2">Dame Prof Chinelo Joy Ugwu</h2>
               <p className="text-soft-gold font-semibold mb-1">CEO, GILT COUNSELLING CONSULT</p>
               <p className="text-sm text-gray-600 mb-4">FCASSON, CPCN, MNAE, KSM</p>
-              <p className="text-gray-700 leading-relaxed text-justify">
+              <p className="text-gray-700 leading-relaxed text-left">
                 Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.
               </p>
             </div>
@@ -217,7 +218,7 @@ export default function About() {
               <p className="body-lg font-semibold text-soft-terracotta">
                 Chairs Donated to Otana Inclusive Centre
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 As part of our ongoing outreach programmes, Gilt Counselling Consult donated executive chairs
                 to Otana Inclusive Centre â€” a gesture born from a deep commitment to the wellbeing of every child,
                 regardless of ability.
@@ -227,7 +228,7 @@ export default function About() {
                 executive individuals in their life's endeavours. This heartfelt gift is proof of your love for
                 humanity and Otana Inclusive Centre. God bless you and your team at Gilt Counselling Consult."
               </blockquote>
-              <p className="body-md text-justify text-gray-600">
+              <p className="body-md text-left text-gray-600">
                 We are honoured by the warm reception from the centre's leadership and remain committed to serving
                 communities in need through compassionate action.
               </p>
@@ -267,13 +268,13 @@ export default function About() {
               <p className="body-lg font-semibold text-soft-terracotta">
                 Education &amp; Empowerment Committee Workshop
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 Dame Prof Chinelo Joy Ugwu, CEO of Gilt Counselling Consult, coordinated a one-day
                 workshop for the All Saints Cathedral Education and Empowerment Committee. The workshop
                 brought together members of the committee for a day of learning, empowerment, and
                 professional development.
               </p>
-              <p className="body-md text-justify text-gray-600">
+              <p className="body-md text-left text-gray-600">
                 This initiative reflects Gilt Counselling Consult&apos;s dedication to extending
                 professional support beyond the counselling room and into the wider community.
               </p>
@@ -334,10 +335,10 @@ export default function About() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
+              <div className={`${value.color} text-white rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-justify">
+              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-left">
                 {value.description}
               </p>
             </div>
@@ -361,7 +362,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="font-heading font-semibold text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-justify">{item.description}</p>
+                  <p className="text-gray-600 leading-relaxed text-left">{item.description}</p>
                 </div>
               </div>
             </Card>
@@ -370,28 +371,23 @@ export default function About() {
       </section>
 
       
-      <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-4xl sm:text-5xl lg:text-6xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 leading-relaxed">
+      <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Your journey starts here</p>
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-heading font-semibold tracking-tight mb-4 sm:mb-5 lg:mb-6 leading-tight">
             Ready to Begin Your Journey?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-300">
+          <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-900/85">
             We're here to support you every step of the way. Let's talk about how we can help.
           </p>
-          <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-            <p className="text-xs sm:text-sm text-gray-400">Your journey starts here</p>
-            <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4">
             <Link href="/book-appointment">
-              <Button className="bg-soft-terracotta text-white hover:bg-soft-terracotta/90 w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs tracking-wide rounded-lg transition-all duration-300 hover:shadow-lg">
+              <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
                 Book an Appointment
               </Button>
             </Link>
             <Link href="/services">
-              <Button className="bg-transparent border-2 border-soft-terracotta text-soft-terracotta hover:bg-soft-terracotta/10 w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 uppercase text-xs tracking-wide rounded-lg transition-all duration-300">
+              <Button className="bg-transparent border border-gray-900 text-gray-900 hover:bg-gray-900/5 w-full sm:w-auto px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
                 Explore Our Services
               </Button>
             </Link>

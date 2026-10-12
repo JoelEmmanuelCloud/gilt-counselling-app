@@ -34,8 +34,6 @@ export interface AuthContextType {
   user: User | null;
   logout: () => void;
   token: string | null;
-  sendOTP: (email: string) => Promise<void>;
-  verifyOTP: (email: string, code: string) => Promise<User>;
-  resendOTP: (email: string) => Promise<void>;
+  loading: boolean;
   adminLogin: (email: string, password: string) => Promise<User>;
 }

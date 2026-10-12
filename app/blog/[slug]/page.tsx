@@ -70,7 +70,7 @@ export default async function BlogPostPage({ params }: Props) {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-16 md:py-20">
+      <section className="bg-white border-b border-gray-200 py-16 md:py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-6">
             <Link href="/blog" className="text-soft-gold hover:text-muted-coral transition-colors duration-200 font-medium">
@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm text-gray-600">
-              <span className="px-3 py-1 bg-soft-gold text-white rounded-full text-xs font-medium">
+              <span className="px-3 py-1 bg-soft-gold text-gray-900 rounded-full text-xs font-semibold">
                 {post.category}
               </span>
               <span>{post.readTime}</span>
@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
       {post.image && (
         <section className="section-container">
           <div className="max-w-4xl mx-auto">
-            <div className="relative w-full h-[240px] sm:h-[300px] md:h-[400px] rounded-xl overflow-hidden mb-12">
+            <div className="relative w-full h-[240px] sm:h-[300px] md:h-[400px] rounded-lg overflow-hidden mb-12">
               <Image
                 src={post.image}
                 alt={post.title}

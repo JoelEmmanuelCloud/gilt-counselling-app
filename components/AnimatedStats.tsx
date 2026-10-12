@@ -71,7 +71,7 @@ export default function AnimatedStats() {
     <section className="py-12 sm:py-16 lg:py-20 bg-white border-y border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeUp>
-          <p className="text-center text-xs font-bold text-soft-terracotta uppercase tracking-[0.2em] mb-10 lg:mb-14">
+          <p className="eyebrow text-center text-gray-600 mb-10 lg:mb-14">
             Our Impact
           </p>
         </FadeUp>
@@ -79,7 +79,7 @@ export default function AnimatedStats() {
           {stats.map((stat, i) => (
             <FadeUp key={stat.label} delay={i * 0.12}>
               <div className="text-center group">
-                <div className="inline-flex items-center justify-center w-14 h-14 lg:w-16 lg:h-16 rounded-2xl bg-soft-terracotta/10 mb-4 lg:mb-5 group-hover:bg-soft-terracotta/20 transition-colors duration-300">
+                <div className="inline-flex items-center justify-center w-14 h-14 lg:w-16 lg:h-16 rounded-lg bg-soft-terracotta/10 mb-4 lg:mb-5 group-hover:bg-soft-terracotta/20 transition-colors duration-300">
                   {stat.icon}
                 </div>
                 <div className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-gray-900 mb-1.5">
