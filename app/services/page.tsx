@@ -154,32 +154,29 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold py-14 sm:py-20 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="eyebrow mb-4">Services</p>
-          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Our Services</h1>
-          <p className="body-lg max-w-2xl text-gray-900/85">
-            Comprehensive counselling and consulting services designed to empower
-            and support your journey toward growth and wellbeing.
-          </p>
+      <section className="panel-gold">
+        <div className="max-w-6xl mx-auto grid items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:py-24 lg:grid-cols-2 lg:gap-14 lg:px-8">
+          <div>
+            <p className="eyebrow mb-4">Services</p>
+            <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Our Services</h1>
+            <p className="body-lg max-w-2xl text-gray-900/85">
+              Comprehensive counselling and consulting services designed to empower
+              and support your journey toward growth and wellbeing.
+            </p>
+          </div>
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-900/10 lg:aspect-[4/3]">
+            <Image
+              src="/images/ourservice.jpg"
+              alt="Counsellor holding a client's hand during a session"
+              fill
+              priority
+              sizes="(min-width: 1152px) 548px, (min-width: 1024px) 46vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
-      <section className="section-container">
-        <div className="relative h-[200px] sm:h-[250px] md:h-[300px] max-w-5xl mx-auto rounded-lg overflow-hidden">
-          <Image
-            src="/images/ourservice.jpg"
-            alt="Counsellor holding client's hand during a session"
-            fill
-            className="object-cover"
-            sizes="(max-width: 1024px) 100vw, 1024px"
-            quality={60}
-            placeholder="blur"
-            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
-            priority
-          />
-        </div>
-      </section>
 
       <section className="section-container bg-off-white">
         <SectionHeading
