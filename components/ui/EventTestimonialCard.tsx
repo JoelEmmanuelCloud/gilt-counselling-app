@@ -31,7 +31,7 @@ export default function EventTestimonialCard({
   return (
     <div className="bg-white rounded-lg p-6 sm:p-8 shadow-calm">
       <div className="flex flex-wrap items-center gap-3 mb-4">
-        <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
+        <span className="eyebrow text-gray-600">
           {badge}
         </span>
         {date && <span className="text-sm text-gray-500">{date}</span>}

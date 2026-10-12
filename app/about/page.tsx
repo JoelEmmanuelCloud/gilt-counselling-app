@@ -156,7 +156,7 @@ export default function About() {
               />
             </div>
             <div>
-              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider mb-3">
+              <div className="eyebrow text-gray-600 mb-3">
                 Founder & CEO
               </div>
               <h2 className="heading-md mb-2">Dame Prof Chinelo Joy Ugwu</h2>

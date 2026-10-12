@@ -100,7 +100,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 16, filter: 'blur(6px)' }}
                     animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
                     transition={{ duration: 0.5, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-                    className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-white px-2.5 py-1 sm:px-3 sm:py-1.5 md:px-4 md:py-2 lg:px-5 lg:py-2.5 rounded-md lg:rounded-lg mb-3 sm:mb-4 md:mb-5 lg:mb-6 text-xs md:text-sm lg:text-base uppercase tracking-wider"
+                    className="eyebrow inline-block text-soft-terracotta mb-3 sm:mb-4 md:mb-5 lg:mb-6"
                   >
                     {heroContent[currentSlide].badge}
                   </motion.div>
@@ -118,7 +118,7 @@ export default function Home() {
                         {typeof line === 'string' ? line : (
                           <>
                             {line.before}
-                            <span className="italic font-serif">{line.italic}</span>
+                            <span className="text-soft-terracotta">{line.italic}</span>
                             {line.after}
                           </>
                         )}
@@ -193,7 +193,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
             <FadeUp className="order-2 lg:order-1">
-              <div className="inline-block bg-soft-terracotta/20 border border-soft-terracotta/50 text-soft-terracotta px-2.5 py-1 sm:px-3 sm:py-1.5 lg:px-4 lg:py-2 rounded-md lg:rounded-lg text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
+              <div className="eyebrow text-soft-terracotta mb-3 sm:mb-4 lg:mb-5">
                 Discover a Process
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
@@ -321,12 +321,12 @@ export default function Home() {
             />
           </FadeUp>
           <FadeUp className="order-1 lg:order-2">
-            <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
+            <div className="eyebrow text-gray-600 mb-3 sm:mb-4 lg:mb-5">
               About Us
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 xl:mb-6 leading-tight">
               Gilt Counselling Consult –<br className="hidden sm:block" />
-              Empowering <span className="italic font-serif">Teens & Youths</span><br className="hidden sm:block" />
+              Empowering Teens & Youths<br className="hidden sm:block" />
               {' '}for Optimal Development
             </h2>
             <p className="text-sm sm:text-base lg:text-lg xl:text-xl text-gray-600 leading-relaxed mb-4 sm:mb-5 lg:mb-6 text-left">
@@ -404,7 +404,7 @@ export default function Home() {
               />
             </FadeUp>
             <FadeUp>
-              <div className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 sm:px-4 sm:py-2 lg:px-5 lg:py-2.5 rounded-full text-xs lg:text-sm uppercase tracking-wider mb-3 sm:mb-4 lg:mb-5">
+              <div className="eyebrow text-gray-600 mb-3 sm:mb-4 lg:mb-5">
                 The Process
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 leading-tight">

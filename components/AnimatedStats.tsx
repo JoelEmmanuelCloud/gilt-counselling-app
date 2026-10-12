@@ -71,7 +71,7 @@ export default function AnimatedStats() {
     <section className="py-12 sm:py-16 lg:py-20 bg-white border-y border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <FadeUp>
-          <p className="text-center text-xs font-bold text-soft-terracotta uppercase tracking-[0.2em] mb-10 lg:mb-14">
+          <p className="eyebrow text-center text-gray-600 mb-10 lg:mb-14">
             Our Impact
           </p>
         </FadeUp>

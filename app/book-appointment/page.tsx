@@ -45,7 +45,7 @@ export default function BookAppointment() {
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-4 sm:p-6 md:p-8 mt-6 sm:mt-8 md:mt-10">
           
           <div className="mb-8">
-            <p className="text-sm font-semibold text-[#8B7355] uppercase tracking-wide mb-3">
+            <p className="eyebrow text-gray-600 mb-3">
               Step 1 — Optional
             </p>
             <p className="text-gray-700 font-medium mb-4">
@@ -75,7 +75,7 @@ export default function BookAppointment() {
 
           
           <div className="mb-8">
-            <p className="text-sm font-semibold text-[#8B7355] uppercase tracking-wide mb-3">
+            <p className="eyebrow text-gray-600 mb-3">
               Step 2
             </p>
             <p className="text-gray-700 font-medium mb-4">
