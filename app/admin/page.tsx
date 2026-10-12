@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useToast } from '@/components/ui/Toast';
 import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
 import AdminLoginForm from '@/components/admin/AdminLoginForm';
+import Skeleton from '@/components/ui/Skeleton';
 
 type Category = 'client' | 'school' | 'community' | 'media';
 
@@ -495,8 +496,22 @@ function AdminDashboardContent() {
         )}
 
         {loading ? (
-          <div className="flex justify-center py-12">
-            <div className="w-8 h-8 border-4 border-gilt-gold border-t-transparent rounded-full animate-spin" />
+          <div className="space-y-4" role="status" aria-live="polite">
+            <span className="sr-only">Loading entries</span>
+            {[0, 1, 2].map((i) => (
+              <div key={i} className="bg-white rounded-lg p-5 shadow-calm flex flex-col sm:flex-row sm:items-start gap-4" aria-hidden="true">
+                <div className="flex-1 space-y-3">
+                  <Skeleton className="h-4 w-11/12" />
+                  <Skeleton className="h-4 w-3/4" />
+                  <Skeleton className="h-3 w-1/3" />
+                </div>
+                <div className="flex sm:flex-col gap-2 flex-shrink-0">
+                  <Skeleton className="h-7 w-20 rounded-full" />
+                  <Skeleton className="h-7 w-20 rounded-full" />
+                  <Skeleton className="h-7 w-20 rounded-full" />
+                </div>
+              </div>
+            ))}
           </div>
         ) : items.length === 0 ? (
           <div className="text-center py-12 text-gray-500">
