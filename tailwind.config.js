@@ -17,8 +17,6 @@ module.exports = {
       colors: {
         'gilt-gold': '#D9A85D',
         'gilt-teal': '#1BA5BB',
-        'gilt-teal-dark': '#0E7C8E',
-        'gilt-teal-deep': '#0A5F6D',
         'gilt-green': '#5FB74E',
         'gilt-orange': '#F5A623',
         'soft-gold': '#D9A85D',
