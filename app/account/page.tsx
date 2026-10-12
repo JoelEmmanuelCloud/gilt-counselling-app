@@ -100,7 +100,7 @@ function MyAccountContent() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-12 md:py-16">
+      <section className="bg-white border-b border-gray-200 py-12 md:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row items-center gap-6">
 

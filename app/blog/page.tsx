@@ -9,12 +9,13 @@ export default function BlogPage() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-6">
+      <section className="panel-gold py-14 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Resources</p>
+          <h1 className="heading-xl max-w-3xl mb-6">
             Resources & Insights
           </h1>
-          <p className="body-lg">
+          <p className="body-lg max-w-2xl text-gray-900/85">
             Practical guidance, expert insights, and thoughtful perspectives on mental health,
             teen development, and family wellbeing.
           </p>

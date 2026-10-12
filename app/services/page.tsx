@@ -154,10 +154,11 @@ export default function Services() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-4 sm:mb-6">Our Services</h1>
-          <p className="body-lg">
+      <section className="panel-gold py-14 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Services</p>
+          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Our Services</h1>
+          <p className="body-lg max-w-2xl text-gray-900/85">
             Comprehensive counselling and consulting services designed to empower
             and support your journey toward growth and wellbeing.
           </p>

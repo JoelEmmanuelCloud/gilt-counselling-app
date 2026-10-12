@@ -55,10 +55,11 @@ export default function Contact() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="bg-gradient-to-br from-warm-cream via-off-white to-warm-sand py-10 sm:py-14 md:py-20">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="heading-xl mb-4 sm:mb-6">Get in Touch</h1>
-          <p className="body-lg">
+      <section className="panel-gold py-14 sm:py-20 md:py-24">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="eyebrow mb-4">Contact</p>
+          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Get in Touch</h1>
+          <p className="body-lg max-w-2xl text-gray-900/85">
             We're here to answer your questions and support you on your journey.
             Reach out however feels most comfortable for you.
           </p>
