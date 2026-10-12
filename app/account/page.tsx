@@ -149,7 +149,7 @@ function MyAccountContent() {
           >
             Appointments
             {stats.pending > 0 && (
-              <span className="ml-2 px-2 py-1 text-xs bg-soft-gold text-white rounded-full">
+              <span className="ml-2 px-2 py-1 text-xs bg-soft-gold text-gray-900 rounded-full">
                 {stats.pending}
               </span>
             )}

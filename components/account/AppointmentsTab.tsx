@@ -193,7 +193,7 @@ export default function AppointmentsTab({ appointments, onRefresh }: Appointment
                 {apt.status === 'pending' && (
                   <button
                     onClick={() => setEditingAppointment(apt)}
-                    className="w-full px-4 py-2 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition"
+                    className="w-full px-4 py-2 bg-gilt-gold text-gray-900 rounded-lg font-semibold hover:bg-soft-terracotta/90 transition"
                   >
                     Edit Appointment
                   </button>

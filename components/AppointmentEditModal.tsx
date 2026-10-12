@@ -104,7 +104,7 @@ export default function AppointmentEditModal({
               <select
                 value={formData.service}
                 onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 required
                 disabled={appointment.status !== 'pending'}
               >
@@ -121,7 +121,7 @@ export default function AppointmentEditModal({
                   type="date"
                   value={formData.date}
                   onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   required
                   disabled={appointment.status !== 'pending'}
                   min={new Date().toISOString().split('T')[0]}
@@ -134,7 +134,7 @@ export default function AppointmentEditModal({
                   type="time"
                   value={formData.time}
                   onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   required
                   disabled={appointment.status !== 'pending'}
                 />
@@ -147,7 +147,7 @@ export default function AppointmentEditModal({
                 value={formData.notes}
                 onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                 rows={3}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 placeholder="Any additional information..."
                 disabled={appointment.status !== 'pending'}
               />
@@ -165,7 +165,7 @@ export default function AppointmentEditModal({
               <button
                 type="submit"
                 disabled={saving || appointment.status !== 'pending'}
-                className="flex-1 px-6 py-3 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex-1 px-6 py-3 bg-gilt-gold text-gray-900 rounded-lg font-semibold hover:bg-soft-terracotta/90 transition disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {saving ? 'Saving...' : 'Save Changes'}
               </button>

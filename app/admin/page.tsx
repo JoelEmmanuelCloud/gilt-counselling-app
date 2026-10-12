@@ -330,7 +330,7 @@ function AdminDashboardContent() {
                     rows={4}
                     value={form.quote}
                     onChange={(e) => setForm({ ...form, quote: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
@@ -341,7 +341,7 @@ function AdminDashboardContent() {
                       type="text"
                       value={form.name}
                       onChange={(e) => setForm({ ...form, name: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                   <div>
@@ -351,7 +351,7 @@ function AdminDashboardContent() {
                       value={form.service}
                       onChange={(e) => setForm({ ...form, service: e.target.value })}
                       placeholder="Individual Counselling"
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                   <div>
@@ -361,7 +361,7 @@ function AdminDashboardContent() {
                       value={form.date}
                       onChange={(e) => setForm({ ...form, date: e.target.value })}
                       placeholder="November 2025"
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                 </div>
@@ -377,7 +377,7 @@ function AdminDashboardContent() {
                     type="text"
                     value={form.school}
                     onChange={(e) => setForm({ ...form, school: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
                 <div>
@@ -390,14 +390,14 @@ function AdminDashboardContent() {
                           placeholder="Quote text"
                           value={q.text}
                           onChange={(e) => updateQuoteRow(index, 'text', e.target.value)}
-                          className="flex-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                          className="flex-1 w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                         />
                         <input
                           type="text"
                           placeholder="Role (Student, Principal...)"
                           value={q.role}
                           onChange={(e) => updateQuoteRow(index, 'role', e.target.value)}
-                          className="w-full sm:w-48 rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                          className="w-full sm:w-48 rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                         />
                         {form.quotes.length > 1 && (
                           <button
@@ -431,7 +431,7 @@ function AdminDashboardContent() {
                     type="text"
                     value={form.title}
                     onChange={(e) => setForm({ ...form, title: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -441,7 +441,7 @@ function AdminDashboardContent() {
                       type="text"
                       value={form.organization}
                       onChange={(e) => setForm({ ...form, organization: e.target.value })}
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                   <div>
@@ -451,7 +451,7 @@ function AdminDashboardContent() {
                       value={form.date}
                       onChange={(e) => setForm({ ...form, date: e.target.value })}
                       placeholder="June 2026"
-                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                 </div>
@@ -462,7 +462,7 @@ function AdminDashboardContent() {
                     rows={4}
                     value={form.description}
                     onChange={(e) => setForm({ ...form, description: e.target.value })}
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
                 <div>
@@ -479,7 +479,7 @@ function AdminDashboardContent() {
                     value={form.videoUrl}
                     onChange={(e) => setForm({ ...form, videoUrl: e.target.value })}
                     placeholder="/videos/event.mp4"
-                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full rounded-lg border border-gray-300 px-3 py-2 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
               </>
@@ -491,7 +491,7 @@ function AdminDashboardContent() {
                 type="checkbox"
                 checked={form.published}
                 onChange={(e) => setForm({ ...form, published: e.target.checked })}
-                className="h-4 w-4 rounded border-gray-300 text-gilt-gold focus:ring-gilt-gold"
+                className="h-4 w-4 rounded border-gray-300 text-gilt-gold focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
               <label htmlFor="published" className="text-sm text-gray-700">
                 Published (visible on the public testimonials page)

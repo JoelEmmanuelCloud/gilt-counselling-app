@@ -163,7 +163,7 @@ function ProfileContent() {
                     type="text"
                     value={profile.firstName}
                     onChange={(e) => setProfile({ ...profile, firstName: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
 
@@ -173,7 +173,7 @@ function ProfileContent() {
                     type="text"
                     value={profile.lastName}
                     onChange={(e) => setProfile({ ...profile, lastName: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
 
@@ -194,7 +194,7 @@ function ProfileContent() {
                     type="tel"
                     value={profile.phone}
                     onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
 
@@ -204,7 +204,7 @@ function ProfileContent() {
                     type="date"
                     value={profile.dateOfBirth}
                     onChange={(e) => setProfile({ ...profile, dateOfBirth: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   />
                 </div>
 
@@ -213,7 +213,7 @@ function ProfileContent() {
                   <select
                     value={profile.gender}
                     onChange={(e) => setProfile({ ...profile, gender: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   >
                     <option value="">Select Gender</option>
                     <option value="male">Male</option>
@@ -228,7 +228,7 @@ function ProfileContent() {
                   <select
                     value={profile.preferredContactMethod}
                     onChange={(e) => setProfile({ ...profile, preferredContactMethod: e.target.value })}
-                    className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                    className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   >
                     <option value="email">Email</option>
                     <option value="phone">Phone</option>
@@ -246,7 +246,7 @@ function ProfileContent() {
                       type="text"
                       value={profile.address.street}
                       onChange={(e) => setProfile({ ...profile, address: { ...profile.address, street: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
 
@@ -256,7 +256,7 @@ function ProfileContent() {
                       type="text"
                       value={profile.address.city}
                       onChange={(e) => setProfile({ ...profile, address: { ...profile.address, city: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
 
@@ -266,7 +266,7 @@ function ProfileContent() {
                       type="text"
                       value={profile.address.state}
                       onChange={(e) => setProfile({ ...profile, address: { ...profile.address, state: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
 
@@ -275,7 +275,7 @@ function ProfileContent() {
                     <select
                       value={profile.address.country}
                       onChange={(e) => setProfile({ ...profile, address: { ...profile.address, country: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     >
                       <option value="">Select Country</option>
                       <option value="Nigeria">Nigeria</option>
@@ -289,7 +289,7 @@ function ProfileContent() {
                       type="text"
                       value={profile.address.postalCode}
                       onChange={(e) => setProfile({ ...profile, address: { ...profile.address, postalCode: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                 </div>
@@ -304,7 +304,7 @@ function ProfileContent() {
                       type="text"
                       value={profile.emergencyContact.name}
                       onChange={(e) => setProfile({ ...profile, emergencyContact: { ...profile.emergencyContact, name: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
 
@@ -314,7 +314,7 @@ function ProfileContent() {
                       type="text"
                       value={profile.emergencyContact.relationship}
                       onChange={(e) => setProfile({ ...profile, emergencyContact: { ...profile.emergencyContact, relationship: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                       placeholder="e.g. Spouse, Parent, Sibling"
                     />
                   </div>
@@ -325,7 +325,7 @@ function ProfileContent() {
                       type="tel"
                       value={profile.emergencyContact.phone}
                       onChange={(e) => setProfile({ ...profile, emergencyContact: { ...profile.emergencyContact, phone: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
 
@@ -335,7 +335,7 @@ function ProfileContent() {
                       type="email"
                       value={profile.emergencyContact.email}
                       onChange={(e) => setProfile({ ...profile, emergencyContact: { ...profile.emergencyContact, email: e.target.value } })}
-                      className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-gilt-gold"
+                      className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     />
                   </div>
                 </div>
@@ -359,7 +359,7 @@ function ProfileContent() {
               <button
                 type="submit"
                 disabled={saving}
-                className="w-full px-6 py-3 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition disabled:opacity-50"
+                className="w-full px-6 py-3 bg-gilt-gold text-gray-900 rounded-lg font-semibold hover:bg-soft-terracotta/90 transition disabled:opacity-50"
               >
                 {saving ? 'Saving...' : 'Save Changes'}
               </button>

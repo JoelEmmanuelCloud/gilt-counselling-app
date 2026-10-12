@@ -107,7 +107,7 @@ export default function ProfilePhotoUpload({ currentPhoto, onPhotoUpdate }: Prof
           <div className="space-y-2">
             <label
               htmlFor="photo-upload"
-              className="inline-block px-4 py-2 bg-gilt-gold text-white rounded-lg cursor-pointer hover:bg-gilt-orange transition"
+              className="inline-block px-4 py-2 bg-gilt-gold text-gray-900 rounded-lg cursor-pointer hover:bg-soft-terracotta/90 transition font-semibold"
             >
               Choose Photo
             </label>

@@ -453,7 +453,7 @@ function DashboardContent() {
                   value={rescheduleForm.date}
                   onChange={(e) => setRescheduleForm({ ...rescheduleForm, date: e.target.value })}
                   min={getMinDate()}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-gilt-gold"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 />
               </div>
               <div>
@@ -462,7 +462,7 @@ function DashboardContent() {
                   type="time"
                   value={rescheduleForm.time}
                   onChange={(e) => setRescheduleForm({ ...rescheduleForm, time: e.target.value })}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-gilt-gold"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 />
               </div>
             </div>
@@ -478,7 +478,7 @@ function DashboardContent() {
               <button
                 onClick={handleReschedule}
                 disabled={rescheduleLoading}
-                className="px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition-colors font-medium disabled:opacity-50"
+                className="px-6 py-2 bg-gilt-gold text-gray-900 rounded-lg hover:bg-soft-terracotta/90 transition-colors font-semibold disabled:opacity-50"
               >
                 {rescheduleLoading ? 'Rescheduling...' : 'Confirm Reschedule'}
               </button>

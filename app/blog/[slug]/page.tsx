@@ -79,7 +79,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
           <div className="space-y-4">
             <div className="flex items-center gap-3 text-sm text-gray-600">
-              <span className="px-3 py-1 bg-soft-gold text-white rounded-full text-xs font-medium">
+              <span className="px-3 py-1 bg-soft-gold text-gray-900 rounded-full text-xs font-semibold">
                 {post.category}
               </span>
               <span>{post.readTime}</span>

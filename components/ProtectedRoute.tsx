@@ -67,7 +67,7 @@ export default function ProtectedRoute({
           <p className="text-gray-600 mb-6">You don't have permission to access this page.</p>
           <button
             onClick={() => router.push(user.role === 'counselor' ? '/counselor' : '/dashboard')}
-            className="bg-gilt-gold text-white px-6 py-2 rounded-lg hover:bg-gilt-orange transition"
+            className="bg-gilt-gold text-gray-900 px-6 py-2 rounded-lg hover:bg-soft-terracotta/90 transition font-semibold"
           >
             Go to Dashboard
           </button>

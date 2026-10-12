@@ -250,7 +250,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   placeholder="your.email@example.com"
                   disabled={loading}
                 />
@@ -296,7 +296,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     placeholder="John"
                     disabled={loading}
                   />
@@ -311,7 +311,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                     placeholder="Doe"
                     disabled={loading}
                   />
@@ -328,7 +328,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg transition-all focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                   placeholder="you@example.com"
                   disabled={loading}
                 />
@@ -387,7 +387,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                 required
                 value={otp}
                 onChange={(e) => handleOTPChange(e.target.value)}
-                className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-6 lg:py-4 border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent text-center text-xl sm:text-2xl lg:text-3xl tracking-widest font-mono transition-all"
+                className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-6 lg:py-4 border border-gray-300 rounded-lg lg:rounded-lg text-center text-xl sm:text-2xl lg:text-3xl tracking-widest font-mono transition-all focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 placeholder="000000"
                 maxLength={6}
                 disabled={loading}

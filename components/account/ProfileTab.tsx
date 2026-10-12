@@ -104,7 +104,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                 type="text"
                 value={formData.firstName}
                 onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 required
               />
             </div>
@@ -115,7 +115,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                 type="text"
                 value={formData.lastName}
                 onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 required
               />
             </div>
@@ -137,7 +137,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                 type="tel"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -147,7 +147,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                 type="text"
                 value={formData.occupation}
                 onChange={(e) => setFormData({ ...formData, occupation: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 placeholder="e.g., Teacher, Engineer, Student"
               />
             </div>
@@ -158,7 +158,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                 type="date"
                 value={formData.dateOfBirth}
                 onChange={(e) => setFormData({ ...formData, dateOfBirth: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -167,7 +167,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
               <select
                 value={formData.gender}
                 onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               >
                 <option value="">Select gender</option>
                 <option value="male">Male</option>
@@ -191,7 +191,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   address: { ...formData.address, street: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -204,7 +204,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   address: { ...formData.address, city: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -217,7 +217,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   address: { ...formData.address, state: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -229,7 +229,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   address: { ...formData.address, country: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               >
                 <option value="Nigeria">Nigeria</option>
                 <option value="Canada">Canada</option>
@@ -245,7 +245,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   address: { ...formData.address, postalCode: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
           </div>
@@ -263,7 +263,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   emergencyContact: { ...formData.emergencyContact, name: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -276,7 +276,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   emergencyContact: { ...formData.emergencyContact, relationship: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
                 placeholder="e.g., Spouse, Parent, Sibling"
               />
             </div>
@@ -290,7 +290,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   emergencyContact: { ...formData.emergencyContact, phone: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
 
@@ -303,7 +303,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
                   ...formData,
                   emergencyContact: { ...formData.emergencyContact, email: e.target.value },
                 })}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               />
             </div>
           </div>
@@ -316,7 +316,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
             <select
               value={formData.preferredContactMethod}
               onChange={(e) => setFormData({ ...formData, preferredContactMethod: e.target.value })}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gilt-gold focus:border-transparent"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
             >
               <option value="email">Email</option>
               <option value="phone">Phone</option>
@@ -329,7 +329,7 @@ export default function ProfileTab({ user, onUpdate }: ProfileTabProps) {
           <button
             type="submit"
             disabled={saving}
-            className="px-8 py-3 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition disabled:opacity-50"
+            className="px-8 py-3 bg-gilt-gold text-gray-900 rounded-lg font-semibold hover:bg-soft-terracotta/90 transition disabled:opacity-50"
           >
             {saving ? 'Saving...' : 'Save Changes'}
           </button>

@@ -59,7 +59,7 @@ export default function OverviewTab({ stats, upcomingAppointments }: OverviewTab
             <p className="text-gray-500 mb-4">No upcoming appointments</p>
             <Link
               href="/book-appointment"
-              className="inline-block px-6 py-3 bg-gilt-gold text-white rounded-lg font-semibold hover:bg-gilt-orange transition"
+              className="inline-block px-6 py-3 bg-gilt-gold text-gray-900 rounded-lg font-semibold hover:bg-soft-terracotta/90 transition"
             >
               Book Your First Appointment
             </Link>

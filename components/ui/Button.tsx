@@ -12,12 +12,12 @@ export default function Button({
   className = '',
   ...props
 }: ButtonProps) {
-  const baseStyles = 'px-4 sm:px-6 py-3 rounded-lg font-medium transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseStyles = 'inline-flex min-h-[44px] items-center justify-center gap-2 px-4 sm:px-6 py-3 rounded-md font-medium transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 disabled:opacity-60 disabled:cursor-not-allowed';
 
   const variants = {
-    primary: 'bg-soft-terracotta text-gray-900 hover:bg-soft-terracotta/90 focus:ring-soft-terracotta font-semibold',
-    secondary: 'bg-gentle-blue-grey text-white hover:bg-muted-teal focus:ring-gentle-blue-grey',
-    ghost: 'bg-transparent border-2 border-gray-300 text-gray-700 hover:bg-gray-100 focus:ring-gray-300',
+    primary: 'bg-soft-terracotta text-gray-900 hover:bg-soft-terracotta/90 active:bg-soft-terracotta/80 font-semibold shadow-sm',
+    secondary: 'bg-white text-gray-900 border border-gray-300 hover:bg-gray-50 shadow-sm',
+    ghost: 'bg-transparent text-gray-900 hover:bg-gray-900/5',
   };
 
   return (

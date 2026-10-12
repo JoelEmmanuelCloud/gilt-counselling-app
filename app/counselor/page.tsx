@@ -518,13 +518,13 @@ function CounselorDashboardContent() {
             <div className="flex gap-4">
               <button
                 onClick={addAvailabilitySlot}
-                className="px-4 py-2 border border-gilt-gold text-gilt-gold rounded-lg hover:bg-gilt-gold hover:text-white transition"
+                className="px-4 py-2 border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 transition"
               >
                 + Add Time Slot
               </button>
               <button
                 onClick={handleUpdateAvailability}
-                className="px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition"
+                className="px-6 py-2 bg-gilt-gold text-gray-900 rounded-lg hover:bg-soft-terracotta/90 transition font-semibold"
               >
                 Save Availability
               </button>
@@ -571,7 +571,7 @@ function CounselorDashboardContent() {
               </button>
               <button
                 onClick={handleSaveNotes}
-                className="px-6 py-2 bg-gilt-gold text-white rounded-lg hover:bg-gilt-orange transition"
+                className="px-6 py-2 bg-gilt-gold text-gray-900 rounded-lg hover:bg-soft-terracotta/90 transition font-semibold"
               >
                 Save Notes
               </button>

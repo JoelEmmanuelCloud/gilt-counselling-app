@@ -271,7 +271,7 @@ function VerifyOTPContent() {
               onKeyDown={(e) => handleKeyDown(index, e)}
               onPaste={handlePaste}
               disabled={isLoading || !!successMessage}
-              className="w-10 h-12 sm:w-12 sm:h-14 lg:w-14 lg:h-16 text-center text-xl sm:text-2xl lg:text-3xl font-bold border-2 border-gray-300 rounded-lg lg:rounded-lg focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-10 h-12 sm:w-12 sm:h-14 lg:w-14 lg:h-16 text-center text-xl sm:text-2xl lg:text-3xl font-bold border-2 border-gray-300 rounded-lg lg:rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-all focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
               autoFocus={index === 0}
             />
           ))}
