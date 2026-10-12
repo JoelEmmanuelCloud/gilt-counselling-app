@@ -272,7 +272,7 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-xs lg:text-sm text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
-                    <a href="tel:+2347065734165" className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold hover:opacity-80 transition-opacity">
+                    <a href="tel:+2347065734165" className="inline-flex min-h-[44px] items-center rounded text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900">
                       +234 706 573 4165
                     </a>
                   </div>
