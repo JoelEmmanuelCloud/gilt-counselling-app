@@ -7,6 +7,7 @@ import TestimonialCard from '@/components/ui/TestimonialCard';
 import EventTestimonialCard from '@/components/ui/EventTestimonialCard';
 import Button from '@/components/ui/Button';
 import Image from 'next/image';
+import { TestimonialCardSkeleton } from '@/components/ui/Skeleton';
 
 interface SchoolQuote {
   text: string;
@@ -85,9 +86,14 @@ export default function TestimoniesPage() {
       </section>
 
       {loading ? (
-        <div className="flex justify-center py-20">
-          <div className="w-10 h-10 border-4 border-gilt-gold border-t-transparent rounded-full animate-spin" />
-        </div>
+        <section className="section-container" role="status" aria-live="polite">
+          <span className="sr-only">Loading testimonials</span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+            {[0, 1, 2].map((i) => (
+              <TestimonialCardSkeleton key={i} />
+            ))}
+          </div>
+        </section>
       ) : (
         <>
           {clientTestimonials.length > 0 && (
