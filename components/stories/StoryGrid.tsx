@@ -1,12 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Skeleton from '@/components/ui/Skeleton';
+import Pagination from '@/components/ui/Pagination';
 import type { StoryCategory } from '@/lib/testimonialCategories';
 import { usePublishedEntries } from './usePublishedEntries';
 import StoryCard from './StoryCard';
 import StoryDialog from './StoryDialog';
 import type { Story } from './types';
+
+const PAGE_SIZE = 6;
 
 interface StoryGridProps {
   category: StoryCategory;
@@ -38,6 +41,8 @@ function StoryGridSkeleton() {
 export default function StoryGrid({ category, badge, emptyMessage, extraStories = [] }: StoryGridProps) {
   const { entries, loading, failed } = usePublishedEntries(category);
   const [openStory, setOpenStory] = useState<Story | null>(null);
+  const [page, setPage] = useState(1);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   if (loading) {
     return <StoryGridSkeleton />;
@@ -56,6 +61,20 @@ export default function StoryGrid({ category, badge, emptyMessage, extraStories 
     ...extraStories,
   ];
 
+  const totalPages = Math.max(1, Math.ceil(stories.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageStories = stories.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  const changePage = (nextPage: number) => {
+    setPage(Math.min(Math.max(1, nextPage), totalPages));
+    const grid = gridRef.current;
+    if (!grid) return;
+    const stickyOffset = window.matchMedia('(min-width: 768px)').matches ? 186 : 170;
+    if (grid.getBoundingClientRect().top < stickyOffset) {
+      grid.scrollIntoView({ block: 'start' });
+    }
+  };
+
   return (
     <>
       {failed && (
@@ -66,11 +85,22 @@ export default function StoryGrid({ category, badge, emptyMessage, extraStories 
       {stories.length === 0 && !failed ? (
         <p className="text-center text-gray-600">{emptyMessage}</p>
       ) : (
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {stories.map((story) => (
-            <StoryCard key={story.id} story={story} badge={badge} onOpen={setOpenStory} />
-          ))}
-        </div>
+        <>
+          <div
+            ref={gridRef}
+            className="grid scroll-mt-[170px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:scroll-mt-[186px]"
+          >
+            {pageStories.map((story) => (
+              <StoryCard key={story.id} story={story} badge={badge} onOpen={setOpenStory} />
+            ))}
+          </div>
+          <Pagination
+            page={currentPage}
+            totalPages={totalPages}
+            onPageChange={changePage}
+            label={`${badge} stories pages`}
+          />
+        </>
       )}
       <StoryDialog story={openStory} badge={badge} onClose={() => setOpenStory(null)} />
     </>
