@@ -6,6 +6,7 @@ import { ToastProvider } from '@/components/ui/Toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
+import NavigationProgress from '@/components/NavigationProgress';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -91,6 +92,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-body" suppressHydrationWarning>
+        <NavigationProgress />
         <AuthProvider>
           <ToastProvider>
             <div className="flex flex-col min-h-screen">
