@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Testimonial from '@/lib/models/testimonial';
+import Testimonial, { isStoryCategory } from '@/lib/models/testimonial';
 import { requireAdmin } from '@/lib/auth';
 import { del } from '@vercel/blob';
 
@@ -64,6 +64,16 @@ export async function PATCH(
       if (body[field] !== undefined) {
         updates[field] = body[field];
       }
+    }
+
+    if (body.category !== undefined && body.category !== existing.category) {
+      if (!isStoryCategory(body.category) || !isStoryCategory(existing.category)) {
+        return NextResponse.json(
+          { message: 'Only outreach, media, and event entries can be moved between those sections' },
+          { status: 400 }
+        );
+      }
+      updates.category = body.category;
     }
 
     if (updates.images) {

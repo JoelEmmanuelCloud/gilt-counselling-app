@@ -1,6 +1,8 @@
 import mongoose, { Schema } from 'mongoose';
+import { TESTIMONIAL_CATEGORIES, TestimonialCategory } from '../testimonialCategories';
 
-export type TestimonialCategory = 'client' | 'school' | 'community' | 'media';
+export { isStoryCategory, isTestimonialCategory } from '../testimonialCategories';
+export type { TestimonialCategory } from '../testimonialCategories';
 
 export interface ISchoolQuote {
   text: string;
@@ -47,7 +49,7 @@ const TestimonialSchema = new Schema(
   {
     category: {
       type: String,
-      enum: ['client', 'school', 'community', 'media'],
+      enum: TESTIMONIAL_CATEGORIES,
       required: [true, 'Category is required'],
       index: true,
     },

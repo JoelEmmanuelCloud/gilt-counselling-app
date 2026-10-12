@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import connectDB from '@/lib/mongodb';
-import Testimonial from '@/lib/models/testimonial';
+import Testimonial, { isTestimonialCategory } from '@/lib/models/testimonial';
 
 export async function GET(request: NextRequest) {
   try {
@@ -11,6 +11,9 @@ export async function GET(request: NextRequest) {
 
     const query: Record<string, unknown> = { published: true };
     if (category) {
+      if (!isTestimonialCategory(category)) {
+        return NextResponse.json({ message: 'Invalid category' }, { status: 400 });
+      }
       query.category = category;
     }
 
