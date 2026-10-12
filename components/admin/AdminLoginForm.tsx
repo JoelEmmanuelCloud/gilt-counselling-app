@@ -7,6 +7,14 @@ import { useAuth } from '@/lib/AuthContext';
 
 const REMEMBER_KEY = 'admin-login-email';
 
+const stripWhitespace = (value: string) => value.replace(/\s/g, '');
+
+const blockWhitespaceKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  if (e.key === ' ') {
+    e.preventDefault();
+  }
+};
+
 const stripePattern: React.CSSProperties = {
   backgroundImage:
     'repeating-linear-gradient(135deg, rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 2px, transparent 2px, transparent 8px)',
@@ -38,7 +46,7 @@ export default function AdminLoginForm() {
       saved = localStorage.getItem(REMEMBER_KEY);
     } catch {}
     if (saved) {
-      setEmail(saved);
+      setEmail(stripWhitespace(saved));
       passwordRef.current?.focus();
     } else {
       emailRef.current?.focus();
@@ -53,12 +61,12 @@ export default function AdminLoginForm() {
     e.preventDefault();
     setError('');
     setSubmitting(true);
-    const trimmedEmail = email.trim();
+    const cleanEmail = stripWhitespace(email);
     try {
-      await adminLogin(trimmedEmail, password);
+      await adminLogin(cleanEmail, password);
       try {
         if (remember) {
-          localStorage.setItem(REMEMBER_KEY, trimmedEmail);
+          localStorage.setItem(REMEMBER_KEY, cleanEmail);
         } else {
           localStorage.removeItem(REMEMBER_KEY);
         }
@@ -74,6 +82,11 @@ export default function AdminLoginForm() {
 
   const detectCapsLock = (e: React.KeyboardEvent<HTMLInputElement>) => {
     setCapsLock(e.getModifierState('CapsLock'));
+  };
+
+  const handlePasswordKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    blockWhitespaceKey(e);
+    detectCapsLock(e);
   };
 
   const borderClass = error ? 'border-red-500' : 'border-gray-300';
@@ -140,9 +153,13 @@ export default function AdminLoginForm() {
                   type="email"
                   inputMode="email"
                   autoComplete="username"
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  spellCheck={false}
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onKeyDown={blockWhitespaceKey}
+                  onChange={(e) => setEmail(stripWhitespace(e.target.value))}
                   aria-invalid={!!error}
                   aria-describedby={error ? 'admin-login-error' : undefined}
                   className={`${fieldClass} ${borderClass}`}
@@ -161,8 +178,11 @@ export default function AdminLoginForm() {
                     autoComplete="current-password"
                     required
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    onKeyDown={detectCapsLock}
+                    autoCapitalize="none"
+                    autoCorrect="off"
+                    spellCheck={false}
+                    onChange={(e) => setPassword(stripWhitespace(e.target.value))}
+                    onKeyDown={handlePasswordKeyDown}
                     onKeyUp={detectCapsLock}
                     onBlur={() => setCapsLock(false)}
                     aria-invalid={!!error}
