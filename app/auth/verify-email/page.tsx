@@ -53,7 +53,7 @@ function VerifyEmailContent() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-12 px-4">
+    <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg border border-gilt-gold/20">
         <div className="text-center">
           {status === "loading" && (
@@ -123,7 +123,7 @@ function VerifyEmailContent() {
               <div className="space-y-3">
                 <Link
                   href="/auth/signin"
-                  className="block w-full py-3 px-4 bg-gradient-to-r from-gilt-gold to-gilt-orange text-white rounded-lg hover:from-gilt-orange hover:to-gilt-gold transition-all font-medium"
+                  className="block w-full py-3 px-4 bg-soft-terracotta text-gray-900 rounded-lg hover:bg-soft-terracotta/90 transition-colors font-semibold"
                 >
                   Sign In to Get a New Code
                 </Link>
@@ -139,7 +139,7 @@ function VerifyEmailContent() {
 export default function VerifyEmailPage() {
   return (
     <Suspense fallback={
-      <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center">
+      <div className="min-h-screen bg-white flex items-center justify-center">
         <div className="text-center bg-white p-8 rounded-lg shadow-md">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-gilt-teal mb-4"></div>
           <p className="text-gray-600">Verifying email...</p>

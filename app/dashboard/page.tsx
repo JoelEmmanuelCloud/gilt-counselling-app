@@ -241,7 +241,7 @@ function DashboardContent() {
       {!profileComplete && (
         <section className="section-container pt-0">
           <div className="max-w-7xl mx-auto">
-            <Card className="bg-gradient-to-r from-soft-gold/10 to-warm-cream border-soft-gold/30">
+            <Card className="bg-warm-cream border-soft-gold/30">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-4">
                 <div className="flex-shrink-0">
                   <div className="w-12 h-12 bg-soft-gold/20 rounded-full flex items-center justify-center">

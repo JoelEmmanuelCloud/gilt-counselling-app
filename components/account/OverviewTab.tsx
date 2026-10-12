@@ -97,26 +97,26 @@ export default function OverviewTab({ stats, upcomingAppointments }: OverviewTab
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <Link
             href="/book-appointment"
-            className="flex items-center gap-3 p-4 bg-gradient-to-r from-gilt-gold to-gilt-orange text-white rounded-lg hover:shadow-lg transition"
+            className="flex items-center gap-3 p-4 bg-soft-terracotta text-gray-900 rounded-lg shadow-sm hover:bg-soft-terracotta/90 transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
             <div>
               <h3 className="font-semibold">Book Appointment</h3>
-              <p className="text-xs text-white text-opacity-90">Schedule a new session</p>
+              <p className="text-xs text-gray-900/80">Schedule a new session</p>
             </div>
           </Link>
           <Link
             href="/contact"
-            className="flex items-center gap-3 p-4 bg-gradient-to-r from-olive-green to-muted-teal text-white rounded-lg hover:shadow-lg transition"
+            className="flex items-center gap-3 p-4 bg-white border border-gray-300 text-gray-900 rounded-lg hover:bg-gray-50 transition-colors"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
             </svg>
             <div>
               <h3 className="font-semibold">Contact Us</h3>
-              <p className="text-xs text-white text-opacity-90">Get in touch with our team</p>
+              <p className="text-xs text-gray-600">Get in touch with our team</p>
             </div>
           </Link>
         </div>

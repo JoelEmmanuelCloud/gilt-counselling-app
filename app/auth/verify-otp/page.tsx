@@ -193,7 +193,7 @@ function VerifyOTPContent() {
   };
   if (!email) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4">
+      <div className="min-h-screen bg-white flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4">
         <div className="max-w-md w-full bg-white p-6 sm:p-8 rounded-lg sm:rounded-lg shadow-md border border-gilt-gold/20 text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -204,7 +204,7 @@ function VerifyOTPContent() {
           <p className="text-gray-600 mb-6">No email address provided.</p>
           <Link
             href="/auth/signin"
-            className="inline-block px-6 py-3 bg-gradient-to-r from-gilt-gold to-gilt-orange text-white rounded-lg font-medium hover:from-gilt-orange hover:to-gilt-gold transition-all"
+            className="inline-block px-6 py-3 bg-soft-terracotta text-gray-900 rounded-lg font-semibold hover:bg-soft-terracotta/90 transition-colors"
           >
             Back to Sign In
           </Link>
@@ -214,7 +214,7 @@ function VerifyOTPContent() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
+    <div className="min-h-screen bg-white flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
       <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg sm:rounded-lg lg:rounded-lg shadow-md sm:shadow-lg border border-gilt-gold/20">
 
         <div className="text-center">
@@ -280,7 +280,7 @@ function VerifyOTPContent() {
         <button
           onClick={() => handleSubmit()}
           disabled={isLoading || otp.some((d) => !d) || !!successMessage}
-          className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-lg shadow-sm text-sm sm:text-base lg:text-lg text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+          className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-lg shadow-sm text-sm sm:text-base lg:text-lg text-gray-900 bg-soft-terracotta hover:bg-soft-terracotta/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-900 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold"
         >
           {isLoading ? (
             <span className="flex items-center gap-2">
@@ -334,7 +334,7 @@ export default function VerifyOTPPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center">
+        <div className="min-h-screen bg-white flex items-center justify-center">
           <div className="text-center bg-white p-8 rounded-lg shadow-md">
             <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-gilt-teal mb-4"></div>
             <p className="text-gray-600">Loading...</p>

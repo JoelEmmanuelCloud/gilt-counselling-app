@@ -168,14 +168,14 @@ export default function Home() {
       </section>
 
 
-      <section className="bg-gradient-to-r from-gilt-gold via-soft-terracotta to-gilt-teal py-6 sm:py-7 md:py-8">
+      <section className="panel-gold py-6 sm:py-7 md:py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 sm:gap-6">
             <div className="text-center sm:text-left">
-              <p className="text-white font-heading font-bold text-lg sm:text-xl md:text-2xl">
+              <p className="text-gray-900 font-semibold tracking-tight text-lg sm:text-xl md:text-2xl">
                 Holiday Psycho-Social Skills Bootcamp · 10th-28th Aug 2026
               </p>
-              <p className="text-white/90 text-sm sm:text-base mt-1">
+              <p className="text-gray-900/85 text-sm sm:text-base mt-1">
                 Ages 9-14 &amp; 15-18. Create your &ldquo;I&apos;m Attending&rdquo; badge and share the news.
               </p>
             </div>
