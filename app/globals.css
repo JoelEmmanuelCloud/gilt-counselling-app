@@ -192,10 +192,7 @@
   button:not(.print\\:visible),
   select,
   input,
-  .no-print,
-  .admin-header,
-  .admin-stats,
-  .admin-tabs {
+  .no-print {
     display: none !important;
   }
 
