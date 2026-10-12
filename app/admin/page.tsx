@@ -9,6 +9,7 @@ import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
 import AdminLoginForm from '@/components/admin/AdminLoginForm';
 import Skeleton from '@/components/ui/Skeleton';
 import Pagination from '@/components/ui/Pagination';
+import TeamManager, { StaffMemberRecord } from '@/components/admin/TeamManager';
 import {
   CATEGORY_DETAILS,
   CATEGORY_GROUPS,
@@ -133,6 +134,8 @@ const CATEGORY_ICONS: Record<Category, string> = {
   media: 'M10.34 15.84c-.688-.06-1.386-.09-2.09-.09H7.5a4.5 4.5 0 110-9h.75c.704 0 1.402-.03 2.09-.09m0 9.18c.253.962.584 1.892.985 2.783.247.55.06 1.21-.463 1.511l-.657.38c-.551.318-1.26.117-1.527-.461a20.845 20.845 0 01-1.44-4.282m3.102.069a18.03 18.03 0 01-.59-4.59c0-1.586.205-3.124.59-4.59m0 9.18a23.848 23.848 0 018.835 2.535M10.34 6.66a23.847 23.847 0 008.835-2.535m0 0A23.74 23.74 0 0018.795 3m.38 1.125a23.91 23.91 0 011.014 5.395m-1.014 8.855c-.118.38-.245.754-.38 1.125m.38-1.125a23.91 23.91 0 001.014-5.395m0-3.46c.495.413.811 1.035.811 1.73 0 .695-.316 1.317-.811 1.73m0-3.46a24.347 24.347 0 010 3.46',
 };
 
+const TEAM_ICON = 'M15 9h3.75M15 12h3.75M15 15h3.75M4.5 19.5h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5zm6-10.125a1.875 1.875 0 11-3.75 0 1.875 1.875 0 013.75 0zm1.294 6.336a6.721 6.721 0 01-3.17.789 6.721 6.721 0 01-3.168-.789 3.376 3.376 0 016.338 0z';
+
 const SIDEBAR_STORAGE_KEY = 'admin-sidebar-collapsed';
 
 const entryTitle = (item: Testimonial) => {
@@ -167,6 +170,9 @@ function AdminDashboardContent() {
   const [form, setForm] = useState<FormState>(emptyForm('client'));
   const [saving, setSaving] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [showTeam, setShowTeam] = useState(false);
+  const [staff, setStaff] = useState<StaffMemberRecord[]>([]);
+  const [staffLoading, setStaffLoading] = useState(true);
 
   useEffect(() => {
     try {
@@ -186,7 +192,9 @@ function AdminDashboardContent() {
 
   useEffect(() => {
     const hash = window.location.hash.replace('#', '');
-    if (isTestimonialCategory(hash)) {
+    if (hash === 'team') {
+      setShowTeam(true);
+    } else if (isTestimonialCategory(hash)) {
       setActiveCategory(hash);
     }
   }, []);
@@ -194,6 +202,7 @@ function AdminDashboardContent() {
   useEffect(() => {
     if (user?.role === 'admin') {
       fetchTestimonials();
+      fetchStaff();
     }
   }, [user]);
 
@@ -214,8 +223,23 @@ function AdminDashboardContent() {
   }, [activeCategory]);
 
   const selectCategory = (category: Category) => {
+    setShowTeam(false);
     setActiveCategory(category);
     window.history.replaceState(null, '', `#${category}`);
+  };
+
+  const selectTeam = () => {
+    closeForm();
+    setShowTeam(true);
+    window.history.replaceState(null, '', '#team');
+  };
+
+  const handleSectionSelect = (value: string) => {
+    if (value === 'team') {
+      selectTeam();
+    } else if (isTestimonialCategory(value)) {
+      selectCategory(value);
+    }
   };
 
   const items = allItems.filter((item) => item.category === activeCategory);
@@ -247,6 +271,21 @@ function AdminDashboardContent() {
       toast.error('Unable to load testimonials');
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchStaff = async () => {
+    try {
+      setStaffLoading(true);
+      const response = await axios.get('/api/admin/staff', {
+        headers: authHeaders(),
+      });
+      setStaff(Array.isArray(response.data) ? response.data : []);
+    } catch (error) {
+      console.error('Failed to fetch team members', error);
+      toast.error('Unable to load team members');
+    } finally {
+      setStaffLoading(false);
     }
   };
 
@@ -387,6 +426,8 @@ function AdminDashboardContent() {
   });
   const activeGroup = CATEGORY_GROUPS.find((group) => group.categories.includes(activeCategory))!;
   const activeStyle = GROUP_STYLES[activeGroup.page];
+  const staffPublished = staff.filter((member) => member.published).length;
+  const staffCount = staffLoading ? '–' : staff.length;
 
   return (
     <div className="fixed inset-0 z-[60] flex bg-gray-50 font-body">
@@ -431,6 +472,67 @@ function AdminDashboardContent() {
         </div>
 
         <nav aria-label="Content sections" className={`flex-1 overflow-y-auto py-6 ${sidebarCollapsed ? 'space-y-5 px-3' : 'space-y-7 px-4'}`}>
+          <div>
+            {sidebarCollapsed ? (
+              <span className="mx-auto mb-2 block h-1 w-6 rounded-full bg-soft-terracotta" aria-hidden="true" />
+            ) : (
+              <p className="mb-2 flex items-center gap-2 px-3 text-xs font-semibold uppercase tracking-wider text-gray-400">
+                <span className="h-2 w-2 rounded-full bg-soft-terracotta" aria-hidden="true" />
+                About page
+              </p>
+            )}
+            <ul className="space-y-1">
+              <li>
+                <button
+                  type="button"
+                  onClick={selectTeam}
+                  aria-current={showTeam ? 'page' : undefined}
+                  aria-label={sidebarCollapsed ? `Team Members (About page), ${staffCount} members` : undefined}
+                  title={sidebarCollapsed ? `Team Members · ${staffCount}` : undefined}
+                  className={`relative flex w-full items-center rounded-md text-left text-[15px] transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-soft-terracotta ${
+                    sidebarCollapsed ? 'h-12 justify-center' : 'justify-between px-3 py-2.5'
+                  } ${showTeam ? 'bg-white/10 font-semibold text-white' : 'font-medium text-gray-300 hover:bg-white/5 hover:text-white'}`}
+                >
+                  {showTeam && (
+                    <span className="absolute inset-y-1.5 left-0 w-[3px] rounded-full bg-soft-terracotta" aria-hidden="true" />
+                  )}
+                  {sidebarCollapsed ? (
+                    <>
+                      <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-soft-terracotta/20 text-soft-terracotta" aria-hidden="true">
+                        <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" d={TEAM_ICON} />
+                        </svg>
+                      </span>
+                      <span
+                        className={`absolute right-1 top-0.5 min-w-[20px] rounded-full px-1 text-center text-[11px] font-semibold leading-5 tabular-nums ${
+                          showTeam ? 'bg-soft-terracotta text-gray-900' : 'bg-gray-700 text-gray-200'
+                        }`}
+                        aria-hidden="true"
+                      >
+                        {staffCount}
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="flex items-center gap-3 pl-1">
+                        <svg className="h-5 w-5 flex-shrink-0 text-gray-400" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
+                          <path strokeLinecap="round" strokeLinejoin="round" d={TEAM_ICON} />
+                        </svg>
+                        Team Members
+                      </span>
+                      <span
+                        className={`min-w-[28px] rounded-full px-2 py-0.5 text-center text-xs font-semibold tabular-nums ${
+                          showTeam ? 'bg-soft-terracotta text-gray-900' : 'bg-white/10 text-gray-300'
+                        }`}
+                      >
+                        {staffCount}
+                      </span>
+                    </>
+                  )}
+                </button>
+              </li>
+            </ul>
+          </div>
           {CATEGORY_GROUPS.map((group) => {
             const style = GROUP_STYLES[group.page];
             return (
@@ -445,7 +547,7 @@ function AdminDashboardContent() {
                 )}
                 <ul className="space-y-1">
                   {group.categories.map((cat) => {
-                    const selected = cat === activeCategory;
+                    const selected = !showTeam && cat === activeCategory;
                     const label = CATEGORY_DETAILS[cat].label;
                     const count = loading ? '–' : countFor(cat);
                     return (
@@ -591,10 +693,15 @@ function AdminDashboardContent() {
             <label htmlFor="section-select" className="sr-only">Content section</label>
             <select
               id="section-select"
-              value={activeCategory}
-              onChange={(e) => selectCategory(e.target.value as Category)}
+              value={showTeam ? 'team' : activeCategory}
+              onChange={(e) => handleSectionSelect(e.target.value)}
               className="block h-11 w-full rounded-md border border-white/20 bg-white/10 px-3 text-base text-white focus:outline-none focus:ring-2 focus:ring-soft-terracotta"
             >
+              <optgroup label="About page" className="text-gray-900">
+                <option value="team" className="text-gray-900">
+                  Team Members ({staffLoading ? '…' : staff.length})
+                </option>
+              </optgroup>
               {CATEGORY_GROUPS.map((group) => (
                 <optgroup key={group.page} label={`${group.page} page`} className="text-gray-900">
                   {group.categories.map((cat) => (
@@ -617,10 +724,37 @@ function AdminDashboardContent() {
           </div>
 
           <h2 className="sr-only">Content overview</h2>
-          <div className="mb-8 grid grid-cols-3 gap-3 sm:gap-5">
+          <div className="mb-8 grid grid-cols-2 gap-3 sm:gap-5 xl:grid-cols-4">
+            <button
+              type="button"
+              onClick={selectTeam}
+              aria-label={`About page: ${staff.length} team members, ${staffPublished} published, ${staff.length - staffPublished} hidden`}
+              className={`group relative overflow-hidden rounded-lg border bg-white p-3 text-left shadow-sm transition-shadow duration-150 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 sm:p-5 ${
+                showTeam ? 'border-transparent ring-2 ring-soft-terracotta' : 'border-gray-200'
+              }`}
+            >
+              <span className="absolute inset-x-0 top-0 h-1 bg-soft-terracotta" aria-hidden="true" />
+              <div className="flex items-start justify-between gap-2">
+                <span className="hidden h-10 w-10 items-center justify-center rounded-lg bg-soft-terracotta/20 text-gilt-gold-strong sm:flex" aria-hidden="true">
+                  <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d={TEAM_ICON} />
+                  </svg>
+                </span>
+                <span className="text-xs font-semibold leading-tight text-gilt-gold-strong sm:text-[13px] sm:uppercase sm:tracking-wider">About</span>
+              </div>
+              <p className="mt-2 text-2xl font-semibold tabular-nums tracking-tight text-gray-900 sm:mt-4 sm:text-3xl">
+                {staffCount}
+              </p>
+              <p className="mt-0.5 text-xs text-gray-600 sm:text-sm">
+                <span className="sm:hidden">members</span>
+                <span className="hidden sm:inline">
+                  {staffLoading ? 'Loading…' : `${staffPublished} published · ${staff.length - staffPublished} hidden`}
+                </span>
+              </p>
+            </button>
             {groupStats.map((group) => {
               const style = GROUP_STYLES[group.page];
-              const isActive = group.page === activeGroup.page;
+              const isActive = !showTeam && group.page === activeGroup.page;
               return (
                 <button
                   key={group.page}
@@ -654,6 +788,9 @@ function AdminDashboardContent() {
             })}
           </div>
 
+          {showTeam ? (
+            <TeamManager members={staff} loading={staffLoading} onChanged={fetchStaff} icon={TEAM_ICON} />
+          ) : (
           <section aria-labelledby="section-title" className="overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm">
             <div className="flex flex-col gap-4 border-b border-gray-200 p-5 sm:flex-row sm:items-center sm:justify-between sm:p-6">
               <div className="flex min-w-0 items-start gap-4">
@@ -1033,6 +1170,7 @@ function AdminDashboardContent() {
               </>
             )}
           </section>
+          )}
         </main>
       </div>
     </div>
