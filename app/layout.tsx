@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import SessionProvider from '@/components/SessionProvider';
 import { AuthProvider } from '@/lib/AuthContext';
 import { ToastProvider } from '@/components/ui/Toast';
 import Navbar from '@/components/Navbar';
@@ -92,20 +91,18 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-body" suppressHydrationWarning>
-        <SessionProvider>
-          <AuthProvider>
-            <ToastProvider>
-              <div className="flex flex-col min-h-screen">
-                <Navbar />
-                <main className="flex-grow">
-                  {children}
-                </main>
-                <Footer />
-                <WhatsAppButton />
-              </div>
-            </ToastProvider>
-          </AuthProvider>
-        </SessionProvider>
+        <AuthProvider>
+          <ToastProvider>
+            <div className="flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-grow">
+                {children}
+              </main>
+              <Footer />
+              <WhatsAppButton />
+            </div>
+          </ToastProvider>
+        </AuthProvider>
       </body>
     </html>
   );

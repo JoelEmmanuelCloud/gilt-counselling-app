@@ -1,9 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { useSession } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
-import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import { useToast } from '@/components/ui/Toast';
 import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
@@ -90,13 +88,8 @@ const toFormState = (item: Testimonial): FormState => ({
 });
 
 function AdminDashboardContent() {
-  const { data: session, status } = useSession();
-  const { user: customUser, token } = useAuth();
-  const router = useRouter();
+  const { user, loading: authLoading } = useAuth();
   const toast = useToast();
-  const user = session?.user || customUser;
-  const isAuthenticated = status === 'authenticated' || (token && customUser);
-  const authLoading = status === 'loading' || (!!token && !customUser);
 
   const [activeCategory, setActiveCategory] = useState<Category>('client');
   const [items, setItems] = useState<Testimonial[]>([]);
@@ -105,14 +98,6 @@ function AdminDashboardContent() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [form, setForm] = useState<FormState>(emptyForm());
   const [saving, setSaving] = useState(false);
-
-  useEffect(() => {
-    if (authLoading) return;
-
-    if (isAuthenticated && user?.role !== 'admin') {
-      router.push('/account');
-    }
-  }, [authLoading, isAuthenticated, user, router]);
 
   useEffect(() => {
     if (user?.role === 'admin') {
@@ -264,16 +249,8 @@ function AdminDashboardContent() {
     );
   }
 
-  if (!isAuthenticated) {
-    return <AdminLoginForm />;
-  }
-
   if (user?.role !== 'admin') {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-off-white">
-        <div className="w-10 h-10 border-4 border-gilt-gold border-t-transparent rounded-full animate-spin" />
-      </div>
-    );
+    return <AdminLoginForm />;
   }
 
   return (

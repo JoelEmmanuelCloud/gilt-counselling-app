@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useState, useContext, useEffect } from 'react';
+import React, { createContext, useState, useContext, useEffect, useCallback } from 'react';
 import api from './api';
 import { User, AuthContextType } from './types';
 
@@ -9,64 +9,34 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const storedToken = localStorage.getItem('token');
-    if (storedToken) {
-      setToken(storedToken);
-    }
+  const logout = useCallback(() => {
+    try {
+      localStorage.removeItem('token');
+    } catch {}
+    setToken(null);
+    setUser(null);
   }, []);
 
   useEffect(() => {
-    if (token) {
-      fetchUser();
-    }
-  }, [token]);
-
-  const fetchUser = async () => {
+    let storedToken: string | null = null;
     try {
-      const response = await api.get('/auth/me');
-      setUser(response.data.user);
-    } catch (error) {
-      console.error('Failed to fetch user', error);
-      logout();
-    }
-  };
+      storedToken = localStorage.getItem('token');
+    } catch {}
 
-  const logout = () => {
-    localStorage.removeItem('token');
-    setToken(null);
-    setUser(null);
-  };
-
-  const sendOTP = async (email: string) => {
-    try {
-      const response = await api.post('/auth/send-otp', { email });
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to send verification code');
+    if (!storedToken) {
+      setLoading(false);
+      return;
     }
-  };
 
-  const verifyOTP = async (email: string, code: string): Promise<User> => {
-    try {
-      const response = await api.post('/auth/verify-otp', { email, code });
-      const { token, user } = response.data;
-      localStorage.setItem('token', token);
-      setToken(token);
-      setUser(user);
-      return user;
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Invalid verification code');
-    }
-  };
-
-  const resendOTP = async (email: string) => {
-    try {
-      const response = await api.post('/auth/resend-otp', { email });
-    } catch (error: any) {
-      throw new Error(error.response?.data?.message || 'Failed to resend verification code');
-    }
-  };
+    setToken(storedToken);
+    api
+      .get('/auth/me')
+      .then((response) => setUser(response.data.user))
+      .catch(() => logout())
+      .finally(() => setLoading(false));
+  }, [logout]);
 
   const adminLogin = async (email: string, password: string): Promise<User> => {
     try {
@@ -82,7 +52,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, logout, token, sendOTP, verifyOTP, resendOTP, adminLogin }}>
+    <AuthContext.Provider value={{ user, logout, token, loading, adminLogin }}>
       {children}
     </AuthContext.Provider>
   );

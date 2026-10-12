@@ -10,13 +10,13 @@ const nextConfig = {
     return [
       {
         source: '/login',
-        destination: '/auth/signin',
-        permanent: true,
+        destination: '/admin',
+        permanent: false,
       },
       {
         source: '/register',
-        destination: '/auth/signup',
-        permanent: true,
+        destination: '/book-appointment',
+        permanent: false,
       },
     ];
   },

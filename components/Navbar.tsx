@@ -4,17 +4,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
-import { useSession, signOut } from 'next-auth/react';
 import { useAuth } from '@/lib/AuthContext';
 
 const Navbar: React.FC = () => {
-  const { data: session, status } = useSession();
-  const { user: customUser, token, logout: customLogout } = useAuth();
+  const { user, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const user = session?.user || customUser;
-  const isAuthenticated = status === 'authenticated' || (token && customUser);
 
   const WHATSAPP_NUMBER = '2347065734165';
   const WHATSAPP_MESSAGE = encodeURIComponent(
@@ -39,14 +35,10 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(false);
   }, [pathname]);
 
-  const handleLogout = async () => {
-    if (session) {
-      await signOut({ callbackUrl: '/' });
-    } else if (token) {
-      customLogout();
-      router.push('/');
-    }
+  const handleLogout = () => {
+    logout();
     setMobileMenuOpen(false);
+    router.push('/');
   };
 
   const navLinks = [
@@ -141,45 +133,17 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
 
-              {user && (
-                <>
-                  {user.role === 'admin' && (
-                    <Link
-                      href="/admin"
-                      className={`transition-colors duration-200 relative pb-1 ${
-                        pathname === '/admin'
-                          ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
-                          : 'text-gray-700 hover:text-soft-terracotta'
-                      }`}
-                    >
-                      Admin
-                    </Link>
-                  )}
-                  {user.role === 'counselor' && (
-                    <Link
-                      href="/counselor"
-                      className={`transition-colors duration-200 relative pb-1 ${
-                        pathname === '/counselor'
-                          ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
-                          : 'text-gray-700 hover:text-soft-terracotta'
-                      }`}
-                    >
-                      Dashboard
-                    </Link>
-                  )}
-                  {user.role !== 'admin' && user.role !== 'counselor' && (
-                    <Link
-                      href="/account"
-                      className={`transition-colors duration-200 relative pb-1 ${
-                        pathname === '/account'
-                          ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
-                          : 'text-gray-700 hover:text-soft-terracotta'
-                      }`}
-                    >
-                      My Account
-                    </Link>
-                  )}
-                </>
+              {user?.role === 'admin' && (
+                <Link
+                  href="/admin"
+                  className={`transition-colors duration-200 relative pb-1 ${
+                    pathname === '/admin'
+                      ? 'text-soft-terracotta font-semibold after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-soft-terracotta'
+                      : 'text-gray-700 hover:text-soft-terracotta'
+                  }`}
+                >
+                  Admin
+                </Link>
               )}
             </div>
 
@@ -310,39 +274,17 @@ const Navbar: React.FC = () => {
                 </Link>
               ))}
 
-              {user && (
+              {user?.role === 'admin' && (
                 <div className="border-t border-gray-200 pt-3 sm:pt-4 mt-3 sm:mt-4">
-                  {user.role === 'admin' ? (
-                    <Link
-                      href="/admin"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`block text-gray-700 hover:text-soft-terracotta active:text-soft-terracotta hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 py-3 sm:py-3.5 px-3 sm:px-4 rounded-lg font-semibold text-sm sm:text-base touch-manipulation ${
-                        pathname === '/admin' ? 'bg-warm-cream text-soft-terracotta' : ''
-                      }`}
-                    >
-                      Admin Dashboard
-                    </Link>
-                  ) : user.role === 'counselor' ? (
-                    <Link
-                      href="/counselor"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`block text-gray-700 hover:text-soft-terracotta active:text-soft-terracotta hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 py-3 sm:py-3.5 px-3 sm:px-4 rounded-lg font-semibold text-sm sm:text-base touch-manipulation ${
-                        pathname === '/counselor' ? 'bg-warm-cream text-soft-terracotta' : ''
-                      }`}
-                    >
-                      Dashboard
-                    </Link>
-                  ) : (
-                    <Link
-                      href="/account"
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={`block text-gray-700 hover:text-soft-terracotta active:text-soft-terracotta hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 py-3 sm:py-3.5 px-3 sm:px-4 rounded-lg text-sm sm:text-base touch-manipulation ${
-                        pathname === '/account' ? 'bg-warm-cream text-soft-terracotta' : ''
-                      }`}
-                    >
-                      My Account
-                    </Link>
-                  )}
+                  <Link
+                    href="/admin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={`block text-gray-700 hover:text-soft-terracotta active:text-soft-terracotta hover:bg-warm-cream active:bg-warm-cream/80 transition-colors duration-200 py-3 sm:py-3.5 px-3 sm:px-4 rounded-lg font-semibold text-sm sm:text-base touch-manipulation ${
+                      pathname === '/admin' ? 'bg-warm-cream text-soft-terracotta' : ''
+                    }`}
+                  >
+                    Admin Dashboard
+                  </Link>
                 </div>
               )}
             </div>
