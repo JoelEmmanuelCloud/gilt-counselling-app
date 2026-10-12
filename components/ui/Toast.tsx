@@ -70,23 +70,23 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
   };
 
   const styles = {
-    success: 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white',
-    error: 'bg-gradient-to-r from-red-500 to-rose-500 text-white',
-    warning: 'bg-gradient-to-r from-amber-500 to-orange-500 text-white',
-    info: 'bg-gradient-to-r from-blue-500 to-indigo-500 text-white',
+    success: 'border-l-emerald-600',
+    error: 'border-l-red-600',
+    warning: 'border-l-amber-500',
+    info: 'border-l-gray-900',
   };
 
   const iconBgStyles = {
-    success: 'bg-white/20',
-    error: 'bg-white/20',
-    warning: 'bg-white/20',
-    info: 'bg-white/20',
+    success: 'bg-emerald-50 text-emerald-700',
+    error: 'bg-red-50 text-red-700',
+    warning: 'bg-amber-50 text-amber-800',
+    info: 'bg-gray-100 text-gray-900',
   };
 
   return (
     <div
       className={`
-        flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg backdrop-blur-sm
+        pointer-events-auto flex items-center gap-3 px-4 py-3 rounded-md border border-gray-200 border-l-4 bg-white text-gray-900 shadow-lg
         transform transition-all duration-300 ease-out w-full sm:min-w-[320px] sm:w-auto sm:max-w-[420px]
         ${styles[toast.type]}
         ${isExiting ? 'opacity-0 translate-x-full' : 'opacity-100 translate-x-0'}
@@ -99,7 +99,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
       <p className="flex-1 text-sm font-medium leading-snug">{toast.message}</p>
       <button
         onClick={handleClose}
-        className="flex-shrink-0 p-1 rounded-full hover:bg-white/20 transition-colors"
+        className="flex-shrink-0 flex h-9 w-9 items-center justify-center rounded-md text-gray-500 hover:bg-gray-100 hover:text-gray-900 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
         aria-label="Close notification"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
