@@ -16,17 +16,11 @@ export function SiteLinkLabel({ children }: { children: React.ReactNode }) {
   );
 }
 
-interface PanelLink {
-  href: string;
-  label: string;
-}
-
 interface AuthSplitLayoutProps {
   children: React.ReactNode;
   eyebrow: string;
   headline: string;
   description: string;
-  panelLink?: PanelLink;
 }
 
 const whiteButtonClass =
@@ -37,7 +31,6 @@ export default function AuthSplitLayout({
   eyebrow,
   headline,
   description,
-  panelLink,
 }: AuthSplitLayoutProps) {
   useEffect(() => {
     const previousOverflow = document.body.style.overflow;
@@ -79,32 +72,19 @@ export default function AuthSplitLayout({
       </section>
 
       <aside className="panel-gold hidden min-h-full w-1/2 lg:flex lg:flex-col">
-        <div className="flex justify-end p-6 sm:p-8">
-          <Link href="/" className={whiteButtonClass}>
-            <SiteLinkLabel>Back to site</SiteLinkLabel>
-          </Link>
-        </div>
-
-        <div className="flex flex-1 items-center px-12 pb-24 xl:px-16">
+        <div className="flex flex-1 items-center px-12 py-24 xl:px-16">
           <div className="max-w-lg">
             <p className="eyebrow text-gray-900">{eyebrow}</p>
             <p className="mt-4 text-4xl font-semibold leading-[1.1] tracking-tight text-gray-900 xl:text-5xl">
               {headline}
             </p>
             <p className="mt-6 text-lg leading-relaxed text-gray-900/85">{description}</p>
-            {panelLink && (
-              <Link
-                href={panelLink.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={`mt-8 ${whiteButtonClass}`}
-              >
-                <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
-                </svg>
-                {panelLink.label}
-              </Link>
-            )}
+            <Link href="/" className={`mt-8 ${whiteButtonClass}`}>
+              <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+              </svg>
+              <SiteLinkLabel>Back to site</SiteLinkLabel>
+            </Link>
           </div>
         </div>
       </aside>
