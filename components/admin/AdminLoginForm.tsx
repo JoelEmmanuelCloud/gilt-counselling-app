@@ -9,13 +9,13 @@ const REMEMBER_KEY = 'admin-login-email';
 
 const stripePattern: React.CSSProperties = {
   backgroundImage:
-    'repeating-linear-gradient(135deg, rgba(255,255,255,0.22) 0px, rgba(255,255,255,0.22) 2px, transparent 2px, transparent 8px)',
+    'repeating-linear-gradient(135deg, rgba(255,255,255,0.28) 0px, rgba(255,255,255,0.28) 2px, transparent 2px, transparent 8px)',
   maskImage: 'radial-gradient(ellipse 75% 90% at 90% 50%, #000 25%, transparent 78%)',
   WebkitMaskImage: 'radial-gradient(ellipse 75% 90% at 90% 50%, #000 25%, transparent 78%)',
 };
 
 const fieldClass =
-  'block h-12 w-full rounded-md border bg-white px-3.5 text-base text-gray-900 shadow-sm transition-colors duration-150 focus:border-gilt-teal-dark focus:outline-none focus:ring-2 focus:ring-gilt-teal-dark/25';
+  'block h-12 w-full rounded-md border bg-white px-3.5 text-base text-gray-900 shadow-sm transition-colors duration-150 focus:border-gray-900 focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40';
 
 export default function AdminLoginForm() {
   const { adminLogin } = useAuth();
@@ -84,7 +84,7 @@ export default function AdminLoginForm() {
         <header className="flex items-center justify-between px-6 pt-6 sm:px-8">
           <Link
             href="/"
-            className="relative block h-14 w-32 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-gilt-teal-dark"
+            className="relative block h-14 w-32 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
             aria-label="Gilt Counselling Consult home"
           >
             <Image
@@ -98,7 +98,7 @@ export default function AdminLoginForm() {
           </Link>
           <Link
             href="/"
-            className="inline-flex h-11 items-center rounded-md border border-gray-300 px-4 text-sm font-medium text-gray-800 shadow-sm transition-colors duration-150 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gilt-teal-dark lg:hidden"
+            className="inline-flex h-11 items-center rounded-md border border-gray-300 px-4 text-sm font-medium text-gray-800 shadow-sm transition-colors duration-150 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 lg:hidden"
           >
             Back to site
           </Link>
@@ -175,7 +175,7 @@ export default function AdminLoginForm() {
                     aria-label={showPassword ? 'Hide password' : 'Show password'}
                     aria-pressed={showPassword}
                     aria-controls="admin-password"
-                    className="absolute inset-y-0 right-0 flex w-12 cursor-pointer items-center justify-center rounded-r-md text-gray-600 transition-colors duration-150 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gilt-teal-dark"
+                    className="absolute inset-y-0 right-0 flex w-12 cursor-pointer items-center justify-center rounded-r-md text-gray-600 transition-colors duration-150 hover:text-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-gray-900"
                   >
                     {showPassword ? (
                       <svg className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth={1.75} viewBox="0 0 24 24" aria-hidden="true">
@@ -210,10 +210,10 @@ export default function AdminLoginForm() {
                 type="submit"
                 disabled={submitting}
                 aria-busy={submitting}
-                className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-gilt-teal-dark px-4 text-base font-medium text-white shadow-sm transition-colors duration-150 hover:bg-gilt-teal-deep focus:outline-none focus-visible:ring-2 focus-visible:ring-gilt-teal-dark focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+                className="flex h-12 w-full cursor-pointer items-center justify-center gap-2 rounded-md bg-soft-terracotta px-4 text-base font-semibold text-gray-900 shadow-sm transition-colors duration-150 hover:bg-soft-terracotta/90 active:bg-soft-terracotta/80 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
               >
                 {submitting && (
-                  <span className="h-4 w-4 rounded-full border-2 border-white border-t-transparent motion-safe:animate-spin" aria-hidden="true" />
+                  <span className="h-4 w-4 rounded-full border-2 border-gray-900 border-t-transparent motion-safe:animate-spin" aria-hidden="true" />
                 )}
                 {submitting ? 'Signing in...' : 'Sign in'}
               </button>
@@ -223,7 +223,7 @@ export default function AdminLoginForm() {
               Not an administrator?{' '}
               <Link
                 href="/"
-                className="font-medium text-gilt-teal-dark underline-offset-4 hover:underline focus:outline-none focus-visible:underline"
+                className="font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 transition-colors duration-150 hover:decoration-gray-900 focus:outline-none focus-visible:decoration-gray-900"
               >
                 Return to the website
               </Link>
@@ -232,13 +232,13 @@ export default function AdminLoginForm() {
         </div>
       </section>
 
-      <aside className="relative hidden min-h-full w-1/2 overflow-hidden bg-gilt-teal-deep lg:flex lg:flex-col">
+      <aside className="relative hidden min-h-full w-1/2 overflow-hidden bg-gradient-to-br from-soft-terracotta via-gilt-gold to-gilt-orange lg:flex lg:flex-col">
         <div className="pointer-events-none absolute inset-0" style={stripePattern} aria-hidden="true" />
 
         <div className="relative flex justify-end p-6 sm:p-8">
           <Link
             href="/"
-            className="inline-flex h-11 items-center rounded-md bg-white px-5 text-[15px] font-medium text-gray-900 shadow-sm transition-colors duration-150 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gilt-teal-deep"
+            className="inline-flex h-11 items-center rounded-md bg-white px-5 text-[15px] font-medium text-gray-900 shadow-sm transition-colors duration-150 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-soft-terracotta"
           >
             Back to site
           </Link>
@@ -246,20 +246,20 @@ export default function AdminLoginForm() {
 
         <div className="relative flex flex-1 items-center px-12 pb-24 xl:px-16">
           <div className="max-w-lg">
-            <p className="font-mono text-sm tracking-wide text-amber-200">
+            <p className="font-mono text-sm tracking-wide text-gray-900">
               Gilt Counselling Consult &middot; Admin
             </p>
-            <p className="mt-4 text-4xl font-semibold leading-[1.1] tracking-tight text-white xl:text-5xl">
+            <p className="mt-4 text-4xl font-semibold leading-[1.1] tracking-tight text-gray-900 xl:text-5xl">
               Every story shared is a step toward healing.
             </p>
-            <p className="mt-6 text-lg leading-relaxed text-white/85">
+            <p className="mt-6 text-lg leading-relaxed text-gray-900/85">
               Publish client testimonials, school outreach, community events and media features in one place.
             </p>
             <Link
               href="/testimonials"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex h-11 items-center gap-2 rounded-md bg-white px-5 text-[15px] font-medium text-gray-900 shadow-sm transition-colors duration-150 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-gilt-teal-deep"
+              className="mt-8 inline-flex h-11 items-center gap-2 rounded-md bg-white px-5 text-[15px] font-medium text-gray-900 shadow-sm transition-colors duration-150 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-soft-terracotta"
             >
               <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" />
