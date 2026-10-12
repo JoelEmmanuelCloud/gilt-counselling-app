@@ -1,191 +1,58 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
+import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
 import TestimonialCard from '@/components/ui/TestimonialCard';
-import EventTestimonialCard from '@/components/ui/EventTestimonialCard';
 import Button from '@/components/ui/Button';
-import Image from 'next/image';
 import { TestimonialCardSkeleton } from '@/components/ui/Skeleton';
-
-interface SchoolQuote {
-  text: string;
-  role: string;
-}
-
-interface Testimonial {
-  _id: string;
-  category: 'client' | 'school' | 'community' | 'media';
-  quote?: string;
-  name?: string;
-  service?: string;
-  date?: string;
-  school?: string;
-  quotes?: SchoolQuote[];
-  title?: string;
-  organization?: string;
-  description?: string;
-  images?: string[];
-  videoUrl?: string;
-}
+import { usePublishedEntries } from '@/components/stories/usePublishedEntries';
 
 export default function TestimoniesPage() {
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTestimonials = async () => {
-      try {
-        const response = await fetch('/api/testimonials');
-        const data = await response.json();
-        setTestimonials(Array.isArray(data) ? data : []);
-      } catch (error) {
-        console.error('Failed to load testimonials', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchTestimonials();
-  }, []);
-
-  const clientTestimonials = testimonials.filter((t) => t.category === 'client');
-  const schoolTestimonials = testimonials.filter((t) => t.category === 'school');
-  const communityTestimonials = testimonials.filter((t) => t.category === 'community');
-  const mediaTestimonials = testimonials.filter((t) => t.category === 'media');
+  const { entries, loading, failed } = usePublishedEntries('client');
 
   return (
     <div className="min-h-screen bg-off-white">
+      <PageHeader
+        eyebrow="Testimonies"
+        title="Stories of Hope & Growth"
+        description="Hear from those we've had the privilege to support on their journey toward healing and growth."
+        image={{ src: '/images/office1.jpg', alt: 'A calm counselling room with two armchairs, a small table, and a plant' }}
+      >
+        <p className="mt-4 text-sm text-gray-900/80">
+          All testimonials are shared anonymously to protect our clients' privacy and confidentiality.
+        </p>
+      </PageHeader>
 
-      <section className="panel-gold stripes-left">
-        <div className="relative aspect-[16/10] w-full sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
-          <Image
-            src="/images/ccpa-conference/ccpa-1.jpeg"
-            alt="Prof Chinelo Ugwu with a colleague at the Canadian Counselling and Psychotherapy Association conference"
-            fill
-            priority
-            sizes="(min-width: 1024px) 50vw, 100vw"
-            className="object-cover"
-          />
-        </div>
-        <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:flex lg:min-h-[480px] lg:items-center lg:px-8 lg:py-24">
-          <div className="lg:w-1/2 lg:pr-12">
-            <p className="eyebrow mb-4">Testimonies</p>
-            <h1 className="heading-xl max-w-3xl mb-6">
-              Stories of Hope & Growth
-            </h1>
-            <p className="body-lg max-w-2xl text-gray-900/85 mb-4">
-              Hear from those we've had the privilege to support on their journey toward healing and growth.
-            </p>
-            <p className="text-sm text-gray-900/80">
-              All testimonials are shared anonymously to protect our clients' privacy and confidentiality.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {loading ? (
-        <section className="section-container" role="status" aria-live="polite">
-          <span className="sr-only">Loading testimonials</span>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+      <section className="section-container" aria-busy={loading}>
+        {loading ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12" role="status" aria-live="polite">
+            <span className="sr-only">Loading testimonials</span>
             {[0, 1, 2].map((i) => (
               <TestimonialCardSkeleton key={i} />
             ))}
           </div>
-        </section>
-      ) : (
-        <>
-          {clientTestimonials.length > 0 && (
-            <section className="section-container">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
-                {clientTestimonials.map((testimonial) => (
-                  <TestimonialCard
-                    key={testimonial._id}
-                    quote={testimonial.quote || ''}
-                    firstName={testimonial.name || ''}
-                    service={testimonial.service}
-                    date={testimonial.date}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {schoolTestimonials.length > 0 && (
-            <section className="section-container bg-warm-cream">
-              <SectionHeading
-                title="School Outreach Testimonies"
-                subtitle="Feedback from our Emotional Intelligence sessions with students, counsellors, and principals across schools."
-                centered
+        ) : failed ? (
+          <p className="max-w-3xl mx-auto rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-800" role="alert">
+            We couldn&apos;t load testimonials right now. Please refresh the page to try again.
+          </p>
+        ) : entries.length === 0 ? (
+          <p className="text-center text-gray-600">Client testimonials will appear here soon.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
+            {entries.map((testimonial) => (
+              <TestimonialCard
+                key={testimonial._id}
+                quote={testimonial.quote || ''}
+                firstName={testimonial.name || ''}
+                service={testimonial.service}
+                date={testimonial.date}
               />
-              <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
-                {schoolTestimonials.map((entry) => (
-                  <div key={entry._id} className="bg-white rounded-lg p-6 sm:p-8 shadow-calm">
-                    <h3 className="heading-sm mb-4">{entry.school}</h3>
-                    <div className="space-y-4">
-                      {(entry.quotes || []).map((quote, quoteIndex) => (
-                        <div key={quoteIndex} className="border-t border-soft-beige pt-4 first:border-t-0 first:pt-0">
-                          <p className="text-gray-700 leading-relaxed italic mb-1">"{quote.text}"</p>
-                          <p className="text-sm text-soft-gold font-semibold">{quote.role}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-          )}
-
-          {communityTestimonials.length > 0 && (
-            <section className="section-container bg-off-white">
-              <SectionHeading
-                title="Community Outreach"
-                subtitle="Making a difference beyond our counselling rooms — bringing support and awareness to communities."
-                centered
-              />
-              <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
-                {communityTestimonials.map((entry) => (
-                  <EventTestimonialCard
-                    key={entry._id}
-                    badge="Community"
-                    title={entry.title || ''}
-                    organization={entry.organization}
-                    date={entry.date}
-                    description={entry.description || ''}
-                    images={entry.images}
-                    videoUrl={entry.videoUrl}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-
-          {mediaTestimonials.length > 0 && (
-            <section className="section-container bg-off-white">
-              <SectionHeading
-                title="Media & Press Features"
-                subtitle="Sharing our expertise on mental health and wellness with the wider public through radio."
-                centered
-              />
-              <div className="max-w-5xl mx-auto space-y-6 sm:space-y-8">
-                {mediaTestimonials.map((entry) => (
-                  <EventTestimonialCard
-                    key={entry._id}
-                    badge="Media"
-                    title={entry.title || ''}
-                    organization={entry.organization}
-                    date={entry.date}
-                    description={entry.description || ''}
-                    images={entry.images}
-                    videoUrl={entry.videoUrl}
-                  />
-                ))}
-              </div>
-            </section>
-          )}
-        </>
-      )}
+            ))}
+          </div>
+        )}
+      </section>
 
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
