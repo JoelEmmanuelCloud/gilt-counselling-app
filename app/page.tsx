@@ -438,29 +438,24 @@ export default function Home() {
       </section>
 
       
-      <section className="bg-gray-900 text-white py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
+      <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <FadeUp distance={30}>
-          <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">
-            <div className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6">"</div>
-            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-relaxed">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="eyebrow mb-4">All consultations are completely confidential</p>
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-4xl font-heading font-semibold tracking-tight mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
               Ready to Begin Your Journey?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl lg:text-xl mb-6 sm:mb-7 lg:mb-8 xl:mb-10 text-gray-300">
+            <p className="text-base sm:text-lg md:text-xl lg:text-xl mb-6 sm:mb-7 lg:mb-8 xl:mb-10 text-gray-900/85">
               Take the first step towards a healthier, happier life. Book your consultation today.
             </p>
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-6 sm:mb-8">
-              <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-              <p className="text-xs lg:text-sm text-gray-400">All consultations are completely confidential</p>
-              <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-            </div>
-            <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5 justify-center">
+            <div className="flex flex-col xs:flex-row gap-3 sm:gap-4 lg:gap-5">
               <Link href="/book-appointment">
-                <Button className="btn-cta w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 uppercase text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-lg">
+                <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 rounded-lg lg:rounded-lg text-sm font-semibold transition-colors duration-150">
                   Book Session
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button className="bg-transparent border-2 border-soft-terracotta text-soft-terracotta hover:bg-soft-terracotta/10 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 uppercase text-xs lg:text-sm tracking-wide rounded-lg lg:rounded-lg transition-all duration-300">
+                <Button className="bg-transparent border border-gray-900 text-gray-900 hover:bg-gray-900/5 w-full xs:w-auto px-6 sm:px-8 lg:px-10 xl:px-12 py-3 lg:py-3.5 xl:py-4 rounded-lg lg:rounded-lg text-sm font-semibold transition-colors duration-150">
                   Contact Us
                 </Button>
               </Link>
