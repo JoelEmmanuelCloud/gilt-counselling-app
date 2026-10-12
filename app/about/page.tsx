@@ -107,14 +107,26 @@ export default function About() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold py-14 sm:py-20 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="eyebrow mb-4">About us</p>
-          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
-          <p className="body-lg max-w-2xl text-gray-900/85">
-            Empowering teens and youths for optimal development through professional,
-            compassionate counselling and support.
-          </p>
+      <section className="panel-gold stripes-left">
+        <div className="relative aspect-[16/10] w-full sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
+          <Image
+            src="/images/DSC_9730.jpg"
+            alt="Gilt counsellors and young people holding hands around a table in the counselling office"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:flex lg:min-h-[480px] lg:items-center lg:px-8 lg:py-24">
+          <div className="lg:w-1/2 lg:pr-12">
+            <p className="eyebrow mb-4">About us</p>
+            <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">About Gilt Counselling Consult</h1>
+            <p className="body-lg max-w-2xl text-gray-900/85">
+              Empowering teens and youths for optimal development through professional,
+              compassionate counselling and support.
+            </p>
+          </div>
         </div>
       </section>
 

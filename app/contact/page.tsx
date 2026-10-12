@@ -1,68 +1,36 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { useToast } from '@/components/ui/Toast';
 
 export default function Contact() {
-  const toast = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.message || 'Something went wrong. Please try again.');
-        return;
-      }
-
-      toast.success('Thank you for reaching out. We will get back to you soon!');
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch {
-      toast.error('Failed to send message. Please try again later.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold py-14 sm:py-20 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="eyebrow mb-4">Contact</p>
-          <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Get in Touch</h1>
-          <p className="body-lg max-w-2xl text-gray-900/85">
-            We're here to answer your questions and support you on your journey.
-            Reach out however feels most comfortable for you.
-          </p>
+      <section className="panel-gold stripes-left">
+        <div className="relative aspect-[16/10] w-full sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
+          <Image
+            src="/images/header1.jpg"
+            alt="Counsellor smiling and welcoming two young clients at her desk"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:flex lg:min-h-[480px] lg:items-center lg:px-8 lg:py-24">
+          <div className="lg:w-1/2 lg:pr-12">
+            <p className="eyebrow mb-4">Contact</p>
+            <h1 className="heading-xl max-w-3xl mb-4 sm:mb-6">Get in Touch</h1>
+            <p className="body-lg max-w-2xl text-gray-900/85">
+              We're here to answer your questions and support you on your journey.
+              Reach out however feels most comfortable for you.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -99,15 +67,26 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3">
-              <svg className="w-6 h-6 text-soft-gold flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
-              </svg>
-              <div>
-                <h4 className="font-semibold text-gray-900 mb-1">WhatsApp</h4>
-                <p className="text-gray-700">Available for consultations and inquiries</p>
-              </div>
-            </div>
+            <a
+              href="https://wa.me/2347065734165?text=Hello%2C%20I%20would%20like%20to%20make%20an%20inquiry%20with%20Gilt%20Counselling%20Consult."
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with Gilt Counselling Consult on WhatsApp (opens in a new tab)"
+              className="group -m-2 flex items-start gap-3 rounded-md p-2 transition-colors duration-150 hover:bg-white/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+            >
+              <span className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-[#25D366] text-white" aria-hidden="true">
+                <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                </svg>
+              </span>
+              <span>
+                <span className="block font-semibold text-gray-900 mb-1">WhatsApp</span>
+                <span className="block text-gray-700">Available for consultations and inquiries</span>
+                <span className="mt-1 inline-flex items-center gap-1 text-sm font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 group-hover:decoration-gray-900">
+                  Chat with us on WhatsApp
+                </span>
+              </span>
+            </a>
           </Card>
 
           
@@ -192,82 +171,6 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="section-container bg-off-white">
-        <div className="max-w-2xl mx-auto">
-          <SectionHeading
-            title="Send Us a Message"
-            subtitle="Have a question or ready to book? Fill out the form below and we'll get back to you within 24 hours."
-            centered
-          />
-          <Card>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="label">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="label">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="your.email@example.com"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="label">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="+234 xxx xxx xxxx"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="label">Your Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="input"
-                  placeholder="How can we support you?"
-                  required
-                />
-              </div>
-
-              <Button type="submit" variant="primary" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-
-              <p className="text-sm text-gray-600 text-center mt-4">
-                Your privacy is important to us. We will never share your information.
-              </p>
-            </form>
-          </Card>
-        </div>
-      </section>
-
       <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="eyebrow mb-4">We're here to help</p>
@@ -275,7 +178,7 @@ export default function Contact() {
             Prefer to Book Directly?
           </h2>
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-900/85">
-            Skip the form and schedule your appointment right away.
+            Send us a WhatsApp message and our team will schedule your session.
           </p>
           <Link href="/book-appointment">
             <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">

@@ -85,6 +85,11 @@
     mask-image: radial-gradient(ellipse 75% 90% at 90% 50%, #000 25%, transparent 78%);
   }
 
+  .panel-gold.stripes-left::before {
+    -webkit-mask-image: radial-gradient(ellipse 60% 90% at 10% 50%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 60% 90% at 10% 50%, #000 20%, transparent 75%);
+  }
+
   /* Section Container */
   .section-container {
     @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10 md:py-14 lg:py-16 xl:py-20;
