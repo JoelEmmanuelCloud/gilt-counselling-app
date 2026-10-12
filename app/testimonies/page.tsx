@@ -6,6 +6,7 @@ import SectionHeading from '@/components/ui/SectionHeading';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import EventTestimonialCard from '@/components/ui/EventTestimonialCard';
 import Button from '@/components/ui/Button';
+import Image from 'next/image';
 
 interface SchoolQuote {
   text: string;
@@ -56,18 +57,30 @@ export default function TestimoniesPage() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold py-14 sm:py-20 md:py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="eyebrow mb-4">Testimonies</p>
-          <h1 className="heading-xl max-w-3xl mb-6">
-            Stories of Hope & Growth
-          </h1>
-          <p className="body-lg max-w-2xl text-gray-900/85 mb-4">
-            Hear from those we've had the privilege to support on their journey toward healing and growth.
-          </p>
-          <p className="text-sm text-gray-900/80">
-            All testimonials are shared anonymously to protect our clients' privacy and confidentiality.
-          </p>
+      <section className="panel-gold">
+        <div className="max-w-6xl mx-auto grid items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:py-24 lg:grid-cols-2 lg:gap-14 lg:px-8">
+          <div>
+            <p className="eyebrow mb-4">Testimonies</p>
+            <h1 className="heading-xl max-w-3xl mb-6">
+              Stories of Hope & Growth
+            </h1>
+            <p className="body-lg max-w-2xl text-gray-900/85 mb-4">
+              Hear from those we've had the privilege to support on their journey toward healing and growth.
+            </p>
+            <p className="text-sm text-gray-900/80">
+              All testimonials are shared anonymously to protect our clients' privacy and confidentiality.
+            </p>
+          </div>
+          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-900/10 lg:aspect-[4/3]">
+            <Image
+              src="/images/ccpa-conference/ccpa-1.jpeg"
+              alt="Prof Chinelo Ugwu with a colleague at the Canadian Counselling and Psychotherapy Association conference"
+              fill
+              priority
+              sizes="(min-width: 1152px) 548px, (min-width: 1024px) 46vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </section>
 
