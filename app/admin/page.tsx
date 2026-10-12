@@ -8,6 +8,7 @@ import { useToast } from '@/components/ui/Toast';
 import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
 import AdminLoginForm from '@/components/admin/AdminLoginForm';
 import Skeleton from '@/components/ui/Skeleton';
+import Pagination from '@/components/ui/Pagination';
 import {
   CATEGORY_DETAILS,
   CATEGORY_GROUPS,
@@ -92,6 +93,8 @@ const toFormState = (item: Testimonial): FormState => ({
   order: item.order ?? 0,
 });
 
+const ADMIN_PAGE_SIZE = 10;
+
 function AdminDashboardContent() {
   const { user, loading: authLoading } = useAuth();
   const toast = useToast();
@@ -117,8 +120,11 @@ function AdminDashboardContent() {
     }
   }, [user]);
 
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
     closeForm();
+    setPage(1);
   }, [activeCategory]);
 
   const selectCategory = (category: Category) => {
@@ -127,6 +133,14 @@ function AdminDashboardContent() {
   };
 
   const items = allItems.filter((item) => item.category === activeCategory);
+  const totalPages = Math.max(1, Math.ceil(items.length / ADMIN_PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageItems = items.slice((currentPage - 1) * ADMIN_PAGE_SIZE, currentPage * ADMIN_PAGE_SIZE);
+
+  const changePage = (nextPage: number) => {
+    setPage(Math.min(Math.max(1, nextPage), totalPages));
+    document.getElementById('section-title')?.scrollIntoView({ block: 'center' });
+  };
   const countFor = (category: Category) => allItems.filter((item) => item.category === category).length;
   const activeDetails = CATEGORY_DETAILS[activeCategory];
 
@@ -614,7 +628,7 @@ function AdminDashboardContent() {
               </div>
             ) : (
               <div className="space-y-4">
-                {items.map((item) => (
+                {pageItems.map((item) => (
                   <div key={item._id} className="bg-white rounded-lg p-5 shadow-calm flex flex-col sm:flex-row sm:items-start gap-4">
                     <div className="flex-1 min-w-0">
                       {item.category === 'client' && (
@@ -671,6 +685,12 @@ function AdminDashboardContent() {
                     </div>
                   </div>
                 ))}
+                <Pagination
+                  page={currentPage}
+                  totalPages={totalPages}
+                  onPageChange={changePage}
+                  label={`${activeDetails.label} pages`}
+                />
               </div>
             )}
           </section>
