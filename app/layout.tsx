@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Playfair_Display, Inter } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import './globals.css';
 import SessionProvider from '@/components/SessionProvider';
 import { AuthProvider } from '@/lib/AuthContext';
@@ -7,12 +7,6 @@ import { ToastProvider } from '@/components/ui/Toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
-
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  variable: '--font-heading',
-  display: 'swap',
-});
 
 const inter = Inter({
   subsets: ['latin'],
@@ -96,7 +90,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+    <html lang="en" className={inter.variable}>
       <body className="font-body" suppressHydrationWarning>
         <SessionProvider>
           <AuthProvider>
