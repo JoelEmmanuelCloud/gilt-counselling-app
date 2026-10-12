@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
+import AuthSplitLayout from '@/components/auth/AuthSplitLayout';
 
 function VerifyOTPContent() {
   const router = useRouter();
@@ -193,14 +194,18 @@ function VerifyOTPContent() {
   };
   if (!email) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4">
-        <div className="max-w-md w-full bg-white p-6 sm:p-8 rounded-lg sm:rounded-lg shadow-md border border-gilt-gold/20 text-center">
+      <AuthSplitLayout
+      eyebrow="Gilt Counselling Consult"
+      headline="Your privacy comes first."
+      description="We confirm every sign-in with a one-time code so only you can access your account."
+    >
+        <div className="space-y-6 text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-gray-900 mb-2">Invalid Request</h1>
+          <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">Invalid Request</h1>
           <p className="text-gray-600 mb-6">No email address provided.</p>
           <Link
             href="/auth/signin"
@@ -209,22 +214,26 @@ function VerifyOTPContent() {
             Back to Sign In
           </Link>
         </div>
-      </div>
+      </AuthSplitLayout>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
-      <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg sm:rounded-lg lg:rounded-lg shadow-md sm:shadow-lg border border-gilt-gold/20">
+    <AuthSplitLayout
+      eyebrow="Gilt Counselling Consult"
+      headline="Your privacy comes first."
+      description="We confirm every sign-in with a one-time code so only you can access your account."
+    >
+      <div className="space-y-6">
 
         <div className="text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
+          <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
             Verify Your Email
           </h1>
           <p className="text-sm sm:text-base lg:text-lg text-gray-600">
             Enter the 6-digit code sent to
           </p>
-          <p className="text-sm sm:text-base lg:text-lg font-medium text-gilt-gold mt-1">
+          <p className="text-sm sm:text-base lg:text-lg font-semibold text-gray-900 mt-1 break-all">
             {email}
           </p>
         </div>
@@ -233,7 +242,7 @@ function VerifyOTPContent() {
           <div className="text-center">
             <p className="text-xs sm:text-sm lg:text-base text-gray-500">
               Code expires in{" "}
-              <span className={`font-medium ${timeRemaining < 60 ? "text-red-500" : "text-gilt-gold"}`}>
+              <span className={`font-semibold tabular-nums ${timeRemaining < 60 ? "text-red-700" : "text-gray-900"}`}>
                 {formatTime(timeRemaining)}
               </span>
             </p>
@@ -304,7 +313,7 @@ function VerifyOTPContent() {
           <button
             onClick={handleResend}
             disabled={!canResend || isResending || !!successMessage}
-            className="text-sm sm:text-base font-medium text-gilt-gold hover:text-gilt-orange disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
+            className="text-sm sm:text-base font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 hover:decoration-gray-900 disabled:text-gray-400 disabled:no-underline disabled:cursor-not-allowed transition-colors"
           >
             {isResending ? (
               "Sending..."
@@ -320,13 +329,13 @@ function VerifyOTPContent() {
         <div className="text-center pt-3 sm:pt-4 lg:pt-5 border-t border-gray-200">
           <Link
             href={type === "signup" ? "/auth/signup" : "/auth/signin"}
-            className="text-xs sm:text-sm lg:text-base text-gray-500 hover:text-gilt-gold transition-colors"
+            className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
           >
             ← Back to {type === "signup" ? "Sign Up" : "Sign In"}
           </Link>
         </div>
       </div>
-    </div>
+    </AuthSplitLayout>
   );
 }
 

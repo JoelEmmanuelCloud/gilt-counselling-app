@@ -2,11 +2,16 @@
 
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
+import AuthSplitLayout from '@/components/auth/AuthSplitLayout';
 
 export default function VerifyRequest() {
   return (
-    <div className="min-h-screen bg-off-white flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+    <AuthSplitLayout
+      eyebrow="Gilt Counselling Consult"
+      headline="Your privacy comes first."
+      description="We confirm every sign-in with a one-time code so only you can access your account."
+    >
+      <div className="space-y-6">
         <div className="text-center">
           <div className="w-16 h-16 bg-soft-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8 text-soft-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -14,7 +19,7 @@ export default function VerifyRequest() {
             </svg>
           </div>
 
-          <h1 className="text-3xl font-heading font-bold text-gray-900 mb-4">
+          <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
             Check your email
           </h1>
 
@@ -40,6 +45,6 @@ export default function VerifyRequest() {
           </Link>
         </div>
       </div>
-    </div>
+    </AuthSplitLayout>
   );
 }

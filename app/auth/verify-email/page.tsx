@@ -3,6 +3,7 @@
 import { useEffect, useState, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
+import AuthSplitLayout from '@/components/auth/AuthSplitLayout';
 
 function VerifyEmailContent() {
   const searchParams = useSearchParams();
@@ -53,15 +54,19 @@ function VerifyEmailContent() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg border border-gilt-gold/20">
+    <AuthSplitLayout
+      eyebrow="Gilt Counselling Consult"
+      headline="Your privacy comes first."
+      description="We confirm every sign-in with a one-time code so only you can access your account."
+    >
+      <div className="space-y-6">
         <div className="text-center">
           {status === "loading" && (
             <>
               <div className="mb-6">
                 <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-gilt-gold"></div>
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
                 Verifying your email...
               </h1>
               <p className="text-gray-600">Please wait a moment</p>
@@ -87,7 +92,7 @@ function VerifyEmailContent() {
                   </svg>
                 </div>
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
                 Email Verified!
               </h1>
               <p className="text-gray-600 mb-6">{message}</p>
@@ -116,7 +121,7 @@ function VerifyEmailContent() {
                   </svg>
                 </div>
               </div>
-              <h1 className="text-2xl font-bold text-gray-900 mb-2">
+              <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
                 Verification Failed
               </h1>
               <p className="text-gray-600 mb-6">{message}</p>
@@ -132,7 +137,7 @@ function VerifyEmailContent() {
           )}
         </div>
       </div>
-    </div>
+    </AuthSplitLayout>
   );
 }
 

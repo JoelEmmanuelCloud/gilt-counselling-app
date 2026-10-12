@@ -4,6 +4,7 @@ import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Button from '@/components/ui/Button';
+import AuthSplitLayout from '@/components/auth/AuthSplitLayout';
 
 const errorMessages: Record<string, string> = {
   Configuration: 'There is a problem with the server configuration.',
@@ -18,8 +19,12 @@ function AuthErrorContent() {
   const errorMessage = error ? errorMessages[error] || errorMessages.Default : errorMessages.Default;
 
   return (
-    <div className="min-h-screen bg-off-white flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+    <AuthSplitLayout
+      eyebrow="Gilt Counselling Consult"
+      headline="A safe space to grow, heal and thrive."
+      description="Sign in to book sessions, manage your appointments and stay connected with your counsellor."
+    >
+      <div className="space-y-6">
         <div className="text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -27,7 +32,7 @@ function AuthErrorContent() {
             </svg>
           </div>
 
-          <h1 className="text-3xl font-heading font-bold text-gray-900 mb-4">
+          <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
             Sign In Error
           </h1>
 
@@ -49,7 +54,7 @@ function AuthErrorContent() {
           </div>
         </div>
       </div>
-    </div>
+    </AuthSplitLayout>
   );
 }
 

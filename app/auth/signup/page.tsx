@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import AuthSplitLayout from '@/components/auth/AuthSplitLayout';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -56,11 +57,15 @@ export default function SignUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
-      <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg sm:rounded-lg lg:rounded-lg shadow-md sm:shadow-lg border border-gilt-gold/20">
+    <AuthSplitLayout
+      eyebrow="Gilt Counselling Consult"
+      headline="Your journey to wellbeing starts here."
+      description="Create an account to book sessions with experienced counsellors in Nigeria and Canada."
+    >
+      <div className="space-y-6">
 
         <div className="text-center">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
+          <h1 className="text-[28px] sm:text-[32px] font-semibold tracking-tight text-gray-900 mb-2">
             Get Started
           </h1>
           <p className="text-sm sm:text-base lg:text-lg text-gray-600">
@@ -184,20 +189,20 @@ export default function SignUpPage() {
               name="terms"
               type="checkbox"
               required
-              className="h-4 w-4 lg:h-5 lg:w-5 mt-0.5 sm:mt-1 text-gilt-gold border-gray-300 rounded focus:outline-none focus:ring-4 focus:ring-soft-terracotta/40 focus:border-gray-900"
+              className="h-5 w-5 mt-0.5 cursor-pointer rounded border-gray-400 accent-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
             />
             <label htmlFor="terms" className="ml-2 lg:ml-3 block text-xs sm:text-sm lg:text-base text-gray-700">
               I agree to the{" "}
               <Link
                 href="/terms"
-                className="text-gilt-gold hover:text-gilt-orange transition-colors"
+                className="font-medium text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 hover:decoration-gray-900 transition-colors"
               >
                 Terms of Service
               </Link>{" "}
               and{" "}
               <Link
                 href="/privacy"
-                className="text-gilt-gold hover:text-gilt-orange transition-colors"
+                className="font-medium text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 hover:decoration-gray-900 transition-colors"
               >
                 Privacy Policy
               </Link>
@@ -223,13 +228,13 @@ export default function SignUpPage() {
             Already have an account?{" "}
             <Link
               href="/auth/signin"
-              className="font-medium text-gilt-gold hover:text-gilt-orange transition-colors"
+              className="font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 transition-colors duration-150 hover:decoration-gray-900"
             >
               Sign in
             </Link>
           </p>
         </div>
       </div>
-    </div>
+    </AuthSplitLayout>
   );
 }
