@@ -57,9 +57,19 @@ export default function TestimoniesPage() {
   return (
     <div className="min-h-screen bg-off-white">
 
-      <section className="panel-gold">
-        <div className="max-w-6xl mx-auto grid items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 md:py-24 lg:grid-cols-2 lg:gap-14 lg:px-8">
-          <div>
+      <section className="panel-gold stripes-left">
+        <div className="relative aspect-[16/10] w-full sm:aspect-[2/1] lg:absolute lg:inset-y-0 lg:right-0 lg:aspect-auto lg:w-1/2">
+          <Image
+            src="/images/ccpa-conference/ccpa-1.jpeg"
+            alt="Prof Chinelo Ugwu with a colleague at the Canadian Counselling and Psychotherapy Association conference"
+            fill
+            priority
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            className="object-cover"
+          />
+        </div>
+        <div className="max-w-6xl mx-auto px-4 py-12 sm:px-6 sm:py-16 lg:flex lg:min-h-[480px] lg:items-center lg:px-8 lg:py-24">
+          <div className="lg:w-1/2 lg:pr-12">
             <p className="eyebrow mb-4">Testimonies</p>
             <h1 className="heading-xl max-w-3xl mb-6">
               Stories of Hope & Growth
@@ -70,16 +80,6 @@ export default function TestimoniesPage() {
             <p className="text-sm text-gray-900/80">
               All testimonials are shared anonymously to protect our clients' privacy and confidentiality.
             </p>
-          </div>
-          <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg shadow-lg ring-1 ring-gray-900/10 lg:aspect-[4/3]">
-            <Image
-              src="/images/ccpa-conference/ccpa-1.jpeg"
-              alt="Prof Chinelo Ugwu with a colleague at the Canadian Counselling and Psychotherapy Association conference"
-              fill
-              priority
-              sizes="(min-width: 1152px) 548px, (min-width: 1024px) 46vw, 100vw"
-              className="object-cover"
-            />
           </div>
         </div>
       </section>
