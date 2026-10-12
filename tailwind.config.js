@@ -22,6 +22,7 @@ module.exports = {
         'gilt-teal-strong': '#0E7C8E',
         'gilt-green-strong': '#3D7F30',
         'gilt-orange-strong': '#A86400',
+        'gilt-gold-strong': '#8A6420',
         'soft-gold': '#D9A85D',
         'warm-sand': '#FFF4E6',
         'muted-teal': '#1BA5BB',
