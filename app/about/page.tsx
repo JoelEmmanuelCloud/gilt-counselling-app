@@ -122,16 +122,16 @@ export default function About() {
           <Card variant="warm" className="text-center">
             <h2 className="heading-md mb-6">Our Mission</h2>
             <div className="space-y-4 text-gray-700">
-              <p className="body-lg text-justify">
+              <p className="body-lg text-left">
                 Empowering teens and youths for optimal development through professional,
                 compassionate counselling and comprehensive support services.
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 At Gilt Counselling Consult, we are dedicated to providing high-quality mental health services,
                 educational consulting, and youth development programs. With offices in Nigeria and Canada, we serve
                 individuals, families, schools, and organizations with a commitment to excellence and care.
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 Whether you need mental health support, academic guidance, career counselling, or organizational training,
                 we create a safe, confidential space where transformation and growth can happen.
               </p>
@@ -161,7 +161,7 @@ export default function About() {
               <h2 className="heading-md mb-2">Dame Prof Chinelo Joy Ugwu</h2>
               <p className="text-soft-gold font-semibold mb-1">CEO, GILT COUNSELLING CONSULT</p>
               <p className="text-sm text-gray-600 mb-4">FCASSON, CPCN, MNAE, KSM</p>
-              <p className="text-gray-700 leading-relaxed text-justify">
+              <p className="text-gray-700 leading-relaxed text-left">
                 Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.
               </p>
             </div>
@@ -217,7 +217,7 @@ export default function About() {
               <p className="body-lg font-semibold text-soft-terracotta">
                 Chairs Donated to Otana Inclusive Centre
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 As part of our ongoing outreach programmes, Gilt Counselling Consult donated executive chairs
                 to Otana Inclusive Centre â€” a gesture born from a deep commitment to the wellbeing of every child,
                 regardless of ability.
@@ -227,7 +227,7 @@ export default function About() {
                 executive individuals in their life's endeavours. This heartfelt gift is proof of your love for
                 humanity and Otana Inclusive Centre. God bless you and your team at Gilt Counselling Consult."
               </blockquote>
-              <p className="body-md text-justify text-gray-600">
+              <p className="body-md text-left text-gray-600">
                 We are honoured by the warm reception from the centre's leadership and remain committed to serving
                 communities in need through compassionate action.
               </p>
@@ -267,13 +267,13 @@ export default function About() {
               <p className="body-lg font-semibold text-soft-terracotta">
                 Education &amp; Empowerment Committee Workshop
               </p>
-              <p className="body-md text-justify">
+              <p className="body-md text-left">
                 Dame Prof Chinelo Joy Ugwu, CEO of Gilt Counselling Consult, coordinated a one-day
                 workshop for the All Saints Cathedral Education and Empowerment Committee. The workshop
                 brought together members of the committee for a day of learning, empowerment, and
                 professional development.
               </p>
-              <p className="body-md text-justify text-gray-600">
+              <p className="body-md text-left text-gray-600">
                 This initiative reflects Gilt Counselling Consult&apos;s dedication to extending
                 professional support beyond the counselling room and into the wider community.
               </p>
@@ -334,10 +334,10 @@ export default function About() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-xl p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
+              <div className={`${value.color} text-white rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
-              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-justify">
+              <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-left">
                 {value.description}
               </p>
             </div>
@@ -361,7 +361,7 @@ export default function About() {
                 </div>
                 <div>
                   <h3 className="font-heading font-semibold text-lg mb-2">{item.title}</h3>
-                  <p className="text-gray-600 leading-relaxed text-justify">{item.description}</p>
+                  <p className="text-gray-600 leading-relaxed text-left">{item.description}</p>
                 </div>
               </div>
             </Card>

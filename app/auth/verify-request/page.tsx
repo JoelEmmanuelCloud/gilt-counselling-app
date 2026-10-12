@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 export default function VerifyRequest() {
   return (
     <div className="min-h-screen bg-off-white flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-xl p-8">
+      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
         <div className="text-center">
           <div className="w-16 h-16 bg-soft-terracotta/10 rounded-full flex items-center justify-center mx-auto mb-6">
             <svg className="w-8 h-8 text-soft-terracotta" fill="none" stroke="currentColor" viewBox="0 0 24 24">

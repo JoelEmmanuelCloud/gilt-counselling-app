@@ -178,7 +178,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-lg sm:rounded-xl lg:rounded-2xl max-w-md lg:max-w-lg w-full p-4 sm:p-6 md:p-8 lg:p-10 relative max-h-[95vh] sm:max-h-[90vh] lg:max-h-[85vh] overflow-y-auto shadow-xl lg:shadow-2xl"
+        className="bg-white rounded-lg sm:rounded-lg lg:rounded-lg max-w-md lg:max-w-lg w-full p-4 sm:p-6 md:p-8 lg:p-10 relative max-h-[95vh] sm:max-h-[90vh] lg:max-h-[85vh] overflow-y-auto shadow-md lg:shadow-lg"
         onClick={(e) => e.stopPropagation()}
       >
         <button
@@ -220,7 +220,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
         </div>
 
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
+          <div className="bg-red-50 border border-red-200 text-red-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-lg mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
             {error}
             {remainingAttempts < 3 && remainingAttempts > 0 && step === 'otp' && (
               <div className="text-xs lg:text-sm mt-1">
@@ -231,7 +231,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
         )}
 
         {successMessage && (
-          <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
+          <div className="bg-green-50 border border-green-200 text-green-800 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-lg mb-4 sm:mb-6 lg:mb-8 text-xs sm:text-sm lg:text-base">
             {successMessage}
           </div>
         )}
@@ -250,7 +250,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                   placeholder="your.email@example.com"
                   disabled={loading}
                 />
@@ -296,7 +296,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                     required
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                     placeholder="John"
                     disabled={loading}
                   />
@@ -311,7 +311,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                     required
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                    className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                     placeholder="Doe"
                     disabled={loading}
                   />
@@ -328,7 +328,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
+                  className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-5 lg:py-3.5 text-base lg:text-lg border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent transition-all"
                   placeholder="you@example.com"
                   disabled={loading}
                 />
@@ -387,7 +387,7 @@ export default function AuthModal({ onClose, redirectTo, initialMode = 'signin' 
                 required
                 value={otp}
                 onChange={(e) => handleOTPChange(e.target.value)}
-                className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-6 lg:py-4 border border-gray-300 rounded-lg lg:rounded-xl focus:ring-2 focus:ring-soft-terracotta focus:border-transparent text-center text-xl sm:text-2xl lg:text-3xl tracking-widest font-mono transition-all"
+                className="w-full px-3 py-2.5 sm:px-4 sm:py-3 lg:px-6 lg:py-4 border border-gray-300 rounded-lg lg:rounded-lg focus:ring-2 focus:ring-soft-terracotta focus:border-transparent text-center text-xl sm:text-2xl lg:text-3xl tracking-widest font-mono transition-all"
                 placeholder="000000"
                 maxLength={6}
                 disabled={loading}

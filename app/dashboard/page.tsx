@@ -438,7 +438,7 @@ function DashboardContent() {
       
       {rescheduleModal.isOpen && rescheduleModal.appointment && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
+          <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-md">
             <h3 className="text-xl font-heading font-semibold mb-2">Reschedule Appointment</h3>
             <p className="text-sm text-gray-600 mb-6">
               {rescheduleModal.appointment.service}<br />

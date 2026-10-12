@@ -194,7 +194,7 @@ function VerifyOTPContent() {
   if (!email) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4">
-        <div className="max-w-md w-full bg-white p-6 sm:p-8 rounded-xl sm:rounded-2xl shadow-xl border border-gilt-gold/20 text-center">
+        <div className="max-w-md w-full bg-white p-6 sm:p-8 rounded-lg sm:rounded-lg shadow-md border border-gilt-gold/20 text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
             <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -215,7 +215,7 @@ function VerifyOTPContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-6 px-3 sm:py-12 sm:px-4 md:px-6 lg:px-8 lg:py-16">
-      <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-xl sm:rounded-2xl lg:rounded-3xl shadow-xl sm:shadow-2xl border border-gilt-gold/20">
+      <div className="max-w-md lg:max-w-lg xl:max-w-xl w-full space-y-4 sm:space-y-6 md:space-y-8 lg:space-y-10 bg-white p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12 rounded-lg sm:rounded-lg lg:rounded-lg shadow-md sm:shadow-lg border border-gilt-gold/20">
 
         <div className="text-center">
           <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-1 sm:mb-2 lg:mb-3">
@@ -247,13 +247,13 @@ function VerifyOTPContent() {
         )}
 
         {errorMessage && (
-          <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
+          <div className="bg-red-50 border border-red-200 text-red-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-lg">
             <p className="text-xs sm:text-sm lg:text-base">{errorMessage}</p>
           </div>
         )}
 
         {successMessage && (
-          <div className="bg-green-50 border border-green-200 text-green-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-xl">
+          <div className="bg-green-50 border border-green-200 text-green-700 px-3 py-2 sm:px-4 sm:py-3 lg:px-5 lg:py-4 rounded-lg lg:rounded-lg">
             <p className="text-xs sm:text-sm lg:text-base">{successMessage}</p>
           </div>
         )}
@@ -271,7 +271,7 @@ function VerifyOTPContent() {
               onKeyDown={(e) => handleKeyDown(index, e)}
               onPaste={handlePaste}
               disabled={isLoading || !!successMessage}
-              className="w-10 h-12 sm:w-12 sm:h-14 lg:w-14 lg:h-16 text-center text-xl sm:text-2xl lg:text-3xl font-bold border-2 border-gray-300 rounded-lg lg:rounded-xl focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+              className="w-10 h-12 sm:w-12 sm:h-14 lg:w-14 lg:h-16 text-center text-xl sm:text-2xl lg:text-3xl font-bold border-2 border-gray-300 rounded-lg lg:rounded-lg focus:outline-none focus:ring-2 focus:ring-gilt-gold focus:border-transparent disabled:opacity-50 disabled:cursor-not-allowed transition-all"
               autoFocus={index === 0}
             />
           ))}
@@ -280,7 +280,7 @@ function VerifyOTPContent() {
         <button
           onClick={() => handleSubmit()}
           disabled={isLoading || otp.some((d) => !d) || !!successMessage}
-          className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-xl shadow-sm text-sm sm:text-base lg:text-lg text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
+          className="w-full flex justify-center py-2.5 sm:py-3 lg:py-4 px-4 lg:px-6 border border-transparent rounded-lg lg:rounded-lg shadow-sm text-sm sm:text-base lg:text-lg text-white bg-gradient-to-r from-gilt-gold to-gilt-orange hover:from-gilt-orange hover:to-gilt-gold focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gilt-gold disabled:opacity-50 disabled:cursor-not-allowed transition-all font-medium"
         >
           {isLoading ? (
             <span className="flex items-center gap-2">
@@ -335,7 +335,7 @@ export default function VerifyOTPPage() {
     <Suspense
       fallback={
         <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center">
-          <div className="text-center bg-white p-8 rounded-2xl shadow-xl">
+          <div className="text-center bg-white p-8 rounded-lg shadow-md">
             <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-gilt-teal mb-4"></div>
             <p className="text-gray-600">Loading...</p>
           </div>

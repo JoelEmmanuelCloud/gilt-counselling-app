@@ -54,7 +54,7 @@ function VerifyEmailContent() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center py-12 px-4">
-      <div className="max-w-md w-full bg-white p-8 rounded-2xl shadow-2xl border border-gilt-gold/20">
+      <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg border border-gilt-gold/20">
         <div className="text-center">
           {status === "loading" && (
             <>
@@ -140,7 +140,7 @@ export default function VerifyEmailPage() {
   return (
     <Suspense fallback={
       <div className="min-h-screen bg-gradient-to-br from-gilt-teal/10 via-white to-gilt-gold/10 flex items-center justify-center">
-        <div className="text-center bg-white p-8 rounded-2xl shadow-xl">
+        <div className="text-center bg-white p-8 rounded-lg shadow-md">
           <div className="inline-block animate-spin rounded-full h-16 w-16 border-b-4 border-gilt-teal mb-4"></div>
           <p className="text-gray-600">Verifying email...</p>
         </div>

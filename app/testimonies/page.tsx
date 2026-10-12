@@ -101,7 +101,7 @@ export default function TestimoniesPage() {
               />
               <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
                 {schoolTestimonials.map((entry) => (
-                  <div key={entry._id} className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+                  <div key={entry._id} className="bg-white rounded-lg p-6 sm:p-8 shadow-calm">
                     <h3 className="heading-sm mb-4">{entry.school}</h3>
                     <div className="space-y-4">
                       {(entry.quotes || []).map((quote, quoteIndex) => (
@@ -169,7 +169,7 @@ export default function TestimoniesPage() {
 
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="bg-white rounded-xl p-8 shadow-calm">
+          <div className="bg-white rounded-lg p-8 shadow-calm">
             <svg className="w-12 h-12 text-soft-gold mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
             </svg>

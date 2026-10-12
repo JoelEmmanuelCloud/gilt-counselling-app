@@ -205,23 +205,23 @@ export default function Services() {
           centered
         />
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="bg-white rounded-xl p-6 shadow-calm">
+          <div className="bg-white rounded-lg p-6 shadow-calm">
             <h3 className="font-heading font-semibold text-lg text-soft-gold mb-3">First Session</h3>
-            <p className="text-gray-700 leading-relaxed text-justify">
+            <p className="text-gray-700 leading-relaxed text-left">
               Your first session is an opportunity to get to know each other. We'll discuss what brings you to counselling,
               your goals, and how we can best support you. There's no pressure—just a safe, welcoming conversation.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-calm">
+          <div className="bg-white rounded-lg p-6 shadow-calm">
             <h3 className="font-heading font-semibold text-lg text-soft-gold mb-3">Ongoing Support</h3>
-            <p className="text-gray-700 leading-relaxed text-justify">
+            <p className="text-gray-700 leading-relaxed text-left">
               Counselling is a journey, not a destination. We work at your pace, celebrating progress and navigating
               challenges together. The frequency and duration of sessions are flexible based on your needs.
             </p>
           </div>
-          <div className="bg-white rounded-xl p-6 shadow-calm">
+          <div className="bg-white rounded-lg p-6 shadow-calm">
             <h3 className="font-heading font-semibold text-lg text-soft-gold mb-3">Complete Confidentiality</h3>
-            <p className="text-gray-700 leading-relaxed text-justify">
+            <p className="text-gray-700 leading-relaxed text-left">
               Everything you share is held in strict confidence. Your privacy is protected, and you can trust that
               this is a safe space to be open and honest.
             </p>

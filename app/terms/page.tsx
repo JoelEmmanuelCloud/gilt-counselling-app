@@ -12,7 +12,7 @@ export default function TermsPage() {
 
       <section className="section-container">
         <div className="max-w-3xl mx-auto">
-          <div className="bg-warm-cream border border-soft-gold/40 rounded-xl px-5 py-4 mb-10">
+          <div className="bg-warm-cream border border-soft-gold/40 rounded-lg px-5 py-4 mb-10">
             <p className="body-md">
               This page is a placeholder while our full Terms of Service are being finalized.
               It does not yet reflect our final, legally reviewed terms. If you have questions

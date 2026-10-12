@@ -284,7 +284,7 @@ export default function OutreachShowcase() {
           <button
             key={s.id}
             onClick={() => navigate(i)}
-            className={`flex-shrink-0 flex flex-col items-center px-4 py-2.5 rounded-xl text-xs font-semibold tracking-wide uppercase transition-all duration-300 border ${
+            className={`flex-shrink-0 flex flex-col items-center px-4 py-2.5 rounded-lg text-xs font-semibold tracking-wide uppercase transition-all duration-300 border ${
               i === activeIndex
                 ? 'bg-soft-terracotta text-white border-soft-terracotta shadow-md scale-105'
                 : 'bg-white text-gray-500 border-soft-beige hover:border-soft-terracotta hover:text-soft-terracotta'
@@ -297,7 +297,7 @@ export default function OutreachShowcase() {
       </div>
 
       {/* Main animated panel */}
-      <div className="relative overflow-hidden rounded-2xl bg-white shadow-lg border border-soft-beige">
+      <div className="relative overflow-hidden rounded-lg bg-white shadow-lg border border-soft-beige">
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={school.id}
@@ -311,7 +311,7 @@ export default function OutreachShowcase() {
             <div className="grid grid-cols-1 md:grid-cols-5">
 
               {/* Hero image */}
-              <div className="md:col-span-2 relative h-[260px] sm:h-[300px] md:h-full md:min-h-[400px] lg:min-h-[450px] xl:min-h-[500px] overflow-hidden rounded-t-2xl md:rounded-l-2xl md:rounded-tr-none">
+              <div className="md:col-span-2 relative h-[260px] sm:h-[300px] md:h-full md:min-h-[400px] lg:min-h-[450px] xl:min-h-[500px] overflow-hidden rounded-t-lg md:rounded-l-lg md:rounded-tr-none">
                 <Image
                   src={school.hero.src}
                   alt={school.hero.alt}
@@ -345,12 +345,12 @@ export default function OutreachShowcase() {
                 {/* Narrative */}
                 <div className="space-y-2">
                   {school.narrative.map((p, i) => (
-                    <p key={i} className="text-gray-600 text-sm sm:text-base leading-relaxed text-justify">{p}</p>
+                    <p key={i} className="text-gray-600 text-sm sm:text-base leading-relaxed text-left">{p}</p>
                   ))}
                 </div>
 
                 {/* Quote carousel */}
-                <div className="bg-warm-cream rounded-xl p-4 sm:p-5 relative overflow-hidden">
+                <div className="bg-warm-cream rounded-lg p-4 sm:p-5 relative overflow-hidden">
                   <div className="text-2xl text-soft-terracotta font-serif leading-none mb-2">&ldquo;</div>
                   <div className="min-h-[72px] flex items-center">
                     <AnimatePresence mode="wait">

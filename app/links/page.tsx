@@ -88,7 +88,7 @@ export default function LinksPage() {
               href={s.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-4 px-5 py-4 rounded-2xl w-full transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md"
+              className="flex items-center gap-4 px-5 py-4 rounded-lg w-full transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md"
               style={{ backgroundColor: s.bg, color: s.textColor }}
             >
               {s.icon}
@@ -108,7 +108,7 @@ export default function LinksPage() {
         <div className="space-y-3 mb-10">
           <Link
             href="/book-appointment"
-            className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl bg-[#D9A85D] text-white font-semibold text-sm shadow-sm hover:bg-[#c99748] transition-colors duration-200"
+            className="flex items-center justify-center gap-2 w-full py-4 rounded-lg bg-[#D9A85D] text-white font-semibold text-sm shadow-sm hover:bg-[#c99748] transition-colors duration-200"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -117,7 +117,7 @@ export default function LinksPage() {
           </Link>
           <a
             href="tel:+2347065734165"
-            className="flex items-center justify-center gap-2 w-full py-4 rounded-2xl border-2 border-[#D9A85D] text-[#A07530] font-semibold text-sm hover:bg-[#D9A85D]/10 transition-colors duration-200"
+            className="flex items-center justify-center gap-2 w-full py-4 rounded-lg border-2 border-[#D9A85D] text-[#A07530] font-semibold text-sm hover:bg-[#D9A85D]/10 transition-colors duration-200"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />

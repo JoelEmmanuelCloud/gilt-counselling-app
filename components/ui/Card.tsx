@@ -13,7 +13,7 @@ export default function Card({ children, variant = 'default', className = '' }: 
   };
 
   return (
-    <div className={`${variants[variant]} rounded-xl shadow-sm hover:shadow-md transition-shadow duration-300 p-6 ${className}`}>
+    <div className={`${variants[variant]} rounded-lg shadow-sm hover:shadow-md transition-shadow duration-300 p-6 ${className}`}>
       {children}
     </div>
   );

@@ -29,7 +29,7 @@ export default function EventTestimonialCard({
     : 'h-[180px] sm:h-[220px] md:h-[260px]';
 
   return (
-    <div className="bg-white rounded-xl p-6 sm:p-8 shadow-calm">
+    <div className="bg-white rounded-lg p-6 sm:p-8 shadow-calm">
       <div className="flex flex-wrap items-center gap-3 mb-4">
         <span className="inline-block bg-soft-terracotta/10 text-soft-terracotta px-3 py-1.5 rounded-full text-xs uppercase tracking-wider font-medium">
           {badge}
@@ -40,7 +40,7 @@ export default function EventTestimonialCard({
       {organization && (
         <p className="text-soft-gold font-semibold mb-2">{organization}</p>
       )}
-      <p className="text-gray-700 leading-relaxed mb-6 text-justify">{description}</p>
+      <p className="text-gray-700 leading-relaxed mb-6 text-left">{description}</p>
       {images.length > 0 && (
         <div className={`grid ${gridCols} gap-3 sm:gap-4 ${videoUrl ? 'mb-6' : ''}`}>
           {images.map((url, index) => (

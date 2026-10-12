@@ -86,7 +86,7 @@ function ToastItem({ toast, onRemove }: { toast: Toast; onRemove: (id: string) =
   return (
     <div
       className={`
-        flex items-center gap-3 px-4 py-3 rounded-xl shadow-lg backdrop-blur-sm
+        flex items-center gap-3 px-4 py-3 rounded-lg shadow-lg backdrop-blur-sm
         transform transition-all duration-300 ease-out w-full sm:min-w-[320px] sm:w-auto sm:max-w-[420px]
         ${styles[toast.type]}
         ${isExiting ? 'opacity-0 translate-x-full' : 'opacity-100 translate-x-0'}

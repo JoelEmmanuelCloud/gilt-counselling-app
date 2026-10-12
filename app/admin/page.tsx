@@ -316,7 +316,7 @@ function AdminDashboardContent() {
         </div>
 
         {formOpen && (
-          <form onSubmit={handleSubmit} className="bg-white rounded-xl p-6 shadow-calm mb-8 space-y-4">
+          <form onSubmit={handleSubmit} className="bg-white rounded-lg p-6 shadow-calm mb-8 space-y-4">
             <h2 className="heading-sm">
               {editingId ? 'Edit Entry' : 'Add New Entry'}
             </h2>
@@ -528,7 +528,7 @@ function AdminDashboardContent() {
         ) : (
           <div className="space-y-4">
             {items.map((item) => (
-              <div key={item._id} className="bg-white rounded-xl p-5 shadow-calm flex flex-col sm:flex-row sm:items-start gap-4">
+              <div key={item._id} className="bg-white rounded-lg p-5 shadow-calm flex flex-col sm:flex-row sm:items-start gap-4">
                 <div className="flex-1 min-w-0">
                   {item.category === 'client' && (
                     <>
