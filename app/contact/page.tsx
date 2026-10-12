@@ -1,57 +1,13 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
 import Button from '@/components/ui/Button';
-import { useToast } from '@/components/ui/Toast';
 
 export default function Contact() {
-  const toast = useToast();
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    message: '',
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsSubmitting(true);
-
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
-      });
-
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.message || 'Something went wrong. Please try again.');
-        return;
-      }
-
-      toast.success('Thank you for reaching out. We will get back to you soon!');
-      setFormData({ name: '', email: '', phone: '', message: '' });
-    } catch {
-      toast.error('Failed to send message. Please try again later.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
   return (
     <div className="min-h-screen bg-off-white">
 
@@ -204,82 +160,6 @@ export default function Contact() {
         </div>
       </section>
 
-      <section className="section-container bg-off-white">
-        <div className="max-w-2xl mx-auto">
-          <SectionHeading
-            title="Send Us a Message"
-            subtitle="Have a question or ready to book? Fill out the form below and we'll get back to you within 24 hours."
-            centered
-          />
-          <Card>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label htmlFor="name" className="label">Your Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="email" className="label">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="your.email@example.com"
-                  required
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="label">Phone Number</label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
-                  onChange={handleChange}
-                  className="input"
-                  placeholder="+234 xxx xxx xxxx"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="message" className="label">Your Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows={5}
-                  className="input"
-                  placeholder="How can we support you?"
-                  required
-                />
-              </div>
-
-              <Button type="submit" variant="primary" className="w-full" disabled={isSubmitting}>
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-              </Button>
-
-              <p className="text-sm text-gray-600 text-center mt-4">
-                Your privacy is important to us. We will never share your information.
-              </p>
-            </form>
-          </Card>
-        </div>
-      </section>
-
       <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="eyebrow mb-4">We're here to help</p>
@@ -287,7 +167,7 @@ export default function Contact() {
             Prefer to Book Directly?
           </h2>
           <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-900/85">
-            Skip the form and schedule your appointment right away.
+            Send us a WhatsApp message and our team will schedule your session.
           </p>
           <Link href="/book-appointment">
             <Button className="bg-white text-gray-900 hover:bg-gray-100 shadow-sm px-6 sm:px-8 py-2.5 sm:py-3 rounded-lg text-sm font-semibold transition-colors duration-150">
