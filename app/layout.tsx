@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import NavigationProgress from '@/components/NavigationProgress';
+import BackToTop from '@/components/BackToTop';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -102,6 +103,7 @@ export default function RootLayout({
               </main>
               <Footer />
               <WhatsAppButton />
+              <BackToTop />
             </div>
           </ToastProvider>
         </AuthProvider>
