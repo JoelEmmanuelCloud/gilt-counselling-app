@@ -1,4 +1,5 @@
 import { MongoClient } from 'mongodb';
+import { applyDnsServerOverride } from './dns-override';
 
 if (!process.env.MONGODB_URI) {
   throw new Error('Please add MONGODB_URI to .env.local');
@@ -6,6 +7,8 @@ if (!process.env.MONGODB_URI) {
 
 const uri = process.env.MONGODB_URI;
 const options = {};
+
+applyDnsServerOverride();
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
