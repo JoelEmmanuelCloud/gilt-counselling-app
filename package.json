@@ -22,7 +22,6 @@
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
     "react-email": "^5.1.0",
-    "resend": "^6.6.0",
     "typescript": "^4.9.5",
     "uuid": "^9.0.1"
   },
