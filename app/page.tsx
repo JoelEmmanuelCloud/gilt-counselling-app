@@ -301,7 +301,7 @@ export default function Home() {
           </FadeUp>
           <FadeUp className="order-1 lg:order-2">
             <div className="eyebrow text-gray-600 mb-3 sm:mb-4 lg:mb-5">
-              About Us
+              We Care
             </div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 xl:mb-6 leading-tight">
               Gilt Counselling Consult –<br className="hidden sm:block" />
