@@ -14,6 +14,11 @@ const nextConfig = {
         permanent: false,
       },
       {
+        source: '/blog/:path*',
+        destination: '/',
+        permanent: true,
+      },
+      {
         source: '/register',
         destination: '/book-appointment',
         permanent: false,
