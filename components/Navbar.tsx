@@ -48,7 +48,6 @@ const Navbar: React.FC = () => {
     { href: '/outreach', label: 'Outreach' },
     { href: '/news', label: 'News & Media' },
     { href: '/testimonies', label: 'Testimonies' },
-    { href: '/blog', label: 'Resources' },
     { href: '/contact', label: 'Contact' },
   ];
 
