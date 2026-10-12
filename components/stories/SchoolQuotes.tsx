@@ -17,8 +17,16 @@ export default function SchoolQuotes() {
     );
   }
 
-  if (failed || entries.length === 0) {
-    return null;
+  if (failed) {
+    return (
+      <p className="max-w-5xl mx-auto rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-center text-sm text-red-800" role="alert">
+        We couldn&apos;t load school feedback right now. Please refresh the page to try again.
+      </p>
+    );
+  }
+
+  if (entries.length === 0) {
+    return <p className="max-w-5xl mx-auto text-center text-gray-600">School feedback will appear here soon.</p>;
   }
 
   return (
