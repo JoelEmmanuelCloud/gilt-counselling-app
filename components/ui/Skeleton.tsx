@@ -28,25 +28,6 @@ export function TestimonialCardSkeleton() {
   );
 }
 
-export function StoryCardSkeleton() {
-  return (
-    <div className="bg-white rounded-lg p-6 sm:p-8 shadow-calm" aria-hidden="true">
-      <Skeleton className="mb-4 h-4 w-32" />
-      <Skeleton className="mb-3 h-6 w-3/4" />
-      <Skeleton className="mb-5 h-4 w-1/3" />
-      <div className="mb-6 space-y-2">
-        <Skeleton className="h-4 w-full" />
-        <Skeleton className="h-4 w-11/12" />
-        <Skeleton className="h-4 w-2/3" />
-      </div>
-      <div className="grid grid-cols-2 gap-3 sm:gap-4">
-        <Skeleton className="h-[180px] sm:h-[220px] rounded-lg" />
-        <Skeleton className="h-[180px] sm:h-[220px] rounded-lg" />
-      </div>
-    </div>
-  );
-}
-
 export function QuoteCardSkeleton() {
   return (
     <div className="bg-white rounded-lg p-6 sm:p-8 shadow-calm" aria-hidden="true">
