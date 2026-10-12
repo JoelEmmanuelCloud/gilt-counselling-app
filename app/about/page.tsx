@@ -2,10 +2,10 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Card from '@/components/ui/Card';
+import TeamSection from '@/components/team/TeamSection';
 import Button from '@/components/ui/Button';
 
 export default function About() {
@@ -34,34 +34,6 @@ export default function About() {
       name: 'Inclusion',
       description: 'Everyone deserves compassionate care, without exception or judgment.',
       color: 'bg-gentle-blue-grey',
-    },
-  ];
-
-  const team = [
-    {
-      name: 'Prof (Mrs) Betty-Ruth Ngozi Iruloh',
-      title: 'Consultant - Marital Counselling',
-      image: '/images/PROF( MRS) BETTY-RUTH NGOZI IRULOR.jpeg',
-    },
-    {
-      name: 'Dr Faith I. Barilera',
-      title: 'Strategic Planner & Counselling Psychologist',
-      image: '/images/Dr Faith I. Barilera.jpeg',
-    },
-    {
-      name: 'Dr. Gideon Isukwem',
-      title: 'Adolescent & Youth Psychologist',
-      image: '/uploads/Dr. Gideon Isukwem.jpeg',
-    },
-    {
-      name: 'Esther Ebifimoere Peters',
-      title: 'Counsellor',
-      image: '/uploads/Esther Ebifimoere Peters.jpeg',
-    },
-    {
-      name: 'Jane Nnakpee',
-      title: 'Secretary and Administrative Officer',
-      image: '/uploads/Jane Nnakpee.jpeg',
     },
   ];
 
@@ -137,61 +109,7 @@ export default function About() {
         </div>
       </section>
 
-      <section className="section-container bg-warm-cream">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 items-center">
-            <div className="relative h-[280px] sm:h-[340px] md:h-[420px] w-full max-w-xs sm:max-w-sm md:max-w-[380px] mx-auto rounded-lg overflow-hidden">
-              <Image
-                src="/images/Dame Prof Chinelo Joy Ugwu.jpeg"
-                alt="Dame Prof Chinelo Joy Ugwu - Founder & CEO"
-                fill
-                className="object-cover object-top"
-                sizes="(max-width: 768px) 100vw, 350px"
-                quality={60}
-                loading="lazy"
-              />
-            </div>
-            <div>
-              <div className="eyebrow text-gray-600 mb-3">
-                Founder & CEO
-              </div>
-              <h2 className="heading-md mb-2">Dame Prof Chinelo Joy Ugwu</h2>
-              <p className="text-soft-gold font-semibold mb-1">CEO, GILT COUNSELLING CONSULT</p>
-              <p className="text-sm text-gray-600 mb-4">FCASSON, CPCN, MNAE, KSM</p>
-              <p className="text-gray-700 leading-relaxed text-left">
-                Dame Prof Chinelo Joy Ugwu is the visionary founder and CEO of Gilt Counselling Consult. With extensive experience in counselling and youth development, she leads the organization with dedication to empowering teens and youths for optimal development through professional, compassionate support.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-container bg-off-white">
-        <SectionHeading
-          title="Our Dedicated Consultants and Professional Counsellors"
-          subtitle="Experienced professionals dedicated to your wellbeing and growth."
-          centered
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
-          {team.map((member, index) => (
-            <Card key={index} className="text-center">
-              <div className="mb-4 sm:mb-6 relative h-[200px] w-[200px] sm:h-[240px] sm:w-[240px] md:h-[260px] md:w-[260px] mx-auto rounded-lg overflow-hidden">
-                <Image
-                  src={member.image}
-                  alt={`${member.name} - Professional Headshot`}
-                  fill
-                  className="object-cover object-top"
-                  sizes="280px"
-                  quality={60}
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="heading-sm mb-2">{member.name}</h3>
-              <p className="text-soft-gold font-semibold">{member.title}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
+      <TeamSection />
 
       <section className="section-container bg-warm-cream">
         <SectionHeading
