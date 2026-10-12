@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import Link, { useLinkStatus } from 'next/link';
 import { useAuth } from '@/lib/AuthContext';
 
 const REMEMBER_KEY = 'admin-login-email';
@@ -14,6 +14,18 @@ const blockWhitespaceKey = (e: React.KeyboardEvent<HTMLInputElement>) => {
     e.preventDefault();
   }
 };
+
+function SiteLinkLabel({ children }: { children: React.ReactNode }) {
+  const { pending } = useLinkStatus();
+  return (
+    <>
+      {pending && (
+        <span className="mr-2 inline-block h-4 w-4 rounded-full border-2 border-gray-900 border-t-transparent align-[-3px] motion-safe:animate-spin" aria-hidden="true" />
+      )}
+      {pending ? 'Opening site...' : children}
+    </>
+  );
+}
 
 const stripePattern: React.CSSProperties = {
   backgroundImage:
@@ -113,7 +125,7 @@ export default function AdminLoginForm() {
             href="/"
             className="inline-flex h-11 items-center rounded-md border border-gray-300 px-4 text-sm font-medium text-gray-800 shadow-sm transition-colors duration-150 hover:bg-gray-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 lg:hidden"
           >
-            Back to site
+            <SiteLinkLabel>Back to site</SiteLinkLabel>
           </Link>
         </header>
 
@@ -245,7 +257,7 @@ export default function AdminLoginForm() {
                 href="/"
                 className="font-semibold text-gray-900 underline decoration-soft-terracotta decoration-2 underline-offset-4 transition-colors duration-150 hover:decoration-gray-900 focus:outline-none focus-visible:decoration-gray-900"
               >
-                Return to the website
+                <SiteLinkLabel>Return to the website</SiteLinkLabel>
               </Link>
             </p>
           </div>
@@ -260,7 +272,7 @@ export default function AdminLoginForm() {
             href="/"
             className="inline-flex h-11 items-center rounded-md bg-white px-5 text-[15px] font-medium text-gray-900 shadow-sm transition-colors duration-150 hover:bg-gray-100 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900 focus-visible:ring-offset-2 focus-visible:ring-offset-soft-terracotta"
           >
-            Back to site
+            <SiteLinkLabel>Back to site</SiteLinkLabel>
           </Link>
         </div>
 
