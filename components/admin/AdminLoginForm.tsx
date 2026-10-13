@@ -82,7 +82,6 @@ export default function AdminLoginForm() {
       eyebrow="Gilt Counselling Consult · Admin"
       headline="Every story shared is a step toward healing."
       description="Publish client testimonials, school outreach, community events and media features in one place."
-      panelLink={{ href: '/testimonies', label: 'View live testimonials' }}
     >
       <h1 className="text-center font-body text-[28px] font-semibold tracking-tight text-gray-900 sm:text-[32px]">
         Sign in to Gilt Admin

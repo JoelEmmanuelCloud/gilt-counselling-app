@@ -372,16 +372,21 @@ export default function OutreachShowcase() {
                     </AnimatePresence>
                   </div>
                   {/* Quote dots */}
-                  <div className="flex gap-1.5 mt-3">
+                  <div className="flex mt-1 -ml-1.5">
                     {school.quotes.map((_, i) => (
                       <button
                         key={i}
                         onClick={() => setActiveQuote(i)}
-                        className={`h-1.5 rounded-full transition-all duration-300 ${
-                          i === activeQuote ? 'w-5 bg-soft-terracotta' : 'w-1.5 bg-soft-beige'
-                        }`}
+                        className="flex h-11 min-w-[28px] items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
                         aria-label={`Quote ${i + 1}`}
-                      />
+                        aria-current={i === activeQuote ? 'true' : undefined}
+                      >
+                        <span
+                          className={`block h-1.5 rounded-full transition-all duration-300 ${
+                            i === activeQuote ? 'w-5 bg-soft-terracotta' : 'w-1.5 bg-soft-beige'
+                          }`}
+                        />
+                      </button>
                     ))}
                   </div>
                 </div>
@@ -431,9 +436,9 @@ export default function OutreachShowcase() {
       <div className="flex items-center justify-between mt-4 sm:mt-5">
         <button
           onClick={prev}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-soft-terracotta transition-colors duration-200 group"
+          className="flex min-h-[44px] items-center gap-2 rounded-md text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
         >
-          <span className="w-8 h-8 rounded-full border border-soft-beige flex items-center justify-center group-hover:border-soft-terracotta transition-colors duration-200">
+          <span className="w-11 h-11 rounded-full border border-soft-beige flex items-center justify-center group-hover:border-soft-terracotta transition-colors duration-200">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
@@ -442,25 +447,30 @@ export default function OutreachShowcase() {
         </button>
 
         {/* Progress dots */}
-        <div className="flex gap-2 items-center">
+        <div className="flex items-center">
           {schools.map((_, i) => (
             <button
               key={i}
               onClick={() => navigate(i)}
-              className={`rounded-full transition-all duration-300 ${
-                i === activeIndex ? 'w-6 h-2 bg-soft-terracotta' : 'w-2 h-2 bg-soft-beige hover:bg-soft-terracotta/50'
-              }`}
+              className="group/dot flex h-11 min-w-[28px] items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
               aria-label={`Go to school ${i + 1}`}
-            />
+              aria-current={i === activeIndex ? 'true' : undefined}
+            >
+              <span
+                className={`block rounded-full transition-all duration-300 ${
+                  i === activeIndex ? 'w-6 h-2 bg-soft-terracotta' : 'w-2 h-2 bg-soft-beige group-hover/dot:bg-soft-terracotta/50'
+                }`}
+              />
+            </button>
           ))}
         </div>
 
         <button
           onClick={next}
-          className="flex items-center gap-2 text-sm text-gray-500 hover:text-soft-terracotta transition-colors duration-200 group"
+          className="flex min-h-[44px] items-center gap-2 rounded-md text-sm text-gray-600 hover:text-gray-900 transition-colors duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
         >
           <span className="hidden sm:inline">Next</span>
-          <span className="w-8 h-8 rounded-full border border-soft-beige flex items-center justify-center group-hover:border-soft-terracotta transition-colors duration-200">
+          <span className="w-11 h-11 rounded-full border border-soft-beige flex items-center justify-center group-hover:border-soft-terracotta transition-colors duration-200">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>

@@ -1,16 +1,36 @@
 'use client';
 
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
 import TestimonialCard from '@/components/ui/TestimonialCard';
 import Button from '@/components/ui/Button';
+import Pagination from '@/components/ui/Pagination';
 import { TestimonialCardSkeleton } from '@/components/ui/Skeleton';
 import { usePublishedEntries } from '@/components/stories/usePublishedEntries';
 
+const PAGE_SIZE = 6;
+
 export default function TestimoniesPage() {
   const { entries, loading, failed } = usePublishedEntries('client');
+  const [page, setPage] = useState(1);
+  const gridRef = useRef<HTMLDivElement>(null);
+
+  const totalPages = Math.max(1, Math.ceil(entries.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const pageEntries = entries.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  const changePage = (nextPage: number) => {
+    setPage(Math.min(Math.max(1, nextPage), totalPages));
+    const grid = gridRef.current;
+    if (!grid) return;
+    grid.focus({ preventScroll: true });
+    const navHeight = window.matchMedia('(min-width: 768px)').matches ? 136 : 120;
+    if (grid.getBoundingClientRect().top < navHeight) {
+      grid.scrollIntoView({ block: 'start' });
+    }
+  };
 
   return (
     <div className="min-h-screen bg-off-white">
@@ -40,8 +60,14 @@ export default function TestimoniesPage() {
         ) : entries.length === 0 ? (
           <p className="text-center text-gray-600">Client testimonials will appear here soon.</p>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12">
-            {entries.map((testimonial) => (
+          <>
+          <div
+            ref={gridRef}
+            tabIndex={-1}
+            aria-label="Testimonials"
+            className="grid scroll-mt-[120px] focus:outline-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 md:scroll-mt-[136px]"
+          >
+            {pageEntries.map((testimonial) => (
               <TestimonialCard
                 key={testimonial._id}
                 quote={testimonial.quote || ''}
@@ -51,6 +77,13 @@ export default function TestimoniesPage() {
               />
             ))}
           </div>
+          <Pagination
+            page={currentPage}
+            totalPages={totalPages}
+            onPageChange={changePage}
+            label="Testimonial pages"
+          />
+          </>
         )}
       </section>
 
