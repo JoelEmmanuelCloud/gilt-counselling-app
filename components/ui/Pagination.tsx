@@ -41,13 +41,13 @@ export default function Pagination({ page, totalPages, onPageChange, label }: Pa
             type="button"
             onClick={() => onPageChange(page - 1)}
             disabled={page === 1}
+            aria-label={page === 1 ? 'Previous page' : `Previous page, page ${page - 1}`}
             className={`${controlClass} gap-1 border border-gray-300 bg-white text-gray-900 shadow-sm hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white`}
           >
             <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
             </svg>
             <span className="hidden sm:inline">Previous</span>
-            <span className="sr-only sm:hidden">Previous page</span>
           </button>
         </li>
 
@@ -80,10 +80,10 @@ export default function Pagination({ page, totalPages, onPageChange, label }: Pa
             type="button"
             onClick={() => onPageChange(page + 1)}
             disabled={page === totalPages}
+            aria-label={page === totalPages ? 'Next page' : `Next page, page ${page + 1}`}
             className={`${controlClass} gap-1 border border-gray-300 bg-white text-gray-900 shadow-sm hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-white`}
           >
             <span className="hidden sm:inline">Next</span>
-            <span className="sr-only sm:hidden">Next page</span>
             <svg className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
