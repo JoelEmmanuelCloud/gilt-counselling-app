@@ -69,6 +69,7 @@ export default function StoryGrid({ category, badge, emptyMessage, extraStories 
     setPage(Math.min(Math.max(1, nextPage), totalPages));
     const grid = gridRef.current;
     if (!grid) return;
+    grid.focus({ preventScroll: true });
     const stickyOffset = window.matchMedia('(min-width: 768px)').matches ? 186 : 170;
     if (grid.getBoundingClientRect().top < stickyOffset) {
       grid.scrollIntoView({ block: 'start' });
@@ -88,7 +89,9 @@ export default function StoryGrid({ category, badge, emptyMessage, extraStories 
         <>
           <div
             ref={gridRef}
-            className="grid scroll-mt-[170px] grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:scroll-mt-[186px]"
+            tabIndex={-1}
+            aria-label="Stories"
+            className="grid scroll-mt-[170px] focus:outline-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:scroll-mt-[186px]"
           >
             {pageStories.map((story) => (
               <StoryCard key={story.id} story={story} badge={badge} onOpen={setOpenStory} />

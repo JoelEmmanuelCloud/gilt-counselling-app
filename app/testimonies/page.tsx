@@ -25,6 +25,7 @@ export default function TestimoniesPage() {
     setPage(Math.min(Math.max(1, nextPage), totalPages));
     const grid = gridRef.current;
     if (!grid) return;
+    grid.focus({ preventScroll: true });
     const navHeight = window.matchMedia('(min-width: 768px)').matches ? 136 : 120;
     if (grid.getBoundingClientRect().top < navHeight) {
       grid.scrollIntoView({ block: 'start' });
@@ -62,7 +63,9 @@ export default function TestimoniesPage() {
           <>
           <div
             ref={gridRef}
-            className="grid scroll-mt-[120px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 md:scroll-mt-[136px]"
+            tabIndex={-1}
+            aria-label="Testimonials"
+            className="grid scroll-mt-[120px] focus:outline-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 md:scroll-mt-[136px]"
           >
             {pageEntries.map((testimonial) => (
               <TestimonialCard
