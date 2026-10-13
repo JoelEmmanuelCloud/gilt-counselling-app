@@ -11,7 +11,7 @@ interface TestimonialImageUploadProps {
 export default function TestimonialImageUpload({
   images,
   onChange,
-  maxImages = 8,
+  maxImages = 40,
 }: TestimonialImageUploadProps) {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
