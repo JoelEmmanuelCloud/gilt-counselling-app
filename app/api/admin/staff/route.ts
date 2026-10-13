@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const { data, error } = parseStaffInput(await request.json(), { partial: false });
+    const { data, error } = parseStaffInput(await request.json().catch(() => null), { partial: false });
     if (error || !data) {
       return NextResponse.json({ message: error }, { status: 400 });
     }

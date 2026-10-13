@@ -27,7 +27,7 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
       return NextResponse.json({ message: 'Team member not found' }, { status: 404 });
     }
 
-    const { data, error } = parseStaffInput(await request.json(), { partial: true });
+    const { data, error } = parseStaffInput(await request.json().catch(() => null), { partial: true });
     if (error || !data) {
       return NextResponse.json({ message: error }, { status: 400 });
     }
