@@ -39,6 +39,9 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
     }
 
     const member = await StaffMember.findByIdAndUpdate(id, data, { new: true, runValidators: true });
+    if (!member) {
+      return NextResponse.json({ message: 'Team member not found' }, { status: 404 });
+    }
     if (data.photo !== undefined && data.photo !== existing.photo) {
       await deleteBlobPhoto(existing.photo);
     }
