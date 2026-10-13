@@ -32,7 +32,13 @@ export function isAllowedPhotoUrl(value: string): boolean {
 }
 
 export function isBlobUrl(value: string | undefined): value is string {
-  return !!value && value.includes('.public.blob.vercel-storage.com');
+  if (!value) return false;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'https:' && url.hostname.endsWith('.public.blob.vercel-storage.com');
+  } catch {
+    return false;
+  }
 }
 
 export function parseStaffInput(body: unknown, { partial }: { partial: boolean }): { data?: StaffInput; error?: string } {
