@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
+import { brandTone } from '@/lib/brandTones';
 import Card from '@/components/ui/Card';
 import TeamSection from '@/components/team/TeamSection';
 import Button from '@/components/ui/Button';
@@ -13,27 +14,27 @@ export default function About() {
     {
       name: 'Joy',
       description: 'We believe in fostering happiness and positive growth in every interaction.',
-      color: 'bg-soft-gold',
+      color: 'bg-gilt-gold-strong',
     },
     {
       name: 'Optimism',
       description: 'Every challenge is an opportunity for positive change and growth.',
-      color: 'bg-muted-teal',
+      color: 'bg-gilt-teal-strong',
     },
     {
       name: 'Confidentiality',
       description: 'Your privacy is sacred and always protected in everything we do.',
-      color: 'bg-olive-green',
+      color: 'bg-gilt-green-strong',
     },
     {
       name: 'Integrity',
       description: 'We uphold the highest ethical standards in our practice and relationships.',
-      color: 'bg-muted-coral',
+      color: 'bg-gilt-orange-strong',
     },
     {
       name: 'Inclusion',
       description: 'Everyone deserves compassionate care, without exception or judgment.',
-      color: 'bg-gentle-blue-grey',
+      color: 'bg-gradient-to-br from-gilt-teal-strong to-gilt-green-strong',
     },
   ];
 
@@ -143,7 +144,7 @@ export default function About() {
           {whyChooseUs.map((item, index) => (
             <Card key={index}>
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-soft-gold">
+                <div className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl ${brandTone(index).tile}`}>
                   {item.icon}
                 </div>
                 <div>
@@ -177,14 +178,14 @@ export default function About() {
               title: 'Media, Events & Milestones',
               text: 'Radio and television features, conferences, awards, and the programmes that mark our journey.',
             },
-          ].map((item) => (
+          ].map((item, index) => (
             <Link
               key={item.href}
               href={item.href}
               className="group card flex flex-col justify-between transition-colors duration-150 hover:border-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
             >
               <div>
-                <p className="eyebrow mb-3 text-gilt-gold-strong">{item.eyebrow}</p>
+                <p className={`eyebrow mb-3 ${brandTone(index).text}`}>{item.eyebrow}</p>
                 <h3 className="heading-sm mb-2">{item.title}</h3>
                 <p className="text-gray-700 leading-relaxed">{item.text}</p>
               </div>
