@@ -109,6 +109,7 @@ export default function TestimoniesPage() {
         <div className="max-w-4xl mx-auto text-center">
           <SectionHeading
             title="Your Story Could Inspire Someone"
+            highlight="Inspire Someone"
             subtitle="If our counselling services have helped you, consider sharing your experience to give hope to others who may be struggling."
             centered
           />

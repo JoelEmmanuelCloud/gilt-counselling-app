@@ -114,6 +114,7 @@ export default function About() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Our Core Values"
+          highlight="Core Values"
           subtitle="These principles guide everything we do and shape the care we provide."
           centered
         />
@@ -134,6 +135,7 @@ export default function About() {
       <section className="section-container bg-off-white">
         <SectionHeading
           title="Why Choose Gilt Counselling?"
+          highlight="Gilt Counselling"
           subtitle="We combine professional excellence with genuine compassion for every person we serve."
           centered
         />
@@ -157,6 +159,7 @@ export default function About() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="See Our Work in Action"
+          highlight="in Action"
           subtitle="Our impact reaches beyond the counselling room into schools, communities, and the media."
           centered
         />

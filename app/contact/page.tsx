@@ -123,6 +123,7 @@ export default function Contact() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Our Space"
+          highlight="Space"
           subtitle="We've created a welcoming, comfortable environment where you can feel safe and at ease."
           centered
         />

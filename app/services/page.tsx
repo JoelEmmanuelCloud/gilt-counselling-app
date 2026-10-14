@@ -166,6 +166,7 @@ export default function Services() {
       <section className="section-container bg-off-white">
         <SectionHeading
           title="How We Can Support You"
+          highlight="Support You"
           subtitle="Each service is designed with care to address specific needs and provide meaningful support."
           centered
         />
@@ -184,6 +185,7 @@ export default function Services() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="What to Expect"
+          highlight="Expect"
           subtitle="Every service is tailored to meet your unique needs and circumstances."
           centered
         />

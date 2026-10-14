@@ -19,6 +19,7 @@ export default function BootcampAttendingPage() {
           <SectionHeading
             centered
             title="I'm Attending the Holiday Bootcamp"
+            highlight="Holiday Bootcamp"
             subtitle="Add your photo, create your badge, and let friends and family know you'll be at the Gilt Consult Champions 2026 Holiday Psycho-Social Skills Bootcamp."
           />
         </div>
