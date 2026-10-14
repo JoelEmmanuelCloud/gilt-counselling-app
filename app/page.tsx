@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -9,6 +9,12 @@ import BookSessionButton from '@/components/BookSessionButton';
 import HeroSlideshow, { heroImages } from '@/components/HeroSlideshow';
 import FadeUp from '@/components/FadeUp';
 import AnimatedStats from '@/components/AnimatedStats';
+import LatestActivity from '@/components/home/LatestActivity';
+import SchoolsSpotlight from '@/components/home/SchoolsSpotlight';
+import TestimonialHighlights from '@/components/home/TestimonialHighlights';
+import MomentsStrip from '@/components/home/MomentsStrip';
+import { buildActivity } from '@/components/home/activity';
+import { usePublishedEntries } from '@/components/stories/usePublishedEntries';
 
 type HeadingLine = string | { before?: string; italic: string; after?: string };
 
@@ -50,30 +56,18 @@ const heroContent: SlideContent[] = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const { entries, loading: entriesLoading } = usePublishedEntries();
+  const activity = useMemo(() => buildActivity(entries), [entries]);
+  const clientTestimonials = useMemo(
+    () => entries.filter((entry) => entry.category === 'client' && entry.quote).slice(0, 6),
+    [entries]
+  );
   const helpOptions = [
     'Family Problems',
     'Breakups',
     'Business Failure',
     'Stress Issues',
     'Online Sessions',
-  ];
-
-  const testimonials = [
-    {
-      quote: 'The counselling sessions helped me understand myself better and gave me tools to manage my emotions. I feel more confident now.',
-      firstName: 'Sarah',
-      service: 'Individual Counselling',
-    },
-    {
-      quote: 'Our family is communicating better than we have in years. The sessions were a safe space for all of us.',
-      firstName: 'Michael',
-      service: 'Family Counselling',
-    },
-    {
-      quote: 'I was struggling with anxiety and depression. My counsellor helped me find hope and develop coping strategies that actually work.',
-      firstName: 'David',
-      service: 'Mental Health Support',
-    },
   ];
 
   return (
@@ -167,6 +161,8 @@ export default function Home() {
         </div>
       </section>
 
+
+      <LatestActivity items={activity} loading={entriesLoading} />
 
       <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
@@ -339,31 +335,9 @@ export default function Home() {
       </section>
 
       
-      <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
-        <FadeUp distance={30}>
-          <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">
-            <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: 'backOut' }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6"
-            >
-              "
-            </motion.div>
-            <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-relaxed">
-              Gilt Counselling Consult transformed how I understand myself and gave me the confidence to pursue my dreams.
-            </blockquote>
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-              <div>
-                <p className="font-semibold text-sm sm:text-base lg:text-lg">Client Testimonial</p>
-                <p className="text-xs lg:text-sm text-gray-400">Youth Counselling Program</p>
-              </div>
-            </div>
-          </div>
-        </FadeUp>
-      </section>
+      <SchoolsSpotlight />
+
+      <TestimonialHighlights testimonials={clientTestimonials} />
 
       
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-warm-cream">
@@ -417,6 +391,8 @@ export default function Home() {
       </section>
 
       
+      <MomentsStrip items={activity} />
+
       <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <FadeUp distance={30}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
