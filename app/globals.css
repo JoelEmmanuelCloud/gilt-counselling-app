@@ -70,6 +70,30 @@
     @apply font-mono text-sm tracking-wide;
   }
 
+  .text-accent {
+    @apply bg-gradient-to-r from-gilt-gold-strong to-gilt-orange-strong bg-clip-text text-transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .text-accent-light {
+    @apply bg-gradient-to-r from-gilt-gold to-gilt-orange bg-clip-text text-transparent;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .accent-bar {
+    @apply block h-1 w-14 rounded-full bg-gradient-to-r from-gilt-teal via-gilt-gold to-gilt-green;
+  }
+
+  @media (forced-colors: active) {
+    .text-accent,
+    .text-accent-light {
+      background: none;
+      color: CanvasText;
+    }
+  }
+
   .panel-gold {
     @apply relative isolate overflow-hidden bg-gradient-to-br from-soft-terracotta via-gilt-gold to-gilt-orange text-gray-900;
   }
