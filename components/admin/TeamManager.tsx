@@ -6,7 +6,7 @@ import axios from 'axios';
 import { useToast } from '@/components/ui/Toast';
 import Skeleton from '@/components/ui/Skeleton';
 import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
-import { DEFAULT_STAFF_TIER, STAFF_TIERS, type StaffTier } from '@/lib/staffInput';
+import { DEFAULT_STAFF_TIER, STAFF_TIERS, isStaffTier, type StaffTier } from '@/lib/staffInput';
 
 export interface StaffMemberRecord {
   _id: string;
@@ -83,7 +83,7 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
       label: tier.label,
       description: null,
       tier: tier.value,
-      members: members.filter((member) => !member.featured && (member.tier || DEFAULT_STAFF_TIER) === tier.value),
+      members: members.filter((member) => !member.featured && (isStaffTier(member.tier) ? member.tier : DEFAULT_STAFF_TIER) === tier.value),
     })),
   ].filter((group) => group.tier !== null || group.members.length > 0);
 
@@ -105,7 +105,7 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
       credentials: member.credentials || '',
       bio: member.bio || '',
       photo: member.photo || '',
-      tier: member.tier || DEFAULT_STAFF_TIER,
+      tier: isStaffTier(member.tier) ? member.tier : DEFAULT_STAFF_TIER,
       featured: member.featured,
       published: member.published,
       order: member.order ?? 0,
