@@ -14,6 +14,12 @@ const Footer: React.FC = () => {
     { href: '/testimonies', label: 'Testimonies' },
   ];
 
+  const legalLinks = [
+    { href: '/privacy', label: 'Privacy Policy' },
+    { href: '/terms', label: 'Terms of Service' },
+    { href: '/cookies', label: 'Cookie Policy' },
+  ];
+
   const supportLinks = [
     { href: '/contact', label: 'Contact' },
     { href: '/book-appointment', label: 'Book Appointment' },
@@ -156,9 +162,20 @@ const Footer: React.FC = () => {
             <p className="text-gray-600 text-sm text-center md:text-left">
               &copy; {new Date().getFullYear()} Gilt Counselling Consult. All rights reserved.
             </p>
-            <p className="text-gray-500 text-xs text-center md:text-right">
-              Your privacy and confidentiality are our priority.
-            </p>
+            <nav aria-label="Legal">
+              <ul className="flex flex-wrap items-center justify-center gap-x-1 text-sm md:justify-end">
+                {legalLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="inline-flex min-h-[40px] items-center rounded px-2 text-gray-600 underline-offset-4 transition-colors duration-200 hover:text-gray-900 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
           </div>
         </div>
       </div>
