@@ -13,6 +13,7 @@ import LatestActivity from '@/components/home/LatestActivity';
 import SchoolsSpotlight from '@/components/home/SchoolsSpotlight';
 import TestimonialHighlights from '@/components/home/TestimonialHighlights';
 import MomentsStrip from '@/components/home/MomentsStrip';
+import ApproachImages from '@/components/home/ApproachImages';
 import { buildActivity } from '@/components/home/activity';
 import { usePublishedEntries } from '@/components/stories/usePublishedEntries';
 
@@ -194,32 +195,9 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
-              <div className="mt-6 sm:mt-8 flex items-start gap-3 sm:gap-4 rounded-lg border border-white/10 bg-white/5 p-4 sm:p-5 lg:p-6">
-                <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gilt-gold rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg className="w-5 h-5 sm:w-6 sm:h-6 text-gray-900" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                  </svg>
-                </div>
-                <div>
-                  <h3 className="font-heading font-bold text-white mb-1 sm:mb-2 text-base sm:text-lg lg:text-xl">Personalised therapies</h3>
-                  <p className="text-gray-300 text-sm lg:text-base text-left">
-                    Going through a distressing or stressful period? A supportive therapist will walk with you, with understanding and at your own pace, so you can achieve more than you imagined.
-                  </p>
-                </div>
-              </div>
             </FadeUp>
             <FadeUp delay={0.15} className="order-1 lg:order-2 relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] rounded-lg lg:rounded-lg xl:rounded-lg overflow-hidden shadow-md">
-              <Image
-                src="/images/DSC_9730.jpg"
-                alt="Counsellor in a therapy session with a client"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={60}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
-                loading="lazy"
-              />
+              <ApproachImages />
             </FadeUp>
           </div>
         </div>
