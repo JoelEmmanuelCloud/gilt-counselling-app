@@ -8,7 +8,7 @@ import Footer from '@/components/Footer';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import NavigationProgress from '@/components/NavigationProgress';
 import BackToTop from '@/components/BackToTop';
-import CookieNotice from '@/components/CookieNotice';
+import CookieConsent from '@/components/CookieConsent';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -105,7 +105,7 @@ export default function RootLayout({
               <Footer />
               <WhatsAppButton />
               <BackToTop />
-              <CookieNotice />
+              <CookieConsent />
             </div>
           </ToastProvider>
         </AuthProvider>
