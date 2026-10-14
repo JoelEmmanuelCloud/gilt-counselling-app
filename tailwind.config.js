@@ -54,11 +54,16 @@ module.exports = {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-8px)' },
         },
+        'marquee-right': {
+          '0%': { transform: 'translateX(calc(-1 * var(--marquee-distance, 50%)))' },
+          '100%': { transform: 'translateX(0)' },
+        },
       },
       animation: {
         'ken-burns': 'ken-burns 8s ease-out forwards',
         'pulse-ring': 'pulse-ring 2s ease-out infinite',
         'float': 'float 3s ease-in-out infinite',
+        'marquee-right': 'marquee-right 40s linear infinite',
       },
     },
   },
