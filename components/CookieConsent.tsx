@@ -123,9 +123,9 @@ export default function CookieConsent() {
         <div
           role="region"
           aria-label="Cookie consent"
-          className="fixed inset-x-0 bottom-0 z-[60] border-t-4 border-gilt-gold bg-gray-900 text-white shadow-2xl"
+          className="fixed inset-x-3 bottom-3 z-[60] mx-auto max-w-6xl overflow-hidden rounded-xl border-t-4 border-gilt-gold bg-gray-900 text-white shadow-2xl ring-1 ring-black/10 sm:inset-x-6 sm:bottom-6"
         >
-          <div className="mx-auto flex max-w-7xl flex-col gap-4 px-4 py-4 sm:px-6 sm:py-5 lg:flex-row lg:items-center lg:gap-8 lg:px-8">
+          <div className="flex flex-col gap-4 px-4 py-4 sm:px-6 sm:py-5 lg:flex-row lg:items-center lg:gap-8">
             <div className="min-w-0 flex-1">
               <p className="font-heading text-base font-semibold sm:text-lg">We value your privacy</p>
               <p className="mt-1 text-sm leading-relaxed text-gray-300">
