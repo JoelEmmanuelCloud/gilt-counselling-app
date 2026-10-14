@@ -8,7 +8,6 @@ import Button from '@/components/ui/Button';
 import BookSessionButton from '@/components/BookSessionButton';
 import HeroSlideshow, { heroImages } from '@/components/HeroSlideshow';
 import FadeUp from '@/components/FadeUp';
-import AnimatedStats from '@/components/AnimatedStats';
 import LatestActivity from '@/components/home/LatestActivity';
 import SchoolsSpotlight from '@/components/home/SchoolsSpotlight';
 import TestimonialHighlights from '@/components/home/TestimonialHighlights';
@@ -63,13 +62,6 @@ export default function Home() {
     () => entries.filter((entry) => entry.category === 'client' && entry.quote).slice(0, 6),
     [entries]
   );
-  const helpOptions = [
-    'Family Problems',
-    'Breakups',
-    'Business Failure',
-    'Stress Issues',
-    'Online Sessions',
-  ];
 
   return (
     <div className="min-h-screen">
@@ -162,7 +154,6 @@ export default function Home() {
         </div>
       </section>
 
-
       <LatestActivity items={activity} loading={entriesLoading} />
 
       <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
@@ -204,71 +195,8 @@ export default function Home() {
       </section>
 
       
-      <AnimatedStats />
 
       
-      <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-[#FFF8F1]">
-        <div className="max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
-          <FadeUp>
-            <div className="bg-warm-cream rounded-lg lg:rounded-lg xl:rounded-lg p-5 sm:p-6 lg:p-8 xl:p-10 h-full hover:shadow-lg transition-shadow duration-300">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading font-bold text-gray-900 mb-4 sm:mb-5 lg:mb-6">
-                How can I <span className="text-accent">help you?</span>
-              </h2>
-              <p className="text-gray-600 mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg text-left">
-                If you're experiencing any kind of mental illness or problem in relations.
-              </p>
-              <ul className="space-y-2 sm:space-y-3 lg:space-y-4 mb-5 sm:mb-6 lg:mb-8">
-                {helpOptions.map((option, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="flex items-center gap-2 sm:gap-3"
-                  >
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-soft-terracotta flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-gray-700 text-sm sm:text-base lg:text-lg">{option}</span>
-                  </motion.li>
-                ))}
-              </ul>
-              <Link href="/services">
-                <Button className="btn-cta uppercase text-xs lg:text-sm tracking-wide py-3 lg:py-3.5 px-5 sm:px-6 lg:px-8 rounded-lg lg:rounded-lg">
-                  Explore Programs
-                </Button>
-              </Link>
-            </div>
-          </FadeUp>
-
-          <FadeUp delay={0.15}>
-            <div className="bg-soft-terracotta text-gray-900 rounded-lg lg:rounded-lg xl:rounded-lg p-5 sm:p-6 lg:p-8 xl:p-10 h-full hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading font-bold mb-3 sm:mb-4 lg:mb-5">
-                Call for Consultation
-              </h2>
-              <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-5 lg:mb-6 text-gray-800">
-                30 minutes free for first session. <span className="font-semibold">T&C Apply</span>
-              </p>
-              <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg lg:rounded-lg p-4 sm:p-5 lg:p-6 xl:p-8 mb-4 sm:mb-5 lg:mb-6">
-                <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 bg-gray-900/20 rounded-full flex items-center justify-center flex-shrink-0 animate-float">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-xs lg:text-sm text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
-                    <a href="tel:+2347065734165" className="inline-flex min-h-[44px] items-center rounded text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900">
-                      +234 706 573 4165
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
 
       
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-white">
