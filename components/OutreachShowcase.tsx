@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
+import { brandTone } from '@/lib/brandTones';
 
 interface Quote { text: string; author: string; }
 interface Photo { src: string; alt: string; }
@@ -270,9 +271,9 @@ export default function OutreachShowcase() {
           { value: '7', label: 'Schools Visited' },
           { value: '1,000+', label: 'Students Reached' },
           { value: 'May 2026', label: 'Port Harcourt' },
-        ].map(stat => (
+        ].map((stat, statIndex) => (
           <div key={stat.label} className="text-center">
-            <p className="text-xl sm:text-2xl font-heading font-bold text-soft-terracotta">{stat.value}</p>
+            <p className={`text-xl sm:text-2xl font-heading font-bold ${brandTone(statIndex).text}`}>{stat.value}</p>
             <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider">{stat.label}</p>
           </div>
         ))}
@@ -286,11 +287,11 @@ export default function OutreachShowcase() {
             onClick={() => navigate(i)}
             className={`flex-shrink-0 flex flex-col items-center px-4 py-2.5 rounded-lg text-xs font-semibold tracking-wide uppercase transition-all duration-300 border ${
               i === activeIndex
-                ? 'bg-soft-terracotta text-white border-soft-terracotta shadow-md scale-105'
-                : 'bg-white text-gray-500 border-soft-beige hover:border-soft-terracotta hover:text-soft-terracotta'
+                ? 'bg-soft-terracotta text-gray-900 border-soft-terracotta shadow-md scale-105'
+                : 'bg-white text-gray-600 border-soft-beige hover:border-soft-terracotta hover:text-gilt-gold-strong'
             }`}
           >
-            <span className={`text-xs mb-0.5 ${i === activeIndex ? 'text-white/70' : 'text-gray-400'}`}>{s.number}</span>
+            <span className={`text-xs mb-0.5 ${i === activeIndex ? 'text-gray-900/70' : 'text-gray-500'}`}>{s.number}</span>
             <span>{s.short}</span>
           </button>
         ))}
@@ -335,11 +336,11 @@ export default function OutreachShowcase() {
                 {/* School name — desktop only */}
                 <div className="hidden md:block">
                   <div className="flex items-center gap-3 mb-1">
-                    <span className="text-soft-terracotta text-xs font-bold uppercase tracking-widest">{school.number}</span>
+                    <span className="text-gilt-teal-strong text-xs font-bold uppercase tracking-widest">{school.number}</span>
                     <div className="h-px flex-1 bg-soft-beige" />
                     <span className="text-gray-400 text-xs uppercase tracking-wider">{school.location}</span>
                   </div>
-                  <h3 className="font-heading font-bold text-xl sm:text-2xl text-gray-900">{school.name}</h3>
+                  <h3 className="font-heading font-bold text-xl sm:text-2xl text-gray-900"><span className="text-accent">{school.name}</span></h3>
                 </div>
 
                 {/* Narrative */}
@@ -351,7 +352,7 @@ export default function OutreachShowcase() {
 
                 {/* Quote carousel */}
                 <div className="bg-warm-cream rounded-lg p-4 sm:p-5 relative overflow-hidden">
-                  <div className="text-2xl text-soft-terracotta font-serif leading-none mb-2">&ldquo;</div>
+                  <div className="text-3xl text-gilt-orange font-serif leading-none mb-2" aria-hidden="true">&ldquo;</div>
                   <div className="min-h-[72px] flex items-center">
                     <AnimatePresence mode="wait">
                       <motion.div
@@ -365,7 +366,7 @@ export default function OutreachShowcase() {
                         <p className="text-gray-700 italic text-sm sm:text-base leading-relaxed mb-2">
                           {school.quotes[activeQuote].text}
                         </p>
-                        <p className="text-xs font-semibold text-soft-terracotta uppercase tracking-wider">
+                        <p className="text-xs font-semibold text-gilt-gold-strong uppercase tracking-wider">
                           — {school.quotes[activeQuote].author}
                         </p>
                       </motion.div>

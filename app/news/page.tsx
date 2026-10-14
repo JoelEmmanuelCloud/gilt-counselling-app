@@ -50,6 +50,7 @@ export default function NewsPage() {
               <section className="section-container">
                 <SectionHeading
                   title="Events & Milestones"
+                  highlight="Milestones"
                   subtitle="Conferences, awards, programmes, and the moments that mark our journey."
                   centered
                 />
@@ -64,6 +65,7 @@ export default function NewsPage() {
               <section className="section-container">
                 <SectionHeading
                   title="In the Media"
+                  highlight="Media"
                   subtitle="Sharing our expertise on mental health and wellness with the wider public through radio and television."
                   centered
                 />
@@ -78,6 +80,7 @@ export default function NewsPage() {
               <section className="section-container">
                 <SectionHeading
                   title="Professional Development"
+                  highlight="Development"
                   subtitle="Staying current with evidence-based research and international best practice."
                   centered
                 />

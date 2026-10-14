@@ -5,6 +5,7 @@ import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Skeleton from '@/components/ui/Skeleton';
 import { DEFAULT_STAFF_TIER, STAFF_TIERS, isStaffTier, type StaffTier } from '@/lib/staffInput';
+import { brandTone, type BrandTone } from '@/lib/brandTones';
 
 interface TeamMember {
   _id: string;
@@ -51,14 +52,16 @@ function MemberPhoto({ member, sizes, decorative }: { member: TeamMember; sizes:
   );
 }
 
-function MemberCard({ member, size, tier, decorative }: { member: TeamMember; size: CardSize; tier: StaffTier; decorative: boolean }) {
+function MemberCard({ member, size, tier, tone, decorative }: { member: TeamMember; size: CardSize; tier: StaffTier; tone: BrandTone; decorative: boolean }) {
   if (size === 'sm') {
     return (
       <li className="w-36 flex-shrink-0 text-center sm:w-40">
-        <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full bg-warm-cream shadow-sm ring-4 ring-white sm:h-28 sm:w-28">
-          <MemberPhoto member={member} sizes="112px" decorative={decorative} />
+        <div className={`relative mx-auto h-24 w-24 overflow-hidden rounded-full p-1 shadow-sm sm:h-28 sm:w-28 ${tone.bar}`}>
+          <div className="relative h-full w-full overflow-hidden rounded-full bg-warm-cream ring-2 ring-white">
+            <MemberPhoto member={member} sizes="112px" decorative={decorative} />
+          </div>
         </div>
-        <h3 className="mt-3 font-heading text-base font-semibold tracking-tight text-gray-900">{member.name}</h3>
+        <h3 className={`mt-3 font-heading text-base font-semibold tracking-tight ${tone.text}`}>{member.name}</h3>
         <p className="mt-0.5 text-sm text-gray-600">{member.role}</p>
       </li>
     );
@@ -66,13 +69,13 @@ function MemberCard({ member, size, tier, decorative }: { member: TeamMember; si
 
   return (
     <li className={`flex-shrink-0 ${size === 'lg' ? 'w-56 sm:w-64' : 'w-48 sm:w-52'}`}>
-      <article className="h-full overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-gray-200/70 transition-shadow duration-300 hover:shadow-md">
+      <article className={`h-full overflow-hidden rounded-lg border-b-4 bg-white shadow-sm ring-1 ring-gray-200/70 transition-shadow duration-300 hover:shadow-md ${tone.bottomBorder}`}>
         <div className="relative aspect-[4/5] w-full bg-warm-cream">
           <MemberPhoto member={member} sizes={size === 'lg' ? '256px' : '208px'} decorative={decorative} />
         </div>
         <div className="p-4 text-center sm:p-5">
           {tier === 'board' && <p className="eyebrow mb-1.5 text-xs uppercase text-gilt-gold-strong">{member.role}</p>}
-          <h3 className={`font-heading font-semibold tracking-tight text-gray-900 ${size === 'lg' ? 'text-lg' : 'text-base'}`}>{member.name}</h3>
+          <h3 className={`font-heading font-semibold tracking-tight ${tone.text} ${size === 'lg' ? 'text-lg' : 'text-base'}`}>{member.name}</h3>
           {tier !== 'board' && <p className="mt-1 text-sm font-medium text-gray-700">{member.role}</p>}
           {member.credentials && <p className="eyebrow mt-2 text-xs text-gray-500">{member.credentials}</p>}
         </div>
@@ -126,8 +129,8 @@ function MemberMarquee({ members, tier }: { members: TeamMember[]; tier: StaffTi
       aria-hidden={copy > 0 || undefined}
       className={`flex w-max flex-shrink-0 items-stretch ${gap} ${animate ? trailing : ''}`}
     >
-      {members.map((member) => (
-        <MemberCard key={member._id} member={member} size={size} tier={tier} decorative={copy > 0} />
+      {members.map((member, index) => (
+        <MemberCard key={member._id} member={member} size={size} tier={tier} tone={brandTone(index)} decorative={copy > 0} />
       ))}
     </ul>
   );
@@ -245,8 +248,8 @@ export default function TeamSection() {
                 </div>
               )}
               <div>
-                <p className="eyebrow text-gray-600 mb-3">{member.role}</p>
-                <h2 className="heading-md mb-2">{member.name}</h2>
+                <p className="eyebrow text-gilt-gold-strong mb-3">{member.role}</p>
+                <h2 className="heading-md mb-2"><span className="text-accent">{member.name}</span></h2>
                 {member.title && <p className="font-semibold text-gray-800 mb-1">{member.title}</p>}
                 {member.credentials && <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>}
                 {member.bio && <p className="text-gray-700 leading-relaxed text-left whitespace-pre-line">{member.bio}</p>}

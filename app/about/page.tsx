@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
+import { brandTone } from '@/lib/brandTones';
 import Card from '@/components/ui/Card';
 import TeamSection from '@/components/team/TeamSection';
 import Button from '@/components/ui/Button';
@@ -13,27 +14,27 @@ export default function About() {
     {
       name: 'Joy',
       description: 'We believe in fostering happiness and positive growth in every interaction.',
-      color: 'bg-soft-gold',
+      color: 'bg-gilt-gold',
     },
     {
       name: 'Optimism',
       description: 'Every challenge is an opportunity for positive change and growth.',
-      color: 'bg-muted-teal',
+      color: 'bg-gilt-teal',
     },
     {
       name: 'Confidentiality',
       description: 'Your privacy is sacred and always protected in everything we do.',
-      color: 'bg-olive-green',
+      color: 'bg-gilt-green',
     },
     {
       name: 'Integrity',
       description: 'We uphold the highest ethical standards in our practice and relationships.',
-      color: 'bg-muted-coral',
+      color: 'bg-gilt-orange',
     },
     {
       name: 'Inclusion',
       description: 'Everyone deserves compassionate care, without exception or judgment.',
-      color: 'bg-gentle-blue-grey',
+      color: 'bg-gradient-to-br from-gilt-teal to-gilt-green',
     },
   ];
 
@@ -89,7 +90,7 @@ export default function About() {
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
           <Card variant="warm" className="text-center">
-            <h2 className="heading-md mb-6">Our Mission</h2>
+            <h2 className="heading-md mb-6">Our <span className="text-accent">Mission</span></h2>
             <div className="space-y-4 text-gray-700">
               <p className="body-lg text-left">
                 Empowering teens and youths for optimal development through professional,
@@ -114,13 +115,14 @@ export default function About() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="Our Core Values"
+          highlight="Core Values"
           subtitle="These principles guide everything we do and shape the care we provide."
           centered
         />
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
+              <div className={`${value.color} text-gray-900 rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-left">
@@ -134,6 +136,7 @@ export default function About() {
       <section className="section-container bg-off-white">
         <SectionHeading
           title="Why Choose Gilt Counselling?"
+          highlight="Gilt Counselling"
           subtitle="We combine professional excellence with genuine compassion for every person we serve."
           centered
         />
@@ -141,7 +144,7 @@ export default function About() {
           {whyChooseUs.map((item, index) => (
             <Card key={index}>
               <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 text-soft-gold">
+                <div className={`flex h-14 w-14 flex-shrink-0 items-center justify-center rounded-xl ${brandTone(index).tile}`}>
                   {item.icon}
                 </div>
                 <div>
@@ -157,6 +160,7 @@ export default function About() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="See Our Work in Action"
+          highlight="in Action"
           subtitle="Our impact reaches beyond the counselling room into schools, communities, and the media."
           centered
         />
@@ -174,14 +178,14 @@ export default function About() {
               title: 'Media, Events & Milestones',
               text: 'Radio and television features, conferences, awards, and the programmes that mark our journey.',
             },
-          ].map((item) => (
+          ].map((item, index) => (
             <Link
               key={item.href}
               href={item.href}
               className="group card flex flex-col justify-between transition-colors duration-150 hover:border-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
             >
               <div>
-                <p className="eyebrow mb-3 text-gray-600">{item.eyebrow}</p>
+                <p className={`eyebrow mb-3 ${brandTone(index).text}`}>{item.eyebrow}</p>
                 <h3 className="heading-sm mb-2">{item.title}</h3>
                 <p className="text-gray-700 leading-relaxed">{item.text}</p>
               </div>

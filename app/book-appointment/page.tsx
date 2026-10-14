@@ -39,6 +39,7 @@ export default function BookAppointment() {
       <div className="max-w-2xl mx-auto">
         <SectionHeading
           title="Book Your Session"
+          highlight="Your Session"
           subtitle="No forms, no sign-up required — just send our secretary a message on WhatsApp and she'll schedule everything for you."
         />
 

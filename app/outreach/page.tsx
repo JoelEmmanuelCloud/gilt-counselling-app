@@ -69,6 +69,7 @@ export default function OutreachPage() {
                 <section className="section-container">
                   <SectionHeading
                     title="Schools Outreach Programme"
+                    highlight="Outreach Programme"
                     subtitle="Bringing Emotional Intelligence education to secondary schools across Port Harcourt."
                     centered
                   />
@@ -79,6 +80,7 @@ export default function OutreachPage() {
                 <section className="section-container bg-warm-cream">
                   <SectionHeading
                     title="What Schools Are Saying"
+                    highlight="Are Saying"
                     subtitle="Feedback from students, counsellors, and principals after our Emotional Intelligence sessions."
                     centered
                   />
@@ -94,6 +96,7 @@ export default function OutreachPage() {
               <section className="section-container">
                 <SectionHeading
                   title="Community Outreach"
+                  highlight="Outreach"
                   subtitle="Workshops, donations, and awareness programmes that bring support to communities beyond our counselling rooms."
                   centered
                 />

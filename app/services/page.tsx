@@ -6,6 +6,7 @@ import Image from 'next/image';
 import PageHeader from '@/components/PageHeader';
 import SectionHeading from '@/components/ui/SectionHeading';
 import ServiceCard from '@/components/ui/ServiceCard';
+import { brandTone } from '@/lib/brandTones';
 import Button from '@/components/ui/Button';
 
 export default function Services() {
@@ -166,6 +167,7 @@ export default function Services() {
       <section className="section-container bg-off-white">
         <SectionHeading
           title="How We Can Support You"
+          highlight="Support You"
           subtitle="Each service is designed with care to address specific needs and provide meaningful support."
           centered
         />
@@ -176,6 +178,7 @@ export default function Services() {
               title={service.title}
               description={service.description}
               icon={service.icon}
+              tone={brandTone(index)}
             />
           ))}
         </div>
@@ -184,26 +187,27 @@ export default function Services() {
       <section className="section-container bg-warm-cream">
         <SectionHeading
           title="What to Expect"
+          highlight="Expect"
           subtitle="Every service is tailored to meet your unique needs and circumstances."
           centered
         />
         <div className="max-w-4xl mx-auto space-y-6">
-          <div className="bg-white rounded-lg p-6 shadow-calm">
-            <h3 className="font-heading font-semibold text-lg text-soft-gold mb-3">First Session</h3>
+          <div className="bg-white rounded-lg p-6 shadow-calm border-l-4 border-l-gilt-teal">
+            <h3 className="font-heading font-semibold text-lg text-gilt-teal-strong mb-3">First Session</h3>
             <p className="text-gray-700 leading-relaxed text-left">
               Your first session is an opportunity to get to know each other. We'll discuss what brings you to counselling,
               your goals, and how we can best support you. There's no pressure—just a safe, welcoming conversation.
             </p>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-calm">
-            <h3 className="font-heading font-semibold text-lg text-soft-gold mb-3">Ongoing Support</h3>
+          <div className="bg-white rounded-lg p-6 shadow-calm border-l-4 border-l-gilt-green">
+            <h3 className="font-heading font-semibold text-lg text-gilt-green-strong mb-3">Ongoing Support</h3>
             <p className="text-gray-700 leading-relaxed text-left">
               Counselling is a journey, not a destination. We work at your pace, celebrating progress and navigating
               challenges together. The frequency and duration of sessions are flexible based on your needs.
             </p>
           </div>
-          <div className="bg-white rounded-lg p-6 shadow-calm">
-            <h3 className="font-heading font-semibold text-lg text-soft-gold mb-3">Complete Confidentiality</h3>
+          <div className="bg-white rounded-lg p-6 shadow-calm border-l-4 border-l-gilt-orange">
+            <h3 className="font-heading font-semibold text-lg text-gilt-orange-strong mb-3">Complete Confidentiality</h3>
             <p className="text-gray-700 leading-relaxed text-left">
               Everything you share is held in strict confidence. Your privacy is protected, and you can trust that
               this is a safe space to be open and honest.

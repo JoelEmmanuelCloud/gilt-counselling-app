@@ -9,6 +9,7 @@ import Button from '@/components/ui/Button';
 import Pagination from '@/components/ui/Pagination';
 import { TestimonialCardSkeleton } from '@/components/ui/Skeleton';
 import { usePublishedEntries } from '@/components/stories/usePublishedEntries';
+import { brandTone } from '@/lib/brandTones';
 
 const PAGE_SIZE = 6;
 
@@ -67,13 +68,14 @@ export default function TestimoniesPage() {
             aria-label="Testimonials"
             className="grid scroll-mt-[120px] focus:outline-none grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 lg:gap-10 xl:gap-12 md:scroll-mt-[136px]"
           >
-            {pageEntries.map((testimonial) => (
+            {pageEntries.map((testimonial, index) => (
               <TestimonialCard
                 key={testimonial._id}
                 quote={testimonial.quote || ''}
                 firstName={testimonial.name || ''}
                 service={testimonial.service}
                 date={testimonial.date}
+                tone={brandTone(index)}
               />
             ))}
           </div>
@@ -89,11 +91,13 @@ export default function TestimoniesPage() {
 
       <section className="section-container bg-warm-cream">
         <div className="max-w-3xl mx-auto text-center">
-          <div className="bg-white rounded-lg p-8 shadow-calm">
-            <svg className="w-12 h-12 text-soft-gold mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-            </svg>
-            <h3 className="heading-sm mb-4">Your Privacy is Sacred</h3>
+          <div className="bg-white rounded-lg p-8 shadow-calm border-t-4 border-t-gilt-teal">
+            <span className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gilt-teal/10 text-gilt-teal" aria-hidden="true">
+              <svg className="w-9 h-9" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+              </svg>
+            </span>
+            <h3 className="heading-sm mb-4">Your Privacy is <span className="text-accent">Sacred</span></h3>
             <p className="body-md text-gray-700 mb-4">
               All testimonials shared here have been anonymized to protect the identity and privacy of our clients.
               We use first names only and obtain explicit consent before sharing any feedback.
@@ -109,6 +113,7 @@ export default function TestimoniesPage() {
         <div className="max-w-4xl mx-auto text-center">
           <SectionHeading
             title="Your Story Could Inspire Someone"
+            highlight="Inspire Someone"
             subtitle="If our counselling services have helped you, consider sharing your experience to give hope to others who may be struggling."
             centered
           />

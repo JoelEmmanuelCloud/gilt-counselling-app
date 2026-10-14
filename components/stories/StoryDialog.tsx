@@ -61,7 +61,7 @@ export default function StoryDialog({ story, badge, onClose }: StoryDialogProps)
           <div className="flex items-start justify-between gap-4 border-b border-gray-200 px-5 py-4 sm:px-8">
             <div className="min-w-0">
               <p className="mb-1 flex flex-wrap items-center gap-x-2 text-sm text-gray-600">
-                <span className="eyebrow text-gray-700">{badge}</span>
+                <span className="eyebrow text-gilt-gold-strong">{badge}</span>
                 {story.date && <span aria-hidden="true">&middot;</span>}
                 {story.date && <span>{story.date}</span>}
               </p>
