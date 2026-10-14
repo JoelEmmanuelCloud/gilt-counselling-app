@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
 import Skeleton from '@/components/ui/Skeleton';
-import { DEFAULT_STAFF_TIER, STAFF_TIERS, type StaffTier } from '@/lib/staffInput';
+import { DEFAULT_STAFF_TIER, STAFF_TIERS, isStaffTier, type StaffTier } from '@/lib/staffInput';
 
 interface TeamMember {
   _id: string;
@@ -20,18 +20,24 @@ interface TeamMember {
 
 type CardSize = 'lg' | 'md' | 'sm';
 
-const TIER_CARD_SIZE: Record<StaffTier, CardSize> = {
-  board: 'lg',
-  team: 'lg',
-  ambassador: 'md',
-  volunteer: 'sm',
+const TIER_DISPLAY: Record<StaffTier, { size: CardSize; subtitle: string }> = {
+  board: { size: 'lg', subtitle: 'Distinguished leaders who guide our vision, governance and partnerships.' },
+  team: { size: 'lg', subtitle: 'Experienced professionals dedicated to your wellbeing and growth.' },
+  ambassador: { size: 'md', subtitle: 'Advocates who carry our mission into schools, families and communities.' },
+  volunteer: { size: 'sm', subtitle: 'Generous people who give their time to support our work.' },
 };
 
-function MemberPhoto({ member, sizes }: { member: TeamMember; sizes: string }) {
+const MARQUEE_MIN_MEMBERS = 3;
+
+const MARQUEE_SPEED = 40;
+
+const EDGE_FADE = 'linear-gradient(to right, transparent, #000 6%, #000 94%, transparent)';
+
+function MemberPhoto({ member, sizes, decorative }: { member: TeamMember; sizes: string; decorative: boolean }) {
   return member.photo ? (
     <Image
       src={member.photo}
-      alt={`${member.name} - Professional Headshot`}
+      alt={decorative ? '' : `${member.name} - Professional Headshot`}
       fill
       className="object-cover object-top"
       sizes={sizes}
@@ -45,32 +51,106 @@ function MemberPhoto({ member, sizes }: { member: TeamMember; sizes: string }) {
   );
 }
 
-function MemberCard({ member, size }: { member: TeamMember; size: CardSize }) {
+function MemberCard({ member, size, tier, decorative }: { member: TeamMember; size: CardSize; tier: StaffTier; decorative: boolean }) {
   if (size === 'sm') {
     return (
-      <li className="w-36 text-center sm:w-40">
+      <li className="w-36 flex-shrink-0 text-center sm:w-40">
         <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full bg-warm-cream shadow-sm ring-4 ring-white sm:h-28 sm:w-28">
-          <MemberPhoto member={member} sizes="112px" />
+          <MemberPhoto member={member} sizes="112px" decorative={decorative} />
         </div>
-        <h4 className="mt-3 font-heading text-base font-semibold tracking-tight text-gray-900">{member.name}</h4>
+        <h3 className="mt-3 font-heading text-base font-semibold tracking-tight text-gray-900">{member.name}</h3>
         <p className="mt-0.5 text-sm text-gray-600">{member.role}</p>
       </li>
     );
   }
 
   return (
-    <li className={`w-full ${size === 'lg' ? 'max-w-[280px]' : 'max-w-[240px]'}`}>
+    <li className={`flex-shrink-0 ${size === 'lg' ? 'w-56 sm:w-64' : 'w-48 sm:w-52'}`}>
       <article className="h-full overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-gray-200/70 transition-shadow duration-300 hover:shadow-md">
         <div className="relative aspect-[4/5] w-full bg-warm-cream">
-          <MemberPhoto member={member} sizes={size === 'lg' ? '280px' : '240px'} />
+          <MemberPhoto member={member} sizes={size === 'lg' ? '256px' : '208px'} decorative={decorative} />
         </div>
         <div className="p-4 text-center sm:p-5">
-          <h4 className={`font-heading font-semibold tracking-tight text-gray-900 ${size === 'lg' ? 'text-lg' : 'text-base'}`}>{member.name}</h4>
-          <p className="mt-1 text-sm font-medium text-gray-700">{member.role}</p>
+          {tier === 'board' && <p className="eyebrow mb-1.5 text-xs uppercase text-gilt-gold-strong">{member.role}</p>}
+          <h3 className={`font-heading font-semibold tracking-tight text-gray-900 ${size === 'lg' ? 'text-lg' : 'text-base'}`}>{member.name}</h3>
+          {tier !== 'board' && <p className="mt-1 text-sm font-medium text-gray-700">{member.role}</p>}
           {member.credentials && <p className="eyebrow mt-2 text-xs text-gray-500">{member.credentials}</p>}
         </div>
       </article>
     </li>
+  );
+}
+
+function MemberMarquee({ members, tier }: { members: TeamMember[]; tier: StaffTier }) {
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+  const [listWidth, setListWidth] = useState(0);
+  const [viewportWidth, setViewportWidth] = useState(0);
+  const [reducedMotion, setReducedMotion] = useState(false);
+  const { size } = TIER_DISPLAY[tier];
+
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReducedMotion(query.matches);
+    update();
+    query.addEventListener('change', update);
+    return () => query.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const list = listRef.current;
+    if (!viewport || !list) return;
+    const measure = () => {
+      setListWidth(list.scrollWidth);
+      setViewportWidth(viewport.clientWidth);
+    };
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(viewport);
+    observer.observe(list);
+    return () => observer.disconnect();
+  }, [members]);
+
+  const overflowing = listWidth > viewportWidth;
+  const animate = !reducedMotion && listWidth > 0 && (overflowing || members.length >= MARQUEE_MIN_MEMBERS);
+  const copies = animate ? Math.max(2, Math.ceil(viewportWidth / listWidth) + 1) : 1;
+  const gap = size === 'sm' ? 'gap-6 sm:gap-10' : 'gap-6 md:gap-8';
+  const trailing = size === 'sm' ? 'pr-6 sm:pr-10' : 'pr-6 md:pr-8';
+
+  const renderList = (copy: number) => (
+    <ul
+      key={copy}
+      ref={copy === 0 ? listRef : undefined}
+      aria-hidden={copy > 0 || undefined}
+      className={`flex w-max flex-shrink-0 items-stretch ${gap} ${animate ? trailing : ''}`}
+    >
+      {members.map((member) => (
+        <MemberCard key={member._id} member={member} size={size} tier={tier} decorative={copy > 0} />
+      ))}
+    </ul>
+  );
+
+  return (
+    <div
+      ref={viewportRef}
+      className={`group py-2 ${animate ? 'overflow-hidden' : overflowing ? 'overflow-x-auto' : 'flex justify-center'}`}
+      style={animate ? { maskImage: EDGE_FADE, WebkitMaskImage: EDGE_FADE } : undefined}
+    >
+      <div
+        className={`flex w-max ${animate ? 'animate-marquee-right group-hover:[animation-play-state:paused] group-focus-within:[animation-play-state:paused]' : ''}`}
+        style={
+          animate
+            ? ({
+                '--marquee-distance': `${listWidth}px`,
+                animationDuration: `${Math.max(20, Math.round(listWidth / MARQUEE_SPEED))}s`,
+              } as React.CSSProperties)
+            : undefined
+        }
+      >
+        {Array.from({ length: copies }, (_, copy) => renderList(copy))}
+      </div>
+    </div>
   );
 }
 
@@ -101,7 +181,7 @@ export default function TeamSection() {
   const featured = members.filter((member) => member.featured);
   const groups = STAFF_TIERS.map((tier) => ({
     ...tier,
-    members: members.filter((member) => !member.featured && (member.tier || DEFAULT_STAFF_TIER) === tier.value),
+    members: members.filter((member) => !member.featured && (isStaffTier(member.tier) ? member.tier : DEFAULT_STAFF_TIER) === tier.value),
   })).filter((group) => group.members.length > 0);
 
   if (loading) {
@@ -176,30 +256,13 @@ export default function TeamSection() {
       ))}
 
       {groups.length > 0 && (
-        <section className="section-container bg-off-white">
-          <SectionHeading
-            title="Our Dedicated Consultants and Professional Counsellors"
-            subtitle="Experienced professionals dedicated to your wellbeing and growth."
-            centered
-          />
-          <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
-            {groups.map((group) => (
-              <div key={group.value} role="group" aria-labelledby={`team-tier-${group.value}`}>
-                <div className="mb-6 flex items-center gap-4 sm:mb-8">
-                  <span className="h-px flex-1 bg-gray-300" aria-hidden="true" />
-                  <h3 id={`team-tier-${group.value}`} className="eyebrow text-center uppercase text-gray-700">
-                    {group.label}
-                  </h3>
-                  <span className="h-px flex-1 bg-gray-300" aria-hidden="true" />
-                </div>
-                <ul className={`flex flex-wrap justify-center ${TIER_CARD_SIZE[group.value] === 'sm' ? 'gap-x-6 gap-y-8 sm:gap-x-10' : 'gap-6 md:gap-8'}`}>
-                  {group.members.map((member) => (
-                    <MemberCard key={member._id} member={member} size={TIER_CARD_SIZE[group.value]} />
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
+        <section className="section-container bg-off-white space-y-14 sm:space-y-20" aria-label="Our people">
+          {groups.map((group) => (
+            <div key={group.value}>
+              <SectionHeading title={group.label} subtitle={TIER_DISPLAY[group.value].subtitle} centered />
+              <MemberMarquee members={group.members} tier={group.value} />
+            </div>
+          ))}
         </section>
       )}
     </>
