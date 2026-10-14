@@ -3,19 +3,21 @@
 import React from 'react';
 import Image from 'next/image';
 import type { Story } from './types';
+import { BRAND_TONES, type BrandTone } from '@/lib/brandTones';
 
 interface StoryCardProps {
   story: Story;
   badge: string;
+  tone?: BrandTone;
   onOpen: (story: Story) => void;
 }
 
-export default function StoryCard({ story, badge, onOpen }: StoryCardProps) {
+export default function StoryCard({ story, badge, tone = BRAND_TONES[3], onOpen }: StoryCardProps) {
   const cover = story.images[0];
   const photoCount = story.images.length;
 
   return (
-    <article className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md focus-within:ring-2 focus-within:ring-gray-900">
+    <article className={`group relative flex flex-col overflow-hidden rounded-lg border border-gray-200 border-b-4 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md focus-within:ring-2 focus-within:ring-gray-900 ${tone.bottomBorder}`}>
       <div className="relative aspect-[4/3] bg-warm-cream">
         {cover ? (
           <Image
@@ -45,13 +47,13 @@ export default function StoryCard({ story, badge, onOpen }: StoryCardProps) {
 
       <div className="flex flex-1 flex-col p-5">
         <p className="mb-2 flex flex-wrap items-center gap-x-2 text-sm text-gray-600">
-          <span className="eyebrow text-gray-700">{badge}</span>
+          <span className={`eyebrow rounded-full px-2.5 py-0.5 text-xs font-semibold ${tone.tile} ${tone.text}`}>{badge}</span>
           {story.date && <span aria-hidden="true">&middot;</span>}
           {story.date && <span>{story.date}</span>}
         </p>
-        <h3 className="line-clamp-2 text-lg font-semibold leading-snug tracking-tight text-gray-900">{story.title}</h3>
+        <h3 className={`line-clamp-2 text-lg font-semibold leading-snug tracking-tight text-gray-900 transition-colors duration-200 ${tone.hoverText}`}>{story.title}</h3>
         {story.organization && (
-          <p className="mt-1 line-clamp-1 text-sm font-medium text-gray-700">{story.organization}</p>
+          <p className={`mt-1 line-clamp-1 text-sm font-medium ${tone.text}`}>{story.organization}</p>
         )}
         <p className="mt-3 line-clamp-3 text-[15px] leading-relaxed text-gray-600">{story.description}</p>
         <button

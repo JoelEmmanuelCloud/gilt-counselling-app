@@ -8,6 +8,7 @@ import { usePublishedEntries } from './usePublishedEntries';
 import StoryCard from './StoryCard';
 import StoryDialog from './StoryDialog';
 import type { Story } from './types';
+import { brandTone } from '@/lib/brandTones';
 
 const PAGE_SIZE = 6;
 
@@ -93,8 +94,8 @@ export default function StoryGrid({ category, badge, emptyMessage, extraStories 
             aria-label="Stories"
             className="grid scroll-mt-[170px] focus:outline-none grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 md:scroll-mt-[186px]"
           >
-            {pageStories.map((story) => (
-              <StoryCard key={story.id} story={story} badge={badge} onOpen={setOpenStory} />
+            {pageStories.map((story, index) => (
+              <StoryCard key={story.id} story={story} badge={badge} tone={brandTone(index)} onOpen={setOpenStory} />
             ))}
           </div>
           <Pagination
