@@ -16,16 +16,17 @@ export default function TestimonialHighlights({ testimonials }: TestimonialHighl
   const [paused, setPaused] = useState(false);
   const reduceMotion = useReducedMotion();
   const count = testimonials.length;
+  const activeIndex = Math.min(active, Math.max(count - 1, 0));
 
   useEffect(() => {
     if (count < 2 || paused || reduceMotion) return;
-    const timer = window.setInterval(() => setActive((current) => (current + 1) % count), ROTATE_MS);
+    const timer = window.setInterval(() => setActive((current) => (Math.min(current, count - 1) + 1) % count), ROTATE_MS);
     return () => window.clearInterval(timer);
   }, [count, paused, reduceMotion]);
 
   if (count === 0) return null;
 
-  const current = testimonials[Math.min(active, count - 1)];
+  const current = testimonials[activeIndex];
   const details = [current.service, current.date].filter(Boolean).join(' · ');
 
   return (
@@ -72,10 +73,10 @@ export default function TestimonialHighlights({ testimonials }: TestimonialHighl
                 type="button"
                 onClick={() => setActive(index)}
                 aria-label={`Show testimonial ${index + 1} of ${count}`}
-                aria-current={index === active}
+                aria-current={index === activeIndex}
                 className="flex h-11 min-w-[28px] items-center justify-center rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-gilt-gold"
               >
-                <span className={`block h-2 rounded-full transition-all duration-300 ${index === active ? 'w-6 bg-gilt-gold' : 'w-2 bg-white/30'}`} aria-hidden="true" />
+                <span className={`block h-2 rounded-full transition-all duration-300 ${index === activeIndex ? 'w-6 bg-gilt-gold' : 'w-2 bg-white/30'}`} aria-hidden="true" />
               </button>
             ))}
           </div>
