@@ -7,6 +7,7 @@ import { useToast } from '@/components/ui/Toast';
 import Pagination from '@/components/ui/Pagination';
 import Skeleton from '@/components/ui/Skeleton';
 import TestimonialImageUpload from '@/components/admin/TestimonialImageUpload';
+import { DEFAULT_STAFF_TIER, STAFF_TIERS, type StaffTier } from '@/lib/staffInput';
 
 export interface StaffMemberRecord {
   _id: string;
@@ -16,6 +17,7 @@ export interface StaffMemberRecord {
   credentials?: string;
   bio?: string;
   photo?: string;
+  tier?: StaffTier;
   featured: boolean;
   published: boolean;
   order: number;
@@ -28,6 +30,7 @@ interface StaffForm {
   credentials: string;
   bio: string;
   photo: string;
+  tier: StaffTier;
   featured: boolean;
   published: boolean;
   order: number;
@@ -49,6 +52,7 @@ const emptyStaffForm = (order: number): StaffForm => ({
   credentials: '',
   bio: '',
   photo: '',
+  tier: DEFAULT_STAFF_TIER,
   featured: false,
   published: true,
   order,
@@ -91,6 +95,7 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
       credentials: member.credentials || '',
       bio: member.bio || '',
       photo: member.photo || '',
+      tier: member.tier || DEFAULT_STAFF_TIER,
       featured: member.featured,
       published: member.published,
       order: member.order ?? 0,
@@ -215,6 +220,15 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
             </div>
           </div>
           <div>
+            <label htmlFor="staff-tier" className="mb-1 block text-sm font-medium text-gray-700">Team group</label>
+            <select id="staff-tier" value={form.tier} onChange={(e) => setForm({ ...form, tier: e.target.value as StaffTier })} className={fieldClass}>
+              {STAFF_TIERS.map((tier) => (
+                <option key={tier.value} value={tier.value}>{tier.label}</option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-gray-500">Controls which group this person appears under on the About page.</p>
+          </div>
+          <div>
             <label htmlFor="staff-bio" className="mb-1 block text-sm font-medium text-gray-700">Bio (optional, shown for spotlight members)</label>
             <textarea id="staff-bio" rows={4} maxLength={2000} value={form.bio} onChange={(e) => setForm({ ...form, bio: e.target.value })} className={fieldClass} />
           </div>
@@ -311,7 +325,7 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
                       )}
                     </p>
                     <p className="mt-0.5 truncate text-sm text-gray-600">
-                      {[member.role, member.credentials].filter(Boolean).join(' · ')}
+                      {[STAFF_TIERS.find((tier) => tier.value === (member.tier || DEFAULT_STAFF_TIER))?.label, member.role, member.credentials].filter(Boolean).join(' · ')}
                     </p>
                   </div>
                 </div>
