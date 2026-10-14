@@ -18,7 +18,7 @@ export default function TermsPage() {
               This page is a placeholder while our full Terms of Service are being finalized.
               It does not yet reflect our final, legally reviewed terms. If you have questions
               in the meantime, please contact us at{' '}
-              <a href="mailto:wecare@giltcounselling.com" className="text-soft-gold hover:text-muted-coral transition-colors">
+              <a href="mailto:wecare@giltcounselling.com" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">
                 wecare@giltcounselling.com
               </a>.
             </p>
@@ -58,7 +58,7 @@ export default function TermsPage() {
               <p className="body-md">
                 We take client confidentiality seriously. Details of how we collect, use,
                 and protect your information are set out in our{' '}
-                <Link href="/privacy" className="text-soft-gold hover:text-muted-coral transition-colors">
+                <Link href="/privacy" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">
                   Privacy Policy
                 </Link>.
               </p>
@@ -83,7 +83,7 @@ export default function TermsPage() {
               <h2 className="heading-sm mb-3">7. Contact Us</h2>
               <p className="body-md">
                 Questions about these terms can be sent to{' '}
-                <a href="mailto:wecare@giltcounselling.com" className="text-soft-gold hover:text-muted-coral transition-colors">
+                <a href="mailto:wecare@giltcounselling.com" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">
                   wecare@giltcounselling.com
                 </a>{' '}
                 or to our office at 88 Woji Road, Vineyard Building, GRA Phase 2, Port

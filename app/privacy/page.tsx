@@ -16,7 +16,7 @@ export default function PrivacyPage() {
               This page is a placeholder while our full Privacy Policy is being finalized.
               It does not yet reflect our final, legally reviewed policy. If you have
               questions in the meantime, please contact us at{' '}
-              <a href="mailto:wecare@giltcounselling.com" className="text-soft-gold hover:text-muted-coral transition-colors">
+              <a href="mailto:wecare@giltcounselling.com" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">
                 wecare@giltcounselling.com
               </a>.
             </p>
@@ -71,7 +71,7 @@ export default function PrivacyPage() {
               <h2 className="heading-sm mb-3">6. Contact Us</h2>
               <p className="body-md">
                 Questions about this policy can be sent to{' '}
-                <a href="mailto:wecare@giltcounselling.com" className="text-soft-gold hover:text-muted-coral transition-colors">
+                <a href="mailto:wecare@giltcounselling.com" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">
                   wecare@giltcounselling.com
                 </a>{' '}
                 or to our office at 88 Woji Road, Vineyard Building, GRA Phase 2, Port
