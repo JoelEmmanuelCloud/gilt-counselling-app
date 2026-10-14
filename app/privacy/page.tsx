@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function PrivacyPage() {
   return (
     <div className="min-h-screen bg-off-white">
@@ -68,7 +70,19 @@ export default function PrivacyPage() {
             </div>
 
             <div>
-              <h2 className="heading-sm mb-3">6. Contact Us</h2>
+              <h2 className="heading-sm mb-3">6. Cookies</h2>
+              <p className="body-md">
+                Our website only uses browser storage that is strictly necessary for it to work, and no advertising or
+                tracking cookies. See our{' '}
+                <Link href="/cookies" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">
+                  Cookie Policy
+                </Link>{' '}
+                for details.
+              </p>
+            </div>
+
+            <div>
+              <h2 className="heading-sm mb-3">7. Contact Us</h2>
               <p className="body-md">
                 Questions about this policy can be sent to{' '}
                 <a href="mailto:wecare@giltcounselling.com" className="font-medium text-gilt-gold-strong underline decoration-gilt-gold/60 underline-offset-2 transition-colors hover:text-gilt-orange-strong">

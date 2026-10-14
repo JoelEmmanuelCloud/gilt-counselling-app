@@ -4,7 +4,7 @@ import React, { useRef, useState } from 'react';
 import Skeleton from '@/components/ui/Skeleton';
 import Pagination from '@/components/ui/Pagination';
 import type { StoryCategory } from '@/lib/testimonialCategories';
-import { usePublishedEntries } from './usePublishedEntries';
+import { toStory, usePublishedEntries } from './usePublishedEntries';
 import StoryCard from './StoryCard';
 import StoryDialog from './StoryDialog';
 import type { Story } from './types';
@@ -50,15 +50,7 @@ export default function StoryGrid({ category, badge, emptyMessage, extraStories 
   }
 
   const stories: Story[] = [
-    ...entries.map((entry) => ({
-      id: entry._id,
-      title: entry.title || '',
-      organization: entry.organization,
-      date: entry.date,
-      description: entry.description || '',
-      images: entry.images || [],
-      videoUrl: entry.videoUrl,
-    })),
+    ...entries.map(toStory),
     ...extraStories,
   ];
 

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import type { TestimonialCategory } from '@/lib/testimonialCategories';
+import type { Story } from './types';
 
 export interface SchoolQuote {
   text: string;
@@ -22,9 +23,22 @@ export interface PublishedEntry {
   description?: string;
   images?: string[];
   videoUrl?: string;
+  createdAt?: string;
 }
 
-export function usePublishedEntries(category: TestimonialCategory) {
+export function toStory(entry: PublishedEntry): Story {
+  return {
+    id: entry._id,
+    title: entry.title || '',
+    organization: entry.organization,
+    date: entry.date,
+    description: entry.description || '',
+    images: entry.images || [],
+    videoUrl: entry.videoUrl,
+  };
+}
+
+export function usePublishedEntries(category?: TestimonialCategory) {
   const [entries, setEntries] = useState<PublishedEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
@@ -32,7 +46,7 @@ export function usePublishedEntries(category: TestimonialCategory) {
   useEffect(() => {
     const controller = new AbortController();
 
-    fetch(`/api/testimonials?category=${category}`, { signal: controller.signal })
+    fetch(category ? `/api/testimonials?category=${category}` : '/api/testimonials', { signal: controller.signal })
       .then((response) => {
         if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
         return response.json();
@@ -40,7 +54,7 @@ export function usePublishedEntries(category: TestimonialCategory) {
       .then((data) => setEntries(Array.isArray(data) ? data : []))
       .catch((error) => {
         if (error.name === 'AbortError') return;
-        console.error(`Failed to load ${category} entries`, error);
+        console.error(`Failed to load ${category ?? 'published'} entries`, error);
         setFailed(true);
       })
       .finally(() => {

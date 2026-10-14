@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,7 +8,13 @@ import Button from '@/components/ui/Button';
 import BookSessionButton from '@/components/BookSessionButton';
 import HeroSlideshow, { heroImages } from '@/components/HeroSlideshow';
 import FadeUp from '@/components/FadeUp';
-import AnimatedStats from '@/components/AnimatedStats';
+import LatestActivity from '@/components/home/LatestActivity';
+import SchoolsSpotlight from '@/components/home/SchoolsSpotlight';
+import TestimonialHighlights from '@/components/home/TestimonialHighlights';
+import MomentsStrip from '@/components/home/MomentsStrip';
+import ApproachImages from '@/components/home/ApproachImages';
+import { buildActivity } from '@/components/home/activity';
+import { usePublishedEntries } from '@/components/stories/usePublishedEntries';
 
 type HeadingLine = string | { before?: string; italic: string; after?: string };
 
@@ -50,31 +56,12 @@ const heroContent: SlideContent[] = [
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const helpOptions = [
-    'Family Problems',
-    'Breakups',
-    'Business Failure',
-    'Stress Issues',
-    'Online Sessions',
-  ];
-
-  const testimonials = [
-    {
-      quote: 'The counselling sessions helped me understand myself better and gave me tools to manage my emotions. I feel more confident now.',
-      firstName: 'Sarah',
-      service: 'Individual Counselling',
-    },
-    {
-      quote: 'Our family is communicating better than we have in years. The sessions were a safe space for all of us.',
-      firstName: 'Michael',
-      service: 'Family Counselling',
-    },
-    {
-      quote: 'I was struggling with anxiety and depression. My counsellor helped me find hope and develop coping strategies that actually work.',
-      firstName: 'David',
-      service: 'Mental Health Support',
-    },
-  ];
+  const { entries, loading: entriesLoading } = usePublishedEntries();
+  const activity = useMemo(() => buildActivity(entries), [entries]);
+  const clientTestimonials = useMemo(
+    () => entries.filter((entry) => entry.category === 'client' && entry.quote).slice(0, 6),
+    [entries]
+  );
 
   return (
     <div className="min-h-screen">
@@ -167,19 +154,20 @@ export default function Home() {
         </div>
       </section>
 
+      <LatestActivity items={activity} loading={entriesLoading} />
 
       <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
             <FadeUp className="order-2 lg:order-1">
-              <div className="eyebrow text-soft-terracotta mb-3 sm:mb-4 lg:mb-5">
-                Discover a Process
+              <div className="eyebrow text-gilt-gold mb-3 sm:mb-4 lg:mb-5">
+                Our Approach
               </div>
               <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-tight">
                 Benefits of psychological<br />therapy <span className="text-accent-light">by an expert.</span>
               </h2>
               <p className="text-gray-300 mb-6 sm:mb-7 lg:mb-8 xl:mb-10 leading-relaxed text-sm sm:text-base lg:text-lg xl:text-xl text-left">
-                Our experienced counsellors provide a safe, non-judgmental space to help you navigate life's challenges. Through evidence-based therapeutic approaches, we empower individuals, couples, and families to build resilience, strengthen relationships, and achieve lasting wellbeing.
+                Our experienced counsellors provide a safe, non-judgmental space to help you navigate life's challenges. Through evidence-based therapeutic approaches, we empower individuals, couples, and families to build resilience, strengthen relationships, and achieve lasting wellbeing. From your first consultation to ongoing support, every step is tailored to you so that you feel heard, understood, and empowered to make meaningful changes.
               </p>
               <div className="space-y-3 sm:space-y-4 lg:space-y-5">
                 {['Family', 'Marriage & Love', 'Life Style'].map((item, i) => (
@@ -200,88 +188,15 @@ export default function Home() {
               </div>
             </FadeUp>
             <FadeUp delay={0.15} className="order-1 lg:order-2 relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] rounded-lg lg:rounded-lg xl:rounded-lg overflow-hidden shadow-md">
-              <Image
-                src="/images/DSC_9730.jpg"
-                alt="Counsellor in a therapy session with a client"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={60}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
-                loading="lazy"
-              />
+              <ApproachImages />
             </FadeUp>
           </div>
         </div>
       </section>
 
       
-      <AnimatedStats />
 
       
-      <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-[#FFF8F1]">
-        <div className="max-w-6xl xl:max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 xl:gap-10">
-          <FadeUp>
-            <div className="bg-warm-cream rounded-lg lg:rounded-lg xl:rounded-lg p-5 sm:p-6 lg:p-8 xl:p-10 h-full hover:shadow-lg transition-shadow duration-300">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading font-bold text-gray-900 mb-4 sm:mb-5 lg:mb-6">
-                How can I <span className="text-accent">help you?</span>
-              </h2>
-              <p className="text-gray-600 mb-4 sm:mb-5 lg:mb-6 text-sm sm:text-base lg:text-lg text-left">
-                If you're experiencing any kind of mental illness or problem in relations.
-              </p>
-              <ul className="space-y-2 sm:space-y-3 lg:space-y-4 mb-5 sm:mb-6 lg:mb-8">
-                {helpOptions.map((option, index) => (
-                  <motion.li
-                    key={index}
-                    initial={{ opacity: 0, x: -15 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.08 }}
-                    className="flex items-center gap-2 sm:gap-3"
-                  >
-                    <svg className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6 text-soft-terracotta flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="text-gray-700 text-sm sm:text-base lg:text-lg">{option}</span>
-                  </motion.li>
-                ))}
-              </ul>
-              <Link href="/services">
-                <Button className="btn-cta uppercase text-xs lg:text-sm tracking-wide py-3 lg:py-3.5 px-5 sm:px-6 lg:px-8 rounded-lg lg:rounded-lg">
-                  Explore Programs
-                </Button>
-              </Link>
-            </div>
-          </FadeUp>
-
-          <FadeUp delay={0.15}>
-            <div className="bg-soft-terracotta text-gray-900 rounded-lg lg:rounded-lg xl:rounded-lg p-5 sm:p-6 lg:p-8 xl:p-10 h-full hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-              <h2 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-heading font-bold mb-3 sm:mb-4 lg:mb-5">
-                Call for Consultation
-              </h2>
-              <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-5 lg:mb-6 text-gray-800">
-                30 minutes free for first session. <span className="font-semibold">T&C Apply</span>
-              </p>
-              <div className="bg-gray-900/10 backdrop-blur-sm rounded-lg lg:rounded-lg p-4 sm:p-5 lg:p-6 xl:p-8 mb-4 sm:mb-5 lg:mb-6">
-                <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 xl:w-16 xl:h-16 bg-gray-900/20 rounded-full flex items-center justify-center flex-shrink-0 animate-float">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 xl:w-8 xl:h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-xs lg:text-sm text-gray-700 uppercase tracking-wide font-semibold">Dial Now</div>
-                    <a href="tel:+2347065734165" className="inline-flex min-h-[44px] items-center rounded text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold hover:opacity-80 transition-opacity focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900">
-                      +234 706 573 4165
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </FadeUp>
-        </div>
-      </section>
 
       
       <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-white">
@@ -339,84 +254,12 @@ export default function Home() {
       </section>
 
       
-      <section className="bg-gray-900 text-white py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24">
-        <FadeUp distance={30}>
-          <div className="max-w-3xl lg:max-w-4xl xl:max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 text-center">
-            <motion.div
-              initial={{ scale: 0.5, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: 'backOut' }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-soft-terracotta mb-4 sm:mb-5 lg:mb-6"
-            >
-              "
-            </motion.div>
-            <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-heading italic mb-4 sm:mb-5 lg:mb-6 xl:mb-8 leading-relaxed">
-              Gilt Counselling Consult transformed how I understand myself and gave me the confidence to pursue my dreams.
-            </blockquote>
-            <div className="flex items-center justify-center gap-2 sm:gap-3 mb-3 sm:mb-4">
-              <div className="h-0.5 w-8 sm:w-10 lg:w-12 bg-soft-terracotta"></div>
-              <div>
-                <p className="font-semibold text-sm sm:text-base lg:text-lg">Client Testimonial</p>
-                <p className="text-xs lg:text-sm text-gray-400">Youth Counselling Program</p>
-              </div>
-            </div>
-          </div>
-        </FadeUp>
-      </section>
+      <SchoolsSpotlight />
 
-      
-      <section className="py-10 sm:py-14 md:py-16 lg:py-20 xl:py-24 px-4 sm:px-6 lg:px-8 xl:px-12 bg-warm-cream">
-        <div className="max-w-6xl xl:max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-10 lg:gap-12 xl:gap-16 items-center">
-            <FadeUp delay={0.1} className="relative h-[250px] sm:h-[300px] md:h-[350px] lg:h-[400px] xl:h-[500px] rounded-lg lg:rounded-lg xl:rounded-lg overflow-hidden shadow-md">
-              <Image
-                src="/images/tagline.jpg"
-                alt="Counsellor teaching young people at a whiteboard session"
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
-                sizes="(max-width: 1024px) 100vw, 50vw"
-                quality={60}
-                placeholder="blur"
-                blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/2wBDAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQH/wAARCAAIAAoDASIAAhEBAxEB/8QAFAABAAAAAAAAAAAAAAAAAAAACf/EABQQAQAAAAAAAAAAAAAAAAAAAAD/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8AJgA//9k="
-                loading="lazy"
-              />
-            </FadeUp>
-            <FadeUp>
-              <div className="eyebrow text-gilt-gold-strong mb-3 sm:mb-4 lg:mb-5">
-                The Process
-              </div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-heading font-bold text-gray-900 mb-3 sm:mb-4 lg:mb-5 leading-tight">
-                How your <span className="text-accent">journey</span> with us begins.
-              </h2>
-              <p className="text-gray-600 leading-relaxed mb-5 sm:mb-6 lg:mb-8 text-sm sm:text-base lg:text-lg text-left">
-                We follow a structured yet flexible approach tailored to your unique needs. From your first consultation to ongoing support, every step is designed to help you feel heard, understood, and empowered to make meaningful changes in your life.
-              </p>
-              <motion.div
-                whileHover={{ y: -4, boxShadow: '0 12px 30px rgba(0,0,0,0.12)' }}
-                transition={{ duration: 0.25 }}
-                className="bg-white rounded-lg lg:rounded-lg p-4 sm:p-5 lg:p-6 xl:p-8 shadow-sm"
-              >
-                <div className="flex items-start gap-3 sm:gap-4 lg:gap-5">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 bg-soft-terracotta rounded-full flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 sm:w-6 sm:h-6 lg:w-7 lg:h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <h3 className="font-heading font-bold text-gray-900 mb-1 sm:mb-2 text-base sm:text-lg lg:text-xl">Personalized therapies</h3>
-                    <p className="text-gray-600 text-xs sm:text-sm lg:text-base text-left">
-                      When you are in distressed or stressful period in life you need a supportive therapist. What can you accomplish with support and understanding.
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
-            </FadeUp>
-          </div>
-        </div>
-      </section>
+      <TestimonialHighlights testimonials={clientTestimonials} />
 
-      
+      <MomentsStrip items={activity} />
+
       <section className="panel-gold py-12 sm:py-16 md:py-20 lg:py-24 xl:py-28">
         <FadeUp distance={30}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
