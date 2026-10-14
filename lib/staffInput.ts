@@ -9,15 +9,15 @@ const TEXT_LIMITS = {
 type TextField = keyof typeof TEXT_LIMITS;
 
 export const STAFF_TIERS = [
-  { value: 'leadership', label: 'Leadership' },
-  { value: 'consultant', label: 'Consultants & Counsellors' },
-  { value: 'administration', label: 'Administration' },
+  { value: 'board', label: 'Advisory Board' },
+  { value: 'team', label: 'Team Members' },
+  { value: 'ambassador', label: 'Ambassadors' },
   { value: 'volunteer', label: 'Volunteers' },
 ] as const;
 
 export type StaffTier = (typeof STAFF_TIERS)[number]['value'];
 
-export const DEFAULT_STAFF_TIER: StaffTier = 'consultant';
+export const DEFAULT_STAFF_TIER: StaffTier = 'team';
 
 export function isStaffTier(value: unknown): value is StaffTier {
   return STAFF_TIERS.some((tier) => tier.value === value);

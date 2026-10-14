@@ -21,9 +21,9 @@ interface TeamMember {
 type CardSize = 'lg' | 'md' | 'sm';
 
 const TIER_CARD_SIZE: Record<StaffTier, CardSize> = {
-  leadership: 'lg',
-  consultant: 'lg',
-  administration: 'md',
+  board: 'lg',
+  team: 'lg',
+  ambassador: 'md',
   volunteer: 'sm',
 };
 

@@ -206,14 +206,23 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
           <h3 className="text-lg font-semibold tracking-tight text-gray-900">
             {editingId ? 'Edit Team Member' : 'Add Team Member'}
           </h3>
+          <div>
+            <label htmlFor="staff-tier" className="mb-1 block text-sm font-medium text-gray-700">Team group</label>
+            <select id="staff-tier" value={form.tier} onChange={(e) => setForm({ ...form, tier: e.target.value as StaffTier })} className={fieldClass}>
+              {STAFF_TIERS.map((tier) => (
+                <option key={tier.value} value={tier.value}>{tier.label}</option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-gray-500">Controls which section this person appears in on the About page.</p>
+          </div>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="staff-name" className="mb-1 block text-sm font-medium text-gray-700">Full name</label>
               <input id="staff-name" required maxLength={120} value={form.name} onChange={(e) => setForm({ ...form, name: e.target.value })} className={fieldClass} />
             </div>
             <div>
-              <label htmlFor="staff-role" className="mb-1 block text-sm font-medium text-gray-700">Role</label>
-              <input id="staff-role" required maxLength={120} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder="Counsellor" className={fieldClass} />
+              <label htmlFor="staff-role" className="mb-1 block text-sm font-medium text-gray-700">{form.tier === 'board' ? 'Position' : 'Role'}</label>
+              <input id="staff-role" required maxLength={120} value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })} placeholder={form.tier === 'board' ? 'Chairman' : 'Counsellor'} className={fieldClass} />
             </div>
             <div>
               <label htmlFor="staff-title" className="mb-1 block text-sm font-medium text-gray-700">Title line (optional)</label>
@@ -223,15 +232,6 @@ export default function TeamManager({ members, loading, onChanged, icon }: TeamM
               <label htmlFor="staff-credentials" className="mb-1 block text-sm font-medium text-gray-700">Credentials (optional)</label>
               <input id="staff-credentials" maxLength={160} value={form.credentials} onChange={(e) => setForm({ ...form, credentials: e.target.value })} placeholder="FCASSON, CPCN" className={fieldClass} />
             </div>
-          </div>
-          <div>
-            <label htmlFor="staff-tier" className="mb-1 block text-sm font-medium text-gray-700">Team group</label>
-            <select id="staff-tier" value={form.tier} onChange={(e) => setForm({ ...form, tier: e.target.value as StaffTier })} className={fieldClass}>
-              {STAFF_TIERS.map((tier) => (
-                <option key={tier.value} value={tier.value}>{tier.label}</option>
-              ))}
-            </select>
-            <p className="mt-1 text-xs text-gray-500">Controls which group this person appears under on the About page.</p>
           </div>
           <div>
             <label htmlFor="staff-bio" className="mb-1 block text-sm font-medium text-gray-700">Bio (optional, shown for spotlight members)</label>
