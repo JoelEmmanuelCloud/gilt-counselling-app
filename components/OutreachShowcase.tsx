@@ -8,7 +8,7 @@ import { brandTone } from '@/lib/brandTones';
 interface Quote { text: string; author: string; }
 interface Photo { src: string; alt: string; }
 
-interface School {
+export interface School {
   id: string;
   number: string;
   name: string;
@@ -21,7 +21,7 @@ interface School {
   photos: [Photo, Photo, Photo];
 }
 
-const schools: School[] = [
+export const schools: School[] = [
   {
     id: 'ndss',
     number: '01',
@@ -236,6 +236,12 @@ const photoVariants = {
   }),
 };
 
+export const outreachStats = [
+  { value: String(schools.length), label: 'Schools Visited' },
+  { value: '1,000+', label: 'Students Reached' },
+  { value: 'May 2026', label: 'Port Harcourt' },
+];
+
 export default function OutreachShowcase() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -267,11 +273,7 @@ export default function OutreachShowcase() {
 
       {/* Stats bar */}
       <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 mb-8 sm:mb-10">
-        {[
-          { value: '7', label: 'Schools Visited' },
-          { value: '1,000+', label: 'Students Reached' },
-          { value: 'May 2026', label: 'Port Harcourt' },
-        ].map((stat, statIndex) => (
+        {outreachStats.map((stat, statIndex) => (
           <div key={stat.label} className="text-center">
             <p className={`text-xl sm:text-2xl font-heading font-bold ${brandTone(statIndex).text}`}>{stat.value}</p>
             <p className="text-xs sm:text-sm text-gray-500 uppercase tracking-wider">{stat.label}</p>
