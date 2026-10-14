@@ -28,8 +28,8 @@ export default function CookiesPage() {
           <div>
             <h2 className="heading-sm mb-3">2. What We Use</h2>
             <p className="body-md mb-4">
-              We only use storage that is strictly necessary for the website to work. We do not use advertising,
-              analytics, or tracking cookies, and we do not build profiles of visitors.
+              We currently only use cookies and storage that are strictly necessary for the website to work. We do not
+              use advertising, analytics, or tracking cookies, and we do not build profiles of visitors.
             </p>
             <div className="overflow-x-auto rounded-lg border border-gray-200 bg-white">
               <table className="w-full text-left text-sm">
@@ -43,10 +43,10 @@ export default function CookiesPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-200 text-gray-700">
                   <tr>
-                    <td className="px-4 py-3 font-mono text-xs">cookie-notice-dismissed</td>
-                    <td className="px-4 py-3">Local storage</td>
-                    <td className="px-4 py-3">Remembers that you have seen our cookie notice so it is not shown again.</td>
-                    <td className="px-4 py-3">Until you clear your browser data</td>
+                    <td className="px-4 py-3 font-mono text-xs">gilt_cookie_consent</td>
+                    <td className="px-4 py-3">Cookie</td>
+                    <td className="px-4 py-3">Remembers your cookie choices so we do not ask you again on every visit.</td>
+                    <td className="px-4 py-3">6 months</td>
                   </tr>
                   <tr>
                     <td className="px-4 py-3 font-mono text-xs">token</td>
@@ -82,17 +82,17 @@ export default function CookiesPage() {
           <div>
             <h2 className="heading-sm mb-3">4. Managing Cookies</h2>
             <p className="body-md">
-              You can view and delete cookies and local storage at any time through your browser settings. Because we
-              only use strictly necessary storage, clearing it will simply show the cookie notice again and sign staff
-              out of the content manager.
+              You can accept, reject, or choose which optional cookies to allow when you first visit, and change your
+              choice at any time using the Cookie settings link at the bottom of every page. You can also delete cookies
+              and local storage through your browser settings; if you do, we will ask for your choice again.
             </p>
           </div>
 
           <div>
             <h2 className="heading-sm mb-3">5. Changes to This Policy</h2>
             <p className="body-md">
-              If we start using any optional cookies, such as analytics, we will update this policy and ask for your
-              consent before setting them.
+              If we start using any optional cookies, such as analytics or marketing cookies, we will list them here
+              and only set them if you have allowed that category.
             </p>
           </div>
 
