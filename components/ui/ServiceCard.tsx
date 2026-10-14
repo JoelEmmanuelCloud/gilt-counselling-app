@@ -20,7 +20,7 @@ export default function ServiceCard({
           {icon}
         </div>
       )}
-      <h3 className="heading-sm mb-3 group-hover:text-soft-gold transition-colors duration-300">
+      <h3 className="heading-sm mb-3 group-hover:text-gilt-gold-strong transition-colors duration-300">
         {title}
       </h3>
       <p className="text-gray-600 leading-relaxed text-left">
