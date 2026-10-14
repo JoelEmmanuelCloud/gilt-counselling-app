@@ -245,7 +245,7 @@ export default function TeamSection() {
                 </div>
               )}
               <div>
-                <p className="eyebrow text-gray-600 mb-3">{member.role}</p>
+                <p className="eyebrow text-gilt-gold-strong mb-3">{member.role}</p>
                 <h2 className="heading-md mb-2">{member.name}</h2>
                 {member.title && <p className="font-semibold text-gray-800 mb-1">{member.title}</p>}
                 {member.credentials && <p className="text-sm text-gray-600 mb-4">{member.credentials}</p>}
