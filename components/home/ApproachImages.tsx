@@ -30,6 +30,8 @@ export default function ApproachImages() {
       className="relative h-full w-full"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
+      onFocus={() => setPaused(true)}
+      onBlur={() => setPaused(false)}
     >
       {images.map((image, index) => (
         <Image
