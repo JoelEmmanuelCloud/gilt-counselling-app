@@ -14,27 +14,27 @@ export default function About() {
     {
       name: 'Joy',
       description: 'We believe in fostering happiness and positive growth in every interaction.',
-      color: 'bg-gilt-gold-strong',
+      color: 'bg-gilt-gold',
     },
     {
       name: 'Optimism',
       description: 'Every challenge is an opportunity for positive change and growth.',
-      color: 'bg-gilt-teal-strong',
+      color: 'bg-gilt-teal',
     },
     {
       name: 'Confidentiality',
       description: 'Your privacy is sacred and always protected in everything we do.',
-      color: 'bg-gilt-green-strong',
+      color: 'bg-gilt-green',
     },
     {
       name: 'Integrity',
       description: 'We uphold the highest ethical standards in our practice and relationships.',
-      color: 'bg-gilt-orange-strong',
+      color: 'bg-gilt-orange',
     },
     {
       name: 'Inclusion',
       description: 'Everyone deserves compassionate care, without exception or judgment.',
-      color: 'bg-gradient-to-br from-gilt-teal-strong to-gilt-green-strong',
+      color: 'bg-gradient-to-br from-gilt-teal to-gilt-green',
     },
   ];
 
@@ -122,7 +122,7 @@ export default function About() {
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
           {coreValues.map((value, index) => (
             <div key={index} className="text-center">
-              <div className={`${value.color} text-white rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
+              <div className={`${value.color} text-gray-900 rounded-lg p-4 sm:p-6 lg:p-8 xl:p-10 mb-3 sm:mb-4 min-h-[130px] sm:min-h-[160px] lg:min-h-[200px] xl:min-h-[240px] flex flex-col justify-center`}>
                 <h3 className="font-heading font-bold text-base sm:text-xl lg:text-2xl mb-2 sm:mb-3">{value.name}</h3>
               </div>
               <p className="text-sm text-gray-600 leading-relaxed px-2 xl:px-4 text-left">
