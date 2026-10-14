@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose';
+import { DEFAULT_STAFF_TIER, STAFF_TIERS, type StaffTier } from '@/lib/staffInput';
 
 export interface IStaffMember {
   _id?: string;
@@ -8,6 +9,7 @@ export interface IStaffMember {
   credentials?: string;
   bio?: string;
   photo?: string;
+  tier: StaffTier;
   featured: boolean;
   published: boolean;
   order: number;
@@ -47,6 +49,11 @@ const StaffMemberSchema = new Schema(
     photo: {
       type: String,
       trim: true,
+    },
+    tier: {
+      type: String,
+      enum: STAFF_TIERS.map((tier) => tier.value),
+      default: DEFAULT_STAFF_TIER,
     },
     featured: {
       type: Boolean,

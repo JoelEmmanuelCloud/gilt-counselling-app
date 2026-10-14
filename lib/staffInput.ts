@@ -8,6 +8,21 @@ const TEXT_LIMITS = {
 
 type TextField = keyof typeof TEXT_LIMITS;
 
+export const STAFF_TIERS = [
+  { value: 'leadership', label: 'Leadership' },
+  { value: 'consultant', label: 'Consultants & Counsellors' },
+  { value: 'administration', label: 'Administration' },
+  { value: 'volunteer', label: 'Volunteers' },
+] as const;
+
+export type StaffTier = (typeof STAFF_TIERS)[number]['value'];
+
+export const DEFAULT_STAFF_TIER: StaffTier = 'consultant';
+
+export function isStaffTier(value: unknown): value is StaffTier {
+  return STAFF_TIERS.some((tier) => tier.value === value);
+}
+
 export interface StaffInput {
   name?: string;
   role?: string;
@@ -15,6 +30,7 @@ export interface StaffInput {
   credentials?: string;
   bio?: string;
   photo?: string;
+  tier?: StaffTier;
   featured?: boolean;
   published?: boolean;
   order?: number;
@@ -64,6 +80,11 @@ export function parseStaffInput(body: unknown, { partial }: { partial: boolean }
       return { error: 'Photo must be an uploaded image' };
     }
     data.photo = source.photo.trim();
+  }
+
+  if (source.tier !== undefined) {
+    if (!isStaffTier(source.tier)) return { error: 'Tier must be one of the listed team groups' };
+    data.tier = source.tier;
   }
 
   for (const field of ['featured', 'published'] as const) {

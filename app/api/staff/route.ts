@@ -6,7 +6,7 @@ export async function GET() {
   try {
     await connectDB();
     const members = await StaffMember.find({ published: true })
-      .select('name role title credentials bio photo featured order')
+      .select('name role title credentials bio photo tier featured order')
       .sort({ featured: -1, order: 1, createdAt: 1 });
     return NextResponse.json(members, { status: 200 });
   } catch (error) {
