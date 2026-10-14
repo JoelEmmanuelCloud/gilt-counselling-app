@@ -3,6 +3,7 @@
 import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { openCookieSettings } from '@/lib/cookieConsent';
 
 const Footer: React.FC = () => {
   const quickLinks = [
@@ -174,6 +175,15 @@ const Footer: React.FC = () => {
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <button
+                    type="button"
+                    onClick={openCookieSettings}
+                    className="inline-flex min-h-[40px] items-center rounded px-2 text-gray-600 underline-offset-4 transition-colors duration-200 hover:text-gray-900 hover:underline focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
+                  >
+                    Cookie settings
+                  </button>
+                </li>
               </ul>
             </nav>
           </div>
