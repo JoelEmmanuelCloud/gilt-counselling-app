@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import SectionHeading from '@/components/ui/SectionHeading';
-import Card from '@/components/ui/Card';
 import Skeleton from '@/components/ui/Skeleton';
+import { DEFAULT_STAFF_TIER, STAFF_TIERS, type StaffTier } from '@/lib/staffInput';
 
 interface TeamMember {
   _id: string;
@@ -14,7 +14,64 @@ interface TeamMember {
   credentials?: string;
   bio?: string;
   photo?: string;
+  tier?: StaffTier;
   featured: boolean;
+}
+
+type CardSize = 'lg' | 'md' | 'sm';
+
+const TIER_CARD_SIZE: Record<StaffTier, CardSize> = {
+  leadership: 'lg',
+  consultant: 'lg',
+  administration: 'md',
+  volunteer: 'sm',
+};
+
+function MemberPhoto({ member, sizes }: { member: TeamMember; sizes: string }) {
+  return member.photo ? (
+    <Image
+      src={member.photo}
+      alt={`${member.name} - Professional Headshot`}
+      fill
+      className="object-cover object-top"
+      sizes={sizes}
+      quality={60}
+      loading="lazy"
+    />
+  ) : (
+    <span className="flex h-full items-center justify-center text-4xl font-semibold text-gray-400" aria-hidden="true">
+      {member.name.charAt(0)}
+    </span>
+  );
+}
+
+function MemberCard({ member, size }: { member: TeamMember; size: CardSize }) {
+  if (size === 'sm') {
+    return (
+      <li className="w-36 text-center sm:w-40">
+        <div className="relative mx-auto h-24 w-24 overflow-hidden rounded-full bg-warm-cream shadow-sm ring-4 ring-white sm:h-28 sm:w-28">
+          <MemberPhoto member={member} sizes="112px" />
+        </div>
+        <h4 className="mt-3 font-heading text-base font-semibold tracking-tight text-gray-900">{member.name}</h4>
+        <p className="mt-0.5 text-sm text-gray-600">{member.role}</p>
+      </li>
+    );
+  }
+
+  return (
+    <li className={`w-full ${size === 'lg' ? 'max-w-[280px]' : 'max-w-[240px]'}`}>
+      <article className="h-full overflow-hidden rounded-lg bg-white shadow-sm ring-1 ring-gray-200/70 transition-shadow duration-300 hover:shadow-md">
+        <div className="relative aspect-[4/5] w-full bg-warm-cream">
+          <MemberPhoto member={member} sizes={size === 'lg' ? '280px' : '240px'} />
+        </div>
+        <div className="p-4 text-center sm:p-5">
+          <h4 className={`font-heading font-semibold tracking-tight text-gray-900 ${size === 'lg' ? 'text-lg' : 'text-base'}`}>{member.name}</h4>
+          <p className="mt-1 text-sm font-medium text-gray-700">{member.role}</p>
+          {member.credentials && <p className="eyebrow mt-2 text-xs text-gray-500">{member.credentials}</p>}
+        </div>
+      </article>
+    </li>
+  );
 }
 
 export default function TeamSection() {
@@ -42,7 +99,10 @@ export default function TeamSection() {
   }, []);
 
   const featured = members.filter((member) => member.featured);
-  const team = members.filter((member) => !member.featured);
+  const groups = STAFF_TIERS.map((tier) => ({
+    ...tier,
+    members: members.filter((member) => !member.featured && (member.tier || DEFAULT_STAFF_TIER) === tier.value),
+  })).filter((group) => group.members.length > 0);
 
   if (loading) {
     return (
@@ -115,36 +175,29 @@ export default function TeamSection() {
         </section>
       ))}
 
-      {team.length > 0 && (
+      {groups.length > 0 && (
         <section className="section-container bg-off-white">
           <SectionHeading
             title="Our Dedicated Consultants and Professional Counsellors"
             subtitle="Experienced professionals dedicated to your wellbeing and growth."
             centered
           />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 max-w-6xl mx-auto">
-            {team.map((member) => (
-              <Card key={member._id} className="text-center">
-                <div className="mb-4 sm:mb-6 relative h-[200px] w-[200px] sm:h-[240px] sm:w-[240px] md:h-[260px] md:w-[260px] mx-auto rounded-lg overflow-hidden bg-warm-cream">
-                  {member.photo ? (
-                    <Image
-                      src={member.photo}
-                      alt={`${member.name} - Professional Headshot`}
-                      fill
-                      className="object-cover object-top"
-                      sizes="280px"
-                      quality={60}
-                      loading="lazy"
-                    />
-                  ) : (
-                    <span className="flex h-full items-center justify-center text-5xl font-semibold text-gray-400" aria-hidden="true">
-                      {member.name.charAt(0)}
-                    </span>
-                  )}
+          <div className="max-w-6xl mx-auto space-y-12 sm:space-y-16">
+            {groups.map((group) => (
+              <div key={group.value} role="group" aria-labelledby={`team-tier-${group.value}`}>
+                <div className="mb-6 flex items-center gap-4 sm:mb-8">
+                  <span className="h-px flex-1 bg-gray-300" aria-hidden="true" />
+                  <h3 id={`team-tier-${group.value}`} className="eyebrow text-center uppercase text-gray-700">
+                    {group.label}
+                  </h3>
+                  <span className="h-px flex-1 bg-gray-300" aria-hidden="true" />
                 </div>
-                <h3 className="heading-sm mb-2">{member.name}</h3>
-                <p className="font-semibold text-gray-700">{member.role}</p>
-              </Card>
+                <ul className={`flex flex-wrap justify-center ${TIER_CARD_SIZE[group.value] === 'sm' ? 'gap-x-6 gap-y-8 sm:gap-x-10' : 'gap-6 md:gap-8'}`}>
+                  {group.members.map((member) => (
+                    <MemberCard key={member._id} member={member} size={TIER_CARD_SIZE[group.value]} />
+                  ))}
+                </ul>
+              </div>
             ))}
           </div>
         </section>
