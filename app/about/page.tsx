@@ -89,7 +89,7 @@ export default function About() {
       <section className="section-container">
         <div className="max-w-4xl mx-auto">
           <Card variant="warm" className="text-center">
-            <h2 className="heading-md mb-6">Our Mission</h2>
+            <h2 className="heading-md mb-6">Our <span className="text-accent">Mission</span></h2>
             <div className="space-y-4 text-gray-700">
               <p className="body-lg text-left">
                 Empowering teens and youths for optimal development through professional,
@@ -184,7 +184,7 @@ export default function About() {
               className="group card flex flex-col justify-between transition-colors duration-150 hover:border-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-900"
             >
               <div>
-                <p className="eyebrow mb-3 text-gray-600">{item.eyebrow}</p>
+                <p className="eyebrow mb-3 text-gilt-gold-strong">{item.eyebrow}</p>
                 <h3 className="heading-sm mb-2">{item.title}</h3>
                 <p className="text-gray-700 leading-relaxed">{item.text}</p>
               </div>
