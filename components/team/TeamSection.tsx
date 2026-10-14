@@ -97,23 +97,24 @@ function MemberMarquee({ members, tier }: { members: TeamMember[]; tier: StaffTi
     return () => query.removeEventListener('change', update);
   }, []);
 
+  const overflowing = listWidth > viewportWidth;
+  const animate = !reducedMotion && listWidth > 0 && (overflowing || members.length >= MARQUEE_MIN_MEMBERS);
+
   useEffect(() => {
     const viewport = viewportRef.current;
     const list = listRef.current;
     if (!viewport || !list) return;
     const measure = () => {
-      setListWidth(list.scrollWidth);
+      setListWidth(list.offsetWidth);
       setViewportWidth(viewport.clientWidth);
     };
     measure();
     const observer = new ResizeObserver(measure);
     observer.observe(viewport);
-    observer.observe(list);
+    observer.observe(list, { box: 'border-box' });
     return () => observer.disconnect();
-  }, [members]);
+  }, [members, animate]);
 
-  const overflowing = listWidth > viewportWidth;
-  const animate = !reducedMotion && listWidth > 0 && (overflowing || members.length >= MARQUEE_MIN_MEMBERS);
   const copies = animate ? Math.max(2, Math.ceil(viewportWidth / listWidth) + 1) : 1;
   const gap = size === 'sm' ? 'gap-6 sm:gap-10' : 'gap-6 md:gap-8';
   const trailing = size === 'sm' ? 'pr-6 sm:pr-10' : 'pr-6 md:pr-8';
