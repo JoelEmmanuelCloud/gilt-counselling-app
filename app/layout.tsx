@@ -9,6 +9,7 @@ import WhatsAppButton from '@/components/WhatsAppButton';
 import NavigationProgress from '@/components/NavigationProgress';
 import BackToTop from '@/components/BackToTop';
 import CookieConsent from '@/components/CookieConsent';
+import { localBusinessSchema, serializeJsonLd } from '@/lib/structuredData';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -94,6 +95,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-body" suppressHydrationWarning>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(localBusinessSchema) }}
+        />
         <NavigationProgress />
         <AuthProvider>
           <ToastProvider>
